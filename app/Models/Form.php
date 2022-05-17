@@ -12,10 +12,13 @@ class Form extends Model
     use HasFactory, UuidIsPrimary;
 
     protected $dateFormat = 'c';
-    protected $fillable = [
-        'title',
-    ];
+    protected $fillable = ['title'];
+        
     public $timestamps = ['created_at'];
-
     const UPDATED_AT = null;
+
+    public function fields()
+    {
+        return $this->hasMany(Field::class);
+    }
 }

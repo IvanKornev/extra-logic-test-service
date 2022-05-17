@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Collection;
 use App\Models\Form;
 
 final class FormService
@@ -13,9 +14,9 @@ final class FormService
       $this->form = $form;  
     }
 
-    public function get(string $uuid): Form
+    public function get(string $uuid): Collection
     {
-        return $this->form::findOrFail($uuid);
+        return $this->form::with('fields')->where('id', $uuid)->get();
     }
 
     public function create($title): Form
