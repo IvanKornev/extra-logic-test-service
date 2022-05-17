@@ -1,13 +1,12 @@
-import React, { useState, useId } from 'react';
-import { Formik, Form, Field } from 'formik';
+import React, { useState } from 'react';
+import { Formik, Form } from 'formik';
 import axios  from 'axios';
 import { v4 as generateUuid } from 'uuid'; 
 
+import { newForm } from './src/domains/new-form';
+
 const NewFormEditor = () => {
-  let [newFormFields, updateNewFormFields] = useState({
-    title: 'Новая форма',
-    fields: [],
-  });
+  let [newFormFields, updateNewFormFields] = useState(newForm.fieldsInitialValues);
 
   let [editorIsVisible, setEditorVisibility] = useState(false);
   let [name, setName] = useState('');
@@ -54,10 +53,7 @@ const NewFormEditor = () => {
 
   const dropForm = event => {
     event.preventDefault();
-    updateNewFormFields({
-      title: 'Новая форма',
-      fields: [],
-    });
+    updateNewFormFields(newForm.fieldsInitialValues);
   };
 
   return(
@@ -76,9 +72,9 @@ const NewFormEditor = () => {
                 <h5>Тип поля: { field.type }</h5>
               </div>
               <div>
-                <p onClick={e => deleteField(e, field.uniqueId)}>
+                <h5 onClick={e => deleteField(e, field.uniqueId)}>
                   Удалить
-                </p>
+                </h5>
               </div>
             </div>
           ))}
