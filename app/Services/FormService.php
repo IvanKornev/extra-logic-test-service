@@ -13,6 +13,11 @@ final class FormService
       $this->form = $form;  
     }
 
+    public function get(int $id): Form
+    {
+        return $this->form::findOrFail($id);
+    }
+
     public function create(string $title): Form
     {
         $createdForm = $this->form::create([
