@@ -10,7 +10,7 @@ class Field extends Model
     use HasFactory;
 
     public $timestamps = false;
-    protected $attributes = [
+    protected $fillable = [
         'name',
         'description',
         'form_id',
