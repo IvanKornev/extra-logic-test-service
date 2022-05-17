@@ -13,16 +13,6 @@ const NewFormEditor = () => {
   let [description, setDescription] = useState('');
   let [type, setType] = useState('text');
 
-  const showEditor = event => {
-    event.preventDefault();
-    setEditorVisibility(true);
-  };
-
-  const hideEditor = event => {
-    event.preventDefault();
-    setEditorVisibility(false);
-  };
-
   const saveField = event => {
     event.preventDefault();
     const savingField = {
@@ -95,15 +85,17 @@ const NewFormEditor = () => {
                 <button onClick={e => saveField(e)}>
                   Сохранить поле
                 </button>
-                <button onClick={e => hideEditor(e)}>
-                  Отмена
-                </button>
+                <button
+                  type="button"
+                  onClick={() => setEditorVisibility(false)}
+                >Отмена</button>
               </div>
             </div>
         )}
-        <button onClick={e => showEditor(e)}>
-          Добавить поле
-        </button>
+        <button
+          type="button"
+          onClick={() => setEditorVisibility(true)}
+        >Добавить поле</button>
         <button type="submit" disabled={ formIsEmpty }>
           Сохранить форму
         </button>

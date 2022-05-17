@@ -2276,16 +2276,6 @@ var NewFormEditor = function NewFormEditor() {
       type = _useState10[0],
       setType = _useState10[1];
 
-  var showEditor = function showEditor(event) {
-    event.preventDefault();
-    setEditorVisibility(true);
-  };
-
-  var hideEditor = function hideEditor(event) {
-    event.preventDefault();
-    setEditorVisibility(false);
-  };
-
   var saveField = function saveField(event) {
     event.preventDefault();
     var savingField = {
@@ -2382,15 +2372,17 @@ var NewFormEditor = function NewFormEditor() {
               },
               children: "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C \u043F\u043E\u043B\u0435"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
-              onClick: function onClick(e) {
-                return hideEditor(e);
+              type: "button",
+              onClick: function onClick() {
+                return setEditorVisibility(false);
               },
               children: "\u041E\u0442\u043C\u0435\u043D\u0430"
             })]
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
-          onClick: function onClick(e) {
-            return showEditor(e);
+          type: "button",
+          onClick: function onClick() {
+            return setEditorVisibility(true);
           },
           children: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043F\u043E\u043B\u0435"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
@@ -2492,6 +2484,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var save = function save(values) {
+  console.log(values);
   axios__WEBPACK_IMPORTED_MODULE_0___default().post('http://localhost:8000/custom-form', values).then(function (response) {
     return console.log(response.status);
   });
