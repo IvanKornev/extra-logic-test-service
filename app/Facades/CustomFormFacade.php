@@ -5,26 +5,28 @@ namespace App\Facades;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
-use App\Services\{ FormService, FieldsService };
+use App\Services\{ FormService, FieldService };
 
-final class CustomFormFacade
+class CustomFormFacade
 {
     private FormService $form;
-    private FieldsService $fields;
+    private FieldService $field;
 
-    public function __construct(FormService $form, FieldsService $fields)
+    public function __construct(FormService $form, FieldService $field)
     {
         $this->form = $form;
-        $this->fields = $fields;
+        $this->field = $field;
     }
 
     public function create(Collection $form)
     {
-        $createdFormId = DB::transaction(function() use($form) {
-            $this->form->create($form->title);
-            $this->fields->insert($form->fields);
-            return $this->form->id;
+        $formId = DB::transaction(function() use($form) {
+            $createdForm = $this->form->create($form->title);
+            foreach($form->fields as $field) {
+                $this->field->create($field, $createdForm->id);
+            }
+            return $createdForm->id;
         });
-        return $this->form->get($createdFormId);
+        return $this->form->get($formId);
     }
 }
