@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html>
     <body>
         <div id="root" />
         <script src="/js/manifest.js"></script>
