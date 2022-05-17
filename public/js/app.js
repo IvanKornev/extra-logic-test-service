@@ -2301,7 +2301,17 @@ var NewFormEditor = function NewFormEditor() {
 
   var saveForm = function saveForm(values) {
     console.log(values);
-    axios__WEBPACK_IMPORTED_MODULE_2___default().post('http://localhost:8000/custom-form', values);
+    axios__WEBPACK_IMPORTED_MODULE_2___default().post('http://localhost:8000/custom-form', values).then(function (response) {
+      return console.log(response.status);
+    });
+  };
+
+  var dropForm = function dropForm(event) {
+    event.preventDefault();
+    updateNewFormFields({
+      title: 'Новая форма',
+      fields: []
+    });
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("main", {
@@ -2373,7 +2383,14 @@ var NewFormEditor = function NewFormEditor() {
           children: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043F\u043E\u043B\u0435"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
           type: "submit",
+          disabled: newFormFields.fields.length < 1 ? true : false,
           children: "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C \u0444\u043E\u0440\u043C\u0443"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+          onClick: function onClick(e) {
+            return dropForm(e);
+          },
+          disabled: newFormFields.fields.length < 1 ? true : false,
+          children: "\u0421\u0431\u0440\u043E\u0441\u0438\u0442\u044C \u0444\u043E\u0440\u043C\u0443"
         })]
       })
     })

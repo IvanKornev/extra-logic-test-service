@@ -39,7 +39,17 @@ const NewFormEditor = () => {
 
   const saveForm = values => {
     console.log(values);
-    axios.post('http://localhost:8000/custom-form', values);
+    axios
+      .post('http://localhost:8000/custom-form', values)
+      .then((response) => console.log(response.status));
+  };
+
+  const dropForm = event => {
+    event.preventDefault();
+    updateNewFormFields({
+      title: 'Новая форма',
+      fields: [],
+    });
   };
 
   return(
@@ -88,8 +98,11 @@ const NewFormEditor = () => {
         <button onClick={e => showEditor(e)}>
           Добавить поле
         </button>
-        <button type="submit">
+        <button type="submit" disabled={newFormFields.fields.length < 1 ? true : false}>
           Сохранить форму
+        </button>
+        <button onClick={e => dropForm(e)} disabled={newFormFields.fields.length < 1 ? true : false}>
+          Сбросить форму
         </button>
        </Form>
      </Formik>
