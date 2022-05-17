@@ -13,4 +13,7 @@ class Form extends Model
     protected $fillable = [
         'title',
     ];
+    public $timestamps = ['created_at'];
+
+    const UPDATED_AT = null;
 }
