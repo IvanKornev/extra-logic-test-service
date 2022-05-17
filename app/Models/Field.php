@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Field extends Model
 {
     use HasFactory;
-    
+
     public $timestamps = false;
     protected $attributes = [
         'name',
         'description',
-        'form_uuid',
+        'form_id',
         'type',
     ];
 }
