@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
-import axios  from 'axios';
 import { v4 as generateUuid } from 'uuid'; 
 
-import { newForm } from './src/domains/new-form';
+import { newForm } from './src/domains';
+import { formService } from './src/services';
 
 const NewFormEditor = () => {
   let [newFormFields, updateNewFormFields] = useState(newForm.fieldsInitialValues);
@@ -44,21 +44,16 @@ const NewFormEditor = () => {
     updateNewFormFields({ ...newFormFields.title, fields: updatedFields});
   };
 
-  const saveForm = values => {
-    console.log(values);
-    axios
-      .post('http://localhost:8000/custom-form', values)
-      .then((response) => console.log(response.status));
-  };
-
   const dropForm = event => {
     event.preventDefault();
     updateNewFormFields(newForm.fieldsInitialValues);
   };
 
+  const formIsEmpty = newFormFields.fields.length < 1 ? true : false;
+
   return(
     <main>
-      <Formik initialValues={ newFormFields } onSubmit={saveForm}>
+      <Formik initialValues={ newFormFields } onSubmit={ formService.save }>
        <Form>
         <div>
           <h1>{ newFormFields.title }</h1>
@@ -109,10 +104,10 @@ const NewFormEditor = () => {
         <button onClick={e => showEditor(e)}>
           Добавить поле
         </button>
-        <button type="submit" disabled={newFormFields.fields.length < 1 ? true : false}>
+        <button type="submit" disabled={ formIsEmpty }>
           Сохранить форму
         </button>
-        <button onClick={e => dropForm(e)} disabled={newFormFields.fields.length < 1 ? true : false}>
+        <button onClick={e => dropForm(e)} disabled={ formIsEmpty }>
           Сбросить форму
         </button>
        </Form>

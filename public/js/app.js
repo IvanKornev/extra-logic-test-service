@@ -2212,10 +2212,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var formik__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! formik */ "./node_modules/formik/dist/formik.esm.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/v4.js");
-/* harmony import */ var _src_domains_new_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./src/domains/new-form */ "./resources/js/src/domains/new-form.js");
+/* harmony import */ var _src_domains__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./src/domains */ "./resources/js/src/domains/index.js");
+/* harmony import */ var _src_services__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./src/services */ "./resources/js/src/services/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
@@ -2252,7 +2251,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var NewFormEditor = function NewFormEditor() {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(_src_domains_new_form__WEBPACK_IMPORTED_MODULE_3__.newForm.fieldsInitialValues),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(_src_domains__WEBPACK_IMPORTED_MODULE_2__.newForm.fieldsInitialValues),
       _useState2 = _slicedToArray(_useState, 2),
       newFormFields = _useState2[0],
       updateNewFormFields = _useState2[1];
@@ -2312,22 +2311,16 @@ var NewFormEditor = function NewFormEditor() {
     }));
   };
 
-  var saveForm = function saveForm(values) {
-    console.log(values);
-    axios__WEBPACK_IMPORTED_MODULE_2___default().post('http://localhost:8000/custom-form', values).then(function (response) {
-      return console.log(response.status);
-    });
-  };
-
   var dropForm = function dropForm(event) {
     event.preventDefault();
-    updateNewFormFields(_src_domains_new_form__WEBPACK_IMPORTED_MODULE_3__.newForm.fieldsInitialValues);
+    updateNewFormFields(_src_domains__WEBPACK_IMPORTED_MODULE_2__.newForm.fieldsInitialValues);
   };
 
+  var formIsEmpty = newFormFields.fields.length < 1 ? true : false;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("main", {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(formik__WEBPACK_IMPORTED_MODULE_1__.Formik, {
       initialValues: newFormFields,
-      onSubmit: saveForm,
+      onSubmit: _src_services__WEBPACK_IMPORTED_MODULE_3__.formService.save,
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(formik__WEBPACK_IMPORTED_MODULE_1__.Form, {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
@@ -2402,13 +2395,13 @@ var NewFormEditor = function NewFormEditor() {
           children: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043F\u043E\u043B\u0435"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
           type: "submit",
-          disabled: newFormFields.fields.length < 1 ? true : false,
+          disabled: formIsEmpty,
           children: "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C \u0444\u043E\u0440\u043C\u0443"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
           onClick: function onClick(e) {
             return dropForm(e);
           },
-          disabled: newFormFields.fields.length < 1 ? true : false,
+          disabled: formIsEmpty,
           children: "\u0421\u0431\u0440\u043E\u0441\u0438\u0442\u044C \u0444\u043E\u0440\u043C\u0443"
         })]
       })
@@ -2446,6 +2439,22 @@ if (rootElem) {
 
 /***/ }),
 
+/***/ "./resources/js/src/domains/index.js":
+/*!*******************************************!*\
+  !*** ./resources/js/src/domains/index.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "newForm": () => (/* reexport safe */ _new_form__WEBPACK_IMPORTED_MODULE_0__.newForm)
+/* harmony export */ });
+/* harmony import */ var _new_form__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./new-form */ "./resources/js/src/domains/new-form.js");
+
+
+/***/ }),
+
 /***/ "./resources/js/src/domains/new-form.js":
 /*!**********************************************!*\
   !*** ./resources/js/src/domains/new-form.js ***!
@@ -2464,6 +2473,49 @@ var fieldsInitialValues = {
 var newForm = {
   fieldsInitialValues: fieldsInitialValues
 };
+
+/***/ }),
+
+/***/ "./resources/js/src/services/form-service.js":
+/*!***************************************************!*\
+  !*** ./resources/js/src/services/form-service.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "formService": () => (/* binding */ formService)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var save = function save(values) {
+  axios__WEBPACK_IMPORTED_MODULE_0___default().post('http://localhost:8000/custom-form', values).then(function (response) {
+    return console.log(response.status);
+  });
+};
+
+var formService = {
+  save: save
+};
+
+/***/ }),
+
+/***/ "./resources/js/src/services/index.js":
+/*!********************************************!*\
+  !*** ./resources/js/src/services/index.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "formService": () => (/* reexport safe */ _form_service__WEBPACK_IMPORTED_MODULE_0__.formService)
+/* harmony export */ });
+/* harmony import */ var _form_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./form-service */ "./resources/js/src/services/form-service.js");
+
 
 /***/ }),
 
