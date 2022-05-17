@@ -2216,12 +2216,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _src_domains__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./src/domains */ "./resources/js/src/domains/index.js");
 /* harmony import */ var _src_services__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./src/services */ "./resources/js/src/services/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -2251,10 +2245,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var NewFormEditor = function NewFormEditor() {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(_src_domains__WEBPACK_IMPORTED_MODULE_2__.newForm.fieldsInitialValues),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
-      newFormFields = _useState2[0],
-      updateNewFormFields = _useState2[1];
+      fields = _useState2[0],
+      updateFields = _useState2[1];
 
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
@@ -2284,120 +2278,114 @@ var NewFormEditor = function NewFormEditor() {
       description: description || 'Описание по умолчанию',
       type: type
     };
-    updateNewFormFields({
-      title: newFormFields.title,
-      fields: [].concat(_toConsumableArray(newFormFields.fields), [savingField])
+    updateFields(function (prev) {
+      return [].concat(_toConsumableArray(prev), [savingField]);
     });
+    console.log(fields);
     setEditorVisibility(false);
   };
 
   var deleteField = function deleteField(event, uniqueId) {
     event.preventDefault();
-    var updatedFields = newFormFields.fields.filter(function (field) {
+    var updatedFields = fields.filter(function (field) {
       return field.uniqueId !== uniqueId;
     });
-    updateNewFormFields(_objectSpread(_objectSpread({}, newFormFields.title), {}, {
-      fields: updatedFields
-    }));
+    updateFields(updatedFields);
   };
 
   var dropForm = function dropForm(event) {
     event.preventDefault();
-    updateNewFormFields(_src_domains__WEBPACK_IMPORTED_MODULE_2__.newForm.fieldsInitialValues);
+    updateFields([]);
   };
 
-  var formIsEmpty = newFormFields.fields.length < 1 ? true : false;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("main", {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(formik__WEBPACK_IMPORTED_MODULE_1__.Formik, {
-      initialValues: newFormFields,
-      onSubmit: _src_services__WEBPACK_IMPORTED_MODULE_3__.formService.save,
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(formik__WEBPACK_IMPORTED_MODULE_1__.Form, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
-            children: newFormFields.title
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-          children: newFormFields.fields.length !== 0 && newFormFields.fields.map(function (field) {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("h5", {
-                  children: ["\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u043F\u043E\u043B\u044F: ", field.name]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("h5", {
-                  children: ["\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u043F\u043E\u043B\u044F: ", field.description]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("h5", {
-                  children: ["\u0422\u0438\u043F \u043F\u043E\u043B\u044F: ", field.type]
-                })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h5", {
-                  onClick: function onClick(e) {
-                    return deleteField(e, field.uniqueId);
-                  },
-                  children: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C"
-                })
-              })]
-            }, field.uniqueId);
-          })
-        }), editorIsVisible && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
-            placeholder: "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u043F\u043E\u043B\u044F",
-            value: name,
-            onChange: function onChange(e) {
-              return setName(e.target.value);
-            }
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
-            placeholder: "\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u043F\u043E\u043B\u044F",
-            value: description,
-            onChange: function onChange(e) {
-              return setDescription(e.target.value);
-            }
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("select", {
-            value: type,
-            onChange: function onChange(e) {
-              return setType(e.target.value);
-            },
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("option", {
-              value: "text",
-              children: "Text"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("option", {
-              value: "textarea",
-              children: "TextArea"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("option", {
-              value: "select",
-              children: "Select"
+  var formIsEmpty = fields.length < 1 ? true : false;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("main", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
+        children: "\u041D\u043E\u0432\u0430\u044F \u0444\u043E\u0440\u043C\u0430"
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      children: fields.length !== 0 && fields.map(function (field) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("h5", {
+              children: ["\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u043F\u043E\u043B\u044F: ", field.name]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("h5", {
+              children: ["\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u043F\u043E\u043B\u044F: ", field.description]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("h5", {
+              children: ["\u0422\u0438\u043F \u043F\u043E\u043B\u044F: ", field.type]
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h5", {
               onClick: function onClick(e) {
-                return saveField(e);
+                return deleteField(e, field.uniqueId);
               },
-              children: "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C \u043F\u043E\u043B\u0435"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
-              type: "button",
-              onClick: function onClick() {
-                return setEditorVisibility(false);
-              },
-              children: "\u041E\u0442\u043C\u0435\u043D\u0430"
-            })]
+              children: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C"
+            })
           })]
+        }, field.uniqueId);
+      })
+    }), editorIsVisible && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+        placeholder: "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u043F\u043E\u043B\u044F",
+        value: name,
+        onChange: function onChange(e) {
+          return setName(e.target.value);
+        }
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+        placeholder: "\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u043F\u043E\u043B\u044F",
+        value: description,
+        onChange: function onChange(e) {
+          return setDescription(e.target.value);
+        }
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("select", {
+        value: type,
+        onChange: function onChange(e) {
+          return setType(e.target.value);
+        },
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("option", {
+          value: "text",
+          children: "Text"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("option", {
+          value: "textarea",
+          children: "TextArea"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("option", {
+          value: "select",
+          children: "Select"
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+          onClick: function onClick(e) {
+            return saveField(e);
+          },
+          children: "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C \u043F\u043E\u043B\u0435"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
           type: "button",
           onClick: function onClick() {
-            return setEditorVisibility(true);
+            return setEditorVisibility(false);
           },
-          children: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043F\u043E\u043B\u0435"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
-          type: "submit",
-          disabled: formIsEmpty,
-          children: "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C \u0444\u043E\u0440\u043C\u0443"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
-          onClick: function onClick(e) {
-            return dropForm(e);
-          },
-          disabled: formIsEmpty,
-          children: "\u0421\u0431\u0440\u043E\u0441\u0438\u0442\u044C \u0444\u043E\u0440\u043C\u0443"
+          children: "\u041E\u0442\u043C\u0435\u043D\u0430"
         })]
-      })
-    })
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+      type: "button",
+      onClick: function onClick() {
+        return setEditorVisibility(true);
+      },
+      children: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043F\u043E\u043B\u0435"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+      onClick: function onClick() {
+        return _src_services__WEBPACK_IMPORTED_MODULE_3__.formService.save(fields);
+      },
+      disabled: formIsEmpty,
+      children: "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C \u0444\u043E\u0440\u043C\u0443"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+      onClick: function onClick(e) {
+        return dropForm(e);
+      },
+      disabled: formIsEmpty,
+      children: "\u0421\u0431\u0440\u043E\u0441\u0438\u0442\u044C \u0444\u043E\u0440\u043C\u0443"
+    })]
   });
 };
 

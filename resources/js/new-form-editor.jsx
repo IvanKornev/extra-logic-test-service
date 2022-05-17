@@ -6,8 +6,7 @@ import { newForm } from './src/domains';
 import { formService } from './src/services';
 
 const NewFormEditor = () => {
-  let [newFormFields, updateNewFormFields] = useState(newForm.fieldsInitialValues);
-
+  let [fields, updateFields] = useState([]);
   let [editorIsVisible, setEditorVisibility] = useState(false);
   let [name, setName] = useState('');
   let [description, setDescription] = useState('');
@@ -22,34 +21,31 @@ const NewFormEditor = () => {
       type, 
     };
 
-    updateNewFormFields({ title: newFormFields.title, fields: [
-      ...newFormFields.fields, savingField,
-    ]});
+    updateFields(prev => [...prev, savingField]);
+    console.log(fields);
     setEditorVisibility(false);
   };
 
   const deleteField = (event, uniqueId) => {
     event.preventDefault();
-    const updatedFields = newFormFields.fields.filter(field => field.uniqueId !== uniqueId);
-    updateNewFormFields({ ...newFormFields.title, fields: updatedFields});
+    const updatedFields = fields.filter(field => field.uniqueId !== uniqueId);
+    updateFields(updatedFields);
   };
 
   const dropForm = event => {
     event.preventDefault();
-    updateNewFormFields(newForm.fieldsInitialValues);
+    updateFields([]);
   };
 
-  const formIsEmpty = newFormFields.fields.length < 1 ? true : false;
+  const formIsEmpty = fields.length < 1 ? true : false;
 
   return(
     <main>
-      <Formik initialValues={ newFormFields } onSubmit={ formService.save }>
-       <Form>
         <div>
-          <h1>{ newFormFields.title }</h1>
+          <h1>Новая форма</h1>
         </div>
         <div>
-          { newFormFields.fields.length !== 0 && newFormFields.fields.map((field) => (
+          { fields.length !== 0 && fields.map((field) => (
             <div key={ field.uniqueId }>
               <div>
                 <h5>Название поля: { field.name }</h5>
@@ -96,14 +92,12 @@ const NewFormEditor = () => {
           type="button"
           onClick={() => setEditorVisibility(true)}
         >Добавить поле</button>
-        <button type="submit" disabled={ formIsEmpty }>
+        <button onClick={() => formService.save(fields)} disabled={ formIsEmpty }>
           Сохранить форму
         </button>
         <button onClick={e => dropForm(e)} disabled={ formIsEmpty }>
           Сбросить форму
         </button>
-       </Form>
-     </Formik>
     </main>
   );
 };
