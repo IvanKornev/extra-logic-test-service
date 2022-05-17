@@ -4,6 +4,8 @@
 /storage/*.key
 /vendor
 
+composer.lock
+
 .env
 .env.backup
 .env.example
