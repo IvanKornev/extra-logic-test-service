@@ -13,11 +13,10 @@ final class FieldService
       $this->field = $field;  
     }
 
-    public function create(array $data, int $formId): void
+    public function create(array $data, string $formUuid): void
     {
         $this->field::create([
-            'id' => $formId,
-            ...$data,
+            'form_id' => $formUuid, ...$data,
         ]);
     }
 }

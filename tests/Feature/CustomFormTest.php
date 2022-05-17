@@ -4,15 +4,15 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Http;
 
 use Tests\TestCase;
-use App\Facades\CustomFormFacade;
 
 class CustomFormTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
-    public function addsForm()
+    public function testThatAddsForm()
     {
         $data = collect([
             'title' => 'Новая форма',
@@ -22,8 +22,11 @@ class CustomFormTest extends TestCase
                 ['name' => 'Имя', 'description' => 'Имя юзера', 'type' => 'text'],
             ],
         ]);
-        $facade = new CustomFormFacade;
-        $createdForm = $facade->create($data);
-        $this->assertEquals('Новая форма', $createdForm->title);
+
+        $appUrl = env('APP_URL');
+        $fullUrl = "$appUrl:8000/api/custom-form";
+        
+        $response = Http::post($fullUrl, $data);
+        $this->assertTrue($response->ok());
     }
 }

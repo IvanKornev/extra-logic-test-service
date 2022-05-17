@@ -21,8 +21,10 @@ class CustomFormFacade
     public function create(Collection $form)
     {
         $formId = DB::transaction(function() use($form) {
-            $createdForm = $this->form->create($form->title);
-            foreach($form->fields as $field) {
+            $formTitle = $form->get('title');
+            $createdForm = $this->form->create($formTitle);
+
+            foreach($form->get('fields') as $field) {
                 $this->field->create($field, $createdForm->id);
             }
             return $createdForm->id;
