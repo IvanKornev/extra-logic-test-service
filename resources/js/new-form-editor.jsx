@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
-import { Formik, Form } from 'formik';
+import React, { useState, useId } from 'react';
+import { Formik, Form, Field } from 'formik';
+import axios  from 'axios';
 
 const NewFormEditor = () => {
   let [newFormFields, updateNewFormFields] = useState({
     title: 'Новая форма',
     fields: [],
   });
+
   let [editorIsVisible, setEditorVisibility] = useState(false);
+  let [name, setName] = useState('');
+  let [description, setDescription] = useState('');
+  let [type, setType] = useState('text');
 
   const showEditor = event => {
     event.preventDefault();
@@ -20,10 +25,21 @@ const NewFormEditor = () => {
 
   const saveField = event => {
     event.preventDefault();
+    const savingField = {
+      name: name || 'Имя по умолчанию',
+      description: description || 'Описание по умолчанию',
+      type, 
+    };
+
+    updateNewFormFields({ ...newFormFields.title, fields: [
+      ...newFormFields.fields, savingField,
+    ]});
+    setEditorVisibility(false);
   };
 
   const saveForm = values => {
     console.log(values);
+    axios.post('http://localhost:8000/custom-form', values);
   };
 
   return(
@@ -43,23 +59,31 @@ const NewFormEditor = () => {
           ))}
         </div>
         { editorIsVisible && (
-          <div>
-            <input type="text" placeholder="Название поля" />
-            <input type="text" placeholder="Описание поля" />
-            <select>
-              <option>Text</option>
-              <option>TextArea</option>
-              <option>Select</option>
-            </select>
             <div>
-              <button onClick={e => saveField(e)}>
-                Сохранить поле
-              </button>
-              <button onClick={e => hideEditor(e)}>
-                Отмена
-              </button>
+              <input
+                placeholder="Название поля"
+                value={ name }
+                onChange={e => setName(e.target.value)}
+              />
+              <input
+                placeholder="Описание поля"
+                value={ description }
+                onChange={e => setDescription(e.target.value)}
+              />
+              <select value={ type } onChange={e => setType(e.target.value)}>
+                <option value="text">Text</option>
+                <option value="textarea">TextArea</option>
+                <option value="select">Select</option>
+              </select>
+              <div>
+                <button onClick={e => saveField(e)}>
+                  Сохранить поле
+                </button>
+                <button onClick={e => hideEditor(e)}>
+                  Отмена
+                </button>
+              </div>
             </div>
-          </div>
         )}
         <button onClick={e => showEditor(e)}>
           Добавить поле
