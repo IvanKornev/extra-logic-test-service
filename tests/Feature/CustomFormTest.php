@@ -12,21 +12,29 @@ class CustomFormTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
+    protected string $url;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->url = env('APP_URL') . ':8000/api/custom-form';
+        $this->setUpFaker();
+    }
+
     public function testThatAddsForm()
     {
-        $data = collect([
-            'title' => 'Новая форма',
-            'fields' => [
-                ['name' => 'Имя', 'description' => 'Имя юзера', 'type' => 'text'],
-                ['name' => 'Имя', 'description' => 'Имя юзера', 'type' => 'text'],
-                ['name' => 'Имя', 'description' => 'Имя юзера', 'type' => 'text'],
-            ],
-        ]);
+        $data = ['title' => $this->faker->title(), 'fields' => []];
+        for ($i = 0; $i < 3; $i++) {
+            $field = [
+                'name' => $this->faker->title(),
+                'description' => $this->faker->text(30),
+                'type' => 'text'
+            ];
+            array_push($data['fields'], $field);
+        }
 
-        $appUrl = env('APP_URL');
-        $fullUrl = "$appUrl:8000/api/custom-form";
-        
-        $response = Http::post($fullUrl, $data);
+        $response = Http::post($this->url, $data);
+        var_dump($response->body());
         $this->assertTrue($response->ok());
     }
 }
