@@ -1,6 +1,7 @@
 import React, { useState, useId } from 'react';
 import { Formik, Form, Field } from 'formik';
 import axios  from 'axios';
+import { v4 as generateUuid } from 'uuid'; 
 
 const NewFormEditor = () => {
   let [newFormFields, updateNewFormFields] = useState({
@@ -26,6 +27,7 @@ const NewFormEditor = () => {
   const saveField = event => {
     event.preventDefault();
     const savingField = {
+      uniqueId: generateUuid(),
       name: name || 'Имя по умолчанию',
       description: description || 'Описание по умолчанию',
       type, 
@@ -35,6 +37,12 @@ const NewFormEditor = () => {
       ...newFormFields.fields, savingField,
     ]});
     setEditorVisibility(false);
+  };
+
+  const deleteField = (event, uniqueId) => {
+    event.preventDefault();
+    const updatedFields = newFormFields.fields.filter(field => field.uniqueId !== uniqueId);
+    updateNewFormFields({ ...newFormFields.title, fields: updatedFields});
   };
 
   const saveForm = values => {
@@ -62,9 +70,16 @@ const NewFormEditor = () => {
         <div>
           { newFormFields.fields.length !== 0 && newFormFields.fields.map((field) => (
             <div>
-              <h5>Название поля: { field.name }</h5>
-              <h5>Описание поля: { field.description }</h5>
-              <h5>Тип поля: { field.type }</h5>
+              <div>
+                <h5>Название поля: { field.name }</h5>
+                <h5>Описание поля: { field.description }</h5>
+                <h5>Тип поля: { field.type }</h5>
+              </div>
+              <div>
+                <p onClick={e => deleteField(e, field.uniqueId)}>
+                  Удалить
+                </p>
+              </div>
             </div>
           ))}
         </div>
