@@ -10,6 +10,7 @@ class Field extends Model
     use HasFactory;
 
     public $timestamps = false;
+    protected $hidden = ['form_id'];
     protected $fillable = [
         'name',
         'description',
