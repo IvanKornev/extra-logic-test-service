@@ -32,7 +32,7 @@ const NewFormEditor = () => {
       type, 
     };
 
-    updateNewFormFields({ ...newFormFields.title, fields: [
+    updateNewFormFields({ title: newFormFields.title, fields: [
       ...newFormFields.fields, savingField,
     ]});
     setEditorVisibility(false);
@@ -65,7 +65,7 @@ const NewFormEditor = () => {
         </div>
         <div>
           { newFormFields.fields.length !== 0 && newFormFields.fields.map((field) => (
-            <div>
+            <div key={ field.uniqueId }>
               <div>
                 <h5>Название поля: { field.name }</h5>
                 <h5>Описание поля: { field.description }</h5>
