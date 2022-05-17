@@ -13,7 +13,4 @@ class Form extends Model
     protected $fillable = [
         'title',
     ];
-    protected $attributes = [
-        'delayed' => false,
-    ];
 }
