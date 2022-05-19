@@ -1,8 +1,9 @@
 import { Select, MenuItem } from '@mui/material';
+import generateId from 'uniqid';
 
 const renderOptions = component => (
   component.options.map((option) => (
-    <MenuItem value={ option.value }>
+    <MenuItem key={ generateId() } value={ option.value }>
         { option.title }
     </MenuItem>
 )));

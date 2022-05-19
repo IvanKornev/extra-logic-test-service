@@ -13,6 +13,7 @@ const create = values => {
     description: values.description || 'Описание по умолчанию',
     type: values.type,
   };
+  alert(JSON.stringify(createdField));
   return createdField;
 };
 

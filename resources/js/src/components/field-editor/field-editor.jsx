@@ -1,20 +1,15 @@
 import React from 'react';
 import { Formik, Form, useFormik } from 'formik';
-import { Button, Box, TextField, Select, MenuItem, Typography, Stack } from '@mui/material';
+import { Box, Typography, Stack } from '@mui/material';
 
 import { Fields, ActionButtons } from './blocks';
+import { newField } from '../../domains';
 import { styles } from './field-editor.styles';
 
 const FieldEditor = () => {
   const formik = useFormik({
-    initialValues: {
-      name: '',
-      description: '',
-      type: 'text',
-    },
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
+    initialValues: newField.initValues,
+    onSubmit: newField.create,
   });
 
   return(
