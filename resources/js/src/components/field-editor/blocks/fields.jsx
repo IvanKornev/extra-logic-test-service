@@ -1,3 +1,6 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+
 import { fieldEditor, select } from '../../../domains';
 
 const Fields = ({ formikInstance }) => (
@@ -21,5 +24,9 @@ const Fields = ({ formikInstance }) => (
     })}
   </>
 );
+
+Fields.propTypes = {
+  formikInstance: PropTypes.object.isRequired,
+};
 
 export { Fields };
