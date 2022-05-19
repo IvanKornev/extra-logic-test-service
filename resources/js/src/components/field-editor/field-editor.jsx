@@ -2,17 +2,12 @@ import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import { Button, Box } from '@mui/material';
 
-import { newField } from '../domains/new-field';
+import { newField } from '../../domains/new-field';
+import { styles } from './field-editor.styles';
 
 const FieldEditor = () => {
-  const styles = {
-    p: 2,
-    border: '1px dashed grey',
-    display: 'inline-flex',
-  }
-
   return(
-    <Box component="section" sx={ styles }>
+    <Box component="section" sx={ styles.box }>
       <Formik initialValues={ newField.initValues } onSubmit={ newField.create }>
         <Form>
           <Field name="name" placeholder="Название поля" />
