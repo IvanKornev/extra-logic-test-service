@@ -1,3 +1,5 @@
+import { TextField, Select } from "@mui/material";
+
 const fields = [
   {
     name: 'name',
@@ -17,7 +19,7 @@ const fields = [
     name: 'type',
     label: 'Тип поля',
     component: {
-    name: Select,
+      name: Select,
       options: [
         { value: 'text', title: 'Текстовое поле (text)' },
         { value: 'textarea', title: 'Текстовая зона (textarea)' },
