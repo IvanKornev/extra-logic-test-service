@@ -19,6 +19,7 @@ const Fields = ({ formikInstance }) => (
           label={ label }
           value={ formikInstance.values[name] }
           variant="standard"
+          color="primary"
           onChange={ formikInstance.handleChange }
         >{ selectOptions }</CurrentComponent>
       );
