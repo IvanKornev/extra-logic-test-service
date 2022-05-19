@@ -2,7 +2,7 @@ import React from 'react';
 import { Formik, Form, useFormik } from 'formik';
 import { Button, Box, TextField, Select, MenuItem, Typography, Stack } from '@mui/material';
 
-import { newField } from '../../domains/new-field';
+import { newField, fieldEditor } from '../../domains';
 import { styles } from './field-editor.styles';
 
 const FieldEditor = () => {
@@ -25,31 +25,23 @@ const FieldEditor = () => {
       <Formik onSubmit={ formik.handleSubmit }>
         <Form>
           <Stack direction="row" spacing={ 2 }>
-            <TextField
-              name="name"
-              label="Название поля"
-              value={formik.values.name}
-              onChange={formik.handleChange}
-              variant="standard"
-              sx={ styles.field }
-            />
-            <TextField
-              name="description"
-              label="Описание"
-              value={formik.values.description}
-              variant="standard"
-              onChange={formik.handleChange}
-            />
-              <Select
-                value={ formik.values.type }
-                label="Тип поля"
-                variant="standard"
-                onChange={ formik.handleChange }
-              >
-                <MenuItem value={ "text" }>Текст (text)</MenuItem>
-                <MenuItem value={ "textarea" }>Текстовая зона (textarea)</MenuItem>
-                <MenuItem value={ "select" }>Селектор (select)</MenuItem>
-              </Select>
+            { fieldEditor.fields.map((field) => {
+              const { name, label, component } = field;
+              const CurrentComponent = component.name;
+              return(
+                <CurrentComponent
+                  name={ name }
+                  label={ label }
+                  value={ formik.values[name] }
+                  variant="standard"
+                  onChange={ formik.handleChange }
+                >
+                  { component.name === Select && component.options.map((option) => (
+                    <MenuItem value={ option.value }>{ option.title }</MenuItem>
+                  ))}
+                </CurrentComponent>
+              );
+            })}
           </Stack>
           <Stack direction="row" spacing={2}>
             <Button size="medium" variant="contained" color="success" type="submit">

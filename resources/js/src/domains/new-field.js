@@ -13,7 +13,6 @@ const create = values => {
     description: values.description || 'Описание по умолчанию',
     type: values.type,
   };
-  console.log(createdField);
   return createdField;
 };
 
