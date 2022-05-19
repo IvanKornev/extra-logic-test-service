@@ -15,14 +15,14 @@ const FieldEditor = props => {
   });
   const { abortCallback, wasOpened } = props;
   return(
-    <Modal open={ wasOpened } onClose={ abortCallback }>
+    <Modal open={ wasOpened } onClose={ abortCallback } sx={ styles.modal }>
       <Box component="section" sx={ styles.box }>
         <Typography variant="h5" component="h5">
           Новое поле
         </Typography>
         <Formik onSubmit={ formik.handleSubmit }>
           <Form>
-            <Stack direction="row" spacing={ 2 }>
+            <Stack direction="column" spacing={ 2 }>
               <Fields formikInstance={ formik } />
             </Stack>
             <Stack direction="row" spacing={2}>

@@ -7,6 +7,12 @@ const box = {
   color: 'black',
 };
 
+const modal = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+};
+
 export const styles = {
-  box,
+  box, modal,
 };
