@@ -2,7 +2,7 @@ import React from 'react';
 import { Formik, Form, useFormik } from 'formik';
 import { Button, Box, TextField, Select, MenuItem, Typography, Stack } from '@mui/material';
 
-import { Fields } from './blocks';
+import { Fields, ActionButtons } from './blocks';
 import { styles } from './field-editor.styles';
 
 const FieldEditor = () => {
@@ -28,12 +28,7 @@ const FieldEditor = () => {
             <Fields formikInstance={ formik } />
           </Stack>
           <Stack direction="row" spacing={2}>
-            <Button size="medium" variant="contained" color="success" type="submit">
-              Сохранить поле
-            </Button>
-            <Button size="medium" variant="contained" color="error">
-              Отмена
-            </Button>
+            <ActionButtons />
           </Stack>
         </Form>
       </Formik>
