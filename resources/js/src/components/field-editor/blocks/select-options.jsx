@@ -35,6 +35,7 @@ const SelectOptions = props => {
         <NewOption
           abortCallback={() => addNewOption(false)}
           isVisible={ newOptionIsAdding }
+          setOptions={ setOptions }
         />
       )} 
     </Stack>

@@ -17,10 +17,9 @@ const getOptionTexts = (option, number = 1) => {
   return texts;
 };
 
-const addOption = () => {
-  const title = prompt('Какое будет наименование у опции?', 'имя');
-  const value = prompt('А значение?', 'значение');
+const addOption = values => {
   const id = generateId();
+  const { title, value } = values;
   return { id, title, value };
 };
 

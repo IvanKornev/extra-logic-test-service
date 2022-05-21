@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { TextField, Typography, Stack } from '@mui/material';
 import { Form, Formik, useFormik } from 'formik';
 
@@ -6,12 +8,14 @@ import { Modal } from '../../../ui-core';
 import { select, selectOption } from '../../../domains';
 import { ActionButtons } from '.';
 
-const NewOption = ({ isVisible, abortCallback }) => {
+const NewOption = ({ isVisible, abortCallback, setOptions }) => {
   const formik = useFormik({
     initialValues: selectOption.defaultValues,
-    onSubmit: (values) => (
-      alert(JSON.stringify(values))
-    )
+    onSubmit: (values) => {
+      const createdOption = select.addOption(values);
+      setOptions((prev) => [...prev, createdOption]);
+      abortCallback();
+    }
   });
   return(
     <Modal open={ isVisible } onClose={ abortCallback }>
@@ -40,6 +44,12 @@ const NewOption = ({ isVisible, abortCallback }) => {
       </Formik>
     </Modal>
   );
+};
+
+NewOption.propTypes = {
+  isVisible: PropTypes.bool.isRequired,
+  abortCallback: PropTypes.func.isRequired,
+  setOptions: PropTypes.func.isRequired,
 };
 
 export { NewOption };

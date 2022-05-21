@@ -1,5 +1,5 @@
 const defaultValues = {
-  name: '',
+  title: '',
   value: '',
 };
 
