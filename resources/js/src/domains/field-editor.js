@@ -1,4 +1,26 @@
 import { TextField, Select } from "@mui/material";
+import generateId from 'uniqid';
+
+const defaultValues = {
+  name: '',
+  description: '',
+  type: 'text',
+};
+
+const create = values => {
+  let createdField = {
+    uniqueId: generateId(),
+    name: values.name || 'Имя по умолчанию',
+    description: values.description || 'Описание по умолчанию',
+    type: values.type,
+  };
+
+  if (values.type === 'select') {
+    createdField.selectOptions = values.selectOptions;
+  }
+  alert(JSON.stringify(values));
+  return createdField;
+};
 
 const fields = [
   {
@@ -29,4 +51,8 @@ const fields = [
   },
 ];
 
-export const fieldEditor = { fields };
+export const fieldEditor = {
+  defaultValues,
+  create,
+  fields,
+};

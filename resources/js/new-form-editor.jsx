@@ -1,30 +1,12 @@
 import React, { useState } from 'react';
-import { Formik, Form } from 'formik';
-import { v4 as generateUuid } from 'uuid'; 
+import { Typography, Button } from '@mui/material';
 
-import { newForm } from './src/domains';
 import { formService } from './src/services';
+import { FieldEditor } from './src/components';
 
 const NewFormEditor = () => {
   let [fields, updateFields] = useState([]);
   let [editorIsVisible, setEditorVisibility] = useState(false);
-  let [name, setName] = useState('');
-  let [description, setDescription] = useState('');
-  let [type, setType] = useState('text');
-
-  const saveField = event => {
-    event.preventDefault();
-    const savingField = {
-      uniqueId: generateUuid(),
-      name: name || 'Имя по умолчанию',
-      description: description || 'Описание по умолчанию',
-      type, 
-    };
-
-    updateFields(prev => [...prev, savingField]);
-    console.log(fields);
-    setEditorVisibility(false);
-  };
 
   const deleteField = (event, uniqueId) => {
     event.preventDefault();
@@ -39,10 +21,26 @@ const NewFormEditor = () => {
 
   const formIsEmpty = fields.length < 1 ? true : false;
 
+  const styles = {
+    // background: 'rgb(77,77,77)',
+    //background: `radial-gradient(circle, rgba(77,77,77,1) 49%, 
+      //rgba(51,51,51,1) 74%, rgba(34,34,34,1) 100%)`,
+    minHeight: '100vh',
+    // color: '#fff',
+  };
+
   return(
-    <main>
+    <main style={ styles }>
+        { editorIsVisible && (
+          <FieldEditor
+            wasOpened={ editorIsVisible }
+            abortCallback={() => setEditorVisibility(false)}
+          />
+        )}
         <div>
-          <h1>Новая форма</h1>
+          <Typography variant="h4" component="h1">
+            Новая форма
+          </Typography>
         </div>
         <div>
           { fields.length !== 0 && fields.map((field) => (
@@ -60,44 +58,21 @@ const NewFormEditor = () => {
             </div>
           ))}
         </div>
-        { editorIsVisible && (
-            <div>
-              <input
-                placeholder="Название поля"
-                value={ name }
-                onChange={e => setName(e.target.value)}
-              />
-              <input
-                placeholder="Описание поля"
-                value={ description }
-                onChange={e => setDescription(e.target.value)}
-              />
-              <select value={ type } onChange={e => setType(e.target.value)}>
-                <option value="text">Text</option>
-                <option value="textarea">TextArea</option>
-                <option value="select">Select</option>
-              </select>
-              <div>
-                <button onClick={e => saveField(e)}>
-                  Сохранить поле
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setEditorVisibility(false)}
-                >Отмена</button>
-              </div>
-            </div>
-        )}
-        <button
+        <Button
+          variant="contained"
           type="button"
           onClick={() => setEditorVisibility(true)}
-        >Добавить поле</button>
-        <button onClick={() => formService.save(fields)} disabled={ formIsEmpty }>
-          Сохранить форму
-        </button>
-        <button onClick={e => dropForm(e)} disabled={ formIsEmpty }>
-          Сбросить форму
-        </button>
+        >Добавить поле</Button>
+        <Button
+          variant="contained"
+          onClick={() => formService.save(fields)}
+          disabled={ formIsEmpty }
+        >Сохранить форму</Button>
+        <Button
+          variant="contained"
+          onClick={e => dropForm(e)}
+          disabled={ formIsEmpty }
+        >Сбросить форму</Button>
     </main>
   );
 };

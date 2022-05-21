@@ -20,8 +20,7 @@ const editOption = (id = 1, options) => {
   const value = prompt('А значение?', 'значение');
   return options.map((option) => {
     if (option.id === id) {
-      option.title = title;
-      option.value = value;
+      option = { id, title, value };
     }
     return option;
   });

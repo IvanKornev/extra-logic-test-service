@@ -5,16 +5,18 @@ import { Formik, Form, useFormik } from 'formik';
 import { Box, Typography, Stack, Modal } from '@mui/material';
 
 import { Fields, ActionButtons, SelectOptions } from './blocks';
-import { newField } from '../../domains';
+import { fieldEditor } from '../../domains';
 import { styles } from './field-editor.styles';
 
 const FieldEditor = props => {
+  const [selectOptions, setSelectOptions] = useState([]);
   const formik = useFormik({
-    initialValues: newField.initValues,
-    onSubmit: newField.create,
+    initialValues: fieldEditor.defaultValues,
+    onSubmit: eventValues => fieldEditor.create({
+      ...eventValues, selectOptions,
+    }),
   });
   const { abortCallback, wasOpened } = props;
-  let [options, setOptions] = useState([]);
   return(
     <Modal open={ wasOpened } onClose={ abortCallback } sx={ styles.modal }>
       <Box component="section" sx={ styles.box }>
@@ -27,8 +29,8 @@ const FieldEditor = props => {
               <Fields formikInstance={ formik } />
               { formik.values.type === 'select' && (
                 <SelectOptions
-                  options={ options }
-                  setOptions={ setOptions }
+                  options={ selectOptions }
+                  setOptions={ setSelectOptions }
                 />
               )}
             </Stack>

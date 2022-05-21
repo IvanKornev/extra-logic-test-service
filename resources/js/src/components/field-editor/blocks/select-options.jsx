@@ -22,7 +22,6 @@ const SelectOptions = props => {
           { options.map(({ id, title, value }, index) => (
             <ListItem key={ generateId() } sx={ styles.optionItem }>
               <ListItemText
-                divider={ true }
                 primary={ `${ index + 1 }) Наименование: ${ title }` }
                 secondary={ `Значение: ${ value }` } 
               />
