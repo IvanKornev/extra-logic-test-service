@@ -1,43 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import generateId from 'uniqid';
-
-import {
-  UilTrashAlt, UilPen,
-} from '@iconscout/react-unicons';
-import {
-  Button, Stack, ListItem, List, ListItemText, Typography,
-} from '@mui/material'; 
+import { Button, Stack } from '@mui/material';
 
 import { select } from '../../../domains';
-import { styles } from '../field-editor.styles';
+import { OptionsList } from '.';
 
 const SelectOptions = props => {
   const { options, setOptions } = props;
+  const editWrapper = (id, options) => (
+    setOptions(select.editOption(id, options))
+  );
+  const deleteWrapper= (id, options) => (
+    setOptions(select.deleteOption(id, options))
+  );
+
   return(
     <Stack direction="column" justifyContent="center">
       { options.length !== 0 && (
-        <List sx={ styles.optionsList }>
-          <Typography>Опции селектора: </Typography>
-          { options.map(({ id, title, value }, index) => (
-            <ListItem key={ generateId() } sx={ styles.optionItem }>
-              <ListItemText
-                primary={ `${ index + 1 }) Наименование: ${ title }` }
-                secondary={ `Значение: ${ value }` } 
-              />
-              <Stack direction="row" spacing={ 1 }>
-                <UilPen
-                  size={ 18 }
-                  onClick={() => setOptions(select.editOption(id, options))}
-                />
-                <UilTrashAlt
-                  size={ 18 }
-                  onClick={() => setOptions(select.deleteOption(id, options))}
-                />
-              </Stack>
-            </ListItem>
-          ))}
-        </List>
+        <OptionsList
+          options={ options }
+          editCallback={ editWrapper }
+          deleteCallback={ deleteWrapper }
+        />
       )}
       <Button
         size="small"

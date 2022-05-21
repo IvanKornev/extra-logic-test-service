@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { Formik, Form, useFormik } from 'formik';
-import { Box, Typography, Stack, Modal } from '@mui/material';
+import { Typography, Stack } from '@mui/material';
 
 import { Fields, ActionButtons, SelectOptions } from './blocks';
+import { Modal } from '../../ui-core';
 import { fieldEditor } from '../../domains';
-import { styles } from './field-editor.styles';
 
 const FieldEditor = props => {
   const { abortCallback, wasOpened, updateFields } = props;
@@ -30,8 +30,8 @@ const FieldEditor = props => {
   }, [formik.values.type]);
 
   return(
-    <Modal open={ wasOpened } onClose={ abortCallback } sx={ styles.modal }>
-      <Box component="section" sx={ styles.box }>
+    <Modal open={ wasOpened } onClose={ abortCallback }>
+      
         <Typography variant="h5" component="h5">
           Новое поле
         </Typography>
@@ -55,7 +55,6 @@ const FieldEditor = props => {
             </Stack>
           </Form>
         </Formik>
-      </Box>
     </Modal>
   );
 };

@@ -8,6 +8,15 @@ const renderOptions = component => (
     </MenuItem>
 )));
 
+const getOptionTexts = (option, number = 1) => {
+  const { title, value } = option;
+  const texts = {
+    primary: `${ number }) Наименование: ${ title }`,
+    secondary: `Значение: ${ value }`,
+  };
+  return texts;
+};
+
 const addOption = () => {
   const title = prompt('Какое будет наименование у опции?', 'имя');
   const value = prompt('А значение?', 'значение');
@@ -36,6 +45,7 @@ const isSelect = component => (
 
 export const select  = {
   renderOptions,
+  getOptionTexts,
   addOption,
   editOption,
   deleteOption,
