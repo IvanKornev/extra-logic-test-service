@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Stack } from '@mui/material';
 
 import { select } from '../../../domains';
-import { OptionsList } from '.';
+import { OptionsList, NewOption } from '.';
 
 const SelectOptions = props => {
   const { options, setOptions } = props;
+  const [ newOptionIsAdding, addNewOption ] = useState(false);
+
   const editWrapper = (id, options) => (
     setOptions(select.editOption(id, options))
   );
@@ -27,8 +29,14 @@ const SelectOptions = props => {
         size="small"
         variant="text"
         color="primary"
-        onClick={() => setOptions(prev => [...prev, select.addOption()])}
+        onClick={() => addNewOption(true)}
       >Добавить опцию селектора</Button>
+      { newOptionIsAdding && (
+        <NewOption
+          abortCallback={() => addNewOption(false)}
+          isVisible={ newOptionIsAdding }
+        />
+      )} 
     </Stack>
   );
 };
