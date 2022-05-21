@@ -25,18 +25,25 @@ const NewOption = ({ isVisible, abortCallback, setOptions }) => {
       <Formik initialValues={ select.optionValues } onSubmit={ formik.handleSubmit }>
         <Form>
           <Stack direction="column" spacing={ 1 }>
-            { Object.keys(formik.values).map((fieldName) => (
-              <TextField
-                name={ fieldName }
-                label={ fieldName }
-                value={ formik.values[fieldName] }
-                onChange={ formik.handleChange }
-                variant="standard"
-              />
-            ))}
+            { Object.keys(formik.values).map((fieldName) => {
+              const labels = {
+                title: 'Наименование',
+                value: 'Значение'
+              };
+              return(
+                <TextField
+                  name={ fieldName }
+                  label={ labels[fieldName] }
+                  value={ formik.values[fieldName] }
+                  onChange={ formik.handleChange }
+                  variant="standard"
+                />
+              );
+            })}
           </Stack>
           <Stack direction="row" spacing={ 2 }>
             <ActionButtons
+              disableCondition={ !formik.values.title || !formik.values.value }
               abortCallback={ abortCallback }
             />
           </Stack>
