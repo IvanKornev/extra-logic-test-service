@@ -13,6 +13,17 @@ const modal = {
   alignItems: 'center',
 };
 
+const optionsList = {
+  display: 'flex',
+  flexDirection: 'column',
+};
+
+const optionItem = {
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+};
+
 export const styles = {
-  box, modal,
+  box, modal, optionsList, optionItem,
 };
