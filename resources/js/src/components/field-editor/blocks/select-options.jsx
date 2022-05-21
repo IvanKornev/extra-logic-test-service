@@ -1,6 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import generateId from 'uniqid';
+
+import {
+  UilTrashAlt, UilPen,
+} from '@iconscout/react-unicons';
 import {
   Button, Stack, ListItem, List, ListItemText, Typography,
 } from '@mui/material'; 
@@ -22,12 +26,16 @@ const SelectOptions = props => {
                 primary={ `${ index + 1 }) Наименование: ${ title }` }
                 secondary={ `Значение: ${ value }` } 
               />
-              <Typography
-                onClick={() => setOptions(select.deleteOption(id, options))}
-              >Удалить</Typography>
-              <Typography
-                onClick={() => setOptions(select.editOption(id, options))}
-              >Изменить</Typography>
+              <Stack direction="row" spacing={ 1 }>
+                <UilPen
+                  size={ 18 }
+                  onClick={() => setOptions(select.editOption(id, options))}
+                />
+                <UilTrashAlt
+                  size={ 18 }
+                  onClick={() => setOptions(select.deleteOption(id, options))}
+                />
+              </Stack>
             </ListItem>
           ))}
         </List>
