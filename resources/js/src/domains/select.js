@@ -1,6 +1,15 @@
 import { Select, MenuItem } from '@mui/material';
 import generateId from 'uniqid';
 
+const isSelect = component => (
+  component.name === Select && true
+);
+
+const optionValues = {
+  title: '',
+  value: '',
+};
+
 const renderOptions = component => (
   component.options.map((option) => (
     <MenuItem key={ generateId() } value={ option.value }>
@@ -38,15 +47,12 @@ const deleteOption = (id = 1, options) => (
   options.filter((option) => option.id !== id)
 );
 
-const isSelect = component => (
-  component.name === Select && true
-);
-
 export const select  = {
+  isSelect,
+  optionValues,
   renderOptions,
   getOptionTexts,
   addOption,
   editOption,
   deleteOption,
-  isSelect,
 };

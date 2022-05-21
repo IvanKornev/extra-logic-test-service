@@ -5,12 +5,12 @@ import { TextField, Typography, Stack } from '@mui/material';
 import { Form, Formik, useFormik } from 'formik';
 
 import { Modal } from '../../../ui-core';
-import { select, selectOption } from '../../../domains';
+import { select } from '../../../domains';
 import { ActionButtons } from '.';
 
 const NewOption = ({ isVisible, abortCallback, setOptions }) => {
   const formik = useFormik({
-    initialValues: selectOption.defaultValues,
+    initialValues: select.optionValues,
     onSubmit: (values) => {
       const createdOption = select.addOption(values);
       setOptions((prev) => [...prev, createdOption]);
@@ -22,7 +22,7 @@ const NewOption = ({ isVisible, abortCallback, setOptions }) => {
       <Typography variant="h5" component="h5">
         Новая опция селектора
       </Typography>
-      <Formik initialValues={ selectOption.defaultValues } onSubmit={ formik.handleSubmit }>
+      <Formik initialValues={ select.optionValues } onSubmit={ formik.handleSubmit }>
         <Form>
           <Stack direction="column" spacing={ 1 }>
             { Object.keys(formik.values).map((fieldName) => (
