@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { Formik, Form, useFormik } from 'formik';
@@ -17,6 +17,13 @@ const FieldEditor = props => {
     }),
   });
   const { abortCallback, wasOpened } = props;
+
+  useEffect(() => {
+    if (formik.values.type !== 'select') {
+      setSelectOptions([]);
+    }
+  }, [formik.values.type]);
+
   return(
     <Modal open={ wasOpened } onClose={ abortCallback } sx={ styles.modal }>
       <Box component="section" sx={ styles.box }>
@@ -35,7 +42,11 @@ const FieldEditor = props => {
               )}
             </Stack>
             <Stack direction="row" spacing={2}>
-              <ActionButtons abortCallback={ abortCallback } />
+              <ActionButtons
+                optionsCount ={ selectOptions.length }
+                fieldType={ formik.values.type }
+                abortCallback={ abortCallback }
+              />
             </Stack>
           </Form>
         </Formik>
