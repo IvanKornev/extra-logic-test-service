@@ -33,6 +33,7 @@ const NewFormEditor = () => {
     <main style={ styles }>
         { editorIsVisible && (
           <FieldEditor
+            updateFields={ updateFields }
             wasOpened={ editorIsVisible }
             abortCallback={() => setEditorVisibility(false)}
           />

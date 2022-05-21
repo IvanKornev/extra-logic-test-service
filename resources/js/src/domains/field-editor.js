@@ -18,7 +18,8 @@ const create = values => {
   if (values.type === 'select') {
     createdField.selectOptions = values.selectOptions;
   }
-  alert(JSON.stringify(values));
+  
+  alert(JSON.stringify(createdField));
   return createdField;
 };
 

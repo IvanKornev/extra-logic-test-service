@@ -9,14 +9,19 @@ import { fieldEditor } from '../../domains';
 import { styles } from './field-editor.styles';
 
 const FieldEditor = props => {
+  const { abortCallback, wasOpened, updateFields } = props;
+  
   const [selectOptions, setSelectOptions] = useState([]);
   const formik = useFormik({
     initialValues: fieldEditor.defaultValues,
-    onSubmit: eventValues => fieldEditor.create({
-      ...eventValues, selectOptions,
-    }),
+    onSubmit: eventValues => {
+      const createdField = fieldEditor.create({
+        ...eventValues, selectOptions,
+      });
+      updateFields((prev) => [...prev, createdField]);
+      abortCallback();
+    },
   });
-  const { abortCallback, wasOpened } = props;
 
   useEffect(() => {
     if (formik.values.type !== 'select') {
@@ -30,7 +35,7 @@ const FieldEditor = props => {
         <Typography variant="h5" component="h5">
           Новое поле
         </Typography>
-        <Formik onSubmit={ formik.handleSubmit }>
+        <Formik initialValues={ fieldEditor.defaultValues } onSubmit={ formik.handleSubmit }>
           <Form>
             <Stack direction="column" spacing={ 2 }>
               <Fields formikInstance={ formik } />
@@ -57,6 +62,7 @@ const FieldEditor = props => {
 
 FieldEditor.propTypes = {
   wasOpened: PropTypes.bool.isRequired,
+  updateFields: PropTypes.func.isRequired,
   abortCallback: PropTypes.func.isRequired,
 };
 

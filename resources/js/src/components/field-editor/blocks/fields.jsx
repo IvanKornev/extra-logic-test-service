@@ -15,6 +15,7 @@ const Fields = ({ formikInstance }) => (
       return(
         <CurrentComponent
           key={ id }
+          id={ name }
           name={ name }
           label={ label }
           value={ formikInstance.values[name] }
