@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Formik, Form, useFormik } from 'formik';
 import { Box, Typography, Stack, Modal } from '@mui/material';
 
-import { Fields, ActionButtons } from './blocks';
+import { Fields, ActionButtons, SelectOptions } from './blocks';
 import { newField } from '../../domains';
 import { styles } from './field-editor.styles';
 
@@ -24,6 +24,7 @@ const FieldEditor = props => {
           <Form>
             <Stack direction="column" spacing={ 2 }>
               <Fields formikInstance={ formik } />
+              { formik.values.type === 'select' && <SelectOptions /> }
             </Stack>
             <Stack direction="row" spacing={2}>
               <ActionButtons abortCallback={ abortCallback } />
