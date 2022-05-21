@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { Formik, Form, useFormik } from 'formik';
@@ -14,6 +14,7 @@ const FieldEditor = props => {
     onSubmit: newField.create,
   });
   const { abortCallback, wasOpened } = props;
+  let [options, setOptions] = useState([]);
   return(
     <Modal open={ wasOpened } onClose={ abortCallback } sx={ styles.modal }>
       <Box component="section" sx={ styles.box }>
@@ -24,7 +25,12 @@ const FieldEditor = props => {
           <Form>
             <Stack direction="column" spacing={ 2 }>
               <Fields formikInstance={ formik } />
-              { formik.values.type === 'select' && <SelectOptions /> }
+              { formik.values.type === 'select' && (
+                <SelectOptions
+                  options={ options }
+                  setOptions={ setOptions }
+                />
+              )}
             </Stack>
             <Stack direction="row" spacing={2}>
               <ActionButtons abortCallback={ abortCallback } />
