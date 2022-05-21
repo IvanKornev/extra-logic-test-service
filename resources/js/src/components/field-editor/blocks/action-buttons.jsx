@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '@mui/material';
 
-const ActionButtons = ({ abortCallback, optionsCount, fieldType }) => (
+const ActionButtons = ({ abortCallback, disableCondition }) => (
   <>
     <Button
       size="medium"
       variant="contained"
       color="success"
       type="submit"
-      disabled={ fieldType === 'select' && optionsCount === 0 }
+      disabled={ disableCondition }
     >Сохранить поле</Button>
     <Button
       size="medium"
@@ -20,9 +20,12 @@ const ActionButtons = ({ abortCallback, optionsCount, fieldType }) => (
   </>
 );
 
+ActionButtons.defaultProps = {
+  disableCondition: false,
+};
+
 ActionButtons.propTypes = {
-  optionsCount: PropTypes.number.isRequired,
-  fieldType: PropTypes.string.isRequired,
+  disableCondition: PropTypes.bool,
   abortCallback: PropTypes.func.isRequired,
 };
 

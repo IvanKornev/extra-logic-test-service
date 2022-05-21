@@ -31,30 +31,30 @@ const FieldEditor = props => {
 
   return(
     <Modal open={ wasOpened } onClose={ abortCallback }>
-      
-        <Typography variant="h5" component="h5">
-          Новое поле
-        </Typography>
-        <Formik initialValues={ fieldEditor.defaultValues } onSubmit={ formik.handleSubmit }>
-          <Form>
-            <Stack direction="column" spacing={ 2 }>
-              <Fields formikInstance={ formik } />
-              { formik.values.type === 'select' && (
-                <SelectOptions
-                  options={ selectOptions }
-                  setOptions={ setSelectOptions }
-                />
-              )}
-            </Stack>
-            <Stack direction="row" spacing={2}>
-              <ActionButtons
-                optionsCount ={ selectOptions.length }
-                fieldType={ formik.values.type }
-                abortCallback={ abortCallback }
+      <Typography variant="h5" component="h5">
+        Новое поле
+      </Typography>
+      <Formik initialValues={ fieldEditor.defaultValues } onSubmit={ formik.handleSubmit }>
+        <Form>
+          <Stack direction="column" spacing={ 2 }>
+            <Fields formikInstance={ formik } />
+            { formik.values.type === 'select' && (
+              <SelectOptions
+                options={ selectOptions }
+                setOptions={ setSelectOptions }
               />
-            </Stack>
-          </Form>
-        </Formik>
+            )}
+          </Stack>
+          <Stack direction="row" spacing={2}>
+            <ActionButtons
+              disableCondition={
+                formik.values.type === 'select' && selectOptions.length === 0
+              }
+              abortCallback={ abortCallback }
+            />
+          </Stack>
+        </Form>
+      </Formik>
     </Modal>
   );
 };
