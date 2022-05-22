@@ -23,6 +23,14 @@
         "camelcase": "error",
         "spaced-comment": "error",
         "quotes": ["error", "single"],
-        "no-duplicate-imports": "error"
+        "no-use-before-define": "off",
+        "max-len": ["warn", {"code": 80}],
+        "no-duplicate-imports": "error",
+        "import/prefer-default-export": "off",
+        "react/prop-types": "off",
+        "react/function-component-definition": [
+          2,
+          { "namedComponents": "arrow-function" }
+        ]
     }
 }
