@@ -1,8 +1,8 @@
 const fieldsInitialValues = {
   title: 'Новая форма',
-  fields: [],
-};
+  fields: []
+}
 
 export const newForm = {
-  fieldsInitialValues,
-};
+  fieldsInitialValues
+}
