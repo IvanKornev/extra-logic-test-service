@@ -1,15 +1,17 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 
+import { Navbar } from '@components/page-structure';
 import { NewFormPage } from './pages';
 import { app } from './styles';
 
 const App = () => (
-  <body>
+  <>
+    <Navbar />
     <main style={app.page}>
       <NewFormPage />
     </main>
-  </body>
+  </>
 );
 
 const rootElem = document.getElementById('root');
