@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
-import { Typography, Button } from '@mui/material'
+import { createRoot } from 'react-dom/client'
 
+import { Typography, Button } from '@mui/material'
 import { formService } from '@services'
 import { FieldEditor } from '@components/features'
+import { app } from './styles';
 
 const NewForm = () => {
   let [fields, updateFields] = useState([])
@@ -21,16 +23,8 @@ const NewForm = () => {
 
   const formIsEmpty = fields.length < 1 ? true : false
 
-  const styles = {
-    // background: 'rgb(77,77,77)',
-    //background: `radial-gradient(circle, rgba(77,77,77,1) 49%,
-    //rgba(51,51,51,1) 74%, rgba(34,34,34,1) 100%)`,
-    minHeight: '100vh',
-    // color: '#fff',
-  }
-
   return (
-    <main style={styles}>
+    <main style={ app.page }>
       <div>
         <Typography variant='h4' component='h1'>
           Новая форма
@@ -87,6 +81,12 @@ const NewForm = () => {
       </Button>
     </main>
   )
+}
+
+const rootElem = document.getElementById('root')
+if (rootElem) {
+  const root = createRoot(rootElem)
+  root.render(<NewForm />)
 }
 
 export { NewForm }
