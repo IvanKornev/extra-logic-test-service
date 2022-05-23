@@ -4,10 +4,10 @@ import PropTypes from 'prop-types'
 import { Formik, Form, useFormik } from 'formik'
 import { Typography, Stack } from '@mui/material'
 
-import { Fields, SelectOptions } from './blocks'
 import { Modal, ActionButtons } from '@components/reusable';
+import { fieldEditor } from '@domains';
 
-import { fieldEditor } from '../../../domains'
+import { Fields, SelectOptions } from './blocks'
 
 const FieldEditor = (props) => {
   const { abortCallback, wasOpened, updateFields } = props

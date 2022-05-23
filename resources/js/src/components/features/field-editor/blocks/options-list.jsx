@@ -5,7 +5,7 @@ import generateId from 'uniqid'
 import { UilTrashAlt, UilPen } from '@iconscout/react-unicons'
 import { List, Typography, ListItem, ListItemText, Stack } from '@mui/material'
 
-import { select } from '../../../../domains'
+import { select } from '@domains'
 import { styles } from '../field-editor.styles'
 
 export const OptionsList = (props) => {

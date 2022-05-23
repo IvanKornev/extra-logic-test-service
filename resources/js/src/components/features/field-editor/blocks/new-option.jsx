@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { TextField, Typography, Stack } from '@mui/material';
 import { Form, Formik, useFormik } from 'formik';
 
-import { Modal, ActionButtons } from '../../../reusable';
-import { select } from '../../../../domains';
+import { Modal, ActionButtons } from '@components/reusable';
+import { select } from '@domains';
 
 const NewOption = ({ isVisible, abortCallback, setOptions }) => {
   const formik = useFormik({

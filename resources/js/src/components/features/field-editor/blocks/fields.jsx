@@ -1,7 +1,7 @@
 import React, { useId } from 'react'
 import PropTypes from 'prop-types'
 
-import { fieldEditor, select } from '../../../../domains'
+import { fieldEditor, select } from '@domains'
 
 const Fields = ({ formikInstance }) => (
   <>

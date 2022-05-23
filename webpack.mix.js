@@ -1,15 +1,5 @@
 const mix = require('laravel-mix');
-const path = require('path');
-
-const config = {
-  resolve: {
-    extensions: ['js', 'jsx'],
-    alias: {
-      '@': path.resolve(__dirname, './resources/js/src'),
-      '@components': path.resolve(__dirname, './resources/js/src/components'),
-    }
-  },
-};
+const config = require('./webpack.config');
 
 mix
   .webpackConfig(config)
