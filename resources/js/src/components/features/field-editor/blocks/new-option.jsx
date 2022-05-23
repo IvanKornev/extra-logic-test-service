@@ -11,11 +11,11 @@ const NewOption = ({ isVisible, abortCallback, setOptions }) => {
   const formik = useFormik({
     initialValues: select.optionValues,
     onSubmit: (values) => {
-      const createdOption = select.addOption(values)
-      setOptions((prev) => [...prev, createdOption])
-      abortCallback()
+      const createdOption = select.addOption(values);
+      setOptions((prev) => [...prev, createdOption]);
+      abortCallback();
     },
-  })
+  });
   return (
     <Modal open={isVisible} onClose={abortCallback}>
       <Typography variant='h5' component='h5'>
@@ -23,15 +23,14 @@ const NewOption = ({ isVisible, abortCallback, setOptions }) => {
       </Typography>
       <Formik
         initialValues={select.optionValues}
-        onSubmit={formik.handleSubmit}
-      >
+        onSubmit={formik.handleSubmit}>
         <Form>
           <Stack direction='column' spacing={1}>
             {Object.keys(formik.values).map((fieldName) => {
               const labels = {
                 title: 'Наименование',
                 value: 'Значение',
-              }
+              };
               return (
                 <TextField
                   name={fieldName}
@@ -40,7 +39,7 @@ const NewOption = ({ isVisible, abortCallback, setOptions }) => {
                   onChange={formik.handleChange}
                   variant='standard'
                 />
-              )
+              );
             })}
           </Stack>
           <Stack direction='row' spacing={2}>
