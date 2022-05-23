@@ -3,10 +3,7 @@ import { Button } from '@mui/material';
 import { useFormik } from 'formik';
 
 import { FieldEditor } from '@components/features';
-import { NewFormTitle } from '@components/features/new-form';
-
-import { formService } from '@services';
-import { newForm } from '@domains';
+import { NewFormTitle, NewFormFields } from '@components/features/new-form';
 
 const NewFormPage = () => {
   let [fields, updateFields] = useState([]);
@@ -23,25 +20,16 @@ const NewFormPage = () => {
   });
 
   return (
-    <section>
-      <NewFormTitle formikInstance={ formik } />
-      <div>
-        {fields.length !== 0 &&
-          fields.map((field) => (
-            <div key={field.uniqueId}>
-              <div>
-                <h5>Название поля: {field.name}</h5>
-                <h5>Описание поля: {field.description}</h5>
-                <h5>Тип поля: {field.type}</h5>
-                {field.type === 'select' && (
-                  <h5>
-                    Опции селектора:{' '}
-                    {JSON.stringify(field.selectOptions, null, 2)}
-                  </h5>
-                )}
-              </div>
-            </div>
-          ))}
+    <section style={{ display: 'flex', justifyContent: 'center' }}>
+      <div style={{ display: 'inline-flex', flexDirection: 'column', rowGap: '12px', marginTop: '12px' }}>
+        <NewFormTitle formikInstance={ formik } />
+        <NewFormFields fields={ fields } />
+        <Button
+          variant='contained'
+          type='button'
+          onClick={() => setEditorVisibility(true)}>
+          Добавить поле
+        </Button>
       </div>
       {editorIsVisible && (
         <FieldEditor
@@ -50,18 +38,6 @@ const NewFormPage = () => {
           abortCallback={() => setEditorVisibility(false)}
         />
       )}
-      <Button
-        variant='contained'
-        type='button'
-        onClick={() => setEditorVisibility(true)}>
-        Добавить поле
-      </Button>
-      <Button
-        variant='contained'
-        onClick={() => formService.save(fields)}
-        disabled={newForm.isEmpty(fields)}>
-        Сохранить форму
-      </Button>
     </section>
   );
 };
