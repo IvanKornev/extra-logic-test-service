@@ -5,7 +5,7 @@
     },
     "extends": [
         "plugin:react/recommended",
-        "standard"
+        "airbnb"
     ],
     "parserOptions": {
         "ecmaFeatures": {
@@ -19,6 +19,7 @@
         "prettier"
     ],
     "rules": {
+        "no-alert": "off",
         "react/react-in-jsx-scope": "off",
         "camelcase": "error",
         "spaced-comment": "error",
@@ -31,6 +32,9 @@
         "react/function-component-definition": [
           2,
           { "namedComponents": "arrow-function" }
-        ]
+        ],
+        "react/jsx-filename-extension": [1, {
+            "extensions": [".js", ".jsx"]
+        }]
     }
 }

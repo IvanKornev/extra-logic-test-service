@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Typography, Button } from '@mui/material'
 
 import { formService } from './src/services'
-import { FieldEditor } from './src/components'
+import { FieldEditor } from './src/components/features'
 
 const NewForm = () => {
   let [fields, updateFields] = useState([])
