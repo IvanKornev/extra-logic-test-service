@@ -1,8 +1,8 @@
 const modal = {
   display: 'flex',
   justifyContent: 'center',
-  alignItems: 'center'
-}
+  alignItems: 'center',
+};
 
 const box = {
   p: 2,
@@ -10,10 +10,10 @@ const box = {
   borderRadius: '6px',
   display: 'inline-flex',
   flexDirection: 'column',
-  color: 'black'
-}
+  color: 'black',
+};
 
 export const styles = {
   modal,
-  box
-}
+  box,
+};
