@@ -1,12 +1,11 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import { TextField, Typography, Stack } from '@mui/material'
-import { Form, Formik, useFormik } from 'formik'
+import { TextField, Typography, Stack } from '@mui/material';
+import { Form, Formik, useFormik } from 'formik';
 
-import { Modal } from '../../../ui-core'
-import { select } from '../../../domains'
-import { ActionButtons } from '.'
+import { Modal, ActionButtons } from '../../reusable';
+import { select } from '../../../domains';
 
 const NewOption = ({ isVisible, abortCallback, setOptions }) => {
   const formik = useFormik({
@@ -53,13 +52,13 @@ const NewOption = ({ isVisible, abortCallback, setOptions }) => {
         </Form>
       </Formik>
     </Modal>
-  )
-}
+  );
+};
 
 NewOption.propTypes = {
   isVisible: PropTypes.bool.isRequired,
   abortCallback: PropTypes.func.isRequired,
   setOptions: PropTypes.func.isRequired,
-}
+};
 
-export { NewOption }
+export { NewOption };
