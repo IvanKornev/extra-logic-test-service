@@ -1,6 +1,7 @@
 const box = {
   display: 'inline-flex',
   background: 'white',
+  flexDirection: 'column',
   padding: '14px',
   borderRadius: '8px',
   border: '1px rgba(0, 0, 0, 0.2) solid',

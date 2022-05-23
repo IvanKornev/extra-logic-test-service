@@ -1,20 +1,30 @@
 import React, { useState } from 'react';
+import { Button } from '@mui/material';
+import { useFormik } from 'formik';
 
-import { Typography, Button } from '@mui/material';
-import { formService } from '@services';
 import { FieldEditor } from '@components/features';
+import { NewFormTitle } from '@components/features/new-form';
+
+import { formService } from '@services';
 import { newForm } from '@domains';
 
 const NewFormPage = () => {
   let [fields, updateFields] = useState([]);
   let [editorIsVisible, setEditorVisibility] = useState(false);
+
+  const formik = useFormik({
+    initialValues: {
+      form: {
+        name: 'Новая форма',
+        description: 'Описание новой формы',
+      },
+    },
+    onSubmit: (values) => console.log(values),
+  });
+
   return (
     <section>
-      <div>
-        <Typography variant='h4' component='h1'>
-          Новая форма
-        </Typography>
-      </div>
+      <NewFormTitle formikInstance={ formik } />
       <div>
         {fields.length !== 0 &&
           fields.map((field) => (
