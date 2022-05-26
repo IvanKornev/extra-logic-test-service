@@ -13,10 +13,26 @@ const defaultValues = {
 };
 
 const menu = [
-  { iconName: UilPlusCircle, action: () => alert('Добавление') },
-  { iconName: UilEditAlt, action: () => alert('Редактирование') },
-  { iconName: UilCopy, action: () => alert('Копирование') },
-  { iconName: UilTrashAlt, action: () => alert('Удаление') },
+  {
+    iconName: UilPlusCircle,
+    tooltip: 'Добавить поле',
+    action: () => alert('Добавление')
+  },
+  {
+    iconName: UilEditAlt,
+    tooltip: 'Редактировать это поле',
+    action: () => alert('Редактирование')
+  },
+  {
+    iconName: UilCopy,
+    tooltip: 'Копировать это поле',
+    action: () => alert('Копирование')
+  },
+  {
+    iconName: UilTrashAlt,
+    tooltip: 'Удалить это поле',
+    action: () => alert('Удаление')
+  },
 ];
 
 const isEmpty = (fields = []) => (fields.length === 0 ? true : false);
