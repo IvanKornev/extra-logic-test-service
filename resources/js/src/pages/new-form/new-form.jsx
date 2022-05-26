@@ -25,7 +25,7 @@ const NewFormPage = () => {
         />
         <NewFormFields
           anchorCallback={(e) => setAnchorElem(e.currentTarget)}
-          fields={fields}
+          fields={fields.toArray()}
         />
         <NewFormMenu
           actionsCallbacks={{
