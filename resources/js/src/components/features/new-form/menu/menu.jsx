@@ -15,13 +15,7 @@ const NewFormMenu = ({ anchorElem }) => (
         const { iconName, action } = item;
         const id = useId();
         const IconComponent = iconName;
-        return (
-          <IconComponent
-            key={id}
-            color='#545454'
-            onClick={action}
-          />
-        );
+        return <IconComponent key={id} color='#545454' onClick={action} />;
       })}
     </Box>
   </Popper>

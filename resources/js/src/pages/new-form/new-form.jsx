@@ -25,11 +25,14 @@ const NewFormPage = () => {
     <section style={styles.page}>
       <div style={styles.wrapper}>
         <NewFormTitle
-          ref={ titleElem }
+          ref={titleElem}
           onClick={(e) => setAnchorElem(e.currentTarget)}
           formikInstance={formik}
         />
-        <NewFormFields fields={fields} />
+        <NewFormFields
+          anchorCallback={(e) => setAnchorElem(e.currentTarget)}
+          fields={fields}
+        />
         <NewFormMenu anchorElem={anchorElem} />
         <Button
           variant='contained'
