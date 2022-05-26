@@ -27,7 +27,7 @@ const NewFormFields = ({ fields, anchorCallback }) => (
               value={field.description}
               sx={styles.fields.description}
               color='secondary'
-              readonly
+              readOnly
             />
           )}
           {field.type === 'select' && (
