@@ -1,8 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Button } from '@mui/material';
+import React, { useState } from 'react';
 
 import { FieldEditor } from '@components/features';
-import { useNewForm } from '@hooks';
+import { useNewForm, useAnchorElem } from '@hooks';
 import {
   NewFormTitle,
   NewFormFields,
@@ -13,19 +12,14 @@ import { styles } from './new-form.styles';
 
 const NewFormPage = () => {
   let [editorIsVisible, setEditorVisibility] = useState(false);
-  let [anchorElem, setAnchorElem] = useState(null);
   let { fields, updateFields, formik } = useNewForm();
-
-  let titleElem = useRef(null);
-  useEffect(() => {
-    setAnchorElem(titleElem.current);
-  }, []);
+  let { anchorElem, setAnchorElem, startElem } = useAnchorElem();
 
   return (
     <section style={styles.page}>
       <div style={styles.wrapper}>
         <NewFormTitle
-          ref={titleElem}
+          ref={startElem}
           onClick={(e) => setAnchorElem(e.currentTarget)}
           formikInstance={formik}
         />
