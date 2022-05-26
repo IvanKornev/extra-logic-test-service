@@ -12,7 +12,11 @@ const useFieldEditor = (updateCallback, abortCallback) => {
         ...eventValues,
         selectOptions,
       });
-      updateCallback((list) => list.insert(createdField));
+      updateCallback((list) => {
+        list.insert(createdField);
+        console.log(list);
+        return list;
+      });
       abortCallback();
     },
   });
