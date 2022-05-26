@@ -5,8 +5,8 @@ import { TextField } from '@mui/material';
 import { FieldBox } from '@components/reusable';
 import { styles } from './title.styles';
 
-export const NewFormTitle = ({ formikInstance }) => (
-  <FieldBox withBorder>
+export const NewFormTitle = ({ formikInstance, onClick }) => (
+  <FieldBox onClick={ onClick } withBorder>
     { Object.keys(formikInstance.values.form).map((field) => {
       const id = useId();
       return(
@@ -26,4 +26,5 @@ export const NewFormTitle = ({ formikInstance }) => (
 
 NewFormTitle.propTypes = {
   formikInstance: PropTypes.object.isRequired,
+  onClick: PropTypes.func,
 };

@@ -5,10 +5,10 @@ import { Box } from '@mui/material';
 import { styles } from './field-box.styles';
 
 const FieldBox = props => {
-  const { children, withBorder } = props;
+  const { children, withBorder, onClick } = props;
   const { box, borderedBox } = styles;
   return(
-    <Box sx={ withBorder ? borderedBox : box }>
+    <Box onClick={ onClick } sx={ withBorder ? borderedBox : box }>
       { children }
     </Box>
   );
@@ -20,6 +20,7 @@ FieldBox.defaultTypes = {
 
 FieldBox.propTypes = {
   children: PropTypes.node.isRequired,
+  onClick: PropTypes.func,
   withBorder: PropTypes.bool,
 };
 
