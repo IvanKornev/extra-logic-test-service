@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 
+import { newForm } from '@domains';
+import { formService } from '@services';
+
 export const useNewForm = () => {
   let [fields, updateFields] = useState([]);
   const formik = useFormik({
-    initialValues: {
-      form: {
-        name: 'Новая форма',
-        description: 'Описание новой формы',
-      },
+    initialValues: newForm.defaultValues,
+    onSubmit: async (form) => {
+      await formService.save({ ...form, fields });
     },
-    onSubmit: (values) => console.log(values),
   });
   return { fields, updateFields, formik };
 };
