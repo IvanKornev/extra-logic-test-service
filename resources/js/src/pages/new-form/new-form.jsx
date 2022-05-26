@@ -33,13 +33,15 @@ const NewFormPage = () => {
           anchorCallback={(e) => setAnchorElem(e.currentTarget)}
           fields={fields}
         />
-        <NewFormMenu anchorElem={anchorElem} />
-        <Button
-          variant='contained'
-          type='button'
-          onClick={() => setEditorVisibility(true)}>
-          Добавить поле
-        </Button>
+        <NewFormMenu
+          actionsCallbacks={{
+            add: () => setEditorVisibility(true),
+            edit: () => alert('Редактирование'),
+            copy: () => alert('Копирование'),
+            remove: () => alert('Удаление'),
+          }}
+          anchorElem={anchorElem}
+        />
       </div>
       {editorIsVisible && (
         <FieldEditor
