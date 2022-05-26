@@ -1,1 +1,1 @@
-export { NewFormPage } from './new-form';
+export { NewFormPage } from './new-form/new-form';

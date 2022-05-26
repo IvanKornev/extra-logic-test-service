@@ -4,6 +4,7 @@ import { useFormik } from 'formik';
 
 import { FieldEditor } from '@components/features';
 import { NewFormTitle, NewFormFields } from '@components/features/new-form';
+import { styles } from './new-form.styles';
 
 const NewFormPage = () => {
   let [fields, updateFields] = useState([]);
@@ -20,8 +21,8 @@ const NewFormPage = () => {
   });
 
   return (
-    <section style={{ display: 'flex', justifyContent: 'center' }}>
-      <div style={{ display: 'inline-flex', flexDirection: 'column', rowGap: '12px', marginTop: '12px' }}>
+    <section style={ styles.page }>
+      <div style={ styles.wrapper }>
         <NewFormTitle formikInstance={ formik } />
         <NewFormFields fields={ fields } />
         <Button
