@@ -1,19 +1,38 @@
-import React from 'react';
+import React, { useId } from 'react';
+import PropTypes from 'prop-types';
 import { Popper, Box } from '@mui/material';
 
 import { newForm } from '@domains';
 import { styles } from './menu.styles';
 
-const NewFormMenu = ({ anchorEl }) => (
-  <Popper placement="right-start" anchorEl={ anchorEl } open={ anchorEl !== null }>
-    <Box sx={ styles.menu }>
-      { newForm.menu.map((item) => {
+const NewFormMenu = ({ anchorElem }) => (
+  <Popper
+    placement='right-start'
+    anchorEl={anchorElem}
+    open={anchorElem !== null}>
+    <Box sx={styles.menu}>
+      {newForm.menu.map((item) => {
         const { iconName, action } = item;
+        const id = useId();
         const IconComponent = iconName;
-        return <IconComponent color="#545454" onClick={ action } />
+        return (
+          <IconComponent
+            key={id}
+            color='#545454'
+            onClick={action}
+          />
+        );
       })}
     </Box>
   </Popper>
 );
+
+NewFormMenu.defaultTypes = {
+  anchorElem: null,
+};
+
+NewFormMenu.propTypes = {
+  anchorElem: PropTypes.object,
+};
 
 export { NewFormMenu };

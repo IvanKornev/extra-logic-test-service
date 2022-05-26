@@ -4,7 +4,8 @@ const menu = {
   bgcolor: 'background.paper',
   display: 'flex',
   flexDirection: 'column',
-  rowGap: '8px'
+  rowGap: '8px',
+  marginLeft: '10px',
 };
 
 export const styles = {

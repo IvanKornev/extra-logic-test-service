@@ -1,5 +1,8 @@
 import {
-  UilPlusCircle, UilTrashAlt, UilCopy, UilEditAlt,
+  UilPlusCircle,
+  UilTrashAlt,
+  UilCopy,
+  UilEditAlt,
 } from '@iconscout/react-unicons';
 
 const defaultValues = {
@@ -16,9 +19,7 @@ const menu = [
   { iconName: UilTrashAlt, action: () => alert('Удаление') },
 ];
 
-const isEmpty = (fields = []) => (
-  fields.length === 0 ? true : false
-);
+const isEmpty = (fields = []) => (fields.length === 0 ? true : false);
 
 export const newForm = {
   defaultValues,
