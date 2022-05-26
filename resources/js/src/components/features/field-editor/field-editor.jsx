@@ -1,36 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Formik, Form, useFormik } from 'formik';
+import { Formik, Form } from 'formik';
 import { Typography, Stack } from '@mui/material';
 
 import { Modal, ActionButtons } from '@components/reusable';
 import { fieldEditor } from '@domains';
+import { useFieldEditor } from '@hooks';
 
 import { Fields, SelectOptions } from './blocks';
 
 const FieldEditor = (props) => {
   const { abortCallback, wasOpened, updateFields } = props;
-
-  const [selectOptions, setSelectOptions] = useState([]);
-  const formik = useFormik({
-    initialValues: fieldEditor.defaultValues,
-    onSubmit: (eventValues) => {
-      const createdField = fieldEditor.create({
-        ...eventValues,
-        selectOptions,
-      });
-      updateFields((prev) => [...prev, createdField]);
-      abortCallback();
-    },
-  });
-
-  useEffect(() => {
-    if (formik.values.type !== 'select') {
-      setSelectOptions([]);
-    }
-  }, [formik.values.type]);
-
+  let { setSelectOptions, selectOptions, formik } = useFieldEditor(
+    updateFields,
+    abortCallback,
+  );
   return (
     <Modal open={wasOpened} onClose={abortCallback}>
       <Typography variant='h5' component='h5'>

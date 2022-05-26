@@ -8,7 +8,7 @@ import { styles } from './menu.styles';
 const NewFormMenu = (props) => {
   const { anchorElem, actionsCallbacks } = props;
   const menu = newForm.createMenu(actionsCallbacks);
-  return(
+  return (
     <Popper
       placement='right-start'
       anchorEl={anchorElem}
@@ -19,7 +19,7 @@ const NewFormMenu = (props) => {
           const id = useId();
           const IconComponent = iconName;
           return (
-            <Tooltip key={id} title={tooltip} placement="right">
+            <Tooltip key={id} title={tooltip} placement='right'>
               <div>
                 <IconComponent color='#545454' onClick={action} />
               </div>
