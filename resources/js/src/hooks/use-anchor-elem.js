@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 
 export const useAnchorElem = () => {
-  let [anchorElem, setAnchorElem] = useState(null);
-  let startElem = useRef(null);
+  const [anchorElem, setAnchorElem] = useState(null);
+  const startElem = useRef(null);
 
   useEffect(() => {
     setAnchorElem(startElem.current);

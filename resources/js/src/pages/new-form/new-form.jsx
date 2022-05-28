@@ -12,12 +12,12 @@ import { styles } from './new-form.styles';
 
 const NewFormPage = () => {
   let [editorIsVisible, setEditorVisibility] = useState(false);
-  let [currentField, setCurrentField] = useState({});
+  let [currentField, setCurrentField] = useState(null);
 
   let { fields, updateFields, formik } = useNewForm();
   let { anchorElem, setAnchorElem, startElem } = useAnchorElem();
 
-  const selectField = (field, event) => {
+  const selectField = (event, field = null) => {
     setCurrentField(field);
     setAnchorElem(event.currentTarget);
   };
@@ -27,7 +27,7 @@ const NewFormPage = () => {
       <div style={styles.wrapper}>
         <NewFormTitle
           ref={startElem}
-          onClick={(e) => setAnchorElem(e.currentTarget)}
+          onClick={(e) => selectField(e)}
           formikInstance={formik}
         />
         <NewFormFields
@@ -35,6 +35,7 @@ const NewFormPage = () => {
           fields={fields.toArray()}
         />
         <NewFormMenu
+          onlyAddOption={!currentField && true}
           actionsCallbacks={{
             add: () => setEditorVisibility(true),
             edit: () => alert('Редактирование'),

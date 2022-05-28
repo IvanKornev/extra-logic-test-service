@@ -18,7 +18,7 @@ export class LinkedList {
     while (currentNode.next) {
       currentNode = currentNode.next;
     }
-    let lastNode = currentNode;
+    const lastNode = currentNode;
     lastNode.next = newNode;
     this.tail = newNode;
     return this;
@@ -27,13 +27,11 @@ export class LinkedList {
   copy(id) {
     let currentNode = this.head;
     let copied = null;
-    while(!copied) {
-      if (currentNode.value.uniqueId !== id)
-        currentNode = currentNode.next;
-      if (currentNode.value.uniqueId === id)
-        copied = JSON.parse(JSON.stringify(currentNode));
+    while (!copied) {
+      if (currentNode.value.uniqueId !== id) currentNode = currentNode.next;
+      if (currentNode.value.uniqueId === id) copied = JSON.parse(JSON.stringify(currentNode));
     }
-    
+
     const originalId = copied.value.uniqueId;
     copied.value.uniqueId = generateId();
     if (this.tail.value.uniqueId === originalId) {
@@ -51,12 +49,12 @@ export class LinkedList {
     if (!this.head) {
       return [];
     }
-    while(this.head && this.head.value.uniqueId === id) {
+    while (this.head && this.head.value.uniqueId === id) {
       this.head = this.head.next;
     }
 
     let currentNode = this.head;
-    while(currentNode.next) {
+    while (currentNode.next) {
       (currentNode.next.value.uniqueId === id)
         ? currentNode.next = currentNode.next.next
         : currentNode = currentNode.next;
@@ -73,9 +71,9 @@ export class LinkedList {
       return [];
     }
 
-    let result = [];
+    const result = [];
     let currentNode = this.head;
-    while(currentNode !== null) {
+    while (currentNode !== null) {
       result.push(currentNode.value);
       currentNode = currentNode.next;
     }

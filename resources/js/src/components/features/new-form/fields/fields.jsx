@@ -17,7 +17,7 @@ const NewFormFields = ({ fields, selectCallback }) => (
   <>
     {fields.length !== 0 &&
       fields.map((field) => (
-        <FieldBox onClick={(e) => selectCallback(field, e)} key={field.uniqueId}>
+        <FieldBox onClick={(e) => selectCallback(e, field)} key={field.uniqueId}>
           <Typography component='h3' variant='h6' sx={styles.headings.name}>
             {field.name}
           </Typography>

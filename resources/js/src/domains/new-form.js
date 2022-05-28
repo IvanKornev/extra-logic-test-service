@@ -35,7 +35,7 @@ const createMenu = (actionsCallbacks = {}) => [
   },
 ];
 
-const isEmpty = (fields = []) => (fields.length === 0 ? true : false);
+const isEmpty = (fields = []) => (fields.length === 0);
 
 export const newForm = {
   defaultValues,

@@ -8,12 +8,11 @@ const optionValues = {
   value: '',
 };
 
-const renderOptions = (component) =>
-  component.options.map((option) => (
-    <MenuItem key={generateId()} value={option.value}>
-      {option.title}
-    </MenuItem>
-  ));
+const renderOptions = (component) => component.options.map((option) => (
+  <MenuItem key={generateId()} value={option.value}>
+    {option.title}
+  </MenuItem>
+));
 
 const getOptionTexts = (option, number = 1) => {
   const { title, value } = option;
@@ -42,8 +41,7 @@ const editOption = (id, options) => {
   });
 };
 
-const deleteOption = (id, options) =>
-  options.filter((option) => option.id !== id);
+const deleteOption = (id, options) => options.filter((option) => option.id !== id);
 
 export const select = {
   isSelect,
