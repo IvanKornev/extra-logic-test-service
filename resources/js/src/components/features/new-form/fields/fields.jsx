@@ -13,11 +13,11 @@ import {
 
 import { styles } from './fields.styles';
 
-const NewFormFields = ({ fields, anchorCallback }) => (
+const NewFormFields = ({ fields, selectCallback }) => (
   <>
     {fields.length !== 0 &&
       fields.map((field) => (
-        <FieldBox onClick={anchorCallback} key={field.uniqueId}>
+        <FieldBox onClick={(e) => selectCallback(field, e)} key={field.uniqueId}>
           <Typography component='h3' variant='h6' sx={styles.headings.name}>
             {field.name}
           </Typography>
@@ -54,7 +54,7 @@ const NewFormFields = ({ fields, anchorCallback }) => (
 
 NewFormFields.propTypes = {
   fields: PropTypes.array.isRequired,
-  anchorCallback: PropTypes.func,
+  selectCallback: PropTypes.func,
 };
 
 export { NewFormFields };

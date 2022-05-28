@@ -1,3 +1,5 @@
+import generateId from 'uniqid';
+
 export class LinkedList {
   constructor() {
     this.head = null;
@@ -14,6 +16,23 @@ export class LinkedList {
     this.tail.next = newNode;
     this.tail = newNode;
     return this;
+  }
+
+  copy(id) {
+    let currentNode = this.head;
+    let copied = null;
+    while(!copied) {
+      if (currentNode.value.uniqueId !== id)
+        currentNode = currentNode.next;
+      if (currentNode.value.uniqueId === id)
+        copied = JSON.parse(JSON.stringify(currentNode));
+    }
+    copied.value.uniqueId = generateId();
+    currentNode.next = copied;
+    return {
+      list: this,
+      copiedValue: currentNode.next.value
+    };
   }
 
   remove(id) {

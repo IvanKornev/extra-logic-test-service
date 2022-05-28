@@ -1,4 +1,4 @@
-import React, { useId } from 'react';
+import React, { useId, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Popper, Box, Tooltip } from '@mui/material';
 
@@ -8,6 +8,7 @@ import { styles } from './menu.styles';
 const NewFormMenu = (props) => {
   const { anchorElem, actionsCallbacks } = props;
   const menu = newForm.createMenu(actionsCallbacks);
+  useEffect(() => console.log(anchorElem), [anchorElem]);
   return (
     <Popper
       placement='right-start'
