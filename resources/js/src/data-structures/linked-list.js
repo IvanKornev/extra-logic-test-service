@@ -1,4 +1,5 @@
 import generateId from 'uniqid';
+import { ListItem } from './list-item';
 
 export class LinkedList {
   constructor() {
@@ -28,8 +29,12 @@ export class LinkedList {
     let currentNode = this.head;
     let copied = null;
     while (!copied) {
-      if (currentNode.value.uniqueId !== id) currentNode = currentNode.next;
-      if (currentNode.value.uniqueId === id) copied = JSON.parse(JSON.stringify(currentNode));
+      if (currentNode.value.uniqueId !== id) {
+        currentNode = currentNode.next;
+      }
+      if (currentNode.value.uniqueId === id) {
+        copied = JSON.parse(JSON.stringify(currentNode));
+      }
     }
 
     const originalId = copied.value.uniqueId;
@@ -55,9 +60,11 @@ export class LinkedList {
 
     let currentNode = this.head;
     while (currentNode.next) {
-      (currentNode.next.value.uniqueId === id)
-        ? currentNode.next = currentNode.next.next
-        : currentNode = currentNode.next;
+      if (currentNode.next.value.uniqueId === id) {
+        currentNode.next = currentNode.next.next;
+      } else {
+        currentNode = currentNode.next;
+      }
     }
 
     if (this.tail.value.uniqueId === id) {
@@ -78,12 +85,5 @@ export class LinkedList {
       currentNode = currentNode.next;
     }
     return result;
-  }
-}
-
-class ListItem {
-  constructor(value, next = null) {
-    this.value = value;
-    this.next = next;
   }
 }

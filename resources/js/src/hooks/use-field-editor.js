@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 
 import { fieldEditor } from '@domains';
@@ -18,7 +18,9 @@ const useFieldEditor = (updateCallback, abortCallback) => {
   });
 
   useEffect(() => {
-    formik.values.type !== 'select' && setSelectOptions([]);
+    if (formik.values.type !== 'select') {
+      setSelectOptions([]);
+    }
   }, [formik.values.type]);
 
   return { setSelectOptions, selectOptions, formik };

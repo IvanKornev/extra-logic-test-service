@@ -41,7 +41,9 @@ const editOption = (id, options) => {
   });
 };
 
-const deleteOption = (id, options) => options.filter((option) => option.id !== id);
+const deleteOption = (id, options) => (
+  options.filter((option) => option.id !== id)
+);
 
 export const select = {
   isSelect,
