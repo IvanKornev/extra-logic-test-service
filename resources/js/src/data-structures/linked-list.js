@@ -27,11 +27,17 @@ export class LinkedList {
       if (currentNode.value.uniqueId === id)
         copied = JSON.parse(JSON.stringify(currentNode));
     }
+    
+    const originalId = copied.value.uniqueId;
     copied.value.uniqueId = generateId();
+    if (this.tail.value.uniqueId === originalId) {
+      this.tail = copied;
+    }
+
     currentNode.next = copied;
     return {
       list: this,
-      copiedValue: currentNode.next.value
+      copiedValue: currentNode.next.value,
     };
   }
 
