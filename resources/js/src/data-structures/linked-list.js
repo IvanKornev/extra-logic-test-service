@@ -13,7 +13,13 @@ export class LinkedList {
       this.tail = newNode;
       return this;
     }
-    this.tail.next = newNode;
+
+    let currentNode = this.head;
+    while (currentNode.next) {
+      currentNode = currentNode.next;
+    }
+    let lastNode = currentNode;
+    lastNode.next = newNode;
     this.tail = newNode;
     return this;
   }
@@ -31,7 +37,7 @@ export class LinkedList {
     const originalId = copied.value.uniqueId;
     copied.value.uniqueId = generateId();
     if (this.tail.value.uniqueId === originalId) {
-      this.tail = copied;
+      this.tail = new ListItem(copied);
     }
 
     currentNode.next = copied;
