@@ -47,7 +47,6 @@ NewFormMenu.propTypes = {
   anchorElem: PropTypes.object,
   actionsCallbacks: PropTypes.shape({
     add: PropTypes.func.isRequired,
-    edit: PropTypes.func.isRequired,
     copy: PropTypes.func.isRequired,
     remove: PropTypes.func.isRequired,
   }),

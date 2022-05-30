@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import generateId from 'uniqid';
 
 import { FieldBox } from '@components/reusable';
+import { LinkedListConverter } from '@lib/converters';
 import {
   Typography,
   TextField,
@@ -60,12 +61,12 @@ const NewFormFields = (props) => {
             {wasSelected && (
               <FormGroup>
                 <FormControlLabel
-                  onChange={() => callbacks.switch()}
+                  onChange={() => callbacks.switch(field.uniqueId)}
                   control={
                     <Switch
                       size="medium"
                       color="secondary"
-                      defaultChecked={field?.isRequired && true}
+                      defaultChecked={field.isRequired && true}
                     />
                   }
                   label="Обязательный вопрос"

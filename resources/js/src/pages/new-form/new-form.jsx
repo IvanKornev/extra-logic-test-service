@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 
 import { FieldEditor } from '@components/features';
 import { useNewForm, useAnchorElem } from '@hooks';
+import { LinkedListConverter } from '@lib/converters';
 import {
   NewFormTitle,
   NewFormFields,
@@ -22,8 +23,17 @@ const NewFormPage = () => {
     setAnchorElem(event.currentTarget);
   };
 
-  const makeFieldRequired = () => {
-    alert('Поле сделано обязательным');
+  const makeFieldRequired = (id) => {
+    const field = fields.find(id);
+    if (!field) {
+      return;
+    }
+    const { uniqueId, isRequired } = field.value;
+    const value = {
+      ...field.value,
+      isRequired: !isRequired,
+    };
+    updateFields((list) => list.change(uniqueId, value));
   };
 
   const fieldRef = useRef(null);
@@ -61,7 +71,7 @@ const NewFormPage = () => {
           }}
           currentField={currentField}
           outsideRef={fieldRef}
-          fields={fields.toArray()}
+          fields={LinkedListConverter.toArray(fields)}
         />
         <NewFormMenu
           onlyAddOption={!currentField && true}
