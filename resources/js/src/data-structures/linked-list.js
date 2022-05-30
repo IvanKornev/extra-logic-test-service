@@ -34,7 +34,6 @@ export class LinkedList {
       }
       currentNode = currentNode.next;
     }
-    alert(JSON.stringify(foundNode));
     
     if (!foundNode) {
       return false;
@@ -47,7 +46,7 @@ export class LinkedList {
     while (currentNode) {
       if (currentNode.value.uniqueId === id) {
         currentNode.value = value;
-        return;
+        break;
       }
       currentNode = currentNode.next;
     }
