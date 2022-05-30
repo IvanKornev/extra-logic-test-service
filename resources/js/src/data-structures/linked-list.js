@@ -30,11 +30,11 @@ export class LinkedList {
     let foundNode = null;
     while (currentNode) {
       if (currentNode.value.uniqueId === id) {
-        foundNode = currentNode;
-        return;
+        return foundNode = currentNode;
       }
       currentNode = currentNode.next;
     }
+    alert(JSON.stringify(foundNode));
     
     if (!foundNode) {
       return false;
@@ -100,19 +100,5 @@ export class LinkedList {
       this.tail = currentNode;
     }
     return this;
-  }
-
-  toArray() {
-    if (!this.head) {
-      return [];
-    }
-
-    const result = [];
-    let currentNode = this.head;
-    while (currentNode !== null) {
-      result.push(currentNode.value);
-      currentNode = currentNode.next;
-    }
-    return result;
   }
 }
