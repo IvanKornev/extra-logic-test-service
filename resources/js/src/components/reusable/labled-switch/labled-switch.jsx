@@ -25,8 +25,12 @@ export const LabledSwitch = (props) => {
   );
 };
 
+LabledSwitch.defaultTypes = {
+  defaultState: false,
+};
+
 LabledSwitch.propTypes = {
+  defaultState: PropTypes.bool,
   changeHandler: PropTypes.func.isRequired,
-  defaultState: PropTypes.bool.isRequired,
   label: PropTypes.string.isRequired,
 };
