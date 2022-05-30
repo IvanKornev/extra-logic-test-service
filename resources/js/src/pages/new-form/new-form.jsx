@@ -22,6 +22,22 @@ const NewFormPage = () => {
     setAnchorElem(event.currentTarget);
   };
 
+  const menuCallbacks = {
+    add: () => setEditorVisibility(true),
+    edit: () => alert('Редактирование'),
+    copy: () => {
+      updateFields((list) => {
+        let results = list.copy(currentField.uniqueId);
+        setCurrentField(results.copiedValue);
+        return results.list;
+      });
+    },
+    remove: () => {
+      updateFields((list) => list.remove(currentField.uniqueId));
+      startElem.current.click();
+    }
+  };
+
   return (
     <section style={styles.page}>
       <div style={styles.wrapper}>
@@ -36,20 +52,7 @@ const NewFormPage = () => {
         />
         <NewFormMenu
           onlyAddOption={!currentField && true}
-          actionsCallbacks={{
-            add: () => setEditorVisibility(true),
-            edit: () => alert('Редактирование'),
-            copy: () => {
-              updateFields((list) => {
-                let results = list.copy(currentField.uniqueId);
-                setCurrentField(results.copiedValue);
-                return results.list;
-              });
-            },
-            remove: () => {
-              updateFields((list) => list.remove(currentField.uniqueId));
-            }
-          }}
+          actionsCallbacks={menuCallbacks}
           anchorElem={anchorElem}
         />
       </div>
