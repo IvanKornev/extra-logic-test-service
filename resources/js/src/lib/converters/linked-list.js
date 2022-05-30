@@ -10,7 +10,6 @@ export class LinkedListConverter {
       result.push(currentNode.value);
       currentNode = currentNode.next;
     }
-    alert(JSON.stringify(result, null, 2));
     return result;
   }
 }
