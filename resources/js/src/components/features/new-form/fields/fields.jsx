@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import generateId from 'uniqid';
 
@@ -13,11 +13,16 @@ import {
 
 import { styles } from './fields.styles';
 
-const NewFormFields = ({ fields, selectCallback }) => (
-  <>
+const NewFormFields = (props) => {
+  const { fields, selectCallback, outsideRef } = props;
+  const localRef = useRef(null); 
+  return (<>
     {fields.length !== 0 &&
-      fields.map((field) => (
-        <FieldBox onClick={(e) => selectCallback(e, field)} key={field.uniqueId}>
+      fields.map((field, index) => (
+        <FieldBox
+          ref={index === 0 ? outsideRef : localRef}
+          onClick={(e) => selectCallback(e, field)}
+          key={field.uniqueId}>
           <Typography component='h3' variant='h6' sx={styles.headings.name}>
             {field.name}
           </Typography>
@@ -49,11 +54,12 @@ const NewFormFields = ({ fields, selectCallback }) => (
           )}
         </FieldBox>
       ))}
-  </>
-);
+  </>);
+};
 
 NewFormFields.propTypes = {
   fields: PropTypes.array.isRequired,
+  outsideRef: PropTypes.object.isRequired,
   selectCallback: PropTypes.func,
 };
 

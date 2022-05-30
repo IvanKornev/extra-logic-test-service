@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 import { FieldEditor } from '@components/features';
 import { useNewForm, useAnchorElem } from '@hooks';
@@ -15,13 +15,14 @@ const NewFormPage = () => {
   let [currentField, setCurrentField] = useState(null);
 
   let { fields, updateFields, formik } = useNewForm();
-  let { anchorElem, setAnchorElem, startElem } = useAnchorElem();
+  let { anchorElem, setAnchorElem, titleFieldRef } = useAnchorElem();
 
   const selectField = (event, field = null) => {
     setCurrentField(field);
     setAnchorElem(event.currentTarget);
   };
 
+  const fieldRef = useRef(null);
   const menuCallbacks = {
     add: () => setEditorVisibility(true),
     edit: () => alert('Редактирование'),
@@ -34,7 +35,11 @@ const NewFormPage = () => {
     },
     remove: () => {
       updateFields((list) => list.remove(currentField.uniqueId));
-      startElem.current.click();
+      const hasFields = fields.toArray().length >= 1;
+      if (hasFields) {
+        return fieldRef.current.click();
+      }
+      titleFieldRef.current.click();
     }
   };
 
@@ -42,11 +47,12 @@ const NewFormPage = () => {
     <section style={styles.page}>
       <div style={styles.wrapper}>
         <NewFormTitle
-          ref={startElem}
+          ref={titleFieldRef}
           onClick={(e) => selectField(e)}
           formikInstance={formik}
         />
         <NewFormFields
+          outsideRef={fieldRef}
           selectCallback={selectField}
           fields={fields.toArray()}
         />
