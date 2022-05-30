@@ -25,6 +25,35 @@ export class LinkedList {
     return this;
   }
 
+  find(id) {
+    let currentNode = this.head;
+    let foundNode = null;
+    while (currentNode) {
+      if (currentNode.value.uniqueId === id) {
+        foundNode = currentNode;
+        return;
+      }
+      currentNode = currentNode.next;
+    }
+    
+    if (!foundNode) {
+      return false;
+    }
+    return foundNode;
+  }
+
+  change(id, value) {
+    let currentNode = this.head;
+    while (currentNode) {
+      if (currentNode.value.uniqueId === id) {
+        currentNode.value = value;
+        return;
+      }
+      currentNode = currentNode.next;
+    }
+    return this;
+  }
+
   copy(id) {
     let currentNode = this.head;
     let copied = null;
