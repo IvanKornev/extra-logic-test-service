@@ -58,9 +58,7 @@ const NewFormFields = (props) => {
               <LabledSwitch
                 defaultState={field.isRequired && true}
                 label="Обязательный вопрос"
-                changeHandler={() => (
-                  callbacks.switch(field.uniqueId)
-                )}
+                changeHandler={callbacks.switch}
               />
             )}
           </FieldBox>

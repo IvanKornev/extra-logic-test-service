@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 
 import { FieldEditor } from '@components/features';
 import { useNewForm, useAnchorElem } from '@hooks';
+import { fieldEditor } from '@domains/field-editor';
 import { LinkedListConverter } from '@lib/converters';
 import {
   NewFormTitle,
@@ -21,16 +22,6 @@ const NewFormPage = () => {
   const selectField = (event, field = null) => {
     setCurrentField(field);
     setAnchorElem(event.currentTarget);
-  };
-
-  const makeFieldRequired = (id) => {
-    const field = fields.find(id);
-    const { uniqueId, isRequired } = field.value;
-    const value = {
-      ...field.value,
-      isRequired: !isRequired,
-    };
-    updateFields((list) => list.change(uniqueId, value));
   };
 
   const fieldRef = useRef(null);
@@ -53,6 +44,13 @@ const NewFormPage = () => {
     }
   };
 
+  const fieldsCallbacks = {
+    switch: () => (
+      fieldEditor.makeRequired(currentField.uniqueId, updateFields)
+    ),
+    fieldBox: selectField,
+  };
+
   return (
     <section style={styles.page}>
       <div style={styles.wrapper}>
@@ -62,10 +60,7 @@ const NewFormPage = () => {
           formikInstance={formik}
         />
         <NewFormFields
-          callbacks={{
-            switch: makeFieldRequired,
-            fieldBox: selectField,
-          }}
+          callbacks={fieldsCallbacks}
           currentField={currentField}
           outsideRef={fieldRef}
           fields={LinkedListConverter.toArray(fields)}
