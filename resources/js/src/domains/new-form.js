@@ -19,11 +19,6 @@ const createMenu = (actionsCallbacks = {}) => [
     action: actionsCallbacks.add,
   },
   {
-    iconName: UilEditAlt,
-    tooltip: 'Редактировать это поле',
-    action: actionsCallbacks.edit,
-  },
-  {
     iconName: UilCopy,
     tooltip: 'Копировать это поле',
     action: actionsCallbacks.copy,

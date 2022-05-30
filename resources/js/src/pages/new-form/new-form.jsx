@@ -22,10 +22,13 @@ const NewFormPage = () => {
     setAnchorElem(event.currentTarget);
   };
 
+  const makeFieldRequired = () => {
+    alert('Поле сделано обязательным');
+  };
+
   const fieldRef = useRef(null);
   const menuCallbacks = {
     add: () => setEditorVisibility(true),
-    edit: () => alert('Редактирование'),
     copy: () => {
       updateFields((list) => {
         let results = list.copy(currentField.uniqueId);
@@ -52,8 +55,12 @@ const NewFormPage = () => {
           formikInstance={formik}
         />
         <NewFormFields
+          callbacks={{
+            switch: makeFieldRequired,
+            fieldBox: selectField,
+          }}
+          currentField={currentField}
           outsideRef={fieldRef}
-          selectCallback={selectField}
           fields={fields.toArray()}
         />
         <NewFormMenu
