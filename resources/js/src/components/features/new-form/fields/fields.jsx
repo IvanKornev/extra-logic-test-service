@@ -2,17 +2,13 @@ import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import generateId from 'uniqid';
 
-import { FieldBox } from '@components/reusable';
-import { LinkedListConverter } from '@lib/converters';
+import { FieldBox, LabledSwitch } from '@components/reusable';
 import {
   Typography,
   TextField,
   Select,
   MenuItem,
   FormControl,
-  FormGroup,
-  FormControlLabel,
-  Switch,
 } from '@mui/material';
 
 import { styles } from './fields.styles';
@@ -59,20 +55,13 @@ const NewFormFields = (props) => {
               </FormControl>
             )}
             {wasSelected && (
-              <FormGroup>
-                <FormControlLabel
-                  onChange={() => callbacks.switch(field.uniqueId)}
-                  control={
-                    <Switch
-                      size="medium"
-                      color="secondary"
-                      defaultChecked={field.isRequired && true}
-                    />
-                  }
-                  label="Обязательный вопрос"
-                  labelPlacement="start"
-                />
-              </FormGroup>
+              <LabledSwitch
+                defaultState={field.isRequired && true}
+                label="Обязательный вопрос"
+                changeHandler={() => (
+                  callbacks.switch(field.uniqueId)
+                )}
+              />
             )}
           </FieldBox>
         );

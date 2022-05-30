@@ -13,7 +13,6 @@ const create = (values) => {
     name: values.name || 'Имя по умолчанию',
     description: values.description || 'Описание по умолчанию',
     type: values.type,
-    isRequired: false,
   };
 
   if (values.type === 'select') {

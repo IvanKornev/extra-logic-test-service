@@ -25,9 +25,6 @@ const NewFormPage = () => {
 
   const makeFieldRequired = (id) => {
     const field = fields.find(id);
-    if (!field) {
-      return;
-    }
     const { uniqueId, isRequired } = field.value;
     const value = {
       ...field.value,

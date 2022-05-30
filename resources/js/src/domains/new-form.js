@@ -1,16 +1,6 @@
 import {
-  UilPlusCircle,
-  UilTrashAlt,
-  UilCopy,
-  UilEditAlt,
+  UilPlusCircle, UilTrashAlt, UilCopy,
 } from '@iconscout/react-unicons';
-
-const defaultValues = {
-  form: {
-    name: 'Новая форма',
-    description: 'Описание новой формы',
-  },
-};
 
 const createMenu = (actionsCallbacks = {}) => [
   {
@@ -29,6 +19,13 @@ const createMenu = (actionsCallbacks = {}) => [
     action: actionsCallbacks.remove,
   },
 ];
+
+const defaultValues = {
+  form: {
+    name: 'Новая форма',
+    description: 'Описание новой формы',
+  },
+};
 
 const isEmpty = (fields = []) => (fields.length === 0);
 
