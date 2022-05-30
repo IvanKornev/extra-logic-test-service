@@ -5,6 +5,8 @@ const modal = {
 };
 
 const box = {
+  border: 'none',
+  outline: 'none',
   p: 2,
   background: 'rgba(255, 255, 255, 0.8)',
   borderRadius: '6px',
