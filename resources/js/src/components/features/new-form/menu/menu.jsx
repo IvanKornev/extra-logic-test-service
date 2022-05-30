@@ -1,4 +1,4 @@
-import React, { useId, useEffect } from 'react';
+import React, { useId } from 'react';
 import PropTypes from 'prop-types';
 import { Popper, Box, Tooltip } from '@mui/material';
 
@@ -6,9 +6,8 @@ import { newForm } from '@domains';
 import { styles } from './menu.styles';
 
 const NewFormMenu = (props) => {
-  const { anchorElem, actionsCallbacks, onlyAddOption } = props;
-  const menu = newForm.createMenu(actionsCallbacks);
-  useEffect(() => console.log(anchorElem), [anchorElem]);
+  const { anchorElem, actions, onlyAddOption } = props;
+  const menu = newForm.createMenu(actions);
   return (
     <Popper
       placement='right-start'
@@ -45,7 +44,7 @@ NewFormMenu.defaultTypes = {
 NewFormMenu.propTypes = {
   onlyAddOptions: PropTypes.bool,
   anchorElem: PropTypes.object,
-  actionsCallbacks: PropTypes.shape({
+  actions: PropTypes.shape({
     add: PropTypes.func.isRequired,
     copy: PropTypes.func.isRequired,
     remove: PropTypes.func.isRequired,

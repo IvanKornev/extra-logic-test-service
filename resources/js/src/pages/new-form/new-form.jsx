@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 
 import { FieldEditor } from '@components/features';
-import { useNewForm, useAnchorElem } from '@hooks';
+import { useNewForm, useFieldMenu } from '@hooks';
 import { fieldEditor } from '@domains/field-editor';
 import { LinkedListConverter } from '@lib/converters';
 import {
@@ -13,28 +13,16 @@ import {
 import { styles } from './new-form.styles';
 
 const NewFormPage = () => {
-  let [editorIsVisible, setEditorVisibility] = useState(false);
-  let [currentField, setCurrentField] = useState(null);
-
-  let { fields, updateFields, formik } = useNewForm();
-  let { anchorElem, setAnchorElem, titleFieldRef } = useAnchorElem();
-
-  const selectField = (event, field = null) => {
-    setCurrentField(field);
-    setAnchorElem(event.currentTarget);
-  };
-
-  const mainFieldRef = useRef(null);
-  const menuCallbacks = {
-    add: () => setEditorVisibility(true),
-    copy: () => fieldEditor.copy(updateFields, {
-      fieldState: currentField,
-      fieldAction: setCurrentField,
-    }),
-    remove: () => fieldEditor.remove(currentField.uniqueId, updateFields, {
-      mainFieldRef, titleFieldRef,
-    }),
-  };
+  const { fields, updateFields, formik } = useNewForm();
+  const {
+    refs,
+    anchorElem,
+    actions,
+    selectField,
+    currentField,
+    setEditorVisibility,
+    editorIsVisible,
+  } = useFieldMenu(updateFields);
 
   const fieldsCallbacks = {
     switch: () => (
@@ -42,34 +30,31 @@ const NewFormPage = () => {
     ),
     fieldBox: selectField,
   };
-
   return (
     <section style={styles.page}>
       <div style={styles.wrapper}>
         <NewFormTitle
-          ref={titleFieldRef}
+          ref={refs.titleField}
           onClick={(e) => selectField(e)}
           formikInstance={formik}
         />
         <NewFormFields
           callbacks={fieldsCallbacks}
           currentField={currentField}
-          outsideRef={mainFieldRef}
+          outsideRef={refs.mainField}
           fields={LinkedListConverter.toArray(fields)}
         />
         <NewFormMenu
           onlyAddOption={!currentField && true}
-          actionsCallbacks={menuCallbacks}
+          actions={actions}
           anchorElem={anchorElem}
         />
       </div>
-      {editorIsVisible && (
-        <FieldEditor
-          updateFields={updateFields}
-          wasOpened={editorIsVisible}
-          abortCallback={() => setEditorVisibility(false)}
-        />
-      )}
+      <FieldEditor
+        abortCallback={() => setEditorVisibility(false)}
+        wasOpened={editorIsVisible}
+        updateFields={updateFields}
+      />
     </section>
   );
 };
