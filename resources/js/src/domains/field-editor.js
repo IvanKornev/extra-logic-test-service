@@ -1,4 +1,5 @@
 import { TextField, Select } from '@mui/material';
+import { LinkedListConverter } from '@lib/converters';
 import generateId from 'uniqid';
 
 const defaultValues = {
@@ -51,6 +52,26 @@ const create = (values) => {
   return createdField;
 };
 
+const copy = (updateAction, currentField) => {
+  const { fieldState, fieldAction } = currentField;
+  updateAction((list) => {
+    let results = list.copy(fieldState.uniqueId);
+    fieldAction(results.copiedValue);
+    return results.list;
+  });
+};
+
+const remove = (id, updateAction, refs) => {
+  const changedList = updateAction((list) => list.remove(id));
+
+  const { length } = LinkedListConverter.toArray(changedList);
+  const { mainFieldRef, titleFieldRef } = refs; 
+  if (length >= 1) {
+    return mainFieldRef.current.click();
+  }
+  titleFieldRef.current.click();
+};
+
 const makeRequired = (id, stateAction) => {
   stateAction((list) => {
     const foundField = list.find(id);
@@ -67,5 +88,7 @@ export const fieldEditor = {
   defaultValues,
   fields,
   create,
+  copy,
+  remove,
   makeRequired,
 };

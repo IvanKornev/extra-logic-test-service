@@ -24,24 +24,16 @@ const NewFormPage = () => {
     setAnchorElem(event.currentTarget);
   };
 
-  const fieldRef = useRef(null);
+  const mainFieldRef = useRef(null);
   const menuCallbacks = {
     add: () => setEditorVisibility(true),
-    copy: () => {
-      updateFields((list) => {
-        let results = list.copy(currentField.uniqueId);
-        setCurrentField(results.copiedValue);
-        return results.list;
-      });
-    },
-    remove: () => {
-      updateFields((list) => list.remove(currentField.uniqueId));
-      const hasFields = fields.toArray().length >= 1;
-      if (hasFields) {
-        return fieldRef.current.click();
-      }
-      titleFieldRef.current.click();
-    }
+    copy: () => fieldEditor.copy(updateFields, {
+      fieldState: currentField,
+      fieldAction: setCurrentField,
+    }),
+    remove: () => fieldEditor.remove(currentField.uniqueId, updateFields, {
+      mainFieldRef, titleFieldRef,
+    }),
   };
 
   const fieldsCallbacks = {
@@ -62,7 +54,7 @@ const NewFormPage = () => {
         <NewFormFields
           callbacks={fieldsCallbacks}
           currentField={currentField}
-          outsideRef={fieldRef}
+          outsideRef={mainFieldRef}
           fields={LinkedListConverter.toArray(fields)}
         />
         <NewFormMenu
