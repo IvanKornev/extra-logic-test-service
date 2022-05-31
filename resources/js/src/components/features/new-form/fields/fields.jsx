@@ -15,7 +15,7 @@ const NewFormFields = (props) => {
       fields.map((field, index) => {
         const wasSelected = (field.uniqueId === currentField?.uniqueId);
         return(
-            <FieldBox
+          <FieldBox
             ref={index === 0 ? outsideRef : localRef}
             onClick={(e) => callbacks.fieldBox(e, field)}
             key={field.uniqueId}>

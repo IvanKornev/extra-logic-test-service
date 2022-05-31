@@ -6,10 +6,11 @@ import {
 } from '@mui/material';
 
 export const LabledSwitch = (props) => {
-  const { changeHandler, defaultState, label } = props;
+  const { changeHandler, defaultState, label, name } = props;
   return(
     <FormGroup>
       <FormControlLabel
+        name={name}
         onChange={changeHandler}
         control={
           <Switch
@@ -30,6 +31,7 @@ LabledSwitch.defaultTypes = {
 };
 
 LabledSwitch.propTypes = {
+  name: PropTypes.string,
   defaultState: PropTypes.bool,
   changeHandler: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
