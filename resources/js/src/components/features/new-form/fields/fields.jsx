@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import generateId from 'uniqid';
 
@@ -16,6 +16,8 @@ import { styles } from './fields.styles';
 const NewFormFields = (props) => {
   const { fields, outsideRef, currentField, callbacks } = props;
   const localRef = useRef(null);
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
   return (<>
     {fields.length !== 0 &&
       fields.map((field, index) => {
@@ -25,18 +27,18 @@ const NewFormFields = (props) => {
             ref={index === 0 ? outsideRef : localRef}
             onClick={(e) => callbacks.fieldBox(e, field)}
             key={field.uniqueId}>
-            <Typography component='h3' variant='h6' sx={styles.headings.name}>
-              {field.name}
-            </Typography>
-            {(field.type === 'text' || field.type === 'textarea') && (
-              <TextField
-                variant='standard'
-                value={field.description}
-                sx={styles.fields.description}
-                color='secondary'
-                readOnly
-              />
-            )}
+            <NewFormField
+              wasSelected={wasSelected}
+              action={setName}
+              state={name}
+              field={field.name}
+            />
+            <NewFormField
+              wasSelected={wasSelected}
+              action={setDescription}
+              state={description}
+              field={field.description}
+            />
             {field.type === 'select' && (
               <FormControl size='small'>
                 <Typography
@@ -66,6 +68,28 @@ const NewFormFields = (props) => {
       })}
   </>);
 };
+
+const NewFormField = ({ wasSelected, field, state, action }) => (
+  <>
+    {wasSelected && (
+      <TextField
+        color='secondary'
+        variant='standard'
+        placeholder={field}
+        value={state}
+        onChange={(e) => action(e.target.value)}
+      />
+    )}
+    {!wasSelected && (
+      <Typography
+        component='h3'
+        variant='h6'
+        sx={styles.headings.name}>
+        {field}
+      </Typography>
+    )}
+  </>
+);
 
 NewFormFields.defaultTypes = {
   fields: [],
