@@ -39,7 +39,7 @@ export const NewFormEditingField = ({ field }) => {
               color='secondary'
               variant='standard'
               placeholder={field[name]}
-              name="name"
+              name={name}
               value={formik.values[name]}
               onChange={formik.handleChange}
               sx={styles.field}
