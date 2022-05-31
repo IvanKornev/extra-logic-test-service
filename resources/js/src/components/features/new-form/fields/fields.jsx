@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 
-import { FieldBox } from '@components/reusable';
+import { FieldBox, OptionsList } from '@components/reusable';
 import { newForm } from '@domains';
 import { Typography } from '@mui/material';
 import { styles } from './fields.styles';
@@ -32,6 +32,9 @@ const NewFormFields = (props) => {
                       {field[name]}
                     </Typography>
                   ))}
+                  {field.type === 'select' && (
+                    <OptionsList list={field.selectOptions} />
+                  )}
                 </>
               )}
               {wasSelected && selectedFieldComponent}

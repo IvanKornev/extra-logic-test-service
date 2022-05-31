@@ -1,4 +1,5 @@
 import { Select, MenuItem } from '@mui/material';
+import { UilTrashAlt, UilPen } from '@iconscout/react-unicons';
 import generateId from 'uniqid';
 
 const isSelect = (component) => component.name === Select && true;
@@ -45,6 +46,17 @@ const deleteOption = (id, options) => (
   options.filter((option) => option.id !== id)
 );
 
+const getOptionActions = (callbacks) => {
+  if (!callbacks) {
+    return false;
+  }
+  const actions = [
+    { iconComponent: UilPen, performAction: callbacks.edit },
+    { iconComponent: UilTrashAlt, performAction: callbacks.remove },
+  ];
+  return actions;
+};
+
 export const select = {
   isSelect,
   optionValues,
@@ -53,4 +65,5 @@ export const select = {
   addOption,
   editOption,
   deleteOption,
+  getOptionActions,
 };

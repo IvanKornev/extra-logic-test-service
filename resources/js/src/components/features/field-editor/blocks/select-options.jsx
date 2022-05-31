@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { Button, Stack } from '@mui/material';
 
 import { select } from '@domains';
-import { OptionsList, NewOption } from '.';
+import { OptionsList } from '@components/reusable';
+import { NewOption } from '.';
 
 const SelectOptions = (props) => {
   const { options, setOptions } = props;
@@ -18,18 +19,22 @@ const SelectOptions = (props) => {
     <Stack direction='column' justifyContent='center'>
       {options.length !== 0 && (
         <OptionsList
-          options={options}
-          editCallback={editWrapper}
-          deleteCallback={deleteWrapper}
+          list={options}
+          actions={{
+            remove: deleteWrapper,
+            edit: editWrapper,
+          }}
         />
       )}
-      <Button
-        size='small'
-        variant='text'
-        color='primary'
-        onClick={() => addNewOption(true)}>
-        Добавить опцию селектора
-      </Button>
+      {setOptions && (
+        <Button
+          size='small'
+          variant='text'
+          color='primary'
+          onClick={() => addNewOption(true)}>
+          Добавить опцию селектора
+        </Button>
+      )}
       {newOptionIsAdding && (
         <NewOption
           abortCallback={() => addNewOption(false)}
@@ -43,7 +48,7 @@ const SelectOptions = (props) => {
 
 SelectOptions.propTypes = {
   options: PropTypes.array.isRequired,
-  setOptions: PropTypes.func.isRequired,
+  setOptions: PropTypes.func,
 };
 
 export { SelectOptions };

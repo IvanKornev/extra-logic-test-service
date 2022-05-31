@@ -1,4 +1,4 @@
-const optionsList = {
+const list = {
   display: 'flex',
   flexDirection: 'column',
   height: '100px',
@@ -19,13 +19,12 @@ const optionsList = {
   },
 };
 
-const optionItem = {
+const item = {
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'space-between',
 };
 
 export const styles = {
-  optionsList,
-  optionItem,
+  list, item,
 };
