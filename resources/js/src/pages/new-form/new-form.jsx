@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 
 import { FieldEditor } from '@components/features';
 import { useNewForm, useFieldMenu } from '@hooks';
@@ -8,6 +8,7 @@ import {
   NewFormTitle,
   NewFormFields,
   NewFormMenu,
+  NewFormEditingField,
 } from '@components/features/new-form';
 
 import { styles } from './new-form.styles';
@@ -39,6 +40,12 @@ const NewFormPage = () => {
           formikInstance={formik}
         />
         <NewFormFields
+          selectedFieldComponent={
+            <NewFormEditingField
+              callbacks={fieldsCallbacks}
+              field={currentField}
+            />
+          }
           callbacks={fieldsCallbacks}
           currentField={currentField}
           outsideRef={refs.mainField}
