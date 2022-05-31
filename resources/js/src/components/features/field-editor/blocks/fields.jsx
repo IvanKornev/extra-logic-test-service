@@ -1,16 +1,17 @@
 import React, { useId } from 'react';
 import PropTypes from 'prop-types';
 
-import { fieldEditor, select } from '@domains';
+import { fieldEditor, select, selectOptions } from '@domains';
 
 const Fields = ({ formikInstance }) => (
   <>
     {fieldEditor.fields.map((field) => {
       const { name, label, component } = field;
-      const { isSelect, renderOptions } = select;
-
-      const selectOptions = isSelect(component) && renderOptions(component);
       const id = useId();
+
+      const { isSelect } = select;
+      const { render } = selectOptions;
+      const renderedOptions = isSelect(component) && render(component);
       const CurrentComponent = component.name;
       return (
         <CurrentComponent
@@ -22,7 +23,7 @@ const Fields = ({ formikInstance }) => (
           variant='standard'
           color='primary'
           onChange={formikInstance.handleChange}>
-          {selectOptions}
+          {renderedOptions}
         </CurrentComponent>
       );
     })}

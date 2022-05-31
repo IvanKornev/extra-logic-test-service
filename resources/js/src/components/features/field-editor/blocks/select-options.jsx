@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Stack } from '@mui/material';
 
-import { select } from '@domains';
+import { selectOptions } from '@domains';
 import { OptionsList } from '@components/reusable';
 import { NewOption } from '.';
 
@@ -11,9 +11,9 @@ const SelectOptions = (props) => {
   const [newOptionIsAdding, addNewOption] = useState(false);
 
   const editWrapper = (id, options) =>
-    setOptions(select.editOption(id, options));
+    setOptions(selectOptions.edit(id, options));
   const deleteWrapper = (id, options) =>
-    setOptions(select.deleteOption(id, options));
+    setOptions(selectOptions.remove(id, options));
 
   return (
     <Stack direction='column' justifyContent='center'>

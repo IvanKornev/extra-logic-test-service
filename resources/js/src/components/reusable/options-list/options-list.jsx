@@ -3,17 +3,17 @@ import PropTypes from 'prop-types';
 import generateId from 'uniqid';
 
 import { List, Typography, ListItem, ListItemText, Stack } from '@mui/material';
-import { select } from '@domains';
+import { selectOptions } from '@domains';
 
 import { styles } from './options-list.styles';
 
 export const OptionsList = ({ actions, list }) => {
-  const optionActions = select.getOptionActions(actions);
+  const optionActions = selectOptions.getActions(actions);
   return (
     <List sx={styles.list}>
       <Typography>Опции селектора: </Typography>
       {list.map((option, index) => {
-        const texts = select.getOptionTexts(option, index + 1);
+        const texts = selectOptions.getTexts(option, index + 1);
         return (
           <ListItem key={generateId()} sx={styles.item}>
             <ListItemText primary={texts.primary} secondary={texts.secondary} />
