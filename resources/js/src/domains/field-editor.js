@@ -8,6 +8,12 @@ const defaultValues = {
   type: 'text',
 };
 
+const types = [
+  { value: 'text', title: 'Текстовое поле (text)' },
+  { value: 'textarea', title: 'Текстовая зона (textarea)' },
+  { value: 'select', title: 'Селектор (select)' },
+];
+
 const fields = [
   {
     name: 'name',
@@ -28,15 +34,10 @@ const fields = [
     label: 'Тип поля',
     component: {
       name: Select,
-      options: [
-        { value: 'text', title: 'Текстовое поле (text)' },
-        { value: 'textarea', title: 'Текстовая зона (textarea)' },
-        { value: 'select', title: 'Селектор (select)' },
-      ],
+      options: types,
     },
   },
 ];
-
 
 const create = (values) => {
   const createdField = {
@@ -85,6 +86,7 @@ const makeRequired = (id, stateAction) => {
 };
 
 export const fieldEditor = {
+  types,
   defaultValues,
   fields,
   create,

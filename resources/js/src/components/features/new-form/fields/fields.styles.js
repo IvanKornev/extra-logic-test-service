@@ -1,25 +1,26 @@
-const name = {
+const wrapper = {
+  display: 'flex',
+  flexDirection: 'column',
+  rowGap: '10px',
+};
+
+const heading = {
   fontSize: '15px',
 };
 
-const descriptionHeading = {
-  fontSize: '14px',
-  color: '#333',
-  opacity: '0.8',
-};
-
-const descriptionField = {
+const field = {
   '& input[type="text"]': {
     fontSize: '14px',
   },
 };
 
+const select = {
+  fontSize: '15px',
+};
+
 export const styles = {
-  headings: {
-    name,
-    description: descriptionHeading,
-  },
-  fields: {
-    description: descriptionField,
-  },
+  wrapper,
+  heading,
+  field,
+  select,
 };

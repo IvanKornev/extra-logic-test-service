@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import generateId from 'uniqid';
 
+import { fieldEditor } from '@domains';
 import { FieldBox, LabledSwitch } from '@components/reusable';
 import {
   Typography,
@@ -27,42 +28,40 @@ const NewFormFields = (props) => {
             ref={index === 0 ? outsideRef : localRef}
             onClick={(e) => callbacks.fieldBox(e, field)}
             key={field.uniqueId}>
-            <NewFormField
-              wasSelected={wasSelected}
-              action={setName}
-              state={name}
-              field={field.name}
-            />
-            <NewFormField
-              wasSelected={wasSelected}
-              action={setDescription}
-              state={description}
-              field={field.description}
-            />
-            {field.type === 'select' && (
-              <FormControl size='small'>
-                <Typography
-                  component='h3'
-                  variant='h6'
-                  sx={styles.headings.description}>
-                  {field.description}
-                </Typography>
-                <Select value={field.selectOptions[0].value} color='secondary'>
-                  {field.selectOptions.map((option) => (
-                    <MenuItem value={option.value} key={generateId()}>
-                      {option.title}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            )}
-            {wasSelected && (
-              <LabledSwitch
-                defaultState={field.isRequired && true}
-                label="Обязательный вопрос"
-                changeHandler={callbacks.switch}
+            <div style={styles.wrapper}>
+              <NewFormField
+                wasSelected={wasSelected}
+                action={setName}
+                state={name}
+                field={field.name}
               />
-            )}
+              <NewFormField
+                wasSelected={wasSelected}
+                action={setDescription}
+                state={description}
+                field={field.description}
+              />      
+              {wasSelected && (
+                <>
+                  <FormControl size='small'>
+                    <Select value={field.type} color='secondary' sx={styles.select}>
+                      {fieldEditor.types.map((type) => (
+                        <MenuItem
+                          value={type.value}
+                          key={generateId()}>
+                          {type.title}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                  <LabledSwitch
+                    defaultState={field.isRequired && true}
+                    label="Обязательный вопрос"
+                    changeHandler={callbacks.switch}
+                  />
+                </>
+              )}
+            </div>
           </FieldBox>
         );
       })}
@@ -78,13 +77,14 @@ const NewFormField = ({ wasSelected, field, state, action }) => (
         placeholder={field}
         value={state}
         onChange={(e) => action(e.target.value)}
+        sx={styles.field}
       />
     )}
     {!wasSelected && (
       <Typography
         component='h3'
         variant='h6'
-        sx={styles.headings.name}>
+        sx={styles.heading}>
         {field}
       </Typography>
     )}
