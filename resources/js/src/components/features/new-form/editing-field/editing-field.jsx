@@ -62,13 +62,15 @@ export const NewFormEditingField = ({ field }) => {
             </Select>
           </FormControl>
           <div style={styles.footer}>
-            <Button
-              startIcon={<UilCheckCircle />}
-              type="submit"
-              color="success"
-              onClick={formik.changeHandler}>
-              Сохранить
-            </Button>
+            {formik.dirty && (
+              <Button
+                startIcon={<UilCheckCircle />}
+                type="submit"
+                color="success"
+                onClick={formik.changeHandler}>
+                Сохранить
+              </Button>
+            )}
             <LabledSwitch
               defaultState={field.isRequired && true}
               label="Обязательный вопрос"
