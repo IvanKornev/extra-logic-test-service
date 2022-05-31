@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { FieldBox } from '@components/reusable';
+import { newForm } from '@domains';
 import { Typography } from '@mui/material';
 import { styles } from './fields.styles';
 
@@ -10,6 +11,7 @@ const NewFormFields = (props) => {
     fields, outsideRef, currentField, callbacks, selectedFieldComponent,
   } = props;
   const localRef = useRef(null);
+  const formFields = Object.keys(newForm.defaultValues.form);
   return (<>
     {fields.length !== 0 &&
       fields.map((field, index) => {
@@ -22,18 +24,14 @@ const NewFormFields = (props) => {
             <div style={styles.wrapper}>
               {!wasSelected && (
                 <>
-                  <Typography
-                    component='h3'
-                    variant='h6'
-                    sx={styles.heading}>
-                    {field.name}
-                  </Typography>
-                  <Typography
-                    component='h3'
-                    variant='h6'
-                    sx={styles.heading}>
-                    {field.description}
-                  </Typography>
+                  {formFields.map((name) => (
+                    <Typography
+                      component='h3'
+                      variant='h6'
+                      sx={styles.heading}>
+                      {field[name]}
+                    </Typography>
+                  ))}
                 </>
               )}
               {wasSelected && selectedFieldComponent}

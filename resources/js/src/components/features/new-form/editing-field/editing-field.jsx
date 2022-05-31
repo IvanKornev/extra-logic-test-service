@@ -6,6 +6,7 @@ import generateId from 'uniqid';
 import { fieldEditor } from '@domains';
 import { LabledSwitch } from '@components/reusable';
 
+import { newForm } from '@domains';
 import { UilCheckCircle } from '@iconscout/react-unicons';
 import {
   Button,
@@ -27,29 +28,23 @@ export const NewFormEditingField = ({ field }) => {
       },
       onSubmit: (values) => alert(JSON.stringify(values, null, 2)),
     });
+    const formFields = Object.keys(newForm.defaultValues.form);
     return(
       <Formik
         initialValues={formik.initialValues}
         onSubmit={formik.handleSubmit}>
         <Form style={styles.wrapper}>
-          <TextField
-            color='secondary'
-            variant='standard'
-            placeholder={field.name}
-            name="name"
-            value={formik.values.name}
-            onChange={formik.handleChange}
-            sx={styles.field}
-          />
-          <TextField
-            color='secondary'
-            variant='standard'
-            placeholder={field.description}
-            name="name"
-            value={formik.values.description}
-            onChange={formik.handleChange}
-            sx={styles.field}
-          />
+          {formFields.map((name) => (
+            <TextField
+              color='secondary'
+              variant='standard'
+              placeholder={field[name]}
+              name="name"
+              value={formik.values[name]}
+              onChange={formik.handleChange}
+              sx={styles.field}
+            />
+          ))}
           <FormControl size='small'>
             <Select
               name="type"
