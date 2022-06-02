@@ -2,7 +2,7 @@ const path = require('path');
 
 const config = {
   resolve: {
-    extensions: ['js', 'jsx'],
+    extensions: ['js', 'jsx', 'test.js'],
     alias: {
       '@components': path.resolve(__dirname, './resources/js/src/components'),
       '@services': path.resolve(__dirname, './resources/js/src/services'),
