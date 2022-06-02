@@ -74,18 +74,6 @@ const remove = (id, updateFields, refs) => {
   return changedList;
 };
 
-const makeRequired = (id, stateAction) => {
-  stateAction((list) => {
-    const foundField = list.find(id);
-    const { uniqueId, isRequired } = foundField.value;
-    const value = {
-      isRequired: !isRequired,
-      ...foundField.value,
-    };
-    return list.change(uniqueId, value);
-  });
-};
-
 export const fieldEditor = {
   types,
   defaultValues,
@@ -93,5 +81,4 @@ export const fieldEditor = {
   create,
   copy,
   remove,
-  makeRequired,
 };

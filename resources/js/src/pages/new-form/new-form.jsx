@@ -27,9 +27,6 @@ const NewFormPage = () => {
   } = useFieldMenu(updateFields);
 
   const fieldsCallbacks = {
-    switch: () => (
-      fieldEditor.makeRequired(currentField.uniqueId, updateFields)
-    ),
     fieldBox: selectField,
   };
   return (
