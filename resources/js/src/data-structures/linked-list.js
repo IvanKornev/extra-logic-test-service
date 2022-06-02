@@ -30,7 +30,8 @@ export class LinkedList {
     let foundNode = null;
     while (currentNode) {
       if (currentNode.value.uniqueId === id) {
-        return foundNode = currentNode;
+        foundNode = currentNode;
+        break;
       }
       currentNode = currentNode.next;
     }
