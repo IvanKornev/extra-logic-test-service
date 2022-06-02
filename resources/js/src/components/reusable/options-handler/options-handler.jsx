@@ -1,20 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Stack } from '@mui/material';
 
 import { selectOptions } from '@domains';
 import { OptionsList } from '@components/reusable';
-import { NewOption } from '.';
 
-const SelectOptions = (props) => {
-  const { options, setOptions } = props;
-  const [newOptionIsAdding, addNewOption] = useState(false);
-
+const OptionsHandler = ({
+  options, setOptions, editorComponent, editorWasOpened, openEditor,
+}) => {
   const editWrapper = (id, options) =>
     setOptions(selectOptions.edit(id, options));
   const deleteWrapper = (id, options) =>
     setOptions(selectOptions.remove(id, options));
-
   return (
     <Stack direction='column' justifyContent='center'>
       {options.length !== 0 && (
@@ -31,24 +28,21 @@ const SelectOptions = (props) => {
           size='small'
           variant='text'
           color='primary'
-          onClick={() => addNewOption(true)}>
+          onClick={() => openEditor(true)}>
           Добавить опцию селектора
         </Button>
       )}
-      {newOptionIsAdding && (
-        <NewOption
-          abortCallback={() => addNewOption(false)}
-          isVisible={newOptionIsAdding}
-          setOptions={setOptions}
-        />
-      )}
+      {editorWasOpened && editorComponent}
     </Stack>
   );
 };
 
-SelectOptions.propTypes = {
+OptionsHandler.propTypes = {
   options: PropTypes.array.isRequired,
   setOptions: PropTypes.func,
+  editorComponent: PropTypes.element.isRequired,
+  openEditor: PropTypes.func.isRequired,
+  editorWasOpened: PropTypes.bool.isRequired,
 };
 
-export { SelectOptions };
+export { OptionsHandler };

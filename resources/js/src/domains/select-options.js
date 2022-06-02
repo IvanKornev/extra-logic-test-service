@@ -6,6 +6,11 @@ const values = {
   title: '',
   value: '',
 };
+
+const labels = {
+  title: 'Наименование',
+  value: 'Значение',
+};
   
 const render = (component) => component.options.map((option) => (
   <MenuItem key={generateId()} value={option.value}>
@@ -57,6 +62,7 @@ const getActions = (callbacks) => {
 
 export const selectOptions = {
   values,
+  labels,
   render,
   getTexts,
   add,

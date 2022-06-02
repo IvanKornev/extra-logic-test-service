@@ -1,9 +1,10 @@
 import React from 'react';
 
-import { FieldEditor } from '@components/features';
 import { useNewForm, useFieldMenu } from '@hooks';
 import { fieldEditor } from '@domains/field-editor';
 import { LinkedListConverter } from '@lib/converters';
+
+import { NewFieldEditor } from '@components/features/editor';
 import {
   NewFormTitle,
   NewFormFields,
@@ -57,7 +58,7 @@ const NewFormPage = () => {
           anchorElem={anchorElem}
         />
       </div>
-      <FieldEditor
+      <NewFieldEditor
         abortCallback={() => setEditorVisibility(false)}
         wasOpened={editorIsVisible}
         updateFields={updateFields}
