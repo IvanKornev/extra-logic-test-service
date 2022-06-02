@@ -27,9 +27,9 @@ const getTexts = (option, number = 1) => {
   return texts;
 };
 
-const add = (values) => {
+const add = (option) => {
   const id = generateId();
-  const { title, value } = values;
+  const { title, value } = option;
   return { id, title, value };
 };
 

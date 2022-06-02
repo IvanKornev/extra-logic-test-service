@@ -15,8 +15,8 @@ export const useFieldMenu = (updateFields) => {
   const actions = {
     add: () => setEditorVisibility(true),
     copy: () => {
-      const actions = { updateFields, setCurrentField };
-      fieldEditor.copy(currentField.uniqueId, actions);
+      const callbacks = { updateFields, setCurrentField };
+      fieldEditor.copy(currentField.uniqueId, callbacks);
     },
     remove: () => {
       fieldEditor.remove(currentField.uniqueId, updateFields, refs);

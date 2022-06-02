@@ -33721,7 +33721,8 @@ var LinkedList = /*#__PURE__*/function () {
 
       while (currentNode) {
         if (currentNode.value.uniqueId === id) {
-          return foundNode = currentNode;
+          foundNode = currentNode;
+          break;
         }
 
         currentNode = currentNode.next;
@@ -33942,6 +33943,7 @@ var remove = function remove(id, updateFields, refs) {
   }
 
   titleFieldRef.current.click();
+  return changedList;
 };
 
 var makeRequired = function makeRequired(id, stateAction) {
@@ -34099,10 +34101,10 @@ var getTexts = function getTexts(option) {
   return texts;
 };
 
-var add = function add(values) {
+var add = function add(option) {
   var id = uniqid__WEBPACK_IMPORTED_MODULE_0___default()();
-  var title = values.title,
-      value = values.value;
+  var title = option.title,
+      value = option.value;
   return {
     id: id,
     title: title,
@@ -34334,11 +34336,11 @@ var useFieldMenu = function useFieldMenu(updateFields) {
       return setEditorVisibility(true);
     },
     copy: function copy() {
-      var actions = {
+      var callbacks = {
         updateFields: updateFields,
         setCurrentField: setCurrentField
       };
-      _domains_field_editor__WEBPACK_IMPORTED_MODULE_1__.fieldEditor.copy(currentField.uniqueId, actions);
+      _domains_field_editor__WEBPACK_IMPORTED_MODULE_1__.fieldEditor.copy(currentField.uniqueId, callbacks);
     },
     remove: function remove() {
       _domains_field_editor__WEBPACK_IMPORTED_MODULE_1__.fieldEditor.remove(currentField.uniqueId, updateFields, refs);

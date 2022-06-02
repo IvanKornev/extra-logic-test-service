@@ -71,6 +71,7 @@ const remove = (id, updateFields, refs) => {
     return mainFieldRef.current.click();
   }
   titleFieldRef.current.click();
+  return changedList;
 };
 
 const makeRequired = (id, stateAction) => {
