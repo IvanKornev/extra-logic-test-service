@@ -56,7 +56,7 @@ const create = (values) => {
 const copy = (id, actions) => {
   const { updateFields, setCurrentField } = actions;
   updateFields((list) => {
-    let results = list.copy(id);
+    const results = list.copy(id);
     setCurrentField(results.copiedValue);
     return results.list;
   });
@@ -65,8 +65,8 @@ const copy = (id, actions) => {
 const remove = (id, updateFields, refs) => {
   const changedList = updateFields((list) => list.remove(id));
   const { length } = LinkedListConverter.toArray(changedList);
-  
-  const { mainFieldRef, titleFieldRef } = refs; 
+
+  const { mainFieldRef, titleFieldRef } = refs;
   if (length >= 1) {
     return mainFieldRef.current.click();
   }

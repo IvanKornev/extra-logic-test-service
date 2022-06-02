@@ -32504,20 +32504,21 @@ var NewOptionEditor = function NewOptionEditor(_ref) {
     formikInstance: formik
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_reusable__WEBPACK_IMPORTED_MODULE_2__.EditorModal, {
-    open: isVisible,
+    isVisible: isVisible,
     onClose: abortCallback,
     form: formData,
     abortCallback: abortCallback,
     disableCondition: !formik.values.title || !formik.values.value,
     title: "\u041D\u043E\u0432\u0430\u044F \u043E\u043F\u0446\u0438\u044F \u0441\u0435\u043B\u0435\u043A\u0442\u043E\u0440\u0430",
     children: Object.keys(formik.values).map(function (fieldName) {
+      var id = (0,react__WEBPACK_IMPORTED_MODULE_0__.useId)();
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_5__["default"], {
         name: fieldName,
         label: _domains__WEBPACK_IMPORTED_MODULE_3__.selectOptions.labels[fieldName],
         value: formik.values[fieldName],
         onChange: formik.handleChange,
         variant: "standard"
-      });
+      }, id);
     })
   });
 };
@@ -33183,41 +33184,54 @@ var EditorModal = function EditorModal(props) {
     open: isVisible,
     onClose: abortCallback,
     sx: _editor_modal_styles__WEBPACK_IMPORTED_MODULE_2__.styles.modal,
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_5__["default"], {
       component: "section",
       sx: _editor_modal_styles__WEBPACK_IMPORTED_MODULE_2__.styles.box,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        variant: "h5",
-        component: "h5",
-        children: title
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(formik__WEBPACK_IMPORTED_MODULE_1__.Formik, {
-        initialValues: form.initialValues,
-        onSubmit: form.formikInstance.handleSubmit,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(formik__WEBPACK_IMPORTED_MODULE_1__.Form, {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], {
-            direction: "column",
-            spacing: 2,
-            children: children
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], {
-            direction: "row",
-            spacing: 2,
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_8__["default"], {
-              size: "medium",
-              variant: "contained",
-              color: "success",
-              type: "submit",
-              disabled: disableCondition,
-              children: "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C \u043F\u043E\u043B\u0435"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_8__["default"], {
-              size: "medium",
-              variant: "contained",
-              color: "error",
-              onClick: abortCallback,
-              children: "\u041E\u0442\u043C\u0435\u043D\u0430"
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        style: {
+          display: 'flex',
+          flexDirection: 'column',
+          rowGap: '10px'
+        },
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_6__["default"], {
+          variant: "h5",
+          component: "h5",
+          children: title
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(formik__WEBPACK_IMPORTED_MODULE_1__.Formik, {
+          initialValues: form.initialValues,
+          onSubmit: form.formikInstance.handleSubmit,
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(formik__WEBPACK_IMPORTED_MODULE_1__.Form, {
+            style: {
+              display: 'flex',
+              flexDirection: 'column',
+              rowGap: '14px',
+              marginTop: '0'
+            },
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], {
+              direction: "column",
+              spacing: 2,
+              children: children
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], {
+              direction: "row",
+              spacing: 2,
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_8__["default"], {
+                size: "medium",
+                variant: "contained",
+                color: "success",
+                type: "submit",
+                disabled: disableCondition,
+                children: "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C \u043F\u043E\u043B\u0435"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_8__["default"], {
+                size: "medium",
+                variant: "contained",
+                color: "error",
+                onClick: abortCallback,
+                children: "\u041E\u0442\u043C\u0435\u043D\u0430"
+              })]
             })]
-          })]
-        })
-      })]
+          })
+        })]
+      })
     })
   });
 };

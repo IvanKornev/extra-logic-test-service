@@ -4,7 +4,7 @@ import { fieldEditor } from '@domains/field-editor';
 export const useFieldMenu = (updateFields) => {
   const [editorIsVisible, setEditorVisibility] = useState(false);
   const [currentField, setCurrentField] = useState(null);
-  
+
   const [anchorElem, setAnchorElem] = useState(null);
   const refs = {
     mainField: useRef(null),
@@ -20,7 +20,7 @@ export const useFieldMenu = (updateFields) => {
     },
     remove: () => {
       fieldEditor.remove(currentField.uniqueId, updateFields, refs);
-    }
+    },
   };
 
   const selectField = (event, field = null) => {

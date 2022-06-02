@@ -3,7 +3,7 @@ export class LinkedListConverter {
     if (!list.head) {
       return [];
     }
-  
+
     const result = [];
     let currentNode = list.head;
     while (currentNode !== null) {

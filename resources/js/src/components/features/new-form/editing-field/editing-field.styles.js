@@ -8,7 +8,7 @@ const footer = {
   borderTop: '1px #a0a0a0 solid',
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'space-between'
+  justifyContent: 'space-between',
 };
 
 export const styles = {

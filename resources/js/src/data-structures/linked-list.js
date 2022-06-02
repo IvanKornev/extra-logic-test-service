@@ -34,7 +34,7 @@ export class LinkedList {
       }
       currentNode = currentNode.next;
     }
-    
+
     if (!foundNode) {
       return false;
     }

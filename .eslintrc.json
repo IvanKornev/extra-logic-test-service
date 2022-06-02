@@ -36,5 +36,15 @@
         "react/jsx-filename-extension": [1, {
             "extensions": [".js", ".jsx"]
         }]
+    },
+    "settings": {
+        "import/resolver": {
+            "alias": [
+                ["@domains", "./resources/js/src/domains"],
+                ["@data-structures", "./resources/js/src/data-structures"],
+                ["@services", "./resources/js/src/services"],
+                ["@lib", "./resources/js/src/lib"]
+            ]
+        }
     }
 }

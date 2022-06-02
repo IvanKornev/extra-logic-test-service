@@ -11,13 +11,13 @@ const labels = {
   title: 'Наименование',
   value: 'Значение',
 };
-  
+
 const render = (component) => component.options.map((option) => (
   <MenuItem key={generateId()} value={option.value}>
     {option.title}
   </MenuItem>
 ));
-  
+
 const getTexts = (option, number = 1) => {
   const { title, value } = option;
   const texts = {
@@ -26,13 +26,13 @@ const getTexts = (option, number = 1) => {
   };
   return texts;
 };
-  
+
 const add = (values) => {
   const id = generateId();
   const { title, value } = values;
   return { id, title, value };
 };
-  
+
 const edit = (id, options) => {
   const title = prompt('Какое будет наименование у опции?', 'имя');
   const value = prompt('А значение?', 'значение');
@@ -44,11 +44,11 @@ const edit = (id, options) => {
     return option;
   });
 };
-  
+
 const remove = (id, options) => (
   options.filter((option) => option.id !== id)
 );
-  
+
 const getActions = (callbacks) => {
   if (!callbacks) {
     return false;
