@@ -16,13 +16,14 @@ export const EditorModal = (props) => {
       onClose={abortCallback}
       sx={styles.modal}>
       <Box component='section' sx={styles.box}>
+        <div style={{ display: 'flex', flexDirection: 'column', rowGap: '10px' }}>
         <Typography variant='h5' component='h5'>
           {title}
         </Typography>
         <Formik
           initialValues={form.initialValues}
           onSubmit={form.formikInstance.handleSubmit}>
-          <Form>
+          <Form style={{ display: 'flex', flexDirection: 'column', rowGap: '14px', marginTop: '0' }}>
             <Stack direction='column' spacing={2}>
               {children}
             </Stack>
@@ -45,6 +46,7 @@ export const EditorModal = (props) => {
             </Stack>
           </Form>
         </Formik>
+        </div>
       </Box>
     </Modal>
   );

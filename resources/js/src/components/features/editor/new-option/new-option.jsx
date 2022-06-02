@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useId } from 'react';
 import PropTypes from 'prop-types';
 import { useFormik } from 'formik';
 import { TextField } from '@mui/material';
@@ -21,21 +21,25 @@ const NewOptionEditor = ({ isVisible, abortCallback, setOptions }) => {
   };
   return (
     <EditorModal
-      open={isVisible}
+      isVisible={isVisible}
       onClose={abortCallback}
       form={formData}
       abortCallback={abortCallback}
       disableCondition={!formik.values.title || !formik.values.value}
       title="Новая опция селектора">
-      {Object.keys(formik.values).map((fieldName) => (
-        <TextField
-          name={fieldName}
-          label={selectOptions.labels[fieldName]}
-          value={formik.values[fieldName]}
-          onChange={formik.handleChange}
-          variant='standard'
-        />
-      ))}
+      {Object.keys(formik.values).map((fieldName) => {
+        const id = useId();
+        return(
+          <TextField
+            key={id}
+            name={fieldName}
+            label={selectOptions.labels[fieldName]}
+            value={formik.values[fieldName]}
+            onChange={formik.handleChange}
+            variant='standard'
+          />
+        );
+      })}
     </EditorModal>
   );
 };
