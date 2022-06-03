@@ -25,7 +25,7 @@ const NewFieldEditor = (props) => {
       disableCondition={
         formik.values.type === 'select' && selectOptions.length === 0
       }
-      title="Новое поле">
+      title='Новое поле'>
       <EditorFields formikInstance={formik} />
       {formik.values.type === 'select' && (
         <OptionsHandler
@@ -74,6 +74,5 @@ NewFieldEditor.propTypes = {
   updateFields: PropTypes.func.isRequired,
   abortCallback: PropTypes.func.isRequired,
 };
-  
+
 export { NewFieldEditor };
-  

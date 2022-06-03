@@ -39,12 +39,20 @@ const fields = [
   },
 ];
 
+const wasSelected = (fieldId, currentFieldId) => {
+  if (!fieldId || !currentFieldId) {
+    return;
+  }
+  return fieldId === currentFieldId ? true : false;
+};
+
 const create = (values) => {
   const createdField = {
     uniqueId: generateId(),
     name: values.name || 'Имя по умолчанию',
     description: values.description || 'Описание по умолчанию',
     type: values.type,
+    isRequired: false,
   };
 
   if (values.type === 'select') {
@@ -78,6 +86,7 @@ export const fieldEditor = {
   types,
   defaultValues,
   fields,
+  wasSelected,
   create,
   copy,
   remove,

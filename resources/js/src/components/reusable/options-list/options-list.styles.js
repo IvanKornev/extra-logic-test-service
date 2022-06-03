@@ -26,5 +26,6 @@ const item = {
 };
 
 export const styles = {
-  list, item,
+  list,
+  item,
 };

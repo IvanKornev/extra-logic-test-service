@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
+import generateId from 'uniqid';
 
 import { FieldBox, OptionsList } from '@components/reusable';
 import { newForm } from '@domains';
@@ -8,24 +9,31 @@ import { styles } from './fields.styles';
 
 const NewFormFields = (props) => {
   const {
-    fields, outsideRef, currentField, callbacks, selectedFieldComponent,
+    fields,
+    outsideRef,
+    currentField,
+    fieldBoxAction,
+    selectedFieldComponent,
   } = props;
   const localRef = useRef(null);
   const formFields = Object.keys(newForm.defaultValues.form);
-  return (<>
-    {fields.length !== 0 &&
-      fields.map((field, index) => {
-        const wasSelected = (field.uniqueId === currentField?.uniqueId);
-        return(
+  return (
+    <>
+      {fields.length !== 0 &&
+        fields.map((field, index) => (
           <FieldBox
             ref={index === 0 ? outsideRef : localRef}
-            onClick={(e) => callbacks.fieldBox(e, field)}
+            onClick={(e) => fieldBoxAction(e, field)}
             key={field.uniqueId}>
             <div style={styles.wrapper}>
-              {!wasSelected && (
+              {!fieldEditor.wasSelected(
+                field.uniqueId,
+                currentField.uniqueId,
+              ) && (
                 <>
                   {formFields.map((name) => (
                     <Typography
+                      key={generateId()}
                       component='h3'
                       variant='h6'
                       sx={styles.heading}>
@@ -37,12 +45,13 @@ const NewFormFields = (props) => {
                   )}
                 </>
               )}
-              {wasSelected && selectedFieldComponent}
+              {fieldEditor.wasSelected(field.uniqueId, currentField.uniqueId) &&
+                selectedFieldComponent}
             </div>
           </FieldBox>
-        );
-      })}
-  </>);
+        ))}
+    </>
+  );
 };
 
 NewFormFields.defaultTypes = {
@@ -55,10 +64,7 @@ NewFormFields.propTypes = {
   outsideRef: PropTypes.object.isRequired,
   currentField: PropTypes.object,
   selectedFieldComponent: PropTypes.element.isRequired,
-  callbacks: PropTypes.shape({
-    switch: PropTypes.func.isRequired,
-    fieldBox: PropTypes.func.isRequired,
-  }),
+  fieldBoxAction: PropTypes.func.isRequired,
 };
 
 export { NewFormFields };

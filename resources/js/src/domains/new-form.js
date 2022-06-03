@@ -1,6 +1,4 @@
-import {
-  UilPlusCircle, UilTrashAlt, UilCopy,
-} from '@iconscout/react-unicons';
+import { UilPlusCircle, UilTrashAlt, UilCopy } from '@iconscout/react-unicons';
 
 const createMenu = (actionsCallbacks = {}) => [
   {
@@ -27,7 +25,7 @@ const defaultValues = {
   },
 };
 
-const isEmpty = (fields = []) => (fields.length === 0);
+const isEmpty = (fields = []) => fields.length === 0;
 
 export const newForm = {
   defaultValues,

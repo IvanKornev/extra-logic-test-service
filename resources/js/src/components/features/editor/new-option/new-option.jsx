@@ -26,10 +26,10 @@ const NewOptionEditor = ({ isVisible, abortCallback, setOptions }) => {
       form={formData}
       abortCallback={abortCallback}
       disableCondition={!formik.values.title || !formik.values.value}
-      title="Новая опция селектора">
+      title='Новая опция селектора'>
       {Object.keys(formik.values).map((fieldName) => {
         const id = useId();
-        return(
+        return (
           <TextField
             key={id}
             name={fieldName}

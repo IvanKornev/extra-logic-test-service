@@ -6,7 +6,11 @@ import { selectOptions } from '@domains';
 import { OptionsList } from '@components/reusable';
 
 const OptionsHandler = ({
-  options, setOptions, editorComponent, editorWasOpened, openEditor,
+  options,
+  setOptions,
+  editorComponent,
+  editorWasOpened,
+  openEditor,
 }) => {
   const editWrapper = (id, options) =>
     setOptions(selectOptions.edit(id, options));

@@ -18,16 +18,17 @@ export const OptionsList = ({ actions, list }) => {
           <ListItem key={generateId()} sx={styles.item}>
             <ListItemText primary={texts.primary} secondary={texts.secondary} />
             <Stack direction='row' spacing={1}>
-              {optionActions && optionActions.map((option) => {
-                const { iconComponent, performAction } = option;
-                const CurrentComponent = iconComponent;
-                return (
-                  <CurrentComponent
-                    size={18}
-                    onClick={() => performAction(option.id, list)}
-                  />
-                );
-              })}
+              {optionActions &&
+                optionActions.map((option) => {
+                  const { iconComponent, performAction } = option;
+                  const CurrentComponent = iconComponent;
+                  return (
+                    <CurrentComponent
+                      size={18}
+                      onClick={() => performAction(option.id, list)}
+                    />
+                  );
+                })}
             </Stack>
           </ListItem>
         );

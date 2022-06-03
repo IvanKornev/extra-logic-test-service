@@ -21,9 +21,8 @@ describe('Односвязный список', () => {
     expect(foundNode.value.uniqueId).toBe(uniqueId);
   });
 
-  it('Возвращает false при попытке найти неизвестную ноду', () => (
-    expect(list.find(105)).toBeFalsy()
-  ));
+  it('Возвращает false при попытке найти неизвестную ноду', () =>
+    expect(list.find(105)).toBeFalsy());
 
   it('Заменяет значение ноды, найденной по id', () => {
     const uniqueId = faker.datatype.uuid();

@@ -25,10 +25,6 @@ const NewFormPage = () => {
     setEditorVisibility,
     editorIsVisible,
   } = useFieldMenu(updateFields);
-
-  const fieldsCallbacks = {
-    fieldBox: selectField,
-  };
   return (
     <section style={styles.page}>
       <div style={styles.wrapper}>
@@ -40,11 +36,11 @@ const NewFormPage = () => {
         <NewFormFields
           selectedFieldComponent={
             <NewFormEditingField
-              callbacks={fieldsCallbacks}
+              updateAction={updateFields}
               field={currentField}
             />
           }
-          callbacks={fieldsCallbacks}
+          fieldBoxAction={selectField}
           currentField={currentField}
           outsideRef={refs.mainField}
           fields={LinkedListConverter.toArray(fields)}

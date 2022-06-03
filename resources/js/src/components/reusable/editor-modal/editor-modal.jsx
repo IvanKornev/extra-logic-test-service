@@ -7,45 +7,48 @@ import { Formik, Form } from 'formik';
 import { styles } from './editor-modal.styles';
 
 export const EditorModal = (props) => {
-  const {
-    title, form, abortCallback, disableCondition, isVisible, children,
-  } = props;
-  return(
-    <Modal
-      open={isVisible}
-      onClose={abortCallback}
-      sx={styles.modal}>
+  const { title, form, abortCallback, disableCondition, isVisible, children } =
+    props;
+  return (
+    <Modal open={isVisible} onClose={abortCallback} sx={styles.modal}>
       <Box component='section' sx={styles.box}>
-        <div style={{ display: 'flex', flexDirection: 'column', rowGap: '10px' }}>
-        <Typography variant='h5' component='h5'>
-          {title}
-        </Typography>
-        <Formik
-          initialValues={form.initialValues}
-          onSubmit={form.formikInstance.handleSubmit}>
-          <Form style={{ display: 'flex', flexDirection: 'column', rowGap: '14px', marginTop: '0' }}>
-            <Stack direction='column' spacing={2}>
-              {children}
-            </Stack>
-            <Stack direction='row' spacing={2}>
-              <Button
-                size='medium'
-                variant='contained'
-                color='success'
-                type='submit'
-                disabled={disableCondition}>
-                Сохранить поле
-              </Button>
-              <Button
-                size='medium'
-                variant='contained'
-                color='error'
-                onClick={abortCallback}>
-                Отмена
-              </Button>
-            </Stack>
-          </Form>
-        </Formik>
+        <div
+          style={{ display: 'flex', flexDirection: 'column', rowGap: '10px' }}>
+          <Typography variant='h5' component='h5'>
+            {title}
+          </Typography>
+          <Formik
+            initialValues={form.initialValues}
+            onSubmit={form.formikInstance.handleSubmit}>
+            <Form
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                rowGap: '14px',
+                marginTop: '0',
+              }}>
+              <Stack direction='column' spacing={2}>
+                {children}
+              </Stack>
+              <Stack direction='row' spacing={2}>
+                <Button
+                  size='medium'
+                  variant='contained'
+                  color='success'
+                  type='submit'
+                  disabled={disableCondition}>
+                  Сохранить поле
+                </Button>
+                <Button
+                  size='medium'
+                  variant='contained'
+                  color='error'
+                  onClick={abortCallback}>
+                  Отмена
+                </Button>
+              </Stack>
+            </Form>
+          </Formik>
         </div>
       </Box>
     </Modal>
