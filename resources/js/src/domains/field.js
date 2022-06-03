@@ -16,7 +16,7 @@ export const createField = (values) => {
     name: values.name || 'Имя по умолчанию',
     description: values.description || 'Описание по умолчанию',
     type: values.type,
-    isRequired: false,
+    isRequired: values.isRequired,
   };
 
   if (values.type === 'select') {

@@ -70,7 +70,7 @@ const NewFormEditingField = ({ field, updateAction }) => {
           )}
           <LabledSwitch
             defaultState={field.isRequired && true}
-            label='Обязательный вопрос'
+            label='Обязательное поле'
             name='isRequired'
             changeHandler={formik.handleChange}
           />

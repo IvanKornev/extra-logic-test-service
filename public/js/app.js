@@ -32404,6 +32404,10 @@ var NewFieldEditor = function NewFieldEditor(props) {
     title: "\u041D\u043E\u0432\u043E\u0435 \u043F\u043E\u043B\u0435",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(EditorFields, {
       formikInstance: formik
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_reusable__WEBPACK_IMPORTED_MODULE_2__.LabledSwitch, {
+      label: "\u041E\u0431\u044F\u0437\u0430\u0442\u0435\u043B\u044C\u043D\u043E\u0435 \u043F\u043E\u043B\u0435",
+      name: "isRequired",
+      changeHandler: formik.handleChange
     }), formik.values.type === 'select' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_reusable__WEBPACK_IMPORTED_MODULE_2__.OptionsHandler, {
       options: selectOptions,
       setOptions: setSelectOptions,
@@ -32641,7 +32645,7 @@ var NewFormEditingField = function NewFormEditingField(_ref) {
           children: "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_reusable__WEBPACK_IMPORTED_MODULE_4__.LabledSwitch, {
           defaultState: field.isRequired && true,
-          label: "\u041E\u0431\u044F\u0437\u0430\u0442\u0435\u043B\u044C\u043D\u044B\u0439 \u0432\u043E\u043F\u0440\u043E\u0441",
+          label: "\u041E\u0431\u044F\u0437\u0430\u0442\u0435\u043B\u044C\u043D\u043E\u0435 \u043F\u043E\u043B\u0435",
           name: "isRequired",
           changeHandler: formik.handleChange
         })]
@@ -33744,7 +33748,8 @@ __webpack_require__.r(__webpack_exports__);
 var fieldValues = {
   name: '',
   description: '',
-  type: 'text'
+  type: 'text',
+  isRequired: false
 };
 var fieldTypes = [{
   value: 'text',
@@ -34024,7 +34029,7 @@ var createField = function createField(values) {
     name: values.name || 'Имя по умолчанию',
     description: values.description || 'Описание по умолчанию',
     type: values.type,
-    isRequired: false
+    isRequired: values.isRequired
   };
 
   if (values.type === 'select') {

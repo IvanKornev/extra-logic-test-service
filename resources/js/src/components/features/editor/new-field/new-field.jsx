@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import generateId from 'uniqid';
 import { MenuItem } from '@mui/material';
 
-import { EditorModal, OptionsHandler } from '@components/reusable';
+import { EditorModal, OptionsHandler, LabledSwitch } from '@components/reusable';
 import { NewOptionEditor } from '@components/features/editor';
 import { useFieldEditor } from '@hooks';
 import { select } from '@domains';
@@ -30,6 +30,11 @@ const NewFieldEditor = (props) => {
       }
       title='Новое поле'>
       <EditorFields formikInstance={formik} />
+      <LabledSwitch
+        label='Обязательное поле'
+        name='isRequired'
+        changeHandler={formik.handleChange}
+      />
       {formik.values.type === 'select' && (
         <OptionsHandler
           options={selectOptions}

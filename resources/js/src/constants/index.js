@@ -4,6 +4,7 @@ export const fieldValues = {
   name: '',
   description: '',
   type: 'text',
+  isRequired: false,
 };
 
 export const fieldTypes = [
