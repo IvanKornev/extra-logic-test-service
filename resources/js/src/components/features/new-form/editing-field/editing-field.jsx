@@ -20,15 +20,9 @@ import { styles } from './editing-field.styles';
 
 const NewFormEditingField = ({ field, updateAction }) => {
   const formik = useFormik({
-    initialValues: {
-      name: field.name,
-      description: field.description,
-      type: field.type,
-      isRequired: field.isRequired || false,
-    },
+    initialValues: field,
     onSubmit: (values) => {
       const { uniqueId } = field;
-      console.log(values);
       updateAction((list) => list.change(uniqueId, values));
     },
   });
@@ -88,7 +82,13 @@ const NewFormEditingField = ({ field, updateAction }) => {
 
 NewFormEditingField.propTypes = {
   updateAction: PropTypes.func.isRequired,
-  field: PropTypes.object,
+  field: PropTypes.shape({
+    uniqueId: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    type: PropTypes.oneOf(['text', 'textarea', 'select']),
+    isRequired: PropTypes.bool,
+  }),
 };
 
 export { NewFormEditingField };
