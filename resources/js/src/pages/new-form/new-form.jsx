@@ -5,7 +5,7 @@ import { LinkedListConverter } from '@lib/converters';
 
 import { NewFieldEditor } from '@components/features/editor';
 import {
-  NewFormTitle,
+  NewFormTitleField,
   NewFormFields,
   NewFormMenu,
   NewFormEditingField,
@@ -27,7 +27,7 @@ const NewFormPage = () => {
   return (
     <section style={styles.page}>
       <div style={styles.wrapper}>
-        <NewFormTitle
+        <NewFormTitleField
           ref={refs.titleField}
           onClick={(e) => selectField(e)}
           formikInstance={formik}

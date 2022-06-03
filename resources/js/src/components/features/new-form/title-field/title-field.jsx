@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import { TextField } from '@mui/material';
 import { FieldBox } from '@components/reusable';
-import { styles } from './title.styles';
+import { styles } from './title-field.styles';
 
-export const NewFormTitle = forwardRef((props, ref) => {
+export const NewFormTitleField = forwardRef((props, ref) => {
   const { formikInstance, onClick } = props;
   return (
     <FieldBox ref={ref} onClick={onClick} withBorder>
@@ -14,7 +14,7 @@ export const NewFormTitle = forwardRef((props, ref) => {
         return (
           <TextField
             key={id}
-            name={`form.${field}`}
+            name={field}
             color='secondary'
             variant='standard'
             value={formikInstance.values[field]}
@@ -27,7 +27,7 @@ export const NewFormTitle = forwardRef((props, ref) => {
   );
 });
 
-NewFormTitle.propTypes = {
+NewFormTitleField.propTypes = {
   formikInstance: PropTypes.object.isRequired,
   onClick: PropTypes.func,
 };
