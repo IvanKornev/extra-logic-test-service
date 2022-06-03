@@ -65,13 +65,12 @@ const EditorFields = ({ formikInstance }) => (
           variant='standard'
           color='primary'
           onChange={formikInstance.handleChange}>
-          {select.isSelect(component) && (
+          {select.isSelect(component) &&
             component.options.map((option) => (
               <MenuItem key={generateId()} value={option.value}>
                 {option.title}
               </MenuItem>
-            ))
-          )}
+            ))}
         </CurrentComponent>
       );
     })}

@@ -5,13 +5,13 @@ export const fieldValues = {
   description: '',
   type: 'text',
 };
-  
+
 export const fieldTypes = [
   { value: 'text', title: 'Текстовое поле (text)' },
   { value: 'textarea', title: 'Текстовая зона (textarea)' },
   { value: 'select', title: 'Селектор (select)' },
 ];
-  
+
 export const fieldFormStructure = [
   {
     name: 'name',
@@ -41,7 +41,7 @@ export const optionValues = {
   title: '',
   value: '',
 };
-  
+
 export const optionLabels = {
   title: 'Наименование',
   value: 'Значение',

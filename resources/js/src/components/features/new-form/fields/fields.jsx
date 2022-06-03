@@ -30,7 +30,7 @@ const NewFormFields = (props) => {
               {!wasSelected(field.uniqueId, currentId) && (
                 <>
                   {formFields.map((name) => (
-                    <Stack direction="row">
+                    <Stack direction='row'>
                       <Typography
                         key={generateId()}
                         component='h3'

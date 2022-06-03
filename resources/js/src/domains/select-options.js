@@ -28,9 +28,7 @@ const edit = (id, options) => {
   });
 };
 
-const remove = (id, options) => (
-  options.filter((option) => option.id !== id)
-);
+const remove = (id, options) => options.filter((option) => option.id !== id);
 
 const getActions = (callbacks) => {
   if (!callbacks) {
