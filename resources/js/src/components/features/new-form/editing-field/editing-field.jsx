@@ -1,4 +1,4 @@
-import React, { useId } from 'react';
+import React, { useId, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useFormik, Formik, Form } from 'formik';
 import generateId from 'uniqid';
@@ -18,16 +18,18 @@ import {
 
 import { styles } from './editing-field.styles';
 
-const NewFormEditingField = ({ field, updateAction }) => {
+const NewFormEditingField = ({ field, updateAction, startFieldRef }) => {
   const formik = useFormik({
     initialValues: field,
     onSubmit: (values) => {
       const { uniqueId } = field;
       updateAction((list) => list.change(uniqueId, values));
+      startFieldRef.current.click();
     },
   });
   return (
-    <Formik initialValues={formik.initialValues} onSubmit={formik.handleSubmit}>
+    <>
+      <Formik initialValues={formik.initialValues} onSubmit={formik.handleSubmit}>
       <Form style={styles.wrapper}>
         {formFields.map((name) => {
           const id = useId();
@@ -77,11 +79,13 @@ const NewFormEditingField = ({ field, updateAction }) => {
         </div>
       </Form>
     </Formik>
+    </>
   );
 };
 
 NewFormEditingField.propTypes = {
   updateAction: PropTypes.func.isRequired,
+  startFieldRef: PropTypes.object,
   field: fieldAttributes,
 };
 

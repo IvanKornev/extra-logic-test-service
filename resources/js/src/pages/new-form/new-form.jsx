@@ -37,6 +37,7 @@ const NewFormPage = () => {
             <NewFormEditingField
               updateAction={updateFields}
               field={currentField}
+              startFieldRef={refs.titleField}
             />
           }
           fieldBoxAction={selectField}
