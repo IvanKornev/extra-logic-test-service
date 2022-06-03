@@ -30,11 +30,6 @@ const NewFieldEditor = (props) => {
       }
       title='Новое поле'>
       <EditorFields formikInstance={formik} />
-      <LabledSwitch
-        label='Обязательное поле'
-        name='isRequired'
-        changeHandler={formik.handleChange}
-      />
       {formik.values.type === 'select' && (
         <OptionsHandler
           options={selectOptions}
@@ -50,6 +45,11 @@ const NewFieldEditor = (props) => {
           }
         />
       )}
+      <LabledSwitch
+        label='Обязательное поле'
+        name='isRequired'
+        changeHandler={formik.handleChange}
+      />
     </EditorModal>
   );
 };

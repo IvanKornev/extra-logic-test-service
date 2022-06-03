@@ -32404,10 +32404,6 @@ var NewFieldEditor = function NewFieldEditor(props) {
     title: "\u041D\u043E\u0432\u043E\u0435 \u043F\u043E\u043B\u0435",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(EditorFields, {
       formikInstance: formik
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_reusable__WEBPACK_IMPORTED_MODULE_2__.LabledSwitch, {
-      label: "\u041E\u0431\u044F\u0437\u0430\u0442\u0435\u043B\u044C\u043D\u043E\u0435 \u043F\u043E\u043B\u0435",
-      name: "isRequired",
-      changeHandler: formik.handleChange
     }), formik.values.type === 'select' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_reusable__WEBPACK_IMPORTED_MODULE_2__.OptionsHandler, {
       options: selectOptions,
       setOptions: setSelectOptions,
@@ -32420,6 +32416,10 @@ var NewFieldEditor = function NewFieldEditor(props) {
         isVisible: editorWasOpened,
         setOptions: setSelectOptions
       })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_reusable__WEBPACK_IMPORTED_MODULE_2__.LabledSwitch, {
+      label: "\u041E\u0431\u044F\u0437\u0430\u0442\u0435\u043B\u044C\u043D\u043E\u0435 \u043F\u043E\u043B\u0435",
+      name: "isRequired",
+      changeHandler: formik.handleChange
     })]
   });
 };
@@ -33222,12 +33222,7 @@ var EditorModal = function EditorModal(props) {
           initialValues: form.initialValues,
           onSubmit: form.formikInstance.handleSubmit,
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(formik__WEBPACK_IMPORTED_MODULE_1__.Form, {
-            style: {
-              display: 'flex',
-              flexDirection: 'column',
-              rowGap: '14px',
-              marginTop: '0'
-            },
+            style: _editor_modal_styles__WEBPACK_IMPORTED_MODULE_2__.styles.form,
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], {
               direction: "column",
               spacing: 2,
@@ -33296,9 +33291,16 @@ var box = {
   flexDirection: 'column',
   color: 'black'
 };
+var form = {
+  display: 'flex',
+  flexDirection: 'column',
+  rowGap: '14px',
+  marginTop: '0'
+};
 var styles = {
   modal: modal,
-  box: box
+  box: box,
+  form: form
 };
 
 /***/ }),

@@ -15,7 +15,13 @@ const box = {
   color: 'black',
 };
 
+const form = {
+  display: 'flex',
+  flexDirection: 'column',
+  rowGap: '14px',
+  marginTop: '0',
+};
+
 export const styles = {
-  modal,
-  box,
+  modal, box, form,
 };

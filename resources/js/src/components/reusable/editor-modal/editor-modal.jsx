@@ -21,12 +21,7 @@ export const EditorModal = (props) => {
             initialValues={form.initialValues}
             onSubmit={form.formikInstance.handleSubmit}>
             <Form
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                rowGap: '14px',
-                marginTop: '0',
-              }}>
+              style={styles.form}>
               <Stack direction='column' spacing={2}>
                 {children}
               </Stack>
