@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import generateId from 'uniqid';
 
 import { FieldBox, OptionsList } from '@components/reusable';
-import { newForm } from '@domains';
+import { newForm, fieldEditor } from '@domains';
 import { Typography } from '@mui/material';
 import { styles } from './fields.styles';
 
@@ -16,7 +16,6 @@ const NewFormFields = (props) => {
     selectedFieldComponent,
   } = props;
   const localRef = useRef(null);
-  const formFields = Object.keys(newForm.defaultValues.form);
   return (
     <>
       {fields.length !== 0 &&
@@ -28,10 +27,10 @@ const NewFormFields = (props) => {
             <div style={styles.wrapper}>
               {!fieldEditor.wasSelected(
                 field.uniqueId,
-                currentField.uniqueId,
+                currentField?.uniqueId,
               ) && (
                 <>
-                  {formFields.map((name) => (
+                  {newForm.fields.map((name) => (
                     <Typography
                       key={generateId()}
                       component='h3'
@@ -45,7 +44,7 @@ const NewFormFields = (props) => {
                   )}
                 </>
               )}
-              {fieldEditor.wasSelected(field.uniqueId, currentField.uniqueId) &&
+              {fieldEditor.wasSelected(field.uniqueId, currentField?.uniqueId) &&
                 selectedFieldComponent}
             </div>
           </FieldBox>

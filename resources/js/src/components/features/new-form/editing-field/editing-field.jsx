@@ -32,11 +32,10 @@ const NewFormEditingField = ({ field, updateAction }) => {
       updateAction((list) => list.change(uniqueId, values));
     },
   });
-  const formFields = Object.keys(newForm.defaultValues.form);
   return (
     <Formik initialValues={formik.initialValues} onSubmit={formik.handleSubmit}>
       <Form style={styles.wrapper}>
-        {formFields.map((name) => {
+        {newForm.fields.map((name) => {
           const id = useId();
           return (
             <TextField
@@ -90,13 +89,6 @@ const NewFormEditingField = ({ field, updateAction }) => {
 NewFormEditingField.propTypes = {
   updateAction: PropTypes.func.isRequired,
   field: PropTypes.object,
-  // field: PropTypes.shape({
-  //   uniqueId: PropTypes.string.isRequired,
-  //   name: PropTypes.string.isRequired,
-  //   description: PropTypes.string.isRequired,
-  //   type: PropTypes.oneOf(['text', 'textarea', 'select']),
-  //   isRequired: PropTypes.bool,
-  // }),
 };
 
 export { NewFormEditingField };

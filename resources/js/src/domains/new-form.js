@@ -25,10 +25,13 @@ const defaultValues = {
   },
 };
 
+const fields = Object.keys(defaultValues.form);
+
 const isEmpty = (fields = []) => fields.length === 0;
 
 export const newForm = {
-  defaultValues,
   createMenu,
+  defaultValues,
+  fields,
   isEmpty,
 };
