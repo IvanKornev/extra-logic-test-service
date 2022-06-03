@@ -9,7 +9,7 @@ export const NewFormTitle = forwardRef((props, ref) => {
   const { formikInstance, onClick } = props;
   return (
     <FieldBox ref={ref} onClick={onClick} withBorder>
-      {Object.keys(formikInstance.values.form).map((field) => {
+      {Object.keys(formikInstance.values).map((field) => {
         const id = useId();
         return (
           <TextField
@@ -17,7 +17,7 @@ export const NewFormTitle = forwardRef((props, ref) => {
             name={`form.${field}`}
             color='secondary'
             variant='standard'
-            value={formikInstance.values.form[field]}
+            value={formikInstance.values[field]}
             onChange={formikInstance.handleChange}
             sx={styles.fields[field]}
           />

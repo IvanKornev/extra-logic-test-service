@@ -47,7 +47,7 @@ export const optionLabels = {
   value: 'Значение',
 };
 
-const formValues = {
+export const formValues = {
   name: 'Новая форма',
   description: 'Описание новой формы',
 };

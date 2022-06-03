@@ -1,5 +1,7 @@
 import React, { useId, useState } from 'react';
 import PropTypes from 'prop-types';
+import generateId from 'uniqid';
+import { MenuItem } from '@mui/material';
 
 import { EditorModal, OptionsHandler } from '@components/reusable';
 import { NewOptionEditor } from '@components/features/editor';

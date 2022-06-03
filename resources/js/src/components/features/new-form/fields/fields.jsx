@@ -2,10 +2,10 @@ import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import generateId from 'uniqid';
 
-import { FieldBox, OptionsList } from '@components/reusable';
+import { FieldBox, OptionsList, RequiredFieldMark } from '@components/reusable';
 import { wasSelected } from '@domains';
 import { formFields } from '@constants';
-import { Typography } from '@mui/material';
+import { Typography, Stack } from '@mui/material';
 import { styles } from './fields.styles';
 
 const NewFormFields = (props) => {
@@ -17,6 +17,7 @@ const NewFormFields = (props) => {
     selectedFieldComponent,
   } = props;
   const localRef = useRef(null);
+  const currentId = currentField?.uniqueId;
   return (
     <>
       {fields.length !== 0 &&
@@ -26,26 +27,28 @@ const NewFormFields = (props) => {
             onClick={(e) => fieldBoxAction(e, field)}
             key={field.uniqueId}>
             <div style={styles.wrapper}>
-              {!wasSelected(
-                field.uniqueId,
-                currentField?.uniqueId,
-              ) && (
+              {!wasSelected(field.uniqueId, currentId) && (
                 <>
                   {formFields.map((name) => (
-                    <Typography
-                      key={generateId()}
-                      component='h3'
-                      variant='h6'
-                      sx={styles.heading}>
-                      {field[name]}
-                    </Typography>
+                    <Stack direction="row">
+                      <Typography
+                        key={generateId()}
+                        component='h3'
+                        variant='h6'
+                        sx={styles.heading}>
+                        {field[name]}
+                      </Typography>
+                      {field.isRequired && name === 'name' && (
+                        <RequiredFieldMark />
+                      )}
+                    </Stack>
                   ))}
                   {field.type === 'select' && (
                     <OptionsList list={field.selectOptions} />
                   )}
                 </>
               )}
-              {wasSelected(field.uniqueId, currentField?.uniqueId) && selectedFieldComponent}
+              {wasSelected(field.uniqueId, currentId) && selectedFieldComponent}
             </div>
           </FieldBox>
         ))}

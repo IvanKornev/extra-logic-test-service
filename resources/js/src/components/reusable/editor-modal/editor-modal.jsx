@@ -37,7 +37,7 @@ export const EditorModal = (props) => {
                   color='success'
                   type='submit'
                   disabled={disableCondition}>
-                  Сохранить поле
+                  Сохранить
                 </Button>
                 <Button
                   size='medium'
