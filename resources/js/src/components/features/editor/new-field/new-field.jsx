@@ -9,6 +9,8 @@ import { useFieldEditor } from '@hooks';
 import { select } from '@domains';
 import { fieldValues, fieldFormStructure } from '@constants';
 
+import { styles } from './new-field.styles';
+
 const NewFieldEditor = (props) => {
   const { abortCallback, wasOpened, updateFields } = props;
   const [editorWasOpened, openEditor] = useState(false);
@@ -45,11 +47,13 @@ const NewFieldEditor = (props) => {
           }
         />
       )}
-      <LabledSwitch
-        label='Обязательное поле'
-        name='isRequired'
-        changeHandler={formik.handleChange}
-      />
+      <div style={styles.switchWrapper}>
+        <LabledSwitch
+          label='Обязательное поле'
+          name='isRequired'
+          changeHandler={formik.handleChange}
+        />
+      </div>
     </EditorModal>
   );
 };
