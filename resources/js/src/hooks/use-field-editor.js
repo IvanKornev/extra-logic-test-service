@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 
-import { fieldEditor } from '@domains';
+import { createField } from '@domains';
 import { fieldValues } from '@constants';
 
 const useFieldEditor = (updateCallback, abortCallback) => {
@@ -9,10 +9,7 @@ const useFieldEditor = (updateCallback, abortCallback) => {
   const formik = useFormik({
     initialValues: fieldValues,
     onSubmit: (eventValues) => {
-      const createdField = fieldEditor.create({
-        ...eventValues,
-        selectOptions,
-      });
+      const createdField = createField({...eventValues, selectOptions});
       updateCallback((list) => list.insert(createdField));
       abortCallback();
     },

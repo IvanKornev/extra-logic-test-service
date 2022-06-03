@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { fieldEditor } from '@domains/field-editor';
+import { removeField, copyField } from '@domains';
 
 export const useFieldMenu = (updateFields) => {
   const [editorIsVisible, setEditorVisibility] = useState(false);
@@ -16,10 +16,10 @@ export const useFieldMenu = (updateFields) => {
     add: () => setEditorVisibility(true),
     copy: () => {
       const callbacks = { updateFields, setCurrentField };
-      fieldEditor.copy(currentField.uniqueId, callbacks);
+      copyField(currentField.uniqueId, callbacks);
     },
     remove: () => {
-      fieldEditor.remove(currentField.uniqueId, updateFields, refs);
+      removeField(currentField.uniqueId, updateFields, refs);
     },
   };
 

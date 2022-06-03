@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import generateId from 'uniqid';
 
 import { FieldBox, OptionsList } from '@components/reusable';
-import { newForm, fieldEditor } from '@domains';
+import { newForm, wasSelected } from '@domains';
 import { Typography } from '@mui/material';
 import { styles } from './fields.styles';
 
@@ -25,7 +25,7 @@ const NewFormFields = (props) => {
             onClick={(e) => fieldBoxAction(e, field)}
             key={field.uniqueId}>
             <div style={styles.wrapper}>
-              {!fieldEditor.wasSelected(
+              {!wasSelected(
                 field.uniqueId,
                 currentField?.uniqueId,
               ) && (
@@ -44,8 +44,7 @@ const NewFormFields = (props) => {
                   )}
                 </>
               )}
-              {fieldEditor.wasSelected(field.uniqueId, currentField?.uniqueId) &&
-                selectedFieldComponent}
+              {wasSelected(field.uniqueId, currentField?.uniqueId) && selectedFieldComponent}
             </div>
           </FieldBox>
         ))}

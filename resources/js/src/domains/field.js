@@ -2,7 +2,7 @@ import generateId from 'uniqid';
 import PropTypes from 'prop-types';
 import { LinkedListConverter } from '@lib/converters';
 
-const attributes = PropTypes.shape({
+export const fieldAttributes = PropTypes.shape({
   uniqueId: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
@@ -10,14 +10,7 @@ const attributes = PropTypes.shape({
   isRequired: PropTypes.bool,
 });
 
-const wasSelected = (fieldId, currentFieldId) => {
-  if (!fieldId || !currentFieldId) {
-    return;
-  }
-  return fieldId === currentFieldId ? true : false;
-};
-
-const create = (values) => {
+export const createField = (values) => {
   const createdField = {
     uniqueId: generateId(),
     name: values.name || 'Имя по умолчанию',
@@ -32,7 +25,7 @@ const create = (values) => {
   return createdField;
 };
 
-const copy = (id, actions) => {
+export const copyField = (id, actions) => {
   const { updateFields, setCurrentField } = actions;
   updateFields((list) => {
     const results = list.copy(id);
@@ -41,7 +34,7 @@ const copy = (id, actions) => {
   });
 };
 
-const remove = (id, updateFields, refs) => {
+export const removeField = (id, updateFields, refs) => {
   const changedList = updateFields((list) => list.remove(id));
   const { length } = LinkedListConverter.toArray(changedList);
 
@@ -53,6 +46,9 @@ const remove = (id, updateFields, refs) => {
   return changedList;
 };
 
-export const fieldEditor = {
-  attributes, wasSelected, create, copy, remove,
+export const wasSelected = (fieldId, currentFieldId) => {
+  if (!fieldId || !currentFieldId) {
+    return;
+  }
+  return fieldId === currentFieldId ? true : false;
 };

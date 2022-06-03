@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { useNewForm, useFieldMenu } from '@hooks';
-import { fieldEditor } from '@domains/field-editor';
 import { LinkedListConverter } from '@lib/converters';
 
 import { NewFieldEditor } from '@components/features/editor';
