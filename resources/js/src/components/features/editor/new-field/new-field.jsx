@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { EditorModal, OptionsHandler } from '@components/reusable';
 import { NewOptionEditor } from '@components/features/editor';
 import { useFieldEditor } from '@hooks';
-import { select, selectOptions } from '@domains';
+import { select } from '@domains';
 import { fieldValues, fieldFormStructure } from '@constants';
 
 const NewFieldEditor = (props) => {
@@ -63,7 +63,13 @@ const EditorFields = ({ formikInstance }) => (
           variant='standard'
           color='primary'
           onChange={formikInstance.handleChange}>
-          {select.isSelect(component) && selectOptions.render(component)}
+          {select.isSelect(component) && (
+            component.options.map((option) => (
+              <MenuItem key={generateId()} value={option.value}>
+                {option.title}
+              </MenuItem>
+            ))
+          )}
         </CurrentComponent>
       );
     })}

@@ -5,10 +5,11 @@ import { TextField } from '@mui/material';
 
 import { EditorModal } from '@components/reusable';
 import { selectOptions } from '@domains';
+import { optionValues, optionLabels } from '@constants';
 
 const NewOptionEditor = ({ isVisible, abortCallback, setOptions }) => {
   const formik = useFormik({
-    initialValues: selectOptions.values,
+    initialValues: optionValues,
     onSubmit: (values) => {
       const createdOption = selectOptions.add(values);
       setOptions((prev) => [...prev, createdOption]);
@@ -16,7 +17,7 @@ const NewOptionEditor = ({ isVisible, abortCallback, setOptions }) => {
     },
   });
   const formData = {
-    initialValues: selectOptions.values,
+    initialValues: optionValues,
     formikInstance: formik,
   };
   return (
@@ -33,7 +34,7 @@ const NewOptionEditor = ({ isVisible, abortCallback, setOptions }) => {
           <TextField
             key={id}
             name={fieldName}
-            label={selectOptions.labels[fieldName]}
+            label={optionLabels[fieldName]}
             value={formik.values[fieldName]}
             onChange={formik.handleChange}
             variant='standard'

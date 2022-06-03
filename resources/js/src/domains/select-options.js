@@ -1,23 +1,5 @@
 import { UilTrashAlt, UilPen } from '@iconscout/react-unicons';
-import { MenuItem } from '@mui/material';
 import generateId from 'uniqid';
-
-const values = {
-  title: '',
-  value: '',
-};
-
-const labels = {
-  title: 'Наименование',
-  value: 'Значение',
-};
-
-const render = (component) =>
-  component.options.map((option) => (
-    <MenuItem key={generateId()} value={option.value}>
-      {option.title}
-    </MenuItem>
-  ));
 
 const getTexts = (option, number = 1) => {
   const { title, value } = option;
@@ -46,7 +28,9 @@ const edit = (id, options) => {
   });
 };
 
-const remove = (id, options) => options.filter((option) => option.id !== id);
+const remove = (id, options) => (
+  options.filter((option) => option.id !== id)
+);
 
 const getActions = (callbacks) => {
   if (!callbacks) {
@@ -60,9 +44,6 @@ const getActions = (callbacks) => {
 };
 
 export const selectOptions = {
-  values,
-  labels,
-  render,
   getTexts,
   add,
   edit,
