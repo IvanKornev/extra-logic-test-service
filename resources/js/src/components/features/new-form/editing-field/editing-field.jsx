@@ -5,7 +5,7 @@ import generateId from 'uniqid';
 
 import { fieldTypes } from '@constants';
 import { LabledSwitch } from '@components/reusable';
-import { newForm } from '@domains';
+import { newForm, fieldEditor } from '@domains';
 
 import { UilCheckCircle } from '@iconscout/react-unicons';
 import {
@@ -82,13 +82,7 @@ const NewFormEditingField = ({ field, updateAction }) => {
 
 NewFormEditingField.propTypes = {
   updateAction: PropTypes.func.isRequired,
-  field: PropTypes.shape({
-    uniqueId: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    type: PropTypes.oneOf(['text', 'textarea', 'select']),
-    isRequired: PropTypes.bool,
-  }),
+  field: fieldEditor.attributes,
 };
 
 export { NewFormEditingField };

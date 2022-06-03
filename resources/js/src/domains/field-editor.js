@@ -1,5 +1,14 @@
-import { LinkedListConverter } from '@lib/converters';
 import generateId from 'uniqid';
+import PropTypes from 'prop-types';
+import { LinkedListConverter } from '@lib/converters';
+
+const attributes = PropTypes.shape({
+  uniqueId: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(['text', 'textarea', 'select']),
+  isRequired: PropTypes.bool,
+});
 
 const wasSelected = (fieldId, currentFieldId) => {
   if (!fieldId || !currentFieldId) {
@@ -45,8 +54,5 @@ const remove = (id, updateFields, refs) => {
 };
 
 export const fieldEditor = {
-  wasSelected,
-  create,
-  copy,
-  remove,
+  attributes, wasSelected, create, copy, remove,
 };
