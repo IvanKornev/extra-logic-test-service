@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import { EditorModal, OptionsHandler } from '@components/reusable';
 import { NewOptionEditor } from '@components/features/editor';
 import { useFieldEditor } from '@hooks';
-import { fieldEditor, select, selectOptions } from '@domains';
+import { select, selectOptions } from '@domains';
+import { fieldValues, fieldFormStructure } from '@constants';
 
 const NewFieldEditor = (props) => {
   const { abortCallback, wasOpened, updateFields } = props;
@@ -14,7 +15,7 @@ const NewFieldEditor = (props) => {
     abortCallback,
   );
   const formData = {
-    initialValues: fieldEditor.defaultValues,
+    initialValues: fieldValues,
     formikInstance: formik,
   };
   return (
@@ -48,7 +49,7 @@ const NewFieldEditor = (props) => {
 
 const EditorFields = ({ formikInstance }) => (
   <>
-    {fieldEditor.fields.map((field) => {
+    {fieldFormStructure.map((field) => {
       const { name, label, component } = field;
       const CurrentComponent = component.name;
       const id = useId();

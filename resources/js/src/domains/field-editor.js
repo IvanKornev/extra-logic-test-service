@@ -1,43 +1,5 @@
-import { TextField, Select } from '@mui/material';
 import { LinkedListConverter } from '@lib/converters';
 import generateId from 'uniqid';
-
-const defaultValues = {
-  name: '',
-  description: '',
-  type: 'text',
-};
-
-const types = [
-  { value: 'text', title: 'Текстовое поле (text)' },
-  { value: 'textarea', title: 'Текстовая зона (textarea)' },
-  { value: 'select', title: 'Селектор (select)' },
-];
-
-const fields = [
-  {
-    name: 'name',
-    label: 'Название поля',
-    component: {
-      name: TextField,
-    },
-  },
-  {
-    name: 'description',
-    label: 'Описание поля',
-    component: {
-      name: TextField,
-    },
-  },
-  {
-    name: 'type',
-    label: 'Тип поля',
-    component: {
-      name: Select,
-      options: types,
-    },
-  },
-];
 
 const wasSelected = (fieldId, currentFieldId) => {
   if (!fieldId || !currentFieldId) {
@@ -83,9 +45,6 @@ const remove = (id, updateFields, refs) => {
 };
 
 export const fieldEditor = {
-  types,
-  defaultValues,
-  fields,
   wasSelected,
   create,
   copy,

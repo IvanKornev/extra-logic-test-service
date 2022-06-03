@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { useFormik, Formik, Form } from 'formik';
 import generateId from 'uniqid';
 
-import { fieldEditor } from '@domains';
+import { fieldTypes } from '@constants';
 import { LabledSwitch } from '@components/reusable';
-
 import { newForm } from '@domains';
+
 import { UilCheckCircle } from '@iconscout/react-unicons';
 import {
   Button,
@@ -51,7 +51,7 @@ const NewFormEditingField = ({ field, updateAction }) => {
             value={formik.values.type}
             color='secondary'
             sx={styles.select}>
-            {fieldEditor.types.map((type) => (
+            {fieldTypes.map((type) => (
               <MenuItem value={type.value} key={generateId()}>
                 {type.title}
               </MenuItem>

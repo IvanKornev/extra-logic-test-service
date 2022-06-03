@@ -32341,13 +32341,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _components_reusable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @components/reusable */ "./resources/js/src/components/reusable/index.js");
 /* harmony import */ var _components_features_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @components/features/editor */ "./resources/js/src/components/features/editor/index.js");
 /* harmony import */ var _hooks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @hooks */ "./resources/js/src/hooks/index.js");
 /* harmony import */ var _domains__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @domains */ "./resources/js/src/domains/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @constants */ "./resources/js/src/constants/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -32359,6 +32360,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -32386,23 +32388,23 @@ var NewFieldEditor = function NewFieldEditor(props) {
       formik = _useFieldEditor.formik;
 
   var formData = {
-    initialValues: _domains__WEBPACK_IMPORTED_MODULE_4__.fieldEditor.defaultValues,
+    initialValues: _constants__WEBPACK_IMPORTED_MODULE_5__.fieldValues,
     formikInstance: formik
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_components_reusable__WEBPACK_IMPORTED_MODULE_1__.EditorModal, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_components_reusable__WEBPACK_IMPORTED_MODULE_1__.EditorModal, {
     abortCallback: abortCallback,
     form: formData,
     isVisible: wasOpened,
     disableCondition: formik.values.type === 'select' && selectOptions.length === 0,
     title: "\u041D\u043E\u0432\u043E\u0435 \u043F\u043E\u043B\u0435",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(EditorFields, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(EditorFields, {
       formikInstance: formik
-    }), formik.values.type === 'select' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_reusable__WEBPACK_IMPORTED_MODULE_1__.OptionsHandler, {
+    }), formik.values.type === 'select' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_reusable__WEBPACK_IMPORTED_MODULE_1__.OptionsHandler, {
       options: selectOptions,
       setOptions: setSelectOptions,
       editorWasOpened: editorWasOpened,
       openEditor: openEditor,
-      editorComponent: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_features_editor__WEBPACK_IMPORTED_MODULE_2__.NewOptionEditor, {
+      editorComponent: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_features_editor__WEBPACK_IMPORTED_MODULE_2__.NewOptionEditor, {
         abortCallback: function abortCallback() {
           return openEditor(false);
         },
@@ -32415,14 +32417,14 @@ var NewFieldEditor = function NewFieldEditor(props) {
 
 var EditorFields = function EditorFields(_ref) {
   var formikInstance = _ref.formikInstance;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
-    children: _domains__WEBPACK_IMPORTED_MODULE_4__.fieldEditor.fields.map(function (field) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+    children: _constants__WEBPACK_IMPORTED_MODULE_5__.fieldFormStructure.map(function (field) {
       var name = field.name,
           label = field.label,
           component = field.component;
       var CurrentComponent = component.name;
       var id = (0,react__WEBPACK_IMPORTED_MODULE_0__.useId)();
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(CurrentComponent, {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(CurrentComponent, {
         id: name,
         name: name,
         label: label,
@@ -32437,9 +32439,9 @@ var EditorFields = function EditorFields(_ref) {
 };
 
 NewFieldEditor.propTypes = {
-  wasOpened: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().bool.isRequired),
-  updateFields: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().func.isRequired),
-  abortCallback: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().func.isRequired)
+  wasOpened: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().bool.isRequired),
+  updateFields: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().func.isRequired),
+  abortCallback: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().func.isRequired)
 };
 
 
@@ -32545,21 +32547,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_14__);
 /* harmony import */ var formik__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! formik */ "./node_modules/formik/dist/formik.esm.js");
 /* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! uniqid */ "./node_modules/uniqid/index.js");
 /* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(uniqid__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _domains__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @domains */ "./resources/js/src/domains/index.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @constants */ "./resources/js/src/constants/index.js");
 /* harmony import */ var _components_reusable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @components/reusable */ "./resources/js/src/components/reusable/index.js");
-/* harmony import */ var _iconscout_react_unicons__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @iconscout/react-unicons */ "./node_modules/@iconscout/react-unicons/icons/uil-check-circle.js");
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/TextField/TextField.js");
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/FormControl/FormControl.js");
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/Select/Select.js");
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/MenuItem/MenuItem.js");
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/Button/Button.js");
-/* harmony import */ var _editing_field_styles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editing-field.styles */ "./resources/js/src/components/features/new-form/editing-field/editing-field.styles.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _domains__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @domains */ "./resources/js/src/domains/index.js");
+/* harmony import */ var _iconscout_react_unicons__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @iconscout/react-unicons */ "./node_modules/@iconscout/react-unicons/icons/uil-check-circle.js");
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/TextField/TextField.js");
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/FormControl/FormControl.js");
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/Select/Select.js");
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/MenuItem/MenuItem.js");
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/Button/Button.js");
+/* harmony import */ var _editing_field_styles__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./editing-field.styles */ "./resources/js/src/components/features/new-form/editing-field/editing-field.styles.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
@@ -32577,61 +32580,54 @@ var NewFormEditingField = function NewFormEditingField(_ref) {
   var field = _ref.field,
       updateAction = _ref.updateAction;
   var formik = (0,formik__WEBPACK_IMPORTED_MODULE_1__.useFormik)({
-    initialValues: {
-      name: field.name,
-      description: field.description,
-      type: field.type,
-      isRequired: field.isRequired || false
-    },
+    initialValues: field,
     onSubmit: function onSubmit(values) {
       var uniqueId = field.uniqueId;
-      console.log(values);
       updateAction(function (list) {
         return list.change(uniqueId, values);
       });
     }
   });
-  var formFields = Object.keys(_domains__WEBPACK_IMPORTED_MODULE_3__.newForm.defaultValues.form);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(formik__WEBPACK_IMPORTED_MODULE_1__.Formik, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(formik__WEBPACK_IMPORTED_MODULE_1__.Formik, {
     initialValues: formik.initialValues,
     onSubmit: formik.handleSubmit,
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(formik__WEBPACK_IMPORTED_MODULE_1__.Form, {
-      style: _editing_field_styles__WEBPACK_IMPORTED_MODULE_5__.styles.wrapper,
-      children: [formFields.map(function (name) {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(formik__WEBPACK_IMPORTED_MODULE_1__.Form, {
+      style: _editing_field_styles__WEBPACK_IMPORTED_MODULE_6__.styles.wrapper,
+      children: [_domains__WEBPACK_IMPORTED_MODULE_5__.newForm.fields.map(function (name) {
         var id = (0,react__WEBPACK_IMPORTED_MODULE_0__.useId)();
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_8__["default"], {
           color: "secondary",
           variant: "standard",
           placeholder: field[name],
           name: name,
           value: formik.values[name],
           onChange: formik.handleChange,
-          sx: _editing_field_styles__WEBPACK_IMPORTED_MODULE_5__.styles.field
+          sx: _editing_field_styles__WEBPACK_IMPORTED_MODULE_6__.styles.field
         }, id);
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_9__["default"], {
         size: "small",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_10__["default"], {
           name: "type",
           onChange: formik.handleChange,
           value: formik.values.type,
           color: "secondary",
-          sx: _editing_field_styles__WEBPACK_IMPORTED_MODULE_5__.styles.select,
-          children: _domains__WEBPACK_IMPORTED_MODULE_3__.fieldEditor.types.map(function (type) {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_10__["default"], {
+          sx: _editing_field_styles__WEBPACK_IMPORTED_MODULE_6__.styles.select,
+          children: _constants__WEBPACK_IMPORTED_MODULE_3__.fieldTypes.map(function (type) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_11__["default"], {
               value: type.value,
               children: type.title
             }, uniqid__WEBPACK_IMPORTED_MODULE_2___default()());
           })
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-        style: _editing_field_styles__WEBPACK_IMPORTED_MODULE_5__.styles.footer,
-        children: [formik.dirty && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_11__["default"], {
-          startIcon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_iconscout_react_unicons__WEBPACK_IMPORTED_MODULE_12__["default"], {}),
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+        style: _editing_field_styles__WEBPACK_IMPORTED_MODULE_6__.styles.footer,
+        children: [formik.dirty && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_12__["default"], {
+          startIcon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_iconscout_react_unicons__WEBPACK_IMPORTED_MODULE_13__["default"], {}),
           type: "submit",
           color: "success",
           onClick: formik.changeHandler,
           children: "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_reusable__WEBPACK_IMPORTED_MODULE_4__.LabledSwitch, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_reusable__WEBPACK_IMPORTED_MODULE_4__.LabledSwitch, {
           defaultState: field.isRequired && true,
           label: "\u041E\u0431\u044F\u0437\u0430\u0442\u0435\u043B\u044C\u043D\u044B\u0439 \u0432\u043E\u043F\u0440\u043E\u0441",
           name: "isRequired",
@@ -32643,15 +32639,14 @@ var NewFormEditingField = function NewFormEditingField(_ref) {
 };
 
 NewFormEditingField.propTypes = {
-  updateAction: (prop_types__WEBPACK_IMPORTED_MODULE_13___default().func.isRequired),
-  field: (prop_types__WEBPACK_IMPORTED_MODULE_13___default().object) // field: PropTypes.shape({
-  //   uniqueId: PropTypes.string.isRequired,
-  //   name: PropTypes.string.isRequired,
-  //   description: PropTypes.string.isRequired,
-  //   type: PropTypes.oneOf(['text', 'textarea', 'select']),
-  //   isRequired: PropTypes.bool,
-  // }),
-
+  updateAction: (prop_types__WEBPACK_IMPORTED_MODULE_14___default().func.isRequired),
+  field: prop_types__WEBPACK_IMPORTED_MODULE_14___default().shape({
+    uniqueId: (prop_types__WEBPACK_IMPORTED_MODULE_14___default().string.isRequired),
+    name: (prop_types__WEBPACK_IMPORTED_MODULE_14___default().string.isRequired),
+    description: (prop_types__WEBPACK_IMPORTED_MODULE_14___default().string.isRequired),
+    type: prop_types__WEBPACK_IMPORTED_MODULE_14___default().oneOf(['text', 'textarea', 'select']),
+    isRequired: (prop_types__WEBPACK_IMPORTED_MODULE_14___default().bool)
+  })
 };
 
 
@@ -32726,7 +32721,6 @@ var NewFormFields = function NewFormFields(props) {
       fieldBoxAction = props.fieldBoxAction,
       selectedFieldComponent = props.selectedFieldComponent;
   var localRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
-  var formFields = Object.keys(_domains__WEBPACK_IMPORTED_MODULE_3__.newForm.defaultValues.form);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
     children: fields.length !== 0 && fields.map(function (field, index) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_reusable__WEBPACK_IMPORTED_MODULE_2__.FieldBox, {
@@ -32736,8 +32730,8 @@ var NewFormFields = function NewFormFields(props) {
         },
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           style: _fields_styles__WEBPACK_IMPORTED_MODULE_4__.styles.wrapper,
-          children: [!fieldEditor.wasSelected(field.uniqueId, currentField.uniqueId) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
-            children: [formFields.map(function (name) {
+          children: [!_domains__WEBPACK_IMPORTED_MODULE_3__.fieldEditor.wasSelected(field.uniqueId, currentField === null || currentField === void 0 ? void 0 : currentField.uniqueId) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+            children: [_domains__WEBPACK_IMPORTED_MODULE_3__.newForm.fields.map(function (name) {
               return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_6__["default"], {
                 component: "h3",
                 variant: "h6",
@@ -32747,7 +32741,7 @@ var NewFormFields = function NewFormFields(props) {
             }), field.type === 'select' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_reusable__WEBPACK_IMPORTED_MODULE_2__.OptionsList, {
               list: field.selectOptions
             })]
-          }), fieldEditor.wasSelected(field.uniqueId, currentField.uniqueId) && selectedFieldComponent]
+          }), _domains__WEBPACK_IMPORTED_MODULE_3__.fieldEditor.wasSelected(field.uniqueId, currentField === null || currentField === void 0 ? void 0 : currentField.uniqueId) && selectedFieldComponent]
         })
       }, field.uniqueId);
     })
@@ -33655,6 +33649,60 @@ var styles = {
 
 /***/ }),
 
+/***/ "./resources/js/src/constants/index.js":
+/*!*********************************************!*\
+  !*** ./resources/js/src/constants/index.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "fieldFormStructure": () => (/* binding */ fieldFormStructure),
+/* harmony export */   "fieldTypes": () => (/* binding */ fieldTypes),
+/* harmony export */   "fieldValues": () => (/* binding */ fieldValues)
+/* harmony export */ });
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/TextField/TextField.js");
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/Select/Select.js");
+
+var fieldValues = {
+  name: '',
+  description: '',
+  type: 'text'
+};
+var fieldTypes = [{
+  value: 'text',
+  title: 'Текстовое поле (text)'
+}, {
+  value: 'textarea',
+  title: 'Текстовая зона (textarea)'
+}, {
+  value: 'select',
+  title: 'Селектор (select)'
+}];
+var fieldFormStructure = [{
+  name: 'name',
+  label: 'Название поля',
+  component: {
+    name: _mui_material__WEBPACK_IMPORTED_MODULE_0__["default"]
+  }
+}, {
+  name: 'description',
+  label: 'Описание поля',
+  component: {
+    name: _mui_material__WEBPACK_IMPORTED_MODULE_0__["default"]
+  }
+}, {
+  name: 'type',
+  label: 'Тип поля',
+  component: {
+    name: _mui_material__WEBPACK_IMPORTED_MODULE_1__["default"],
+    options: fieldTypes
+  }
+}];
+
+/***/ }),
+
 /***/ "./resources/js/src/data-structures/index.js":
 /*!***************************************************!*\
   !*** ./resources/js/src/data-structures/index.js ***!
@@ -33862,49 +33910,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "fieldEditor": () => (/* binding */ fieldEditor)
 /* harmony export */ });
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/TextField/TextField.js");
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/Select/Select.js");
 /* harmony import */ var _lib_converters__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @lib/converters */ "./resources/js/src/lib/converters/index.js");
 /* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! uniqid */ "./node_modules/uniqid/index.js");
 /* harmony import */ var uniqid__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(uniqid__WEBPACK_IMPORTED_MODULE_1__);
 
 
-
-var defaultValues = {
-  name: '',
-  description: '',
-  type: 'text'
-};
-var types = [{
-  value: 'text',
-  title: 'Текстовое поле (text)'
-}, {
-  value: 'textarea',
-  title: 'Текстовая зона (textarea)'
-}, {
-  value: 'select',
-  title: 'Селектор (select)'
-}];
-var fields = [{
-  name: 'name',
-  label: 'Название поля',
-  component: {
-    name: _mui_material__WEBPACK_IMPORTED_MODULE_2__["default"]
-  }
-}, {
-  name: 'description',
-  label: 'Описание поля',
-  component: {
-    name: _mui_material__WEBPACK_IMPORTED_MODULE_2__["default"]
-  }
-}, {
-  name: 'type',
-  label: 'Тип поля',
-  component: {
-    name: _mui_material__WEBPACK_IMPORTED_MODULE_3__["default"],
-    options: types
-  }
-}];
 
 var wasSelected = function wasSelected(fieldId, currentFieldId) {
   if (!fieldId || !currentFieldId) {
@@ -33960,9 +33970,6 @@ var remove = function remove(id, updateFields, refs) {
 };
 
 var fieldEditor = {
-  types: types,
-  defaultValues: defaultValues,
-  fields: fields,
   wasSelected: wasSelected,
   create: create,
   copy: copy,
@@ -34035,6 +34042,7 @@ var defaultValues = {
     description: 'Описание новой формы'
   }
 };
+var fields = Object.keys(defaultValues.form);
 
 var isEmpty = function isEmpty() {
   var fields = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
@@ -34042,8 +34050,9 @@ var isEmpty = function isEmpty() {
 };
 
 var newForm = {
-  defaultValues: defaultValues,
   createMenu: createMenu,
+  defaultValues: defaultValues,
+  fields: fields,
   isEmpty: isEmpty
 };
 
@@ -34222,6 +34231,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var formik__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! formik */ "./node_modules/formik/dist/formik.esm.js");
 /* harmony import */ var _domains__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @domains */ "./resources/js/src/domains/index.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @constants */ "./resources/js/src/constants/index.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -34244,6 +34254,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var useFieldEditor = function useFieldEditor(updateCallback, abortCallback) {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
@@ -34251,7 +34262,7 @@ var useFieldEditor = function useFieldEditor(updateCallback, abortCallback) {
       setSelectOptions = _useState2[1];
 
   var formik = (0,formik__WEBPACK_IMPORTED_MODULE_1__.useFormik)({
-    initialValues: _domains__WEBPACK_IMPORTED_MODULE_2__.fieldEditor.defaultValues,
+    initialValues: _constants__WEBPACK_IMPORTED_MODULE_3__.fieldValues,
     onSubmit: function onSubmit(eventValues) {
       var createdField = _domains__WEBPACK_IMPORTED_MODULE_2__.fieldEditor.create(_objectSpread(_objectSpread({}, eventValues), {}, {
         selectOptions: selectOptions

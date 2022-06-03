@@ -44,7 +44,8 @@
                 ["@domains", "./resources/js/src/domains"],
                 ["@data-structures", "./resources/js/src/data-structures"],
                 ["@services", "./resources/js/src/services"],
-                ["@lib", "./resources/js/src/lib"]
+                ["@lib", "./resources/js/src/lib"],
+                ["@constants", "./resources/js/src/constants"]
             ]
         }
     }
