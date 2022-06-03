@@ -18,20 +18,9 @@ const createMenu = (actionsCallbacks = {}) => [
   },
 ];
 
-const defaultValues = {
-  form: {
-    name: 'Новая форма',
-    description: 'Описание новой формы',
-  },
-};
-
-const fields = Object.keys(defaultValues.form);
-
 const isEmpty = (fields = []) => fields.length === 0;
 
 export const newForm = {
   createMenu,
-  defaultValues,
-  fields,
   isEmpty,
 };

@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { useFormik, Formik, Form } from 'formik';
 import generateId from 'uniqid';
 
-import { fieldTypes } from '@constants';
+import { fieldTypes, formFields } from '@constants';
 import { LabledSwitch } from '@components/reusable';
-import { fieldAttributes, newForm } from '@domains';
+import { fieldAttributes } from '@domains';
 
 import { UilCheckCircle } from '@iconscout/react-unicons';
 import {
@@ -29,7 +29,7 @@ const NewFormEditingField = ({ field, updateAction }) => {
   return (
     <Formik initialValues={formik.initialValues} onSubmit={formik.handleSubmit}>
       <Form style={styles.wrapper}>
-        {newForm.fields.map((name) => {
+        {formFields.map((name) => {
           const id = useId();
           return (
             <TextField

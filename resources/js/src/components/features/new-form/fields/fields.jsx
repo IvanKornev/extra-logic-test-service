@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import generateId from 'uniqid';
 
 import { FieldBox, OptionsList } from '@components/reusable';
-import { newForm, wasSelected } from '@domains';
+import { wasSelected } from '@domains';
+import { formFields } from '@constants';
 import { Typography } from '@mui/material';
 import { styles } from './fields.styles';
 
@@ -30,7 +31,7 @@ const NewFormFields = (props) => {
                 currentField?.uniqueId,
               ) && (
                 <>
-                  {newForm.fields.map((name) => (
+                  {formFields.map((name) => (
                     <Typography
                       key={generateId()}
                       component='h3'
