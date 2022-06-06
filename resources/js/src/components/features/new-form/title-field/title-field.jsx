@@ -1,14 +1,15 @@
-import React, { useId, forwardRef } from 'react';
+import React, { useId } from 'react';
 import PropTypes from 'prop-types';
 
 import { TextField } from '@mui/material';
 import { FieldBox } from '@components/reusable';
+import { NewFormMenu } from '@components/features/new-form'
 import { styles } from './title-field.styles';
 
-export const NewFormTitleField = forwardRef((props, ref) => {
+export const NewFormTitleField = (props) => {
   const { formikInstance, onClick } = props;
   return (
-    <FieldBox ref={ref} onClick={onClick} withBorder>
+    <FieldBox onClick={onClick} withBorder>
       {Object.keys(formikInstance.values).map((field) => {
         const id = useId();
         return (
@@ -25,7 +26,7 @@ export const NewFormTitleField = forwardRef((props, ref) => {
       })}
     </FieldBox>
   );
-});
+};
 
 NewFormTitleField.propTypes = {
   formikInstance: PropTypes.object.isRequired,

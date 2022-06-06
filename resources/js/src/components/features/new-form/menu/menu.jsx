@@ -1,19 +1,16 @@
 import React, { useId } from 'react';
 import PropTypes from 'prop-types';
-import { Popper, Box, Tooltip } from '@mui/material';
+import { Box, Tooltip } from '@mui/material';
 
 import { newForm } from '@domains';
 import { styles } from './menu.styles';
 
 const NewFormMenu = (props) => {
-  const { anchorElem, actions, onlyAddOption } = props;
+  const { actions, onlyAddOption } = props;
   const menu = newForm.createMenu(actions);
   return (
-    <Popper
-      placement='right-start'
-      anchorEl={anchorElem}
-      open={anchorElem !== null}>
-      <Box sx={styles.menu}>
+    <section style={styles.menu}>
+      <Box sx={styles.wrapper}>
         {menu.map((item) => {
           const { iconName, action, tooltip } = item;
           const id = useId();
@@ -32,18 +29,16 @@ const NewFormMenu = (props) => {
           );
         })}
       </Box>
-    </Popper>
+    </section>
   );
 };
 
 NewFormMenu.defaultTypes = {
-  anchorElem: null,
   onlyAddOptions: false,
 };
 
 NewFormMenu.propTypes = {
   onlyAddOptions: PropTypes.bool,
-  anchorElem: PropTypes.object,
   actions: PropTypes.shape({
     add: PropTypes.func.isRequired,
     copy: PropTypes.func.isRequired,

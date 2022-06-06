@@ -18,9 +18,25 @@ const select = {
   fontSize: '15px',
 };
 
+const name = {
+  '& input[type="text"]': {
+    fontSize: '30px',
+  },
+};
+
+const description = {
+  '& input[type="text"]': {
+    fontSize: '16px',
+  },
+};
+
 export const styles = {
   wrapper,
   heading,
   field,
   select,
+  titleFields: {
+    name,
+    description,
+  },
 };

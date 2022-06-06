@@ -5,7 +5,6 @@ import { LinkedListConverter } from '@lib/converters';
 
 import { NewFieldEditor } from '@components/features/editor';
 import {
-  NewFormTitleField,
   NewFormFields,
   NewFormMenu,
   NewFormEditingField,
@@ -16,41 +15,29 @@ import { styles } from './new-form.styles';
 const NewFormPage = () => {
   const { fields, updateFields, formik } = useNewForm();
   const {
-    refs,
-    anchorElem,
     actions,
-    selectField,
+    setCurrentField,
     currentField,
     setEditorVisibility,
     editorIsVisible,
   } = useFieldMenu(updateFields);
   return (
     <section style={styles.page}>
-      <div style={styles.wrapper}>
-        <NewFormTitleField
-          ref={refs.titleField}
-          onClick={(e) => selectField(e)}
-          formikInstance={formik}
-        />
-        <NewFormFields
-          selectedFieldComponent={
-            <NewFormEditingField
-              updateAction={updateFields}
-              field={currentField}
-              startFieldRef={refs.titleField}
-            />
-          }
-          fieldBoxAction={selectField}
-          currentField={currentField}
-          outsideRef={refs.mainField}
-          fields={LinkedListConverter.toArray(fields)}
-        />
-        <NewFormMenu
-          onlyAddOption={!currentField && true}
-          actions={actions}
-          anchorElem={anchorElem}
-        />
-      </div>
+      <NewFormFields
+        selectedFieldComponent={
+          <NewFormEditingField
+            updateAction={updateFields}
+            field={currentField}
+            setCurrentField={setCurrentField}
+          />
+        }
+        fieldBoxAction={setCurrentField}
+        currentField={currentField}
+        fields={LinkedListConverter.toArray(fields)}
+        formikInstance={formik}
+      >
+        <NewFormMenu actions={actions} onlyAddOption={!currentField && true} />
+      </NewFormFields>
       <NewFieldEditor
         abortCallback={() => setEditorVisibility(false)}
         wasOpened={editorIsVisible}

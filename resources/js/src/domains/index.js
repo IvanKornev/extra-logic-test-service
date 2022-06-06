@@ -5,6 +5,6 @@ export {
   fieldAttributes,
   wasSelected,
   createField,
-  copyField,
   removeField,
+  copyField,
 } from './field';

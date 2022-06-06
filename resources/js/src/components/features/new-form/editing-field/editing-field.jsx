@@ -18,13 +18,13 @@ import {
 
 import { styles } from './editing-field.styles';
 
-const NewFormEditingField = ({ field, updateAction, startFieldRef }) => {
+const NewFormEditingField = ({ field, updateAction, setCurrentField }) => {
   const formik = useFormik({
     initialValues: field,
     onSubmit: (values) => {
       const { uniqueId } = field;
       updateAction((list) => list.change(uniqueId, values));
-      startFieldRef.current.click();
+      setCurrentField(null);
     },
   });
   return (
@@ -85,7 +85,7 @@ const NewFormEditingField = ({ field, updateAction, startFieldRef }) => {
 
 NewFormEditingField.propTypes = {
   updateAction: PropTypes.func.isRequired,
-  startFieldRef: PropTypes.object,
+  setCurrentField: PropTypes.func.isRequired,
   field: fieldAttributes,
 };
 

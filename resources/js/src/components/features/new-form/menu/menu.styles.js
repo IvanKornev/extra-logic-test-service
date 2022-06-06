@@ -1,4 +1,9 @@
 const menu = {
+  display: 'inline-flex',
+  borderRadius: '8px',
+};
+
+const wrapper = {
   borderRadius: '8px',
   p: 1,
   bgcolor: 'background.paper',
@@ -18,7 +23,5 @@ const disabledOption = {
 };
 
 export const styles = {
-  menu,
-  option,
-  disabledOption,
+  menu, wrapper, option, disabledOption,
 };

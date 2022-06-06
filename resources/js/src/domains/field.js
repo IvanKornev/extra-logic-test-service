@@ -25,6 +25,23 @@ export const createField = (values) => {
   return createdField;
 };
 
+export const removeField = (id, actions) => {
+  const { updateFields, setCurrentField } = actions;
+  updateFields((list) => {
+    const { removedNode } = list.remove(id);
+    if (removedNode.next) {
+      const nextField = removedNode.next.value;
+      setCurrentField(nextField);
+    } else if (list.head && !removedNode.next) {
+      const firstField = list.head.value;
+      setCurrentField(firstField);
+    } else {
+      setCurrentField(null);
+    }
+    return list;
+  });
+};
+
 export const copyField = (id, actions) => {
   const { updateFields, setCurrentField } = actions;
   updateFields((list) => {
@@ -32,18 +49,6 @@ export const copyField = (id, actions) => {
     setCurrentField(results.copiedValue);
     return results.list;
   });
-};
-
-export const removeField = (id, updateFields, refs) => {
-  const changedList = updateFields((list) => list.remove(id));
-  const { length } = LinkedListConverter.toArray(changedList);
-
-  const { mainFieldRef, titleFieldRef } = refs;
-  if (length >= 1) {
-    return mainFieldRef.current.click();
-  }
-  titleFieldRef.current.click();
-  return changedList;
 };
 
 export const wasSelected = (fieldId, currentFieldId) => {

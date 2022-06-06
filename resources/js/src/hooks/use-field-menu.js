@@ -1,38 +1,24 @@
-import { useState, useRef, useEffect } from 'react';
-import { removeField, copyField } from '@domains';
+import { useState } from 'react';
+import { copyField, removeField } from '@domains';
 
 export const useFieldMenu = (updateFields) => {
   const [editorIsVisible, setEditorVisibility] = useState(false);
   const [currentField, setCurrentField] = useState(null);
 
-  const [anchorElem, setAnchorElem] = useState(null);
-  const refs = {
-    mainField: useRef(null),
-    titleField: useRef(null),
-  };
-  useEffect(() => setAnchorElem(refs.titleField.current), []);
-
+  const callbacks = { updateFields, setCurrentField };
   const actions = {
     add: () => setEditorVisibility(true),
     copy: () => {
-      const callbacks = { updateFields, setCurrentField };
       copyField(currentField.uniqueId, callbacks);
     },
     remove: () => {
-      removeField(currentField.uniqueId, updateFields, refs);
+      removeField(currentField.uniqueId, callbacks);
     },
   };
 
-  const selectField = (event, field = null) => {
-    setCurrentField(field);
-    setAnchorElem(event.currentTarget);
-  };
-
   return {
-    anchorElem,
-    refs,
     actions,
-    selectField,
+    setCurrentField,
     editorIsVisible,
     setEditorVisibility,
     currentField,
