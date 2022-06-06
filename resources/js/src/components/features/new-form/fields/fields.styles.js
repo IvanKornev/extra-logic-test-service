@@ -1,3 +1,15 @@
+const fieldsContainer = {
+  display: 'flex',
+  flexDirection: 'column',
+};
+
+const singleField = {
+  display: 'inline-flex',
+  flexDirection: 'row',
+  rowGap: '4px',
+  margin: '8px 0',
+};
+
 const wrapper = {
   display: 'flex',
   flexDirection: 'column',
@@ -31,6 +43,8 @@ const description = {
 };
 
 export const styles = {
+  fieldsContainer,
+  singleField,
   wrapper,
   heading,
   field,

@@ -5,7 +5,7 @@ const box = {
   padding: '14px',
   borderRadius: '8px',
   border: '1px rgba(0, 0, 0, 0.2) solid',
-  width: '100%',
+  width: '80%',
 };
 
 const borderedBox = {

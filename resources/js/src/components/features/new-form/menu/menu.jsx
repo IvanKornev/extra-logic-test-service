@@ -9,7 +9,7 @@ const NewFormMenu = (props) => {
   const { actions, onlyAddOption } = props;
   const menu = newForm.createMenu(actions);
   return (
-    <section style={styles.menu}>
+    <section>
       <Box sx={styles.wrapper}>
         {menu.map((item) => {
           const { iconName, action, tooltip } = item;

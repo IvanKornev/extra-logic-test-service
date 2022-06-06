@@ -29,56 +29,58 @@ const NewFormEditingField = ({ field, updateAction, setCurrentField }) => {
   });
   return (
     <>
-      <Formik initialValues={formik.initialValues} onSubmit={formik.handleSubmit}>
-      <Form style={styles.wrapper}>
-        {formFields.map((name) => {
-          const id = useId();
-          return (
-            <TextField
-              key={id}
-              color='secondary'
-              variant='standard'
-              placeholder={field[name]}
-              name={name}
-              value={formik.values[name]}
+      <Formik
+        initialValues={formik.initialValues}
+        onSubmit={formik.handleSubmit}>
+        <Form style={styles.wrapper}>
+          {formFields.map((name) => {
+            const id = useId();
+            return (
+              <TextField
+                key={id}
+                color='secondary'
+                variant='standard'
+                placeholder={field[name]}
+                name={name}
+                value={formik.values[name]}
+                onChange={formik.handleChange}
+                sx={styles.field}
+              />
+            );
+          })}
+          <FormControl size='small'>
+            <Select
+              name='type'
               onChange={formik.handleChange}
-              sx={styles.field}
+              value={formik.values.type}
+              color='secondary'
+              sx={styles.select}>
+              {fieldTypes.map((type) => (
+                <MenuItem value={type.value} key={generateId()}>
+                  {type.title}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <div style={styles.footer}>
+            {formik.dirty && (
+              <Button
+                startIcon={<UilCheckCircle />}
+                type='submit'
+                color='success'
+                onClick={formik.changeHandler}>
+                Сохранить
+              </Button>
+            )}
+            <LabledSwitch
+              defaultState={field.isRequired && true}
+              label='Обязательное поле'
+              name='isRequired'
+              changeHandler={formik.handleChange}
             />
-          );
-        })}
-        <FormControl size='small'>
-          <Select
-            name='type'
-            onChange={formik.handleChange}
-            value={formik.values.type}
-            color='secondary'
-            sx={styles.select}>
-            {fieldTypes.map((type) => (
-              <MenuItem value={type.value} key={generateId()}>
-                {type.title}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <div style={styles.footer}>
-          {formik.dirty && (
-            <Button
-              startIcon={<UilCheckCircle />}
-              type='submit'
-              color='success'
-              onClick={formik.changeHandler}>
-              Сохранить
-            </Button>
-          )}
-          <LabledSwitch
-            defaultState={field.isRequired && true}
-            label='Обязательное поле'
-            name='isRequired'
-            changeHandler={formik.handleChange}
-          />
-        </div>
-      </Form>
-    </Formik>
+          </div>
+        </Form>
+      </Formik>
     </>
   );
 };

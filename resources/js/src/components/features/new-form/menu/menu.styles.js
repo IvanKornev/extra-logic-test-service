@@ -1,8 +1,3 @@
-const menu = {
-  display: 'inline-flex',
-  borderRadius: '8px',
-};
-
 const wrapper = {
   borderRadius: '8px',
   p: 1,
@@ -23,5 +18,5 @@ const disabledOption = {
 };
 
 export const styles = {
-  menu, wrapper, option, disabledOption,
+  wrapper, option, disabledOption,
 };

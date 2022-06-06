@@ -11,34 +11,39 @@ import { styles } from './fields.styles';
 
 const NewFormFields = (props) => {
   const {
-    fields, currentField, fieldBoxAction, selectedFieldComponent, formikInstance, children,
+    fields,
+    currentField,
+    fieldBoxAction,
+    selectedFieldComponent,
+    formikInstance,
+    children,
   } = props;
   const currentId = currentField?.uniqueId;
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
-    <div style={{ display: 'flex', flexDirection: 'row', rowGap: '4px', margin: '8px 0' }}>
-      <FieldBox onClick={() => fieldBoxAction(null)} withBorder>
-        {Object.keys(formikInstance.values).map((field) => {
-          const id = useId();
-          return (
-            <TextField
-              key={id}
-              name={field}
-              color='secondary'
-              variant='standard'
-              value={formikInstance.values[field]}
-              onChange={formikInstance.handleChange}
-              sx={styles.titleFields[field]}
-            />
-          );
-        })}
-      </FieldBox>
-      {!currentField && children}
-    </div>
+    <div style={styles.fieldsContainer}>
+      <div style={styles.singleField}>
+        <FieldBox onClick={() => fieldBoxAction(null)} withBorder>
+          {Object.keys(formikInstance.values).map((field) => {
+            const id = useId();
+            return (
+              <TextField
+                key={id}
+                name={field}
+                color='secondary'
+                variant='standard'
+                value={formikInstance.values[field]}
+                onChange={formikInstance.handleChange}
+                sx={styles.titleFields[field]}
+              />
+            );
+          })}
+        </FieldBox>
+        {!currentField && children}
+      </div>
       {fields.length !== 0 &&
         fields.map((field) => (
-          <div style={{ display: 'flex', flexDirection: 'row', rowGap: '8px', margin: '8px 0' }}>
-             <FieldBox
+          <div style={styles.singleField}>
+            <FieldBox
               onClick={() => fieldBoxAction(field)}
               key={field.uniqueId}>
               <div style={styles.wrapper}>
@@ -63,7 +68,8 @@ const NewFormFields = (props) => {
                     )}
                   </>
                 )}
-                {wasSelected(field.uniqueId, currentId) && selectedFieldComponent}
+                {wasSelected(field.uniqueId, currentId) &&
+                  selectedFieldComponent}
               </div>
             </FieldBox>
             {wasSelected(field.uniqueId, currentId) && children}
