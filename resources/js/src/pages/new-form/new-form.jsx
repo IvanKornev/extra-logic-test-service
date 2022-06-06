@@ -5,9 +5,7 @@ import { LinkedListConverter } from '@lib/converters';
 
 import { NewFieldEditor } from '@components/features/editor';
 import {
-  NewFormFields,
-  NewFormMenu,
-  NewFormEditingField,
+  NewFormFields, NewFormMenu, NewFormEditingField,
 } from '@components/features/new-form';
 
 import { styles } from './new-form.styles';
