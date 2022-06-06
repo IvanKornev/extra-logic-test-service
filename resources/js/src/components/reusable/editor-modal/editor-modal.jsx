@@ -20,8 +20,7 @@ export const EditorModal = (props) => {
           <Formik
             initialValues={form.initialValues}
             onSubmit={form.formikInstance.handleSubmit}>
-            <Form
-              style={styles.form}>
+            <Form style={styles.form}>
               <Stack direction='column' spacing={2}>
                 {children}
               </Stack>

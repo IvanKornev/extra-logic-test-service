@@ -23,5 +23,7 @@ const form = {
 };
 
 export const styles = {
-  modal, box, form,
+  modal,
+  box,
+  form,
 };

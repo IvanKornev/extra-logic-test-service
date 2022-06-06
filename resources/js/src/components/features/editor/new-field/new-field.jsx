@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import generateId from 'uniqid';
 import { MenuItem } from '@mui/material';
 
-import { EditorModal, OptionsHandler, LabledSwitch } from '@components/reusable';
+import {
+  EditorModal,
+  OptionsHandler,
+  LabledSwitch,
+} from '@components/reusable';
 import { NewOptionEditor } from '@components/features/editor';
 import { useFieldEditor } from '@hooks';
 import { select } from '@domains';

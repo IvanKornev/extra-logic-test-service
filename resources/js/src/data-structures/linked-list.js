@@ -104,7 +104,7 @@ export class LinkedList {
       removedNode = this.tail;
       this.tail = currentNode;
     }
-    
+
     return {
       list: this,
       removedNode,
