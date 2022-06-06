@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { LinkedList } from '../linked-list';
+import { LinkedList } from '@data-structures';
 
 describe('Односвязный список', () => {
   let list;

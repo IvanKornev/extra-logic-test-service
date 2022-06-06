@@ -16,7 +16,16 @@
     "jest": {
         "roots": [
             "<rootDir>/resources/js/src"
-        ]
+        ],
+        "moduleNameMapper": {
+            "^@components.*$": "<rootDir>/resources/js/src/components",
+            "^@services.*$": "<rootDir>/resources/js/src/services",
+            "^@domains.*$": "<rootDir>/resources/js/src/domains",
+            "^@hooks.*$": "<rootDir>/resources/js/src/hooks",
+            "^@data-structures.*$": "<rootDir>/resources/js/src/data-structures",
+            "^@lib.*$": "<rootDir>/resources/js/src/lib",
+            "^@constants.*$": "<rootDir>/resources/js/src/constants"
+        } 
     },
     "devDependencies": {
         "@babel/preset-env": "^7.18.2",
