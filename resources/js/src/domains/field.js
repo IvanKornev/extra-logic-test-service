@@ -29,7 +29,7 @@ export const removeField = (id, actions) => {
   const { updateFields, setCurrentField } = actions;
   updateFields((list) => {
     const { removedNode } = list.remove(id);
-    if (removedNode.next) {
+    if (removedNode?.next) {
       const nextField = removedNode.next.value;
       setCurrentField(nextField);
     } else if (list.head && !removedNode.next) {
