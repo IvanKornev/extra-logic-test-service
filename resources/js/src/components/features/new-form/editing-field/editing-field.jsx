@@ -5,7 +5,7 @@ import generateId from 'uniqid';
 
 import { fieldTypes, formFields } from '@constants';
 import { LabledSwitch } from '@components/reusable';
-import { fieldAttributes } from '@domains';
+import { fieldAttributes, changeField } from '@domains';
 
 import { UilCheckCircle } from '@iconscout/react-unicons';
 import {
@@ -18,13 +18,11 @@ import {
 
 import { styles } from './editing-field.styles';
 
-const NewFormEditingField = ({ field, updateAction, setCurrentField }) => {
+const NewFormEditingField = ({ field, actions }) => {
   const formik = useFormik({
     initialValues: field,
     onSubmit: (values) => {
-      const { uniqueId } = field;
-      updateAction((list) => list.change(uniqueId, values));
-      setCurrentField(null);
+      changeField(field.uniqueId, values, actions);
     },
   });
   return (
@@ -86,8 +84,10 @@ const NewFormEditingField = ({ field, updateAction, setCurrentField }) => {
 };
 
 NewFormEditingField.propTypes = {
-  updateAction: PropTypes.func.isRequired,
-  setCurrentField: PropTypes.func.isRequired,
+  actions: PropTypes.shape({
+    updateFields: PropTypes.func.isRequired,
+    setCurrentField: PropTypes.func.isRequired,
+  }),
   field: fieldAttributes,
 };
 

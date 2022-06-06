@@ -26,9 +26,8 @@ const NewFormPage = () => {
       <NewFormFields
         selectedFieldComponent={
           <NewFormEditingField
-            updateAction={updateFields}
+            actions={{ updateFields, setCurrentField }}
             field={currentField}
-            setCurrentField={setCurrentField}
           />
         }
         fieldBoxAction={setCurrentField}

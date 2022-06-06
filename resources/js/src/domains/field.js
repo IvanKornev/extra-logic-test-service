@@ -42,6 +42,12 @@ export const removeField = (id, actions) => {
   });
 };
 
+export const changeField = (id, values, actions) => {
+  const { updateFields, setCurrentField } = actions;
+  updateFields((list) => list.change(id, values));
+  setCurrentField(null);
+};
+
 export const copyField = (id, actions) => {
   const { updateFields, setCurrentField } = actions;
   updateFields((list) => {

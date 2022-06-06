@@ -6,5 +6,6 @@ export {
   wasSelected,
   createField,
   removeField,
+  changeField,
   copyField,
 } from './field';
