@@ -83,13 +83,17 @@ export class LinkedList {
     if (!this.head) {
       return [];
     }
+
+    let removedNode;
     while (this.head && this.head.value.uniqueId === id) {
+      removedNode = this.head;
       this.head = this.head.next;
     }
 
     let currentNode = this.head;
     while (currentNode.next) {
       if (currentNode.next.value.uniqueId === id) {
+        removedNode = currentNode.next;
         currentNode.next = currentNode.next.next;
       } else {
         currentNode = currentNode.next;
@@ -97,8 +101,13 @@ export class LinkedList {
     }
 
     if (this.tail.value.uniqueId === id) {
+      removedNode = this.tail;
       this.tail = currentNode;
     }
-    return this;
+    
+    return {
+      list: this,
+      removedNode,
+    };
   }
 }
