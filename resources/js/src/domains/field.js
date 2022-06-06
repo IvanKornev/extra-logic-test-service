@@ -10,7 +10,7 @@ export const fieldAttributes = PropTypes.shape({
   isRequired: PropTypes.bool,
 });
 
-export const createField = (values) => {
+export const createField = (values, updateAction) => {
   const createdField = {
     uniqueId: generateId(),
     name: values.name || 'Имя по умолчанию',
@@ -22,7 +22,7 @@ export const createField = (values) => {
   if (values.type === 'select') {
     createdField.selectOptions = values.selectOptions;
   }
-  return createdField;
+  updateAction((list) => list.insert(createdField));
 };
 
 export const removeField = (id, actions) => {

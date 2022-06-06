@@ -9,8 +9,7 @@ const useFieldEditor = (updateCallback, abortCallback) => {
   const formik = useFormik({
     initialValues: fieldValues,
     onSubmit: (eventValues) => {
-      const createdField = createField({ ...eventValues, selectOptions });
-      updateCallback((list) => list.insert(createdField));
+      createField({ ...eventValues, selectOptions }, updateCallback);
       abortCallback();
     },
   });
