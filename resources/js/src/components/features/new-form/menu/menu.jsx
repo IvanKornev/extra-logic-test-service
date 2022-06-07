@@ -7,8 +7,8 @@ import { newForm } from '@domains';
 import { styles } from './menu.styles';
 
 const NewFormMenu = observer((props) => {
-  const { actions, onlyAddOption } = props;
-  const menu = newForm.createMenu(actions);
+  const { showEditorAction, onlyAddOption } = props;
+  const menu = newForm.createMenu(showEditorAction);
   return (
     <section>
       <Box sx={styles.wrapper}>
@@ -22,7 +22,7 @@ const NewFormMenu = observer((props) => {
               <div>
                 <IconComponent
                   color='#545454'
-                  onClick={action}
+                  onClick={action.callback}
                   style={isDisable ? styles.disabledOption : styles.option}
                 />
               </div>
@@ -40,11 +40,7 @@ NewFormMenu.defaultTypes = {
 
 NewFormMenu.propTypes = {
   onlyAddOptions: PropTypes.bool,
-  actions: PropTypes.shape({
-    add: PropTypes.func.isRequired,
-    copy: PropTypes.func.isRequired,
-    remove: PropTypes.func.isRequired,
-  }),
+  showEditorAction: PropTypes.func.isRequired,
 };
 
 export { NewFormMenu };

@@ -13,7 +13,8 @@ import { observer } from 'mobx-react-lite';
 import { form } from '@global-states';
 
 const NewFormFields = observer((props) => {
-  const { fields, selectedFieldComponent, formikInstance, menuComponent } = props;
+  const { fields, selectedFieldComponent, formikInstance, menuComponent } =
+    props;
   const currentId = form.selectedField?.uniqueId;
   return (
     <div style={styles.fieldsContainer}>

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { useNewForm, useFieldMenu } from '@hooks';
+import { useNewForm } from '@hooks';
 import { LinkedListConverter } from '@lib/converters';
 
 import { NewFieldEditor } from '@components/features/editor';
@@ -16,14 +16,14 @@ import { form } from '@global-states';
 
 const NewFormPage = observer(() => {
   const { formik } = useNewForm();
-  const { actions, setEditorVisibility, editorIsVisible } = useFieldMenu();
+  const [editorIsVisible, setEditorVisibility] = useState(false);
   return (
     <section style={styles.page}>
       <NewFormFields
         selectedFieldComponent={<NewFormEditingField />}
         menuComponent={
           <NewFormMenu
-            actions={actions}
+            showEditorAction={setEditorVisibility}
             onlyAddOption={!form.selectedField && true}
           />
         }
