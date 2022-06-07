@@ -1,6 +1,6 @@
 name: The frontend part (React.JS)
 
-on: [push, commit]
+on: [push]
 
 jobs:
   build:
