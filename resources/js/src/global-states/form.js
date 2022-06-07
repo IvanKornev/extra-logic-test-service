@@ -1,15 +1,11 @@
-import { makeAutoObservable } from "mobx"
+import { makeAutoObservable } from 'mobx';
 
 import { LinkedList } from '@data-structures';
-import {
-  createField,
-  removeField,
-  changeField,
-  copyField,
-} from '@domains';
+import { createField, removeField, changeField, copyField } from '@domains';
 
 class FormGlobalState {
   fieldsList = new LinkedList();
+
   selectedField = null;
 
   constructor() {
@@ -25,7 +21,7 @@ class FormGlobalState {
   }
 
   removeField(id) {
-    removeField(id, this.fieldsList);
+    const results = removeField(id, this.fieldsList);
     this.selectField(results.remainedNode);
   }
 
@@ -40,4 +36,4 @@ class FormGlobalState {
   }
 }
 
-export const form = new FormGlobalState ();
+export const form = new FormGlobalState();
