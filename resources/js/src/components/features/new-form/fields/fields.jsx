@@ -1,26 +1,33 @@
 import React, { useId } from 'react';
+import { useFormik } from 'formik';
+import { observer } from 'mobx-react-lite';
 import PropTypes from 'prop-types';
 import generateId from 'uniqid';
 
 import { FieldBox, OptionsList, RequiredFieldMark } from '@components/reusable';
+import { Typography, Stack, TextField } from '@mui/material';
 
 import { wasSelected } from '@domains';
-import { formFields } from '@constants';
-import { Typography, Stack, TextField } from '@mui/material';
-import { styles } from './fields.styles';
-
-import { observer } from 'mobx-react-lite';
+import { formFields, formValues } from '@constants';
+import { formService } from '@services';
 import { form } from '@global-states';
 
+import { styles } from './fields.styles';
+
 const NewFormFields = observer((props) => {
-  const { fields, selectedFieldComponent, formikInstance, menuComponent } =
-    props;
+  const { fields, selectedFieldComponent, menuComponent } = props;
   const currentId = form.selectedField?.uniqueId;
+  const formik = useFormik({
+    initialValues: formValues,
+    onSubmit: async (form) => {
+      await formService.save({ ...form });
+    },
+  });
   return (
     <div style={styles.fieldsContainer}>
       <div style={styles.singleField}>
         <FieldBox onClick={() => form.selectField(null)} withBorder>
-          {Object.keys(formikInstance.values).map((field) => {
+          {Object.keys(formik.values).map((field) => {
             const id = useId();
             return (
               <TextField
@@ -28,8 +35,8 @@ const NewFormFields = observer((props) => {
                 name={field}
                 color='secondary'
                 variant='standard'
-                value={formikInstance.values[field]}
-                onChange={formikInstance.handleChange}
+                value={formik.values[field]}
+                onChange={formik.handleChange}
                 sx={styles.titleFields[field]}
               />
             );
@@ -84,7 +91,6 @@ NewFormFields.propTypes = {
   fields: PropTypes.array.isRequired,
   menuComponent: PropTypes.element.isRequired,
   selectedFieldComponent: PropTypes.element.isRequired,
-  formikInstance: PropTypes.object.isRequired,
 };
 
 export { NewFormFields };

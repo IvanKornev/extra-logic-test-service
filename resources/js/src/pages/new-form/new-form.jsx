@@ -1,21 +1,14 @@
 import React, { useState } from 'react';
-
-import { useNewForm } from '@hooks';
-import { LinkedListConverter } from '@lib/converters';
-
-import { NewFieldEditor } from '@components/features/editor';
-import {
-  NewFormFields,
-  NewFormMenu,
-  NewFormEditingField,
-} from '@components/features/new-form';
-
-import { styles } from './new-form.styles';
 import { observer } from 'mobx-react-lite';
+
+import { LinkedListConverter } from '@lib/converters';
 import { form } from '@global-states';
 
+import { NewFieldEditor } from '@components/features/editor';
+import { NewFormFields, NewFormMenu, NewFormEditingField, } from '@components/features/new-form';
+import { styles } from './new-form.styles';
+
 const NewFormPage = observer(() => {
-  const { formik } = useNewForm();
   const [editorIsVisible, setEditorVisibility] = useState(false);
   return (
     <section style={styles.page}>
@@ -28,7 +21,6 @@ const NewFormPage = observer(() => {
           />
         }
         fields={LinkedListConverter.toArray(form.fieldsList)}
-        formikInstance={formik}
       />
       <NewFieldEditor
         abortCallback={() => setEditorVisibility(false)}
