@@ -9,7 +9,7 @@
         "prod": "npm run production",
         "production": "mix --production",
         "debug": "eslint ./resources/js/",
-        "test": "cross-env NODE_ENV=test jest ./resources/js/src",
+        "test": "cross-env NODE_ENV=test jest",
         "debug:fix": "eslint --fix ./resources/js/",
         "format": "prettier --write ./resources/js/ --config ./.prettierrc.json"
     },
