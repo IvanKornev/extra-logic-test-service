@@ -1,7 +1,11 @@
-import React, { useId, useState } from 'react';
+import React, { useId, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import generateId from 'uniqid';
 import { MenuItem } from '@mui/material';
+
+import { observer } from 'mobx-react-lite';
+import { form } from '@global-states';
+import { useFormik } from 'formik';
 
 import {
   EditorModal,
@@ -9,19 +13,30 @@ import {
   LabledSwitch,
 } from '@components/reusable';
 import { NewOptionEditor } from '@components/features/editor';
-import { useFieldEditor } from '@hooks';
 import { select } from '@domains';
 import { fieldValues, fieldFormStructure } from '@constants';
 
 import { styles } from './new-field.styles';
 
-const NewFieldEditor = (props) => {
-  const { abortCallback, wasOpened, updateFields } = props;
+const NewFieldEditor = observer((props) => {
+  const { abortCallback, wasOpened } = props;
   const [editorWasOpened, openEditor] = useState(false);
-  let { setSelectOptions, selectOptions, formik } = useFieldEditor(
-    updateFields,
-    abortCallback,
-  );
+  const [selectOptions, setSelectOptions] = useState([]);
+
+  const formik = useFormik({
+    initialValues: fieldValues,
+    onSubmit: (eventValues) => {
+      form.createField({ ...eventValues, selectOptions });
+      abortCallback();
+    },
+  });
+
+  useEffect(() => {
+    if (formik.values.type !== 'select') {
+      setSelectOptions([]);
+    }
+  }, [formik.values.type]);
+
   const formData = {
     initialValues: fieldValues,
     formikInstance: formik,
@@ -60,7 +75,7 @@ const NewFieldEditor = (props) => {
       </div>
     </EditorModal>
   );
-};
+});
 
 const EditorFields = ({ formikInstance }) => (
   <>
@@ -92,7 +107,6 @@ const EditorFields = ({ formikInstance }) => (
 
 NewFieldEditor.propTypes = {
   wasOpened: PropTypes.bool.isRequired,
-  updateFields: PropTypes.func.isRequired,
   abortCallback: PropTypes.func.isRequired,
 };
 

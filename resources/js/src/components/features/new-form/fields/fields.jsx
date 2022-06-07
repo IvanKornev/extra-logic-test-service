@@ -9,7 +9,9 @@ import { formFields } from '@constants';
 import { Typography, Stack, TextField } from '@mui/material';
 import { styles } from './fields.styles';
 
-const NewFormFields = (props) => {
+import { observer } from 'mobx-react-lite';
+
+const NewFormFields = observer((props) => {
   const {
     fields,
     currentField,
@@ -77,7 +79,7 @@ const NewFormFields = (props) => {
         ))}
     </div>
   );
-};
+});
 
 NewFormFields.defaultTypes = {
   fields: [],

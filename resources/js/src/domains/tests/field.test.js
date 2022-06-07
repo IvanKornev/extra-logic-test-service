@@ -1,16 +1,13 @@
 import { faker } from '@faker-js/faker';
 
-import { LinkedList, } from '@data-structures';
-import {
-  createField,
-  removeField,
-  changeField,
-  copyField,
-} from '@domains';
+import { LinkedList } from '@data-structures';
+import { createField, removeField, changeField, copyField } from '@domains';
 
 describe('Методы нового поля', () => {
   let fieldsList;
-  beforeEach(() => fieldsList = new LinkedList());
+  beforeEach(() => {
+    fieldsList = new LinkedList();
+  });
 
   it('Создает новое поле', () => {
     const newField = prepareFields();
@@ -21,15 +18,15 @@ describe('Методы нового поля', () => {
   it('Удаляет поле', () => {
     const fields = prepareFields(3);
     fields.forEach((field) => createField(field, fieldsList));
-    
-    const secondFieldId = fieldsList.head.next.value.uniqueId
+
+    const secondFieldId = fieldsList.head.next.value.uniqueId;
     const { removedNode } = removeField(secondFieldId, fieldsList);
     expect(removedNode.value.uniqueId).toBe(secondFieldId);
   });
 
   it('Изменяет значения поля', () => {
     const [originalField, updatedField] = prepareFields(2);
-    
+
     createField(originalField, fieldsList);
     expect(fieldsList.head.value.name).toBe(originalField.name);
 
@@ -40,7 +37,7 @@ describe('Методы нового поля', () => {
   it('Дублирует поле', () => {
     const newField = prepareFields(1);
     createField(newField, fieldsList);
-    
+
     const originalField = fieldsList.head.value;
     copyField(originalField.uniqueId, fieldsList);
 
@@ -51,8 +48,8 @@ describe('Методы нового поля', () => {
 });
 
 const prepareFields = (numberOfFields = 1) => {
-  let fields = [];
-  for (let i = 0; i < numberOfFields; i++) {
+  const fields = [];
+  for (let i = 0; i < numberOfFields; i += 1) {
     fields.push({
       name: faker.word.adverb(5),
       description: faker.word.adverb(5),

@@ -18,5 +18,7 @@ const disabledOption = {
 };
 
 export const styles = {
-  wrapper, option, disabledOption,
+  wrapper,
+  option,
+  disabledOption,
 };

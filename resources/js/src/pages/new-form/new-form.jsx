@@ -11,8 +11,10 @@ import {
 } from '@components/features/new-form';
 
 import { styles } from './new-form.styles';
+import { observer } from 'mobx-react-lite';
+import { form } from '@global-states';
 
-const NewFormPage = () => {
+const NewFormPage = observer(() => {
   const { fields, updateFields, formik } = useNewForm();
   const {
     actions,
@@ -32,7 +34,7 @@ const NewFormPage = () => {
         }
         fieldBoxAction={setCurrentField}
         currentField={currentField}
-        fields={LinkedListConverter.toArray(fields)}
+        fields={LinkedListConverter.toArray(form.fieldsList)}
         formikInstance={formik}>
         <NewFormMenu actions={actions} onlyAddOption={!currentField && true} />
       </NewFormFields>
@@ -43,6 +45,6 @@ const NewFormPage = () => {
       />
     </section>
   );
-};
+});
 
 export { NewFormPage };
