@@ -1,0 +1,25 @@
+name: The frontend part (React.JS)
+
+on: [push, commit]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Node.js (v.${{ matrix.node-version }})
+          uses: actions/setup-node@v3
+          with:
+            node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+      - run: npm i
+      - name: Run the tests
+      - run: npm test
+      - name: Build app
+      - run: npm run build
