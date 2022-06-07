@@ -13,7 +13,7 @@ import { observer } from 'mobx-react-lite';
 import { form } from '@global-states';
 
 const NewFormFields = observer((props) => {
-  const { fields, selectedFieldComponent, formikInstance, children } = props;
+  const { fields, selectedFieldComponent, formikInstance, menuComponent } = props;
   const currentId = form.selectedField?.uniqueId;
   return (
     <div style={styles.fieldsContainer}>
@@ -34,7 +34,7 @@ const NewFormFields = observer((props) => {
             );
           })}
         </FieldBox>
-        {!form.selectedField && children}
+        {!form.selectedField && menuComponent}
       </div>
       {fields.length !== 0 &&
         fields.map((field) => (
@@ -68,7 +68,7 @@ const NewFormFields = observer((props) => {
                   selectedFieldComponent}
               </div>
             </FieldBox>
-            {wasSelected(field.uniqueId, currentId) && children}
+            {wasSelected(field.uniqueId, currentId) && menuComponent}
           </div>
         ))}
     </div>
@@ -80,8 +80,8 @@ NewFormFields.defaultTypes = {
 };
 
 NewFormFields.propTypes = {
-  children: PropTypes.node.isRequired,
   fields: PropTypes.array.isRequired,
+  menuComponent: PropTypes.element.isRequired,
   selectedFieldComponent: PropTypes.element.isRequired,
   formikInstance: PropTypes.object.isRequired,
 };
