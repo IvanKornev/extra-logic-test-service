@@ -1,19 +1,14 @@
 import { useState } from 'react';
-import { copyField, removeField } from '@domains';
+import { form } from '@global-states';
 
-export const useFieldMenu = (updateFields) => {
+export const useFieldMenu = () => {
   const [editorIsVisible, setEditorVisibility] = useState(false);
   const [currentField, setCurrentField] = useState(null);
 
-  const callbacks = { updateFields, setCurrentField };
   const actions = {
     add: () => setEditorVisibility(true),
-    copy: () => {
-      copyField(currentField.uniqueId, callbacks);
-    },
-    remove: () => {
-      removeField(currentField.uniqueId, callbacks);
-    },
+    copy: () => form.copyField(),
+    remove: () => form.removeField(),
   };
 
   return {

@@ -1,7 +1,9 @@
 import { makeAutoObservable } from 'mobx';
 
 import { LinkedList } from '@data-structures';
-import { createField, removeField, changeField, copyField } from '@domains';
+import {
+  createField, removeField, changeField, copyField,
+} from '@domains';
 
 class FormGlobalState {
   fieldsList = new LinkedList();
@@ -13,14 +15,15 @@ class FormGlobalState {
   }
 
   selectField(value) {
-    this.selectField = value;
+    this.selectedField = value;
   }
 
   createField(values) {
     createField(values, this.fieldsList);
   }
 
-  removeField(id) {
+  removeField() {
+    const id = this.selectedField.uniqueId;
     const results = removeField(id, this.fieldsList);
     this.selectField(results.remainedNode);
   }
@@ -30,7 +33,8 @@ class FormGlobalState {
     this.selectField(null);
   }
 
-  copyField(id) {
+  copyField() {
+    const id = this.selectedField.uniqueId;
     const results = copyField(id);
     this.selectField(results.copiedValue);
   }

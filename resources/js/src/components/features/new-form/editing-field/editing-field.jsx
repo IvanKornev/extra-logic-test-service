@@ -2,10 +2,12 @@ import React, { useId } from 'react';
 import PropTypes from 'prop-types';
 import { useFormik, Formik, Form } from 'formik';
 import generateId from 'uniqid';
+import { observer } from 'mobx-react-lite';
 
+import { form } from '@global-states';
 import { fieldTypes, formFields } from '@constants';
 import { LabledSwitch } from '@components/reusable';
-import { fieldAttributes, changeField } from '@domains';
+import { changeField } from '@domains';
 
 import { UilCheckCircle } from '@iconscout/react-unicons';
 import {
@@ -18,11 +20,11 @@ import {
 
 import { styles } from './editing-field.styles';
 
-const NewFormEditingField = ({ field, actions }) => {
+const NewFormEditingField = observer(({ actions }) => {
   const formik = useFormik({
-    initialValues: field,
+    initialValues: form.selectedField,
     onSubmit: (values) => {
-      changeField(field.uniqueId, values, actions);
+      changeField(form.selectedField.uniqueId, values, actions);
     },
   });
   return (
@@ -38,7 +40,7 @@ const NewFormEditingField = ({ field, actions }) => {
                 key={id}
                 color='secondary'
                 variant='standard'
-                placeholder={field[name]}
+                placeholder={form.selectedField[name]}
                 name={name}
                 value={formik.values[name]}
                 onChange={formik.handleChange}
@@ -71,7 +73,7 @@ const NewFormEditingField = ({ field, actions }) => {
               </Button>
             )}
             <LabledSwitch
-              defaultState={field.isRequired && true}
+              defaultState={form.selectedField.isRequired && true}
               label='Обязательное поле'
               name='isRequired'
               changeHandler={formik.handleChange}
@@ -81,14 +83,13 @@ const NewFormEditingField = ({ field, actions }) => {
       </Formik>
     </>
   );
-};
+});
 
 NewFormEditingField.propTypes = {
   actions: PropTypes.shape({
     updateFields: PropTypes.func.isRequired,
     setCurrentField: PropTypes.func.isRequired,
   }),
-  field: fieldAttributes,
 };
 
 export { NewFormEditingField };

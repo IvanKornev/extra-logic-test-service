@@ -10,21 +10,21 @@ import { Typography, Stack, TextField } from '@mui/material';
 import { styles } from './fields.styles';
 
 import { observer } from 'mobx-react-lite';
+import { form } from '@global-states';
 
 const NewFormFields = observer((props) => {
   const {
     fields,
     currentField,
-    fieldBoxAction,
     selectedFieldComponent,
     formikInstance,
     children,
   } = props;
-  const currentId = currentField?.uniqueId;
+  const currentId = form.selectedField?.uniqueId;
   return (
     <div style={styles.fieldsContainer}>
       <div style={styles.singleField}>
-        <FieldBox onClick={() => fieldBoxAction(null)} withBorder>
+        <FieldBox onClick={() => form.selectField(null)} withBorder>
           {Object.keys(formikInstance.values).map((field) => {
             const id = useId();
             return (
@@ -46,7 +46,7 @@ const NewFormFields = observer((props) => {
         fields.map((field) => (
           <div style={styles.singleField}>
             <FieldBox
-              onClick={() => fieldBoxAction(field)}
+              onClick={() => form.selectField(field)}
               key={field.uniqueId}>
               <div style={styles.wrapper}>
                 {!wasSelected(field.uniqueId, currentId) && (
@@ -91,7 +91,6 @@ NewFormFields.propTypes = {
   fields: PropTypes.array.isRequired,
   currentField: PropTypes.object,
   selectedFieldComponent: PropTypes.element.isRequired,
-  fieldBoxAction: PropTypes.func.isRequired,
   formikInstance: PropTypes.object.isRequired,
 };
 

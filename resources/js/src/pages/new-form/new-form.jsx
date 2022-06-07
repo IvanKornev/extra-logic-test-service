@@ -22,17 +22,13 @@ const NewFormPage = observer(() => {
     currentField,
     setEditorVisibility,
     editorIsVisible,
-  } = useFieldMenu(updateFields);
+  } = useFieldMenu();
   return (
     <section style={styles.page}>
       <NewFormFields
         selectedFieldComponent={
-          <NewFormEditingField
-            actions={{ updateFields, setCurrentField }}
-            field={currentField}
-          />
+          <NewFormEditingField actions={{ updateFields, setCurrentField }} />
         }
-        fieldBoxAction={setCurrentField}
         currentField={currentField}
         fields={LinkedListConverter.toArray(form.fieldsList)}
         formikInstance={formik}>
