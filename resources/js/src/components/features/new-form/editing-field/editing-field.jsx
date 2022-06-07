@@ -1,14 +1,12 @@
 import React, { useId } from 'react';
-import PropTypes from 'prop-types';
 import { useFormik, Formik, Form } from 'formik';
 import generateId from 'uniqid';
-import { observer } from 'mobx-react-lite';
 
+import { observer } from 'mobx-react-lite';
 import { form } from '@global-states';
 import { fieldTypes, formFields } from '@constants';
-import { LabledSwitch } from '@components/reusable';
-import { changeField } from '@domains';
 
+import { LabledSwitch } from '@components/reusable';
 import { UilCheckCircle } from '@iconscout/react-unicons';
 import {
   Button,
@@ -17,15 +15,15 @@ import {
   MenuItem,
   FormControl,
 } from '@mui/material';
-
 import { styles } from './editing-field.styles';
 
-const NewFormEditingField = observer(({ actions }) => {
+const NewFormEditingField = observer(() => {
   const formik = useFormik({
     initialValues: form.selectedField,
     onSubmit: (values) => {
-      changeField(form.selectedField.uniqueId, values, actions);
-    },
+      const { uniqueId } = form.selectedField;
+      form.changeField(uniqueId, values);
+    }
   });
   return (
     <>
@@ -84,12 +82,5 @@ const NewFormEditingField = observer(({ actions }) => {
     </>
   );
 });
-
-NewFormEditingField.propTypes = {
-  actions: PropTypes.shape({
-    updateFields: PropTypes.func.isRequired,
-    setCurrentField: PropTypes.func.isRequired,
-  }),
-};
 
 export { NewFormEditingField };

@@ -1,9 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 
 import { LinkedList } from '@data-structures';
-import {
-  createField, removeField, changeField, copyField,
-} from '@domains';
+import { createField, removeField, changeField, copyField } from '@domains';
 
 class FormGlobalState {
   fieldsList = new LinkedList();
@@ -29,7 +27,7 @@ class FormGlobalState {
   }
 
   changeField(id, values) {
-    changeField(id, values);
+    changeField(id, values, this.fieldsList);
     this.selectField(null);
   }
 

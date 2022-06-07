@@ -15,21 +15,14 @@ import { observer } from 'mobx-react-lite';
 import { form } from '@global-states';
 
 const NewFormPage = observer(() => {
-  const { fields, updateFields, formik } = useNewForm();
+  const { updateFields, formik } = useNewForm();
   const {
-    actions,
-    setCurrentField,
-    currentField,
-    setEditorVisibility,
-    editorIsVisible,
+    actions, currentField, setEditorVisibility, editorIsVisible,
   } = useFieldMenu();
   return (
     <section style={styles.page}>
       <NewFormFields
-        selectedFieldComponent={
-          <NewFormEditingField actions={{ updateFields, setCurrentField }} />
-        }
-        currentField={currentField}
+        selectedFieldComponent={<NewFormEditingField />}
         fields={LinkedListConverter.toArray(form.fieldsList)}
         formikInstance={formik}>
         <NewFormMenu actions={actions} onlyAddOption={!currentField && true} />

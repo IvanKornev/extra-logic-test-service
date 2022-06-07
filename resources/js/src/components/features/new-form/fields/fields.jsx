@@ -13,13 +13,7 @@ import { observer } from 'mobx-react-lite';
 import { form } from '@global-states';
 
 const NewFormFields = observer((props) => {
-  const {
-    fields,
-    currentField,
-    selectedFieldComponent,
-    formikInstance,
-    children,
-  } = props;
+  const { fields, selectedFieldComponent, formikInstance, children } = props;
   const currentId = form.selectedField?.uniqueId;
   return (
     <div style={styles.fieldsContainer}>
@@ -40,7 +34,7 @@ const NewFormFields = observer((props) => {
             );
           })}
         </FieldBox>
-        {!currentField && children}
+        {!form.selectedField && children}
       </div>
       {fields.length !== 0 &&
         fields.map((field) => (
@@ -83,13 +77,11 @@ const NewFormFields = observer((props) => {
 
 NewFormFields.defaultTypes = {
   fields: [],
-  currentField: null,
 };
 
 NewFormFields.propTypes = {
   children: PropTypes.node.isRequired,
   fields: PropTypes.array.isRequired,
-  currentField: PropTypes.object,
   selectedFieldComponent: PropTypes.element.isRequired,
   formikInstance: PropTypes.object.isRequired,
 };
