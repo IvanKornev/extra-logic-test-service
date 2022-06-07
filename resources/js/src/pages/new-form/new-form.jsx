@@ -16,16 +16,14 @@ import { form } from '@global-states';
 
 const NewFormPage = observer(() => {
   const { updateFields, formik } = useNewForm();
-  const {
-    actions, currentField, setEditorVisibility, editorIsVisible,
-  } = useFieldMenu();
+  const { actions, setEditorVisibility, editorIsVisible } = useFieldMenu();
   return (
     <section style={styles.page}>
       <NewFormFields
         selectedFieldComponent={<NewFormEditingField />}
         fields={LinkedListConverter.toArray(form.fieldsList)}
         formikInstance={formik}>
-        <NewFormMenu actions={actions} onlyAddOption={!currentField && true} />
+        <NewFormMenu actions={actions} onlyAddOption={!form.selectedField && true} />
       </NewFormFields>
       <NewFieldEditor
         abortCallback={() => setEditorVisibility(false)}

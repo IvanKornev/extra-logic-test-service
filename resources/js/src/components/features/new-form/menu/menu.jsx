@@ -1,11 +1,12 @@
 import React, { useId } from 'react';
 import PropTypes from 'prop-types';
-import { Box, Tooltip } from '@mui/material';
+import { observer } from 'mobx-react-lite';
 
+import { Box, Tooltip } from '@mui/material';
 import { newForm } from '@domains';
 import { styles } from './menu.styles';
 
-const NewFormMenu = (props) => {
+const NewFormMenu = observer((props) => {
   const { actions, onlyAddOption } = props;
   const menu = newForm.createMenu(actions);
   return (
@@ -31,7 +32,7 @@ const NewFormMenu = (props) => {
       </Box>
     </section>
   );
-};
+});
 
 NewFormMenu.defaultTypes = {
   onlyAddOptions: false,

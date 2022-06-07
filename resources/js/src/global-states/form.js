@@ -33,7 +33,7 @@ class FormGlobalState {
 
   copyField() {
     const id = this.selectedField.uniqueId;
-    const results = copyField(id);
+    const results = copyField(id, this.fieldsList);
     this.selectField(results.copiedValue);
   }
 }

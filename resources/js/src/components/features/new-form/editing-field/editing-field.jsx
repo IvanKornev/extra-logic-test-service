@@ -23,7 +23,7 @@ const NewFormEditingField = observer(() => {
     onSubmit: (values) => {
       const { uniqueId } = form.selectedField;
       form.changeField(uniqueId, values);
-    }
+    },
   });
   return (
     <>
