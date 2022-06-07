@@ -42,13 +42,7 @@ export const changeField = (id, values, list) => {
   list.change(id, values);
 };
 
-export const copyField = (id, list) => (
-  list.copy(id)
-);
+export const copyField = (id, list) => list.copy(id);
 
-export const wasSelected = (fieldId, currentFieldId) => {
-  if (!fieldId || !currentFieldId) {
-    return;
-  }
-  return fieldId === currentFieldId ? true : false;
-};
+export const wasSelected = (fieldId, currentFieldId) =>
+  fieldId && currentFieldId && fieldId === currentFieldId && true;
