@@ -5,7 +5,11 @@ import { LinkedListConverter } from '@lib/converters';
 import { form } from '@global-states';
 
 import { NewFieldEditor } from '@components/features/editor';
-import { NewFormFields, NewFormMenu, NewFormEditingField, } from '@components/features/new-form';
+import {
+  NewFormFields,
+  NewFormMenu,
+  NewFormEditingField,
+} from '@components/features/new-form';
 import { styles } from './new-form.styles';
 
 const NewFormPage = observer(() => {

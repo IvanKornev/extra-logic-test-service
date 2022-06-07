@@ -36,6 +36,11 @@ class FormGlobalState {
     const results = copyField(id, this.fieldsList);
     this.selectField(results.copiedValue);
   }
+
+  reset() {
+    this.selectField(null);
+    this.fieldsList = new LinkedList();
+  }
 }
 
 export const form = new FormGlobalState();

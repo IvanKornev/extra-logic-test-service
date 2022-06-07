@@ -1,10 +1,12 @@
 import React from 'react';
+import { observer } from 'mobx-react-lite';
+import { form } from '@global-states';
+
 import { Button, Typography, Tabs, Tab, Grid } from '@mui/material';
 import { UilFileAlt } from '@iconscout/react-unicons';
-
 import { styles } from './navbar.styles';
 
-export const Navbar = () => (
+export const Navbar = observer(() => (
   <nav style={styles.navbar}>
     <Grid columns={{ xs: 3 }} direction='row' alignItems='center' container>
       <Grid gap={2} alignItems='center' direction='row' container item xs>
@@ -26,10 +28,13 @@ export const Navbar = () => (
         <Button color='secondary' variant='outlined'>
           Сохранить
         </Button>
-        <Button color='error' variant='outlined'>
-          Удалить
+        <Button
+          color='error'
+          variant='outlined'
+          onClick={() => form.reset()}>
+          Сбросить
         </Button>
       </Grid>
     </Grid>
   </nav>
-);
+));
