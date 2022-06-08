@@ -7,11 +7,10 @@ import generateId from 'uniqid';
 import { FieldBox, OptionsList, RequiredFieldMark } from '@components/reusable';
 import { Typography, Stack, TextField } from '@mui/material';
 
+import { saveForm } from '@api';
 import { wasSelected } from '@domains';
 import { formFields, formValues } from '@constants';
-import { formService } from '@services';
 import { form } from '@global-states';
-
 import { styles } from './fields.styles';
 
 const NewFormFields = observer((props) => {

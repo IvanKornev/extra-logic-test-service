@@ -65,7 +65,7 @@ describe('Односвязный список', () => {
   it('Получается размер списка через атрибут', () => {
     const uniqueId = faker.datatype.uuid();
     list.insert({ uniqueId });
-    
+
     let removingNode = null;
     for (let i = 0; i < 3; i += 1) {
       removingNode = list.copy(uniqueId).copiedValue;
