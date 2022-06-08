@@ -1,11 +1,10 @@
-import React, { useId } from 'react';
-import { useFormik } from 'formik';
+import React, { useId, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import PropTypes from 'prop-types';
 import generateId from 'uniqid';
 
 import { FieldBox, OptionsList, RequiredFieldMark } from '@components/reusable';
-import { Typography, Stack, TextField } from '@mui/material';
+import { Typography, Stack, TextField, Button } from '@mui/material';
 
 import { wasSelected } from '@domains';
 import { formFields, formValues } from '@constants';
@@ -16,30 +15,34 @@ import { styles } from './fields.styles';
 const NewFormFields = observer((props) => {
   const { fields, selectedFieldComponent, menuComponent } = props;
   const currentId = form.selectedField?.uniqueId;
-  const formik = useFormik({
-    initialValues: formValues,
-    onSubmit: async (form) => {
-      await formService.save({ ...form });
-    },
-  });
+  const [name, setName] = useState(formValues.name);
+  const [description, setDescription] = useState(formValues.description);
   return (
     <div style={styles.fieldsContainer}>
       <div style={styles.singleField}>
         <FieldBox onClick={() => form.selectField(null)} withBorder>
-          {Object.keys(formik.values).map((field) => {
-            const id = useId();
-            return (
-              <TextField
-                key={id}
-                name={field}
-                color='secondary'
-                variant='standard'
-                value={formik.values[field]}
-                onChange={formik.handleChange}
-                sx={styles.titleFields[field]}
-              />
-            );
-          })}
+          <TextField
+            color='secondary'
+            variant='standard'
+            value={name}
+            onChange={(e) => setName(e.currentTarget.value)}
+            sx={styles.titleFields.name}
+          />
+          <TextField
+            color='secondary'
+            variant='standard'
+            value={description}
+            onChange={(e) => {
+              setDescription(e.currentTarget.value)
+            }}
+            sx={styles.titleFields.description}
+          />
+          <Button
+            onClick={() => {
+              form.changeTitleField({ name, description })
+            }}>
+            Сохранить
+          </Button>
         </FieldBox>
         {!form.selectedField && menuComponent}
       </div>

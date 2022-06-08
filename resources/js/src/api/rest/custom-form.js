@@ -7,5 +7,6 @@ export const saveForm = async (values) => {
     method: 'POST',
     data: values,
   };
+  console.log(values);
   await makeRequest(urlPrefix, params);
 };

@@ -7,7 +7,7 @@ import { createField, removeField, changeField, copyField } from '@domains';
 
 class FormGlobalState {
   fieldsList = new LinkedList();
-
+  titleField = null;
   selectedField = null;
 
   constructor() {
@@ -33,6 +33,10 @@ class FormGlobalState {
     this.selectField(null);
   }
 
+  changeTitleField(values) {
+    this.titleField = values;
+  }
+
   copyField() {
     const id = this.selectedField.uniqueId;
     const results = copyField(id, this.fieldsList);
@@ -40,10 +44,11 @@ class FormGlobalState {
   }
 
   async save() {
-    const fields = LinkedListConverter.toArray(this.fieldsList);
-    await saveForm({
-      fields,
-    });
+    const savingData = {
+      title: { ...this.titleField },
+      fields: LinkedListConverter.toArray(this.fieldsList),
+    };
+    await saveForm(savingData);
   }
 
   reset() {
