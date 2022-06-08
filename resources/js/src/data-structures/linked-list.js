@@ -2,6 +2,8 @@ import generateId from 'uniqid';
 import { ListItem } from './list-item';
 
 export class LinkedList {
+  length = 0;
+
   constructor() {
     this.head = null;
     this.tail = null;
@@ -12,6 +14,7 @@ export class LinkedList {
     if (!this.head || !this.tail) {
       this.head = newNode;
       this.tail = newNode;
+      this.length += 1;
       return this;
     }
 
@@ -22,6 +25,7 @@ export class LinkedList {
     const lastNode = currentNode;
     lastNode.next = newNode;
     this.tail = newNode;
+    this.length += 1;
     return this;
   }
 
@@ -73,6 +77,7 @@ export class LinkedList {
     }
 
     currentNode.next = copied;
+    this.length += 1;
     return {
       list: this,
       copiedValue: currentNode.next.value,
@@ -88,6 +93,7 @@ export class LinkedList {
     while (this.head && this.head.value.uniqueId === id) {
       removedNode = this.head;
       this.head = this.head.next;
+      this.length -= 1;
     }
 
     let currentNode = this.head;
@@ -95,6 +101,7 @@ export class LinkedList {
       if (currentNode.next.value.uniqueId === id) {
         removedNode = currentNode.next;
         currentNode.next = currentNode.next.next;
+        this.length -= 1;
       } else {
         currentNode = currentNode.next;
       }
@@ -103,8 +110,8 @@ export class LinkedList {
     if (this.tail.value.uniqueId === id) {
       removedNode = this.tail;
       this.tail = currentNode;
+      this.length -= 1;
     }
-
     return {
       list: this,
       removedNode,

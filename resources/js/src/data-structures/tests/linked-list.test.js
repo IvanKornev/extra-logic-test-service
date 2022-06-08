@@ -61,6 +61,19 @@ describe('Односвязный список', () => {
     expect(copy.value.email).toBe(email);
     expect(list.tail.value.uniqueId).toBe(tailId);
   });
+
+  it('Получается размер списка через атрибут', () => {
+    const uniqueId = faker.datatype.uuid();
+    list.insert({ uniqueId });
+    
+    let removingNode = null;
+    for (let i = 0; i < 3; i += 1) {
+      removingNode = list.copy(uniqueId).copiedValue;
+    }
+    expect(list.length).toBe(4);
+    list.remove(removingNode.uniqueId);
+    expect(list.length).toBe(3);
+  });
 });
 
 const fillList = (uniqueId, list) => {
