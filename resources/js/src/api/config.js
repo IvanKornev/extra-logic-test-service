@@ -1,3 +1,1 @@
-export const options = {
-  baseUrl: process.env.MIX_BASE_URL,
-};
+export const baseUrl = process.env.MIX_BASE_URL;

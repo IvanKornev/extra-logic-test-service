@@ -43,7 +43,7 @@
             "alias": [
                 ["@domains", "./resources/js/src/domains"],
                 ["@data-structures", "./resources/js/src/data-structures"],
-                ["@services", "./resources/js/src/services"],
+                ["@api", "./resources/js/src/api"],
                 ["@lib", "./resources/js/src/lib"],
                 ["@constants", "./resources/js/src/constants"],
                 ["@global-states", "./resources/js/src/global-states"]

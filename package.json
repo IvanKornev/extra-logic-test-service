@@ -19,12 +19,13 @@
         ],
         "moduleNameMapper": {
             "^@components.*$": "<rootDir>/resources/js/src/components",
-            "^@services.*$": "<rootDir>/resources/js/src/services",
+            "^@api.*$": "<rootDir>/resources/js/src/api",
             "^@domains.*$": "<rootDir>/resources/js/src/domains",
             "^@hooks.*$": "<rootDir>/resources/js/src/hooks",
             "^@data-structures.*$": "<rootDir>/resources/js/src/data-structures",
             "^@lib.*$": "<rootDir>/resources/js/src/lib/converters",
-            "^@constants.*$": "<rootDir>/resources/js/src/constants"
+            "^@constants.*$": "<rootDir>/resources/js/src/constants",
+            "^@global-states.*$": "<rootDir>/resources/js/src/global-states"
         }
     },
     "devDependencies": {
@@ -60,9 +61,9 @@
         "eslint-import-resolver-webpack": "^0.13.2",
         "formik": "^2.2.9",
         "lodash": "^4.17.21",
-        "prop-types": "^15.8.1",
         "mobx": "^6.6.0",
         "mobx-react-lite": "^3.4.0",
+        "prop-types": "^15.8.1",
         "react": "^18.1.0",
         "react-dom": "^18.1.0",
         "uniqid": "^5.4.0",

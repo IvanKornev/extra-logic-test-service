@@ -1,8 +1,11 @@
-import axios from 'axios';
-import { options } from '@api/config';
+import makeRequest from '@api/make-request';
 
-const url = `${options.baseUrl}/custom-form`;
+const urlPrefix = '/custom-form';
 
 export const saveForm = async (values) => {
-  await axios.post(url, values);
+  const params = {
+    method: 'POST',
+    data: values,
+  };
+  await makeRequest(urlPrefix, params);
 };
