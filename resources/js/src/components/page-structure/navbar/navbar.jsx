@@ -25,7 +25,11 @@ export const Navbar = observer(() => (
         </Tabs>
       </Grid>
       <Grid container item gap={2} justifyContent='flex-end' xs>
-        <Button color='secondary' variant='outlined' type='submit'>
+        <Button
+          color='secondary'
+          variant='outlined'
+          type='submit'
+          onClick={() => form.save()}>
           Сохранить
         </Button>
         <Button
