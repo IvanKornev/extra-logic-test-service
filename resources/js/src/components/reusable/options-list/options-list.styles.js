@@ -46,8 +46,8 @@ const editingOption = {
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',
-    columnGap: '6px', 
-  }
+    columnGap: '6px',
+  },
 };
 
 export const styles = {

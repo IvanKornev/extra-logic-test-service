@@ -9,9 +9,13 @@ import {
   ListItemText,
   Stack,
   TextField,
-  Button,
 } from '@mui/material';
-import { UilPen, UilTrashAlt, UilTimesCircle, UilCheckCircle } from '@iconscout/react-unicons';
+import {
+  UilPen,
+  UilTrashAlt,
+  UilTimesCircle,
+  UilCheckCircle,
+} from '@iconscout/react-unicons';
 
 import { selectOptions } from '@domains';
 
@@ -24,35 +28,18 @@ export const OptionsList = ({ handlers, list }) => {
       <Typography>Опции селектора: </Typography>
       {list.map((option, index) => {
         const texts = selectOptions.getTexts(option, index + 1);
-        const { id, title, value } = option;
-
+        
+        const { id } = option;
         if (editingField?.id === id) {
-          return (
-            <div key={generateId()} style={styles.editingOption.wrapper}>
-              <div style={styles.editingOption.fields}>
-                <TextField
-                  variant='standard'
-                  placeholder={title}
-                />
-                <TextField
-                  variant='standard'
-                  placeholder={value}
-                  sx={styles.editingOption.value}
-                />
-              </div>
-              <div style={styles.editingOption.buttons}>
-                <UilCheckCircle
-                  color='#1EE676'
-                  size={28}
-                  onClick={() => handlers.edit(option)}
-                />
-                <UilTimesCircle
-                  color='#F12323'
-                  size={28}
-                  onClick={() => selectEditingField(null)}
-                />
-              </div>
-            </div>
+          return(
+            <EditingOption
+              callbacks={{
+                confirm: handlers.edit,
+                abort: () => selectEditingField(null),
+              }}
+              option={option}
+              key={generateId()}
+            />
           );
         }
 
@@ -67,6 +54,37 @@ export const OptionsList = ({ handlers, list }) => {
         );
       })}
     </List>
+  );
+};
+
+const EditingOption = ({ option, callbacks }) => {
+  const { abort, confirm } = callbacks;
+  const [title, setTitle] = useState(option.title);
+  const [value, setValue] = useState(option.value);
+  return(
+    <div style={styles.editingOption.wrapper}>
+      <div style={styles.editingOption.fields}>
+        <TextField
+          variant='standard'
+          value={title}
+          onChange={(e) => setTitle(e.currentTarget.value)}
+        />
+        <TextField
+          variant='standard'
+          value={value}
+          onChange={(e) => setValue(e.currentTarget.value)}
+          sx={styles.editingOption.value}
+        />
+      </div>
+      <div style={styles.editingOption.buttons}>
+        <UilCheckCircle color='#1EE676' size={28} onClick={() => {
+          const { id } = option;
+          confirm({ id, title, value });
+          abort();
+        }} />
+        <UilTimesCircle color='#F12323' size={28} onClick={abort} />
+      </div>
+    </div>
   );
 };
 
