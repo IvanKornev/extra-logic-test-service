@@ -3,15 +3,16 @@ import PropTypes from 'prop-types';
 import { observer } from 'mobx-react-lite';
 
 import { form } from '@global-states';
-import { formFields } from '@constants';
-import { UseTitleFieldHandler } from '@hooks';
+import { formFields, formValues } from '@constants';
+import { useFieldsHandler } from '@hooks';
+import { titleFieldReducer } from '@reducers';
 
 import { FieldBox } from '@components/reusable';
 import { TextField } from '@mui/material';
 import { styles } from './title-field.styles';
 
 export const NewFormTitleField = observer(({ menuComponent }) => {
-  const { fields, handle } = UseTitleFieldHandler();
+  const { fields, handle } = useFieldsHandler(titleFieldReducer, formValues);
   return (
     <div style={styles.wrapper}>
       <FieldBox onClick={() => form.selectField(null)} withBorder>
