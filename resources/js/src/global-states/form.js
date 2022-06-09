@@ -7,7 +7,9 @@ import { createField, removeField, changeField, copyField } from '@domains';
 
 class FormGlobalState {
   fieldsList = new LinkedList();
+
   titleField = null;
+
   selectedField = null;
 
   constructor() {
