@@ -1,30 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Stack } from '@mui/material';
-
-import { selectOptions } from '@domains';
 import { OptionsList } from '@components/reusable';
 
-const OptionsHandler = ({
-  options,
-  editorComponent,
-  editorWasOpened,
-  openEditor,
-}) => {
-  const editWrapper = (id, options) =>
-    setOptions(selectOptions.edit(id, options));
-  const deleteWrapper = (id, options) =>
-    setOptions(selectOptions.remove(id, options));
+const OptionsHandler = (props) => {
+  const { options, editorComponent, editorWasOpened, openEditor, optionsHandlers } = props;
   return (
     <Stack direction='column' justifyContent='center'>
       {options.length !== 0 && (
-        <OptionsList
-          list={options}
-          actions={{
-            remove: deleteWrapper,
-            edit: editWrapper,
-          }}
-        />
+        <OptionsList list={options} handlers={optionsHandlers} />
       )}
       <Button
         size='small'
@@ -43,6 +27,7 @@ OptionsHandler.propTypes = {
   editorComponent: PropTypes.element.isRequired,
   openEditor: PropTypes.func.isRequired,
   editorWasOpened: PropTypes.bool.isRequired,
+  optionsHandlers: PropTypes.object,
 };
 
 export { OptionsHandler };

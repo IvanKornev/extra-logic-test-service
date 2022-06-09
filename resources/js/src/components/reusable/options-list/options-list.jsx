@@ -7,8 +7,8 @@ import { selectOptions } from '@domains';
 
 import { styles } from './options-list.styles';
 
-export const OptionsList = ({ actions, list }) => {
-  const optionActions = selectOptions.getActions(actions);
+export const OptionsList = ({ handlers, list }) => {
+  const optionActions = selectOptions.getActions(handlers);
   return (
     <List sx={styles.list}>
       <Typography>Опции селектора: </Typography>
@@ -19,14 +19,12 @@ export const OptionsList = ({ actions, list }) => {
             <ListItemText primary={texts.primary} secondary={texts.secondary} />
             <Stack direction='row' spacing={1}>
               {optionActions &&
-                optionActions.map((option) => {
-                  const { iconComponent, performAction } = option;
+                optionActions.map((action) => {
+                  const { iconComponent, callback } = action;
                   const CurrentComponent = iconComponent;
+                  const { id } = option;
                   return (
-                    <CurrentComponent
-                      size={18}
-                      onClick={() => performAction(option.id, list)}
-                    />
+                    <CurrentComponent size={18} onClick={() => callback(id)} />
                   );
                 })}
             </Stack>
@@ -39,8 +37,5 @@ export const OptionsList = ({ actions, list }) => {
 
 OptionsList.propTypes = {
   list: PropTypes.array.isRequired,
-  actions: PropTypes.shape({
-    edit: PropTypes.func,
-    remove: PropTypes.func,
-  }),
+  handlers: PropTypes.object,
 };

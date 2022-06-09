@@ -47,6 +47,7 @@ const NewFieldEditor = observer(({ abortCallback, wasOpened }) => {
           options={state.optionsList}
           editorWasOpened={editorWasOpened}
           openEditor={openEditor}
+          optionsHandlers={handlers}
           editorComponent={
             <NewOptionEditor
               abortCallback={() => openEditor(false)}

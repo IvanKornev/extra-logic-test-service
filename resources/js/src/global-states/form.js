@@ -3,9 +3,7 @@ import { makeAutoObservable } from 'mobx';
 import { LinkedList } from '@data-structures';
 import { LinkedListConverter } from '@lib/converters';
 import { saveForm } from '@api';
-import {
-  createField, removeField, changeField, copyField,
-} from '@domains';
+import { createField, removeField, changeField, copyField } from '@domains';
 
 class FormGlobalState {
   fieldsList = new LinkedList();

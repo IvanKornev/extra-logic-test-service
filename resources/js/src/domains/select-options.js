@@ -31,12 +31,9 @@ const edit = (id, options) => {
 const remove = (id, options) => options.filter((option) => option.id !== id);
 
 const getActions = (callbacks) => {
-  if (!callbacks) {
-    return false;
-  }
   const actions = [
-    { iconComponent: UilPen, performAction: callbacks.edit },
-    { iconComponent: UilTrashAlt, performAction: callbacks.remove },
+    { iconComponent: UilPen, callback: callbacks.edit },
+    { iconComponent: UilTrashAlt, callback: callbacks.remove },
   ];
   return actions;
 };

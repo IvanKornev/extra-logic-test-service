@@ -7,7 +7,17 @@ export const useSelectOptionsHandler = (initialList = []) => {
       case 'add': {
         const { values } = action.payload;
         const optionsList = [...state.optionsList, selectOptions.add(values)];
-        return ({ ...state, optionsList });
+        return { ...state, optionsList };
+      }
+      case 'edit': {
+        const { optionId } = action.payload;
+        const optionsList = selectOptions.edit(optionId, state.optionsList);
+        return { ...state, optionsList };
+      }
+      case 'remove': {
+        const { optionId } = action.payload;
+        const optionsList = selectOptions.remove(optionId, state.optionsList);
+        return { ...state, optionsList };
       }
       default: {
         throw new Error('Некорректный метод опции селектора');
@@ -29,6 +39,26 @@ export const useSelectOptionsHandler = (initialList = []) => {
     dispatch(action);
   };
 
-  const handlers = { add };
+  const edit = (optionId) => {
+    const action = {
+      type: 'edit',
+      payload: {
+        optionId,
+      },
+    };
+    dispatch(action);
+  };
+
+  const remove = (optionId) => {
+    const action = {
+      type: 'remove',
+      payload: {
+        optionId,
+      },
+    };
+    dispatch(action);
+  };
+
+  const handlers = { add, edit, remove };
   return { state, handlers };
 };
