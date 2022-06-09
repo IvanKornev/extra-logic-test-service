@@ -37,7 +37,7 @@ export const OptionsList = ({ handlers, list }) => {
             <EditingOption
               callbacks={{
                 confirm: handlers.edit,
-                abort: selectEditingField(null),
+                abort: () => selectEditingField(null),
               }}
               option={option}
               key={generateId()}
@@ -62,6 +62,15 @@ export const OptionsList = ({ handlers, list }) => {
 const EditingOption = ({ option, callbacks }) => {
   const { abort, confirm } = callbacks;
   const { fields, handle } = useFieldsHandler(selectOptionReducer, option);
+
+  const circleColor = selectOptions.isEmpty(fields) ? '#C5C5C5' : '#1EE676';
+  const editField = () => {
+    if (selectOptions.isEmpty(fields)) {
+      return;
+    }
+    confirm(fields);
+    abort();
+  };
   return (
     <div style={styles.editingOption.wrapper}>
       <div style={styles.editingOption.fields}>
@@ -76,14 +85,15 @@ const EditingOption = ({ option, callbacks }) => {
       </div>
       <div style={styles.editingOption.buttons}>
         <UilCheckCircle
-          color='#1EE676'
+          color={circleColor}
           size={28}
-          onClick={() => {
-            confirm(fields);
-            abort();
-          }}
+          onClick={editField}
         />
-        <UilTimesCircle color='#F12323' size={28} onClick={abort} />
+        <UilTimesCircle
+          color='#F12323'
+          size={28}
+          onClick={abort}
+        />
       </div>
     </div>
   );

@@ -1,4 +1,3 @@
-import { UilTrashAlt, UilPen } from '@iconscout/react-unicons';
 import generateId from 'uniqid';
 
 const getTexts = (option, number = 1) => {
@@ -26,18 +25,12 @@ const edit = (values, options) =>
 
 const remove = (id, options) => options.filter((option) => option.id !== id);
 
-const getActions = (callbacks) => {
-  const actions = [
-    { iconComponent: UilPen, callback: callbacks.edit },
-    { iconComponent: UilTrashAlt, callback: callbacks.remove },
-  ];
-  return actions;
-};
+const isEmpty = (option) => (!option.title || !option.value) ? true : false;
 
 export const selectOptions = {
   getTexts,
   add,
   edit,
   remove,
-  getActions,
+  isEmpty,
 };
