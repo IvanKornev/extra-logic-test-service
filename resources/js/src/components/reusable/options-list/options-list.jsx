@@ -28,10 +28,10 @@ export const OptionsList = ({ handlers, list }) => {
       <Typography>Опции селектора: </Typography>
       {list.map((option, index) => {
         const texts = selectOptions.getTexts(option, index + 1);
-        
+
         const { id } = option;
         if (editingField?.id === id) {
-          return(
+          return (
             <EditingOption
               callbacks={{
                 confirm: handlers.edit,
@@ -61,7 +61,7 @@ const EditingOption = ({ option, callbacks }) => {
   const { abort, confirm } = callbacks;
   const [title, setTitle] = useState(option.title);
   const [value, setValue] = useState(option.value);
-  return(
+  return (
     <div style={styles.editingOption.wrapper}>
       <div style={styles.editingOption.fields}>
         <TextField
@@ -77,11 +77,15 @@ const EditingOption = ({ option, callbacks }) => {
         />
       </div>
       <div style={styles.editingOption.buttons}>
-        <UilCheckCircle color='#1EE676' size={28} onClick={() => {
-          const { id } = option;
-          confirm({ id, title, value });
-          abort();
-        }} />
+        <UilCheckCircle
+          color='#1EE676'
+          size={28}
+          onClick={() => {
+            const { id } = option;
+            confirm({ id, title, value });
+            abort();
+          }}
+        />
         <UilTimesCircle color='#F12323' size={28} onClick={abort} />
       </div>
     </div>
