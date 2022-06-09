@@ -20,15 +20,34 @@ const list = {
 };
 
 const option = {
-  display: 'flex',
+  display: 'inline-flex',
   flexDirection: 'row',
   justifyContent: 'space-between',
 };
 
 const editingOption = {
-  display: 'grid',
-  gridTemplateColumns: 'repeat(2, 1fr)',
-  columnGap: '8px',
+  wrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    columnGap: '8px',
+  },
+  fields: {
+    display: 'flex',
+    flexDirection: 'column',
+    rowGap: '4px',
+  },
+  value: {
+    width: '80%',
+    '& input[type="text"]': {
+      fontSize: '14px',
+    },
+  },
+  buttons: {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'row',
+    columnGap: '6px', 
+  }
 };
 
 export const styles = {

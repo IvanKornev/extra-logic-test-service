@@ -2,8 +2,16 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import generateId from 'uniqid';
 
-import { List, Typography, ListItem, ListItemText, Stack, TextField, Button } from '@mui/material';
-import { UilPen, UilTrashAlt } from '@iconscout/react-unicons';
+import {
+  List,
+  Typography,
+  ListItem,
+  ListItemText,
+  Stack,
+  TextField,
+  Button,
+} from '@mui/material';
+import { UilPen, UilTrashAlt, UilTimesCircle, UilCheckCircle } from '@iconscout/react-unicons';
 
 import { selectOptions } from '@domains';
 
@@ -17,27 +25,34 @@ export const OptionsList = ({ handlers, list }) => {
       {list.map((option, index) => {
         const texts = selectOptions.getTexts(option, index + 1);
         const { id, title, value } = option;
-      
+
         if (editingField?.id === id) {
           return (
-            <ListItem key={generateId()} sx={styles.editingOption}>
-              <div>
-                <TextField placeholder={title} />
-                <TextField placeholder={value} />
-              </div>
-              <div>
-                <Button
+            <div key={generateId()} style={styles.editingOption.wrapper}>
+              <div style={styles.editingOption.fields}>
+                <TextField
                   variant='standard'
-                  onClick={() => handlers.edit(option)}>
-                  Сохранить
-                </Button>
-                <Button
+                  placeholder={title}
+                />
+                <TextField
                   variant='standard'
-                  onClick={() => setEditorVisibility(false)}>
-                  Оставить без изменений
-                </Button>
+                  placeholder={value}
+                  sx={styles.editingOption.value}
+                />
               </div>
-            </ListItem>
+              <div style={styles.editingOption.buttons}>
+                <UilCheckCircle
+                  color='#1EE676'
+                  size={28}
+                  onClick={() => handlers.edit(option)}
+                />
+                <UilTimesCircle
+                  color='#F12323'
+                  size={28}
+                  onClick={() => selectEditingField(null)}
+                />
+              </div>
+            </div>
           );
         }
 

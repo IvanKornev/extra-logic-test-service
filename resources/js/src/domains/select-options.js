@@ -16,14 +16,13 @@ const add = (option) => {
   return { id, title, value };
 };
 
-const edit = (values, options) => {
-  return options.map((option) => {
+const edit = (values, options) =>
+  options.map((option) => {
     if (option.id === values.id) {
       return values;
     }
     return option;
   });
-};
 
 const remove = (id, options) => options.filter((option) => option.id !== id);
 
