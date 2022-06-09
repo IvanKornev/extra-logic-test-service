@@ -16,10 +16,11 @@ import { styles } from './fields.styles';
 const NewFormFields = observer((props) => {
   const { selectedFieldComponent, menuComponent } = props;
   const currentId = form.selectedField?.uniqueId;
+  const fields = LinkedListConverter.toArray(form.fieldsList);
   return (
     <>
-      {form.fieldsList.length !== 0 &&
-        LinkedListConverter.toArray(form.fieldsList).map((field) => (
+      {fields.length !== 0 &&
+        fields.map((field) => (
           <div style={styles.wrapper}>
             <FieldBox
               onClick={() => form.selectField(field)}
