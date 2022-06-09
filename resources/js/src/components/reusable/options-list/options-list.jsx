@@ -5,7 +5,7 @@ import generateId from 'uniqid';
 import { selectOptions } from '@domains';
 import { selectOptionReducer } from '@reducers';
 import { useFieldsHandler } from '@hooks';
-import { optionFields } from '@constants';
+import { optionFields, optionLabels } from '@constants';
 
 import {
   List,
@@ -76,24 +76,18 @@ const EditingOption = ({ option, callbacks }) => {
       <div style={styles.editingOption.fields}>
         {optionFields.map((fieldName) => (
           <TextField
+            placeholder={optionLabels[fieldName]}
             key={useId()}
             variant='standard'
             value={fields[fieldName]}
             onChange={(e) => handle(e, fieldName)}
+            sx={styles.editingOption[fieldName]}
           />
         ))}
       </div>
       <div style={styles.editingOption.buttons}>
-        <UilCheckCircle
-          color={circleColor}
-          size={28}
-          onClick={editField}
-        />
-        <UilTimesCircle
-          color='#F12323'
-          size={28}
-          onClick={abort}
-        />
+        <UilCheckCircle color={circleColor} size={28} onClick={editField} />
+        <UilTimesCircle color='#F12323' size={28} onClick={abort} />
       </div>
     </div>
   );

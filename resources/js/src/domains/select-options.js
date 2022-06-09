@@ -25,7 +25,7 @@ const edit = (values, options) =>
 
 const remove = (id, options) => options.filter((option) => option.id !== id);
 
-const isEmpty = (option) => (!option.title || !option.value) ? true : false;
+const isEmpty = (option) => !!(!option.title || !option.value);
 
 export const selectOptions = {
   getTexts,

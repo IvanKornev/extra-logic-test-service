@@ -36,6 +36,12 @@ const editingOption = {
     flexDirection: 'column',
     rowGap: '4px',
   },
+  title: {
+    width: '90%',
+    '& input[type="text"]': {
+      fontSize: '17px',
+    },
+  },
   value: {
     width: '80%',
     '& input[type="text"]': {
