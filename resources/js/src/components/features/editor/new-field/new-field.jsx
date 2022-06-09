@@ -14,54 +14,44 @@ import {
 } from '@components/reusable';
 import { NewOptionEditor } from '@components/features/editor';
 import { select } from '@domains';
+import { useSelectOptionsHandler } from '@hooks';
 import { fieldValues, fieldFormStructure } from '@constants';
 
 import { styles } from './new-field.styles';
 
-const NewFieldEditor = observer((props) => {
-  const { abortCallback, wasOpened } = props;
+const NewFieldEditor = observer(({ abortCallback, wasOpened }) => {
   const [editorWasOpened, openEditor] = useState(false);
-  const [selectOptions, setSelectOptions] = useState([]);
-
+  const { state, handlers } = useSelectOptionsHandler();
   const formik = useFormik({
     initialValues: fieldValues,
     onSubmit: (eventValues) => {
-      form.createField({ ...eventValues, selectOptions });
+      form.createField({ ...eventValues, selectOptions: state.optionsList });
       abortCallback();
     },
   });
-
-  useEffect(() => {
-    if (formik.values.type !== 'select') {
-      setSelectOptions([]);
-    }
-  }, [formik.values.type]);
-
-  const formData = {
-    initialValues: fieldValues,
-    formikInstance: formik,
-  };
   return (
     <EditorModal
       abortCallback={abortCallback}
-      form={formData}
+      form={{
+        initialValues: fieldValues,
+        formikInstance: formik,
+      }}
       isVisible={wasOpened}
       disableCondition={
-        formik.values.type === 'select' && selectOptions.length === 0
+        formik.values.type === 'select' && state.optionsList.length === 0
       }
       title='Новое поле'>
       <EditorFields formikInstance={formik} />
       {formik.values.type === 'select' && (
         <OptionsHandler
-          options={selectOptions}
-          setOptions={setSelectOptions}
+          options={state.optionsList}
           editorWasOpened={editorWasOpened}
           openEditor={openEditor}
           editorComponent={
             <NewOptionEditor
               abortCallback={() => openEditor(false)}
               isVisible={editorWasOpened}
-              setOptions={setSelectOptions}
+              optionsHandlers={handlers}
             />
           }
         />

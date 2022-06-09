@@ -4,27 +4,24 @@ import { useFormik } from 'formik';
 import { TextField } from '@mui/material';
 
 import { EditorModal } from '@components/reusable';
-import { selectOptions } from '@domains';
 import { optionValues, optionLabels } from '@constants';
 
-const NewOptionEditor = ({ isVisible, abortCallback, setOptions }) => {
+const NewOptionEditor = ({ isVisible, abortCallback, optionsHandlers }) => {
   const formik = useFormik({
     initialValues: optionValues,
     onSubmit: (values) => {
-      const createdOption = selectOptions.add(values);
-      setOptions((prev) => [...prev, createdOption]);
+      optionsHandlers.add(values);
       abortCallback();
     },
   });
-  const formData = {
-    initialValues: optionValues,
-    formikInstance: formik,
-  };
   return (
     <EditorModal
       isVisible={isVisible}
       onClose={abortCallback}
-      form={formData}
+      form={{
+        initialValues: optionValues,
+        formikInstance: formik,
+      }}
       abortCallback={abortCallback}
       disableCondition={!formik.values.title || !formik.values.value}
       title='Новая опция селектора'>
@@ -48,7 +45,7 @@ const NewOptionEditor = ({ isVisible, abortCallback, setOptions }) => {
 NewOptionEditor.propTypes = {
   isVisible: PropTypes.bool.isRequired,
   abortCallback: PropTypes.func.isRequired,
-  setOptions: PropTypes.func.isRequired,
+  optionsHandlers: PropTypes.object.isRequired,
 };
 
 export { NewOptionEditor };

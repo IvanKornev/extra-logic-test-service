@@ -7,7 +7,6 @@ import { OptionsList } from '@components/reusable';
 
 const OptionsHandler = ({
   options,
-  setOptions,
   editorComponent,
   editorWasOpened,
   openEditor,
@@ -27,15 +26,13 @@ const OptionsHandler = ({
           }}
         />
       )}
-      {setOptions && (
-        <Button
-          size='small'
-          variant='text'
-          color='primary'
-          onClick={() => openEditor(true)}>
-          Добавить опцию селектора
-        </Button>
-      )}
+      <Button
+        size='small'
+        variant='text'
+        color='primary'
+        onClick={() => openEditor(true)}>
+        Добавить опцию селектора
+      </Button>
       {editorWasOpened && editorComponent}
     </Stack>
   );
@@ -43,7 +40,6 @@ const OptionsHandler = ({
 
 OptionsHandler.propTypes = {
   options: PropTypes.array.isRequired,
-  setOptions: PropTypes.func,
   editorComponent: PropTypes.element.isRequired,
   openEditor: PropTypes.func.isRequired,
   editorWasOpened: PropTypes.bool.isRequired,
