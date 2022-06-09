@@ -13,7 +13,7 @@ export const UseTitleFieldHandler = () => {
         throw new Error('Некорректное поле');
     }
   };
-  
+
   const handle = (event, actionType = 'name') => {
     if (actionType !== 'name' && actionType !== 'description') {
       throw new Error('Передан неправильный action type');
@@ -27,5 +27,5 @@ export const UseTitleFieldHandler = () => {
     dispatch(action);
   };
   const [fields, dispatch] = useReducer(reducer, formValues);
-  return { fields, handle }; 
+  return { fields, handle };
 };
