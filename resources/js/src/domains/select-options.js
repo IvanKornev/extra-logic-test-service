@@ -16,13 +16,10 @@ const add = (option) => {
   return { id, title, value };
 };
 
-const edit = (id, options) => {
-  const title = prompt('Какое будет наименование у опции?', 'имя');
-  const value = prompt('А значение?', 'значение');
+const edit = (values, options) => {
   return options.map((option) => {
-    if (option.id === id) {
-      const updatedOption = { id, title, value };
-      return updatedOption;
+    if (option.id === values.id) {
+      return values;
     }
     return option;
   });

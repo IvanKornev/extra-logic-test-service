@@ -19,13 +19,20 @@ const list = {
   },
 };
 
-const item = {
+const option = {
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'space-between',
 };
 
+const editingOption = {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(2, 1fr)',
+  columnGap: '8px',
+};
+
 export const styles = {
   list,
-  item,
+  option,
+  editingOption,
 };

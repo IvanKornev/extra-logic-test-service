@@ -4,7 +4,13 @@ import { Button, Stack } from '@mui/material';
 import { OptionsList } from '@components/reusable';
 
 const OptionsHandler = (props) => {
-  const { options, editorComponent, editorWasOpened, openEditor, optionsHandlers } = props;
+  const {
+    options,
+    editorComponent,
+    editorWasOpened,
+    openEditor,
+    optionsHandlers,
+  } = props;
   return (
     <Stack direction='column' justifyContent='center'>
       {options.length !== 0 && (

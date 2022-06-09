@@ -10,8 +10,8 @@ export const useSelectOptionsHandler = (initialList = []) => {
         return { ...state, optionsList };
       }
       case 'edit': {
-        const { optionId } = action.payload;
-        const optionsList = selectOptions.edit(optionId, state.optionsList);
+        const { values } = action.payload;
+        const optionsList = selectOptions.edit(values, state.optionsList);
         return { ...state, optionsList };
       }
       case 'remove': {
@@ -39,11 +39,11 @@ export const useSelectOptionsHandler = (initialList = []) => {
     dispatch(action);
   };
 
-  const edit = (optionId) => {
+  const edit = (values) => {
     const action = {
       type: 'edit',
       payload: {
-        optionId,
+        values,
       },
     };
     dispatch(action);
