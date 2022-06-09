@@ -1,6 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useId } from 'react';
 import PropTypes from 'prop-types';
 import generateId from 'uniqid';
+
+import { selectOptions } from '@domains';
+import { selectOptionReducer } from '@reducers';
+import { useFieldsHandler } from '@hooks';
+import { optionFields } from '@constants';
 
 import {
   List,
@@ -16,9 +21,6 @@ import {
   UilTimesCircle,
   UilCheckCircle,
 } from '@iconscout/react-unicons';
-
-import { selectOptions } from '@domains';
-
 import { styles } from './options-list.styles';
 
 export const OptionsList = ({ handlers, list }) => {
@@ -35,7 +37,7 @@ export const OptionsList = ({ handlers, list }) => {
             <EditingOption
               callbacks={{
                 confirm: handlers.edit,
-                abort: () => selectEditingField(null),
+                abort: selectEditingField(null),
               }}
               option={option}
               key={generateId()}
@@ -59,30 +61,25 @@ export const OptionsList = ({ handlers, list }) => {
 
 const EditingOption = ({ option, callbacks }) => {
   const { abort, confirm } = callbacks;
-  const [title, setTitle] = useState(option.title);
-  const [value, setValue] = useState(option.value);
+  const { fields, handle } = useFieldsHandler(selectOptionReducer, option);
   return (
     <div style={styles.editingOption.wrapper}>
       <div style={styles.editingOption.fields}>
-        <TextField
-          variant='standard'
-          value={title}
-          onChange={(e) => setTitle(e.currentTarget.value)}
-        />
-        <TextField
-          variant='standard'
-          value={value}
-          onChange={(e) => setValue(e.currentTarget.value)}
-          sx={styles.editingOption.value}
-        />
+        {optionFields.map((fieldName) => (
+          <TextField
+            key={useId()}
+            variant='standard'
+            value={fields[fieldName]}
+            onChange={(e) => handle(e, fieldName)}
+          />
+        ))}
       </div>
       <div style={styles.editingOption.buttons}>
         <UilCheckCircle
           color='#1EE676'
           size={28}
           onClick={() => {
-            const { id } = option;
-            confirm({ id, title, value });
+            confirm(fields);
             abort();
           }}
         />

@@ -48,6 +48,8 @@ export const optionLabels = {
   value: 'Значение',
 };
 
+export const optionFields = Object.keys(optionLabels);
+
 export const formValues = {
   name: 'Новая форма',
   description: 'Описание новой формы',
