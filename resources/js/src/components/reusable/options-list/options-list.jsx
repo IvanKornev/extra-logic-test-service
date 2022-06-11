@@ -4,6 +4,7 @@ import generateId from 'uniqid';
 
 import { selectOptionReducer } from '@reducers';
 import { useFieldsHandler } from '@hooks';
+import { NewOptionEditor } from '@components/features/editor';
 import { optionFields, optionLabels } from '@constants';
 import { getSelectOptionTexts, selectOptionIsEmpty } from '@domains';
 
@@ -13,6 +14,7 @@ import {
   ListItem,
   ListItemText,
   Stack,
+  Button,
   TextField,
 } from '@mui/material';
 import {
@@ -25,31 +27,46 @@ import { styles } from './options-list.styles';
 
 export const OptionsList = ({ handlers, list }) => {
   const [editingField, selectEditingField] = useState(null);
+  const [editorWasOpened, openEditor] = useState(false);
   return (
-    <List sx={styles.list}>
-      <Typography>Опции селектора: </Typography>
-      {list.map((option, index) => {
-        const { id } = option;
-        const Option = (editingField?.id === id) ? EditingOption : DefaultOption;
-        return (
-          <Option
-            option={option}
-            handlers={handlers}
-            confirmCallback={handlers.edit}
-            abortCallback={() => selectEditingField(null)}
-            selectCallback={() => selectEditingField(option)}
-            number={index + 1}
-            key={generateId()}
-          />
-        );
-      })}
-    </List>
+    <Stack direction='column' justifyContent='center'>
+      {list.length !== 0 && (
+        <List sx={styles.list}>
+          <Typography>Опции селектора: </Typography>
+          {list.map((option, index) => {
+            const { id } = option;
+            const Option = (editingField?.id === id) ? EditingOption : DefaultOption;
+            return (
+              <Option
+                option={option}
+                handlers={handlers}
+                abortCallback={() => selectEditingField(null)}
+                selectCallback={() => selectEditingField(option)}
+                number={index + 1}
+                key={generateId()}
+              />
+            );
+          })}
+        </List>
+      )}
+      {handlers && (
+        <Button
+          size='small'
+          variant='text'
+          color='primary'
+          onClick={() => openEditor(true)}>
+          Добавить опцию селектора
+        </Button>
+      )}
+      {editorWasOpened && (
+        <NewOptionEditor
+          abortCallback={() => openEditor(false)}
+          isVisible={editorWasOpened}
+          optionsHandlers={handlers}
+        />
+      )}
+    </Stack>
   );
-};
-
-OptionsList.propTypes = {
-  list: PropTypes.array.isRequired,
-  handlers: PropTypes.object,
 };
 
 const DefaultOption = ({ option, number, handlers, selectCallback }) => {
@@ -67,12 +84,12 @@ const DefaultOption = ({ option, number, handlers, selectCallback }) => {
   );
 };
 
-const EditingOption = ({ option, abortCallback, confirmCallback }) => {
+const EditingOption = ({ option, abortCallback, handlers }) => {
   const { fields, handle } = useFieldsHandler(selectOptionReducer, option);
   const circleColor = selectOptionIsEmpty(fields) ? '#C5C5C5' : '#1EE676';
   const editField = () => {
     if (!selectOptionIsEmpty(fields)) {
-      confirmCallback(fields);
+      handlers.edit(fields);
       abortCallback();
     }
   };
@@ -96,4 +113,9 @@ const EditingOption = ({ option, abortCallback, confirmCallback }) => {
       </div>
     </div>
   );
+};
+
+OptionsList.propTypes = {
+  list: PropTypes.array.isRequired,
+  handlers: PropTypes.object,
 };

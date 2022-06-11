@@ -1,4 +1,4 @@
-import React, { useId, useState } from 'react';
+import React, { useId } from 'react';
 import { useFormik, Formik, Form } from 'formik';
 import generateId from 'uniqid';
 
@@ -8,8 +8,7 @@ import { fieldTypes, formFields } from '@constants';
 import { useSelectOptionsHandler } from '@hooks';
 import { selectHasOptions } from '@domains';
 
-import { NewOptionEditor } from '@components/features/editor';
-import { LabledSwitch, OptionsHandler } from '@components/reusable';
+import { LabledSwitch, OptionsList } from '@components/reusable';
 import { UilCheckCircle } from '@iconscout/react-unicons';
 import {
   Button,
@@ -18,13 +17,12 @@ import {
   MenuItem,
   FormControl,
 } from '@mui/material';
+
 import { styles } from './editing-field.styles';
 
 const NewFormEditingField = observer(() => {
-  const [editorWasOpened, openEditor] = useState(false);
-  const { optionsList, handlers } = useSelectOptionsHandler(
-    form.selectedField.selectOptions,
-  );
+  const { selectOptions } = form.selectedField;
+  const { optionsList, handlers } = useSelectOptionsHandler(selectOptions);
   const formik = useFormik({
     initialValues: form.selectedField,
     onSubmit: (values) => {
@@ -70,19 +68,7 @@ const NewFormEditingField = observer(() => {
               ))}
             </Select>
             {formik.values.type === 'select' && (
-              <OptionsHandler
-                openEditor={openEditor}
-                editorWasOpened={editorWasOpened}
-                options={optionsList}
-                optionsHandlers={handlers}
-                editorComponent={
-                  <NewOptionEditor
-                    abortCallback={() => openEditor(false)}
-                    isVisible={editorWasOpened}
-                    optionsHandlers={handlers}
-                  />
-                }
-              />
+              <OptionsList list={optionsList} handlers={handlers} />
             )}
           </FormControl>
           <div style={styles.footer}>

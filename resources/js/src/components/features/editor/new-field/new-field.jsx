@@ -1,4 +1,4 @@
-import React, { useId, useState } from 'react';
+import React, { useId } from 'react';
 import PropTypes from 'prop-types';
 import generateId from 'uniqid';
 import { MenuItem } from '@mui/material';
@@ -7,20 +7,18 @@ import { observer } from 'mobx-react-lite';
 import { form } from '@global-states';
 import { useFormik } from 'formik';
 
-import {
-  EditorModal,
-  OptionsHandler,
-  LabledSwitch,
-} from '@components/reusable';
-import { NewOptionEditor } from '@components/features/editor';
 import { isSelect } from '@domains';
 import { useSelectOptionsHandler } from '@hooks';
 import { fieldValues, fieldFormStructure } from '@constants';
+import {
+  EditorModal,
+  OptionsList,
+  LabledSwitch,
+} from '@components/reusable';
 
 import { styles } from './new-field.styles';
 
 const NewFieldEditor = observer(({ abortCallback, wasOpened }) => {
-  const [editorWasOpened, openEditor] = useState(false);
   const { optionsList, handlers } = useSelectOptionsHandler();
   const formik = useFormik({
     initialValues: fieldValues,
@@ -43,19 +41,7 @@ const NewFieldEditor = observer(({ abortCallback, wasOpened }) => {
       title='Новое поле'>
       <EditorFields formikInstance={formik} />
       {formik.values.type === 'select' && (
-        <OptionsHandler
-          options={optionsList}
-          editorWasOpened={editorWasOpened}
-          openEditor={openEditor}
-          optionsHandlers={handlers}
-          editorComponent={
-            <NewOptionEditor
-              abortCallback={() => openEditor(false)}
-              isVisible={editorWasOpened}
-              optionsHandlers={handlers}
-            />
-          }
-        />
+        <OptionsList list={optionsList} handlers={handlers} />
       )}
       <div style={styles.switchWrapper}>
         <LabledSwitch
