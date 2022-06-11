@@ -29,49 +29,52 @@ export const OptionsList = ({ handlers, list }) => {
     <List sx={styles.list}>
       <Typography>Опции селектора: </Typography>
       {list.map((option, index) => {
-        const texts = getSelectOptionTexts(option, index + 1);
-
         const { id } = option;
-        if (editingField?.id === id) {
-          return (
-            <EditingOption
-              callbacks={{
-                confirm: handlers.edit,
-                abort: () => selectEditingField(null),
-              }}
-              option={option}
-              key={generateId()}
-            />
-          );
-        }
-
+        const Option = (editingField?.id === id) ? EditingOption : DefaultOption;
         return (
-          <ListItem key={generateId()} sx={styles.option}>
-            <ListItemText primary={texts.primary} secondary={texts.secondary} />
-            {handlers && (
-              <Stack direction='row' spacing={1}>
-                <UilPen size={18} onClick={() => selectEditingField(option)} />
-                <UilTrashAlt size={18} onClick={() => handlers.remove(id)} />
-              </Stack>
-            )}
-          </ListItem>
+          <Option
+            option={option}
+            handlers={handlers}
+            confirmCallback={handlers.edit}
+            abortCallback={() => selectEditingField(null)}
+            selectCallback={() => selectEditingField(option)}
+            number={index + 1}
+            key={generateId()}
+          />
         );
       })}
     </List>
   );
 };
 
-const EditingOption = ({ option, callbacks }) => {
-  const { abort, confirm } = callbacks;
-  const { fields, handle } = useFieldsHandler(selectOptionReducer, option);
+OptionsList.propTypes = {
+  list: PropTypes.array.isRequired,
+  handlers: PropTypes.object,
+};
 
+const DefaultOption = ({ option, number, handlers, selectCallback }) => {
+  const texts = getSelectOptionTexts(option, number);
+  return(
+    <ListItem sx={styles.option}>
+      <ListItemText primary={texts.primary} secondary={texts.secondary} />
+      {handlers && (
+        <Stack direction='row' spacing={1}>
+          <UilPen size={18} onClick={selectCallback} />
+          <UilTrashAlt size={18} onClick={() => handlers.remove(option.id)} />
+        </Stack>
+      )}
+    </ListItem>
+  );
+};
+
+const EditingOption = ({ option, abortCallback, confirmCallback }) => {
+  const { fields, handle } = useFieldsHandler(selectOptionReducer, option);
   const circleColor = selectOptionIsEmpty(fields) ? '#C5C5C5' : '#1EE676';
   const editField = () => {
-    if (selectOptionIsEmpty(fields)) {
-      return;
+    if (!selectOptionIsEmpty(fields)) {
+      confirmCallback(fields);
+      abortCallback();
     }
-    confirm(fields);
-    abort();
   };
   return (
     <div style={styles.editingOption.wrapper}>
@@ -89,13 +92,8 @@ const EditingOption = ({ option, callbacks }) => {
       </div>
       <div style={styles.editingOption.buttons}>
         <UilCheckCircle color={circleColor} size={28} onClick={editField} />
-        <UilTimesCircle color='#F12323' size={28} onClick={abort} />
+        <UilTimesCircle color='#F12323' size={28} onClick={abortCallback} />
       </div>
     </div>
   );
-};
-
-OptionsList.propTypes = {
-  list: PropTypes.array.isRequired,
-  handlers: PropTypes.object,
 };
