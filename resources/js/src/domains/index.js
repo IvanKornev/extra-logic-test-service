@@ -1,5 +1,9 @@
 export { newForm } from './new-form';
-export { select } from './select';
+
+export {
+  isSelect,
+  selectHasOptions,
+} from './select';
 
 export {
   addSelectOption,

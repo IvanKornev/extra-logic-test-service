@@ -90,7 +90,8 @@ const NewFormEditingField = observer(() => {
                 startIcon={<UilCheckCircle />}
                 type='submit'
                 color='success'
-                onClick={formik.changeHandler}>
+                onClick={formik.changeHandler}
+                disabled={formik.values.type === 'select' && optionsList.length === 0}>
                 Сохранить
               </Button>
             )}

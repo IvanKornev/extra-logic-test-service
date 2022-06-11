@@ -6,7 +6,8 @@
             "targets": {
               "node": "current"
             }
-          }]
+          }],
+          "@babel/preset-react"
         ]
       },
       "development": {
@@ -17,7 +18,8 @@
               "browsers": "> 2%",
               "uglify": true
             }
-          }]
+          }],
+          "@babel/preset-react"
         ]
       },
       "production": {
@@ -28,7 +30,8 @@
               "browsers": "> 2%",
               "uglify": true
             }
-          }]
+          }],
+          "@babel/preset-react"
         ]
       }
     }

@@ -13,7 +13,7 @@ import {
   LabledSwitch,
 } from '@components/reusable';
 import { NewOptionEditor } from '@components/features/editor';
-import { select } from '@domains';
+import { isSelect } from '@domains';
 import { useSelectOptionsHandler } from '@hooks';
 import { fieldValues, fieldFormStructure } from '@constants';
 
@@ -84,7 +84,7 @@ const EditorFields = ({ formikInstance }) => (
           variant='standard'
           color='primary'
           onChange={formikInstance.handleChange}>
-          {select.isSelect(component) &&
+          {isSelect(component) &&
             component.options.map((option) => (
               <MenuItem key={generateId()} value={option.value}>
                 {option.title}

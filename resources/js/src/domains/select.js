@@ -1,7 +1,7 @@
-import { Select } from '@mui/material';
+export const isSelect = (component) => (
+  component.name?.muiName === 'Select'
+);
 
-const isSelect = (component) => component.name === Select && true;
-
-export const select = {
-  isSelect,
-};
+export const selectHasOptions = (elemType, list = []) => (
+  (elemType === 'select' && list.length !== 0)
+);
