@@ -30,6 +30,7 @@ export const OptionsList = ({ handlers, list }) => {
       <Typography>Опции селектора: </Typography>
       {list.map((option, index) => {
         const texts = getSelectOptionTexts(option, index + 1);
+        
         const { id } = option;
         if (editingField?.id === id) {
           return (
@@ -47,10 +48,12 @@ export const OptionsList = ({ handlers, list }) => {
         return (
           <ListItem key={generateId()} sx={styles.option}>
             <ListItemText primary={texts.primary} secondary={texts.secondary} />
-            <Stack direction='row' spacing={1}>
-              <UilPen size={18} onClick={() => selectEditingField(option)} />
-              <UilTrashAlt size={18} onClick={() => handlers.remove(id)} />
-            </Stack>
+            {handlers && (
+              <Stack direction='row' spacing={1}>
+                <UilPen size={18} onClick={() => selectEditingField(option)} />
+                <UilTrashAlt size={18} onClick={() => handlers.remove(id)} />
+              </Stack>
+            )}
           </ListItem>
         );
       })}

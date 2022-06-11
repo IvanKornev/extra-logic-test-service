@@ -1,12 +1,14 @@
-import React, { useId } from 'react';
+import React, { useId, useState } from 'react';
 import { useFormik, Formik, Form } from 'formik';
 import generateId from 'uniqid';
 
 import { observer } from 'mobx-react-lite';
 import { form } from '@global-states';
 import { fieldTypes, formFields } from '@constants';
+import { useSelectOptionsHandler } from '@hooks';
 
-import { LabledSwitch } from '@components/reusable';
+import { NewOptionEditor } from '@components/features/editor';
+import { LabledSwitch, OptionsHandler } from '@components/reusable';
 import { UilCheckCircle } from '@iconscout/react-unicons';
 import {
   Button,
@@ -18,10 +20,15 @@ import {
 import { styles } from './editing-field.styles';
 
 const NewFormEditingField = observer(() => {
+  const [editorWasOpened, openEditor] = useState(false);
+  const { state, handlers } = useSelectOptionsHandler(form.selectedField.selectOptions);
   const formik = useFormik({
     initialValues: form.selectedField,
     onSubmit: (values) => {
       const { uniqueId } = form.selectedField;
+      if (state.optionsList) {
+        values.selectOptions = state.optionsList;
+      }
       form.changeField(uniqueId, values);
     },
   });
@@ -59,6 +66,21 @@ const NewFormEditingField = observer(() => {
                 </MenuItem>
               ))}
             </Select>
+            {formik.values.type === 'select' && (
+              <OptionsHandler
+                openEditor={openEditor}
+                editorWasOpened={editorWasOpened}
+                options={state.optionsList}
+                optionsHandlers={handlers}
+                editorComponent={
+                  <NewOptionEditor
+                    abortCallback={() => openEditor(false)}
+                    isVisible={editorWasOpened}
+                    optionsHandlers={handlers}
+                  />
+                }
+              />
+            )}
           </FormControl>
           <div style={styles.footer}>
             {formik.dirty && (

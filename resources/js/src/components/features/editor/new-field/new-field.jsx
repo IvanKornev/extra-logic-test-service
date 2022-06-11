@@ -1,4 +1,4 @@
-import React, { useId, useState, useEffect } from 'react';
+import React, { useId, useState } from 'react';
 import PropTypes from 'prop-types';
 import generateId from 'uniqid';
 import { MenuItem } from '@mui/material';

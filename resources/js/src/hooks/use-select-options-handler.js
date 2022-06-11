@@ -1,6 +1,8 @@
 import { useReducer } from 'react';
 import {
-  addSelectOption, editSelectOption, removeSelectOption,
+  addSelectOption,
+  editSelectOption,
+  removeSelectOption,
 } from '@domains';
 
 export const useSelectOptionsHandler = (initialList = []) => {

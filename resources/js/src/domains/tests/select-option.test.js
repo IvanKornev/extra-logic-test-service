@@ -5,7 +5,7 @@ import {
   removeSelectOption,
   getSelectOptionTexts,
   selectOptionIsEmpty,
-} from "@domains";
+} from '@domains';
 
 describe('Методы опции селектора', () => {
   it('Добавляет новую опцию', () => {
@@ -31,7 +31,7 @@ describe('Методы опции селектора', () => {
 
   it('Удаляет опцию из списка', () => {
     const list = generateOptions(5);
-    const updatedList = removeSelectOption (list[0].id, list);
+    const updatedList = removeSelectOption(list[0].id, list);
     expect(updatedList[0].id).not.toBe(list[0].id);
     expect(updatedList[0].id).toBe(list[1].id);
   });
@@ -44,7 +44,7 @@ describe('Методы опции селектора', () => {
   });
 
   it('Проверяет свойства опции на отсутствие', () => {
-    let newOption = {
+    const newOption = {
       title: faker.word.adverb(1),
     };
     expect(selectOptionIsEmpty(newOption)).toBeTruthy();
@@ -54,7 +54,7 @@ describe('Методы опции селектора', () => {
 });
 
 const generateOptions = (count = 1) => {
-  let options = [];
+  const options = [];
   for (let i = 1; i <= count; i += 1) {
     const newOption = {
       title: faker.word.adverb(1),
