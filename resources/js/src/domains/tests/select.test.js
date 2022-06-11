@@ -8,7 +8,7 @@ describe('Методы тега селектора', () => {
     const paragraph = renderParagraph();
     expect(isSelect(paragraph)).toBeFalsy();
   });
-  
+
   it('Проверяет, имеет ли опции селектор', () => {
     const elemType = 'select';
     expect(selectHasOptions(elemType, [])).toBeFalsy();
@@ -18,5 +18,5 @@ describe('Методы тега селектора', () => {
 
 const renderParagraph = () => {
   const Paragraph = () => <p>Параграф</p>;
-  return renderer.create(<Paragraph />)
+  return renderer.create(<Paragraph />);
 };

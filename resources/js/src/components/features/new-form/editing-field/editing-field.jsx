@@ -6,6 +6,7 @@ import { observer } from 'mobx-react-lite';
 import { form } from '@global-states';
 import { fieldTypes, formFields } from '@constants';
 import { useSelectOptionsHandler } from '@hooks';
+import { selectHasOptions } from '@domains';
 
 import { NewOptionEditor } from '@components/features/editor';
 import { LabledSwitch, OptionsHandler } from '@components/reusable';
@@ -91,7 +92,7 @@ const NewFormEditingField = observer(() => {
                 type='submit'
                 color='success'
                 onClick={formik.changeHandler}
-                disabled={formik.values.type === 'select' && optionsList.length === 0}>
+                disabled={!selectHasOptions(formik.values.type, optionsList)}>
                 Сохранить
               </Button>
             )}
