@@ -1,22 +1,24 @@
 import { useReducer } from 'react';
-import { selectOptions } from '@domains';
+import {
+  addSelectOption, editSelectOption, removeSelectOption,
+} from '@domains';
 
 export const useSelectOptionsHandler = (initialList = []) => {
   const reducer = (state, action) => {
     switch (action.type) {
       case 'add': {
         const { values } = action.payload;
-        const optionsList = [...state.optionsList, selectOptions.add(values)];
+        const optionsList = [...state.optionsList, addSelectOption(values)];
         return { ...state, optionsList };
       }
       case 'edit': {
         const { values } = action.payload;
-        const optionsList = selectOptions.edit(values, state.optionsList);
+        const optionsList = editSelectOption(values, state.optionsList);
         return { ...state, optionsList };
       }
       case 'remove': {
         const { optionId } = action.payload;
-        const optionsList = selectOptions.remove(optionId, state.optionsList);
+        const optionsList = removeSelectOption(optionId, state.optionsList);
         return { ...state, optionsList };
       }
       default: {

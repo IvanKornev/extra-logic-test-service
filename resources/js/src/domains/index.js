@@ -1,6 +1,14 @@
 export { newForm } from './new-form';
 export { select } from './select';
-export { selectOptions } from './select-options';
+
+export {
+  addSelectOption,
+  editSelectOption,
+  removeSelectOption,
+  getSelectOptionTexts,
+  selectOptionIsEmpty,
+} from './select-option';
+
 export {
   fieldAttributes,
   wasSelected,

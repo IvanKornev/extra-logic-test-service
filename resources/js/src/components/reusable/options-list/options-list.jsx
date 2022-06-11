@@ -2,10 +2,10 @@ import React, { useState, useId } from 'react';
 import PropTypes from 'prop-types';
 import generateId from 'uniqid';
 
-import { selectOptions } from '@domains';
 import { selectOptionReducer } from '@reducers';
 import { useFieldsHandler } from '@hooks';
 import { optionFields, optionLabels } from '@constants';
+import { getSelectOptionTexts, selectOptionIsEmpty } from '@domains';
 
 import {
   List,
@@ -29,8 +29,7 @@ export const OptionsList = ({ handlers, list }) => {
     <List sx={styles.list}>
       <Typography>Опции селектора: </Typography>
       {list.map((option, index) => {
-        const texts = selectOptions.getTexts(option, index + 1);
-
+        const texts = getSelectOptionTexts(option, index + 1);
         const { id } = option;
         if (editingField?.id === id) {
           return (
@@ -63,9 +62,9 @@ const EditingOption = ({ option, callbacks }) => {
   const { abort, confirm } = callbacks;
   const { fields, handle } = useFieldsHandler(selectOptionReducer, option);
 
-  const circleColor = selectOptions.isEmpty(fields) ? '#C5C5C5' : '#1EE676';
+  const circleColor = selectOptionIsEmpty(fields) ? '#C5C5C5' : '#1EE676';
   const editField = () => {
-    if (selectOptions.isEmpty(fields)) {
+    if (selectOptionIsEmpty(fields)) {
       return;
     }
     confirm(fields);
