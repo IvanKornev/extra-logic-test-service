@@ -28,10 +28,11 @@ export const useSelectOptionsHandler = (initialList = []) => {
       }
     }
   };
+
   const initialState = {
     optionsList: initialList,
   };
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [{ optionsList }, dispatch] = useReducer(reducer, initialState);
 
   const add = (values) => {
     const action = {
@@ -64,5 +65,5 @@ export const useSelectOptionsHandler = (initialList = []) => {
   };
 
   const handlers = { add, edit, remove };
-  return { state, handlers };
+  return { optionsList, handlers };
 };

@@ -21,13 +21,15 @@ import { styles } from './editing-field.styles';
 
 const NewFormEditingField = observer(() => {
   const [editorWasOpened, openEditor] = useState(false);
-  const { state, handlers } = useSelectOptionsHandler(form.selectedField.selectOptions);
+  const { optionsList, handlers } = useSelectOptionsHandler(
+    form.selectedField.selectOptions,
+  );
   const formik = useFormik({
     initialValues: form.selectedField,
     onSubmit: (values) => {
       const { uniqueId } = form.selectedField;
-      if (state.optionsList) {
-        values.selectOptions = state.optionsList;
+      if (optionsList) {
+        values.selectOptions = optionsList;
       }
       form.changeField(uniqueId, values);
     },
@@ -70,7 +72,7 @@ const NewFormEditingField = observer(() => {
               <OptionsHandler
                 openEditor={openEditor}
                 editorWasOpened={editorWasOpened}
-                options={state.optionsList}
+                options={optionsList}
                 optionsHandlers={handlers}
                 editorComponent={
                   <NewOptionEditor

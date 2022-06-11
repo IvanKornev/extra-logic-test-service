@@ -30,7 +30,7 @@ export const OptionsList = ({ handlers, list }) => {
       <Typography>Опции селектора: </Typography>
       {list.map((option, index) => {
         const texts = getSelectOptionTexts(option, index + 1);
-        
+
         const { id } = option;
         if (editingField?.id === id) {
           return (

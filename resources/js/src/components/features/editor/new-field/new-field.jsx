@@ -21,11 +21,11 @@ import { styles } from './new-field.styles';
 
 const NewFieldEditor = observer(({ abortCallback, wasOpened }) => {
   const [editorWasOpened, openEditor] = useState(false);
-  const { state, handlers } = useSelectOptionsHandler();
+  const { optionsList, handlers } = useSelectOptionsHandler();
   const formik = useFormik({
     initialValues: fieldValues,
     onSubmit: (eventValues) => {
-      form.createField({ ...eventValues, selectOptions: state.optionsList });
+      form.createField({ ...eventValues, selectOptions: optionsList });
       abortCallback();
     },
   });
@@ -38,13 +38,13 @@ const NewFieldEditor = observer(({ abortCallback, wasOpened }) => {
       }}
       isVisible={wasOpened}
       disableCondition={
-        formik.values.type === 'select' && state.optionsList.length === 0
+        formik.values.type === 'select' && optionsList.length === 0
       }
       title='Новое поле'>
       <EditorFields formikInstance={formik} />
       {formik.values.type === 'select' && (
         <OptionsHandler
-          options={state.optionsList}
+          options={optionsList}
           editorWasOpened={editorWasOpened}
           openEditor={openEditor}
           optionsHandlers={handlers}
