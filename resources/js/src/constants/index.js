@@ -69,3 +69,10 @@ export const snackbarMessages = {
     },
   },
 };
+
+export const throttlingButtons = {
+  navbar: {
+    reset: false,
+    save: false,
+  },
+};

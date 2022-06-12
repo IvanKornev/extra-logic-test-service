@@ -14,10 +14,8 @@ export const EventSnackbar = forwardRef((props, ref) => {
       anchorOrigin={anchorOrigin}
       open={isVisible}
       onClose={() => setVisibility(false)}
-      autoHideDuration={2500}>
-      <Alert
-        onClose={() => setVisibility(false)}
-        severity={alertSeverity}>
+      autoHideDuration={1500}>
+      <Alert onClose={() => setVisibility(false)} severity={alertSeverity}>
         {message}
       </Alert>
     </Snackbar>

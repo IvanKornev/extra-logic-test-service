@@ -1,8 +1,9 @@
 import React, { useRef, useState } from 'react';
 import { observer } from 'mobx-react-lite';
+import { throttle } from 'lodash';
 
 import { form } from '@global-states';
-import { snackbarMessages } from '@constants';
+import { snackbarMessages, throttlingButtons } from '@constants';
 
 import { EventSnackbar } from '@components/reusable';
 import { Button, Typography, Tabs, Tab, Grid } from '@mui/material';
@@ -12,16 +13,19 @@ import { styles } from './navbar.styles';
 export const Navbar = observer(() => {
   const snackbarRef = useRef();
   const [message, setMessage] = useState(null);
-  const handleResetButton = () => {
-    form.reset();
-    setMessage(snackbarMessages.form.reset.success);
+  const [throttledButtons, setThrottledButtons] = useState(throttlingButtons.navbar);
+
+  const handleButton = (actionName) => {
+    setThrottledButtons((buttons) => ({...buttons, [actionName]: true}));
+    setMessage(snackbarMessages.form[actionName].success);
     snackbarRef.current.show();
+    setTimeout(() => {
+      setThrottledButtons((buttons) => (
+        {...buttons, [actionName]: false}
+      ));
+    }, 1500);
   };
-  const handleSaveButton = () => {
-    form.save();
-    setMessage(snackbarMessages.form.save.success);
-    snackbarRef.current.show();
-  };
+  
   return (
     <>
       <nav style={styles.navbar}>
@@ -46,14 +50,22 @@ export const Navbar = observer(() => {
               color='secondary'
               variant='outlined'
               type='submit'
-              onClick={handleSaveButton}>
+              disabled={(throttledButtons.save === true)}
+              onClick={async () => {
+                await form.save();
+                throttle(handleButton('save'), 1500);
+              }}>
               Сохранить
             </Button>
             <Button
               type='button'
               color='error'
               variant='outlined'
-              onClick={handleResetButton}>
+              disabled={(throttledButtons.reset === true)}
+              onClick={() => {
+                form.reset();
+                throttle(handleButton('reset'), 1500);
+              }}>
               Сбросить
             </Button>
           </Grid>
