@@ -56,3 +56,12 @@ export const formValues = {
 };
 
 export const formFields = Object.keys(formValues);
+
+export const snackbarMessages = {
+  form: {
+    reset: {
+      success: 'Форма сброшена до начального состояния',
+      fail: 'Форма не была сброшена',
+    }
+  },
+};
