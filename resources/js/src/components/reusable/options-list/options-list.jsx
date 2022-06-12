@@ -35,7 +35,8 @@ export const OptionsList = ({ handlers, list }) => {
           <Typography>Опции селектора: </Typography>
           {list.map((option, index) => {
             const { id } = option;
-            const Option = (editingField?.id === id) ? EditingOption : DefaultOption;
+            const Option =
+              editingField?.id === id ? EditingOption : DefaultOption;
             return (
               <Option
                 option={option}
@@ -71,7 +72,7 @@ export const OptionsList = ({ handlers, list }) => {
 
 const DefaultOption = ({ option, number, handlers, selectCallback }) => {
   const texts = getSelectOptionTexts(option, number);
-  return(
+  return (
     <ListItem sx={styles.option}>
       <ListItemText primary={texts.primary} secondary={texts.secondary} />
       {handlers && (

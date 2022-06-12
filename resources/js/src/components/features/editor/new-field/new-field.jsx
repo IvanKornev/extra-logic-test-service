@@ -10,11 +10,7 @@ import { useFormik } from 'formik';
 import { isSelect } from '@domains';
 import { useSelectOptionsHandler } from '@hooks';
 import { fieldValues, fieldFormStructure } from '@constants';
-import {
-  EditorModal,
-  OptionsList,
-  LabledSwitch,
-} from '@components/reusable';
+import { EditorModal, OptionsList, LabledSwitch } from '@components/reusable';
 
 import { styles } from './new-field.styles';
 

@@ -1,7 +1,9 @@
 import { faker } from '@faker-js/faker';
 
 import { LinkedList } from '@data-structures';
-import { createField, removeField, changeField, copyField } from '@domains';
+import {
+  createField, removeField, changeField, copyField,
+} from '@domains';
 
 describe('Методы нового поля', () => {
   let fieldsList;

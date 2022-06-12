@@ -31,16 +31,25 @@ describe('Методы опции селектора', () => {
 
   it('Удаляет опцию из списка', () => {
     const list = generateOptions(5);
-    const updatedList = removeSelectOption(list[0].id, list);
-    expect(updatedList[0].id).not.toBe(list[0].id);
+    const firstOption = list[0];
+    const updatedList = removeSelectOption(firstOption.id, list);
     expect(updatedList[0].id).toBe(list[1].id);
   });
 
   it('Получает текст опции для дальнейшего рендеринга', () => {
     const newOption = generateOptions();
     const texts = getSelectOptionTexts(newOption, 1);
-    expect(texts.primary).toBe(`1) Наименование: ${newOption.title}`);
+    expect(texts.primary).toBe(`1) Имя: ${newOption.title}`);
     expect(texts.secondary).toBe(`Значение: ${newOption.value}`);
+  });
+
+  it('Сокращает текст опции перед рендерингом', () => {
+    const newOption = generateOptions();
+    newOption.title = newOption.title.padEnd(30, 's');
+
+    const texts = getSelectOptionTexts(newOption, 1);
+    const pattern = /\d\) Имя: \w*\.{3}/gi;
+    expect(texts.primary).toMatch(pattern);
   });
 
   it('Проверяет свойства опции на отсутствие', () => {
@@ -57,8 +66,8 @@ const generateOptions = (count = 1) => {
   const options = [];
   for (let i = 1; i <= count; i += 1) {
     const newOption = {
-      title: faker.word.adverb(1),
-      value: faker.word.adverb(1),
+      title: faker.word.noun(5),
+      value: faker.word.noun(5),
     };
     options.push(addSelectOption(newOption));
   }
