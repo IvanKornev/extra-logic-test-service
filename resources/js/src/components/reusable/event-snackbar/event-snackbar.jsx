@@ -1,26 +1,31 @@
 import React, { useState, useImperativeHandle, forwardRef } from 'react';
 import PropTypes from 'prop-types';
-import { Snackbar } from '@mui/material';
+import { Snackbar, Alert } from '@mui/material';
 
 export const EventSnackbar = forwardRef((props, ref) => {
-  const { anchorOrigin, message } = props;
   const [isVisible, setVisibility] = useState(false);
   useImperativeHandle(ref, () => ({
     show: () => setVisibility(true),
     close: () => setVisibility(false),
   }));
-  return(
+  const { anchorOrigin, message, alertSeverity } = props;
+  return (
     <Snackbar
       anchorOrigin={anchorOrigin}
       open={isVisible}
       onClose={() => setVisibility(false)}
-      autoHideDuration={2500}
-      message={message}
-    />
+      autoHideDuration={2500}>
+      <Alert
+        onClose={() => setVisibility(false)}
+        severity={alertSeverity}>
+        {message}
+      </Alert>
+    </Snackbar>
   );
 });
 
 EventSnackbar.defaultTypes = {
+  alertSeverity: 'success',
   anchorOrigin: PropTypes.shape({
     vertical: 'bottom',
     horizontal: 'right',
@@ -28,6 +33,7 @@ EventSnackbar.defaultTypes = {
 };
 
 EventSnackbar.propTypes = {
+  alertSeverity: PropTypes.oneOf(['success', 'warning', 'error', 'info']),
   message: PropTypes.string.isRequired,
   anchorOrigin: PropTypes.shape({
     vertical: PropTypes.oneOf(['bottom', 'top']),
