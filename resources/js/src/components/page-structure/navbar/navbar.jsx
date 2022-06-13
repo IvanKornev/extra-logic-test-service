@@ -48,9 +48,9 @@ const NavbarButtons = observer(() => {
   return (
     <>
       {buttons.navbar.map((button) => {
-        const isDisable = (wasThrottled || !form.fieldsCounter);
+        const isDisable = wasThrottled || !form.fieldsCounter;
         const clickHandler = () => throttle(handleButton(button.action), 1500);
-        return(
+        return (
           <Button
             key={generateId()}
             color={button.color}

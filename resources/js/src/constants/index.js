@@ -76,4 +76,3 @@ export const buttons = {
     { color: 'error', text: 'Сбросить', action: 'reset' },
   ],
 };
-
