@@ -50,19 +50,23 @@ const NavbarButtons = observer(() => {
       setThrottledButtons((buttons) => ({ ...buttons, [actionName]: false }));
     }, 1500);
   };
-  return(
+  return (
     <>
-      {buttons.navbar.map((button) => (
-        <Button
-          key={generateId()}
-          color={button.color}
-          variant='outlined'
-          type='button'
-          disabled={throttledButtons[button.action] === true || form.fieldsCounter === 0}
-          onClick={() => throttle(handleButton(button.action), 1500)}>
-          {button.text}
-        </Button>
-      ))}
+      {buttons.navbar.map((button) => {
+        const disableCondition = (throttledButtons[button.action] || form.fieldsCounter === 0);
+        const clickHandler = () => throttle(handleButton(button.action), 1500);
+        return(
+          <Button
+            key={generateId()}
+            color={button.color}
+            variant='outlined'
+            type='button'
+            disabled={disableCondition}
+            onClick={clickHandler}>
+            {button.text}
+          </Button>
+        );
+      })}
       <EventSnackbar message={message} ref={snackbarRef} />
     </>
   );
