@@ -1,9 +1,10 @@
 import React, { useRef, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { throttle } from 'lodash';
+import generateId from 'uniqid';
 
 import { form } from '@global-states';
-import { snackbarMessages, throttlingButtons } from '@constants';
+import { snackbarMessages, throttlingButtons, buttons } from '@constants';
 
 import { EventSnackbar } from '@components/reusable';
 import { Button, Typography, Tabs, Tab, Grid } from '@mui/material';
@@ -13,19 +14,20 @@ import { styles } from './navbar.styles';
 export const Navbar = observer(() => {
   const snackbarRef = useRef();
   const [message, setMessage] = useState(null);
-  const [throttledButtons, setThrottledButtons] = useState(throttlingButtons.navbar);
+  const [throttledButtons, setThrottledButtons] = useState(
+    throttlingButtons.navbar,
+  );
 
   const handleButton = (actionName) => {
-    setThrottledButtons((buttons) => ({...buttons, [actionName]: true}));
+    form[actionName]();
+    setThrottledButtons((buttons) => ({ ...buttons, [actionName]: true }));
     setMessage(snackbarMessages.form[actionName].success);
     snackbarRef.current.show();
     setTimeout(() => {
-      setThrottledButtons((buttons) => (
-        {...buttons, [actionName]: false}
-      ));
+      setThrottledButtons((buttons) => ({ ...buttons, [actionName]: false }));
     }, 1500);
   };
-  
+
   return (
     <>
       <nav style={styles.navbar}>
@@ -46,28 +48,17 @@ export const Navbar = observer(() => {
             </Tabs>
           </Grid>
           <Grid container item gap={2} justifyContent='flex-end' xs>
-            <Button
-              color='secondary'
-              variant='outlined'
-              type='submit'
-              disabled={(throttledButtons.save === true)}
-              onClick={async () => {
-                await form.save();
-                throttle(handleButton('save'), 1500);
-              }}>
-              Сохранить
-            </Button>
-            <Button
-              type='button'
-              color='error'
-              variant='outlined'
-              disabled={(throttledButtons.reset === true)}
-              onClick={() => {
-                form.reset();
-                throttle(handleButton('reset'), 1500);
-              }}>
-              Сбросить
-            </Button>
+            {buttons.navbar.map((button) => (
+              <Button
+                key={generateId()}
+                color={button.color}
+                variant='outlined'
+                type='button'
+                disabled={throttledButtons[button.action] === true}
+                onClick={() => throttle(handleButton(button.action), 1500)}>
+                {button.text}
+              </Button>
+            ))}
           </Grid>
         </Grid>
       </nav>

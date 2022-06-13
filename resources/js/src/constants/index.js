@@ -70,6 +70,13 @@ export const snackbarMessages = {
   },
 };
 
+export const buttons = {
+  navbar: [
+    { color: 'secondary', text: 'Сохранить', action: 'save' },
+    { color: 'error', text: 'Сбросить', action: 'reset' },
+  ],
+};
+
 export const throttlingButtons = {
   navbar: {
     reset: false,
