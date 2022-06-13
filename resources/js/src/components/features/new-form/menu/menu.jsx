@@ -21,6 +21,7 @@ const NewFormMenu = observer((props) => {
             <Tooltip key={id} title={tooltip} placement='right'>
               <div>
                 <IconComponent
+                  id={`menu__icon_${action.name}`}
                   color='#545454'
                   onClick={action.callback}
                   style={isDisable ? styles.disabledOption : styles.option}

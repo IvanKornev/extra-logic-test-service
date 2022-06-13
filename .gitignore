@@ -7,6 +7,8 @@
 composer.lock
 package-lock.json
 
+public/js
+tests_output
 .env
 .env.backup
 .env.example

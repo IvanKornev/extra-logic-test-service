@@ -59,7 +59,7 @@ const EditorFields = ({ formikInstance }) => (
       return (
         <CurrentComponent
           key={id}
-          id={name}
+          id={`new-field-editor__field_${name}`}
           name={name}
           label={label}
           value={formikInstance.values[name]}

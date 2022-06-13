@@ -26,6 +26,7 @@ export const EditorModal = (props) => {
               </Stack>
               <Stack direction='row' spacing={2}>
                 <Button
+                  id='editor-modal__button_save'
                   size='medium'
                   variant='contained'
                   color='success'
@@ -34,6 +35,7 @@ export const EditorModal = (props) => {
                   Сохранить
                 </Button>
                 <Button
+                  id='editor-modal__button_cancel'
                   size='medium'
                   variant='contained'
                   color='error'

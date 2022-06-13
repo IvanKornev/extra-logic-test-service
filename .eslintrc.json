@@ -19,6 +19,10 @@
         "react",
         "prettier"
     ],
+    "globals": {
+        "before": true,
+        "after": true
+    },
     "rules": {
         "no-alert": "off",
         "react/react-in-jsx-scope": "off",
