@@ -77,9 +77,3 @@ export const buttons = {
   ],
 };
 
-export const throttlingButtons = {
-  navbar: {
-    reset: false,
-    save: false,
-  },
-};

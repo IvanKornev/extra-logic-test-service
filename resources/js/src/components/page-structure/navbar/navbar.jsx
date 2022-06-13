@@ -5,6 +5,7 @@ import generateId from 'uniqid';
 
 import { form } from '@global-states';
 import { snackbarMessages, throttlingButtons, buttons } from '@constants';
+import { useSnackbar } from '@hooks';
 
 import { EventSnackbar } from '@components/reusable';
 import { Button, Typography, Tabs, Tab, Grid } from '@mui/material';
@@ -36,24 +37,18 @@ export const Navbar = observer(() => (
 ));
 
 const NavbarButtons = observer(() => {
-  const snackbarRef = useRef();
-  const [message, setMessage] = useState(null);
-  const [throttledButtons, setThrottledButtons] = useState(
-    throttlingButtons.navbar,
-  );
+  const [wasThrottled, setThrottlingStatus] = useState(false);
+  const { message, showSnackbar, snackbarRef } = useSnackbar();
   const handleButton = (actionName) => {
     form[actionName]();
-    setThrottledButtons((buttons) => ({ ...buttons, [actionName]: true }));
-    setMessage(snackbarMessages.form[actionName].success);
-    snackbarRef.current.show();
-    setTimeout(() => {
-      setThrottledButtons((buttons) => ({ ...buttons, [actionName]: false }));
-    }, 1500);
+    setThrottlingStatus(true);
+    showSnackbar(snackbarMessages.form[actionName].success);
+    setTimeout(() => setThrottlingStatus(false), 1500);
   };
   return (
     <>
       {buttons.navbar.map((button) => {
-        const disableCondition = (throttledButtons[button.action] || form.fieldsCounter === 0);
+        const isDisable = (wasThrottled || !form.fieldsCounter);
         const clickHandler = () => throttle(handleButton(button.action), 1500);
         return(
           <Button
@@ -61,7 +56,7 @@ const NavbarButtons = observer(() => {
             color={button.color}
             variant='outlined'
             type='button'
-            disabled={disableCondition}
+            disabled={isDisable}
             onClick={clickHandler}>
             {button.text}
           </Button>
