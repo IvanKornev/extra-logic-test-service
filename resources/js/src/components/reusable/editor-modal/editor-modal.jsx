@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import generateId from 'uniqid';
 
+import { buttons } from '@constants';
 import { Modal, Box, Typography, Button, Stack } from '@mui/material';
 import { Formik, Form } from 'formik';
 
@@ -25,23 +27,19 @@ export const EditorModal = (props) => {
                 {children}
               </Stack>
               <Stack direction='row' spacing={2}>
-                <Button
-                  id='editor-modal__button_save'
-                  size='medium'
-                  variant='contained'
-                  color='success'
-                  type='submit'
-                  disabled={disableCondition}>
-                  Сохранить
-                </Button>
-                <Button
-                  id='editor-modal__button_cancel'
-                  size='medium'
-                  variant='contained'
-                  color='error'
-                  onClick={abortCallback}>
-                  Отмена
-                </Button>
+                {buttons.editorModal.map((button) => (
+                  <Button
+                    key={generateId()}
+                    id={`editor-modal__button_${button.action}`}
+                    size='medium'
+                    variant='contained'
+                    color={button.color}
+                    type={button.type}
+                    disabled={button.canBeDisabled && disableCondition}
+                    onClick={button.action === 'abort' && abortCallback}>
+                    {button.text}
+                  </Button>
+                ))}
               </Stack>
             </Form>
           </Formik>
