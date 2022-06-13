@@ -11,13 +11,36 @@ import { Button, Typography, Tabs, Tab, Grid } from '@mui/material';
 import { UilFileAlt } from '@iconscout/react-unicons';
 import { styles } from './navbar.styles';
 
-export const Navbar = observer(() => {
+export const Navbar = observer(() => (
+  <nav style={styles.navbar}>
+    <Grid columns={{ xs: 3 }} direction='row' alignItems='center' container>
+      <Grid gap={2} alignItems='center' direction='row' container item xs>
+        <UilFileAlt color='rgb(76, 43, 135)' size={52} />
+        <Typography variant='h6' component='h1'>
+          Новая форма
+        </Typography>
+      </Grid>
+      <Grid item container justifyContent='center' xs>
+        <Tabs
+          textColor='secondary'
+          indicatorColor='secondary'
+          value='create-form'>
+          <Tab value='create-form' label='Создать форму' />
+        </Tabs>
+      </Grid>
+      <Grid container item gap={2} justifyContent='flex-end' xs>
+        <NavbarButtons />
+      </Grid>
+    </Grid>
+  </nav>
+));
+
+const NavbarButtons = observer(() => {
   const snackbarRef = useRef();
   const [message, setMessage] = useState(null);
   const [throttledButtons, setThrottledButtons] = useState(
     throttlingButtons.navbar,
   );
-
   const handleButton = (actionName) => {
     form[actionName]();
     setThrottledButtons((buttons) => ({ ...buttons, [actionName]: true }));
@@ -27,41 +50,19 @@ export const Navbar = observer(() => {
       setThrottledButtons((buttons) => ({ ...buttons, [actionName]: false }));
     }, 1500);
   };
-
-  return (
+  return(
     <>
-      <nav style={styles.navbar}>
-        <Grid columns={{ xs: 3 }} direction='row' alignItems='center' container>
-          <Grid gap={2} alignItems='center' direction='row' container item xs>
-            <UilFileAlt color='rgb(76, 43, 135)' size={52} />
-            <Typography variant='h6' component='h1'>
-              Новая форма
-            </Typography>
-          </Grid>
-          <Grid item container justifyContent='center' xs>
-            <Tabs
-              textColor='secondary'
-              indicatorColor='secondary'
-              value='create-form'>
-              <Tab value='create-form' label='Создать форму' />
-              <Tab value='all-forms' label='Все формы' />
-            </Tabs>
-          </Grid>
-          <Grid container item gap={2} justifyContent='flex-end' xs>
-            {buttons.navbar.map((button) => (
-              <Button
-                key={generateId()}
-                color={button.color}
-                variant='outlined'
-                type='button'
-                disabled={throttledButtons[button.action] === true}
-                onClick={() => throttle(handleButton(button.action), 1500)}>
-                {button.text}
-              </Button>
-            ))}
-          </Grid>
-        </Grid>
-      </nav>
+      {buttons.navbar.map((button) => (
+        <Button
+          key={generateId()}
+          color={button.color}
+          variant='outlined'
+          type='button'
+          disabled={throttledButtons[button.action] === true || form.fieldsCounter === 0}
+          onClick={() => throttle(handleButton(button.action), 1500)}>
+          {button.text}
+        </Button>
+      ))}
       <EventSnackbar message={message} ref={snackbarRef} />
     </>
   );

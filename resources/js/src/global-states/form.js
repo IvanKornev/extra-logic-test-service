@@ -12,6 +12,8 @@ class FormGlobalState {
 
   selectedField = null;
 
+  fieldsCounter = 0;
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -20,14 +22,20 @@ class FormGlobalState {
     this.selectedField = value;
   }
 
+  setFieldsCounter(value = 0) {
+    this.fieldsCounter = value;
+  }
+
   createField(values) {
     createField(values, this.fieldsList);
+    this.setFieldsCounter(this.fieldsCounter += 1);
   }
 
   removeField() {
     const id = this.selectedField.uniqueId;
     const results = removeField(id, this.fieldsList);
     this.selectField(results.remainedNode);
+    this.setFieldsCounter(this.fieldsCounter -= 1);
   }
 
   changeField(id, values) {
@@ -43,6 +51,7 @@ class FormGlobalState {
     const id = this.selectedField.uniqueId;
     const results = copyField(id, this.fieldsList);
     this.selectField(results.copiedValue);
+    this.setFieldsCounter(this.fieldsCounter += 1);
   }
 
   async save() {
@@ -56,6 +65,7 @@ class FormGlobalState {
   reset() {
     this.selectField(null);
     this.fieldsList = new LinkedList();
+    this.setFieldsCounter();
   }
 }
 
