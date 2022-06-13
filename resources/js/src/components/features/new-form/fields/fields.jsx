@@ -22,10 +22,11 @@ const NewFormFields = observer((props) => {
       {fields.length !== 0 &&
         fields.map((field, index) => (
           <div
+            onClick={() => form.selectField(field)}
             key={field.uniqueId}
             id={`new-form__fields_${index}`}
             style={styles.wrapper}>
-            <FieldBox onClick={() => form.selectField(field)}>
+            <FieldBox>
               <div>
                 {!wasSelected(field.uniqueId, currentId) && (
                   <>

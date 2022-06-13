@@ -11,6 +11,7 @@ export const EventSnackbar = forwardRef((props, ref) => {
   const { anchorOrigin, message, alertSeverity } = props;
   return (
     <Snackbar
+      id='event-snackbar'
       anchorOrigin={anchorOrigin}
       open={isVisible}
       onClose={() => setVisibility(false)}

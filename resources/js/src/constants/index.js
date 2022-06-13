@@ -75,12 +75,12 @@ export const buttons = {
     {
       color: 'secondary',
       text: 'Сохранить',
-      action: 'save'
+      action: 'save',
     },
     {
       color: 'error',
       text: 'Сбросить',
-      action: 'reset'
+      action: 'reset',
     },
   ],
   editorModal: [

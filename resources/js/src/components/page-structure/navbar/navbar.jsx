@@ -53,6 +53,7 @@ const NavbarButtons = observer(() => {
         return (
           <Button
             key={generateId()}
+            id={`navbar__button_${button.action}`}
             color={button.color}
             variant='outlined'
             type='button'

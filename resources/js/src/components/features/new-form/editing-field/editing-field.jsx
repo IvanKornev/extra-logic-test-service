@@ -44,6 +44,7 @@ const NewFormEditingField = observer(() => {
             return (
               <TextField
                 key={id}
+                id={`editing-field__field_${name}`}
                 color='secondary'
                 variant='standard'
                 placeholder={form.selectedField[name]}
@@ -74,11 +75,11 @@ const NewFormEditingField = observer(() => {
           <div style={styles.footer}>
             {formik.dirty && (
               <Button
+                id='editing-field__button_save'
                 startIcon={<UilCheckCircle />}
                 type='submit'
                 color='success'
-                onClick={formik.changeHandler}
-                disabled={!selectHasOptions(formik.values.type, optionsList)}>
+                onClick={formik.changeHandler}>
                 Сохранить
               </Button>
             )}

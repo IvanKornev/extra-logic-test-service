@@ -20,6 +20,7 @@
         "prettier"
     ],
     "globals": {
+        "browser": true,
         "before": true,
         "after": true
     },
