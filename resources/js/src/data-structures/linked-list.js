@@ -97,7 +97,7 @@ export class LinkedList {
     }
 
     let currentNode = this.head;
-    while (currentNode.next) {
+    while (currentNode?.next) {
       if (currentNode.next.value.uniqueId === id) {
         removedNode = currentNode.next;
         currentNode.next = currentNode.next.next;
