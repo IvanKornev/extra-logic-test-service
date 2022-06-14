@@ -1,22 +1,19 @@
-import React, { useState, useImperativeHandle, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
+import { useVisibilityManager } from '@hooks';
 import { Snackbar, Alert } from '@mui/material';
 
 export const EventSnackbar = forwardRef((props, ref) => {
-  const [isVisible, setVisibility] = useState(false);
-  useImperativeHandle(ref, () => ({
-    show: () => setVisibility(true),
-    close: () => setVisibility(false),
-  }));
   const { anchorOrigin, message, alertSeverity } = props;
+  const manager = useVisibilityManager(ref);
   return (
     <Snackbar
       id='event-snackbar'
       anchorOrigin={anchorOrigin}
-      open={isVisible}
-      onClose={() => setVisibility(false)}
+      open={manager.isVisible}
+      onClose={() => manager.setVisibility(false)}
       autoHideDuration={1500}>
-      <Alert onClose={() => setVisibility(false)} severity={alertSeverity}>
+      <Alert onClose={() => manager.setVisibility(false)} severity={alertSeverity}>
         {message}
       </Alert>
     </Snackbar>
