@@ -39,7 +39,7 @@ export const Navbar = observer(() => (
 const NavbarButtons = observer(() => {
   const [wasThrottled, setThrottlingStatus] = useState(false);
   const { message, showSnackbar, snackbarRef } = useSnackbar();
-  const handleButton = (actionName) => {
+  const handleButton = (actionName) => () => {
     form[actionName]();
     setThrottlingStatus(true);
     showSnackbar(snackbarMessages.form[actionName].success);
@@ -49,7 +49,7 @@ const NavbarButtons = observer(() => {
     <>
       {buttons.navbar.map((button) => {
         const isDisable = wasThrottled || !form.fieldsCounter;
-        const clickHandler = () => throttle(handleButton(button.action), 1500);
+        const clickHandler = handleButton(button.action);
         return (
           <Button
             key={generateId()}
@@ -58,7 +58,7 @@ const NavbarButtons = observer(() => {
             variant='outlined'
             type='button'
             disabled={isDisable}
-            onClick={clickHandler}>
+            onClick={throttle(clickHandler, 1500)}>
             {button.text}
           </Button>
         );
