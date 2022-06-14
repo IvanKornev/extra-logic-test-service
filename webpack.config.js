@@ -1,6 +1,14 @@
 const path = require('path');
 
 const config = {
+  module: {
+    rules: [
+      {
+        test: /\.scss$/,
+        use: 'sass-loader',
+      },
+    ],
+  },
   resolve: {
     extensions: ['js', 'jsx', 'test.js'],
     alias: {

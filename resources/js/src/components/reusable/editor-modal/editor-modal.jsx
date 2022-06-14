@@ -6,7 +6,7 @@ import { buttons } from '@constants';
 import { Modal, Box, Typography, Button, Stack } from '@mui/material';
 import { Formik, Form } from 'formik';
 
-import styles from './editor-modal.module.css';
+import styles from './editor-modal.module.scss';
 
 export const EditorModal = (props) => {
   const { title, form, abortCallback, disableCondition, isVisible, children } =

@@ -23,7 +23,8 @@ import {
   UilTimesCircle,
   UilCheckCircle,
 } from '@iconscout/react-unicons';
-import styles from './options-list.module.css';
+
+import styles from './options-list.module.scss';
 
 export const OptionsList = ({ handlers, list }) => {
   const [editingField, selectEditingField] = useState(null);
