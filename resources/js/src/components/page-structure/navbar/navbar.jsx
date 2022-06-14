@@ -10,10 +10,10 @@ import { useSnackbar } from '@hooks';
 import { EventSnackbar } from '@components/reusable';
 import { Button, Typography, Tabs, Tab, Grid } from '@mui/material';
 import { UilFileAlt } from '@iconscout/react-unicons';
-import { styles } from './navbar.styles';
+import styles from './navbar.module.scss';
 
 export const Navbar = observer(() => (
-  <nav style={styles.navbar}>
+  <nav className={styles['navbar']}>
     <Grid columns={{ xs: 3 }} direction='row' alignItems='center' container>
       <Grid gap={2} alignItems='center' direction='row' container item xs>
         <UilFileAlt color='rgb(76, 43, 135)' size={52} />

@@ -1,7 +1,6 @@
 import React, { useId } from 'react';
 import PropTypes from 'prop-types';
 import generateId from 'uniqid';
-import { MenuItem } from '@mui/material';
 
 import { observer } from 'mobx-react-lite';
 import { form } from '@global-states';
@@ -10,9 +9,10 @@ import { useFormik } from 'formik';
 import { isSelect } from '@domains';
 import { useSelectOptionsHandler } from '@hooks';
 import { fieldValues, fieldFormStructure } from '@constants';
-import { EditorModal, OptionsList, LabledSwitch } from '@components/reusable';
 
-import { styles } from './new-field.styles';
+import { MenuItem } from '@mui/material';
+import { EditorModal, OptionsList, LabledSwitch } from '@components/reusable';
+import styles from './new-field.module.scss';
 
 const NewFieldEditor = observer(({ abortCallback, wasOpened }) => {
   const { optionsList, handlers } = useSelectOptionsHandler();
@@ -39,7 +39,7 @@ const NewFieldEditor = observer(({ abortCallback, wasOpened }) => {
       {formik.values.type === 'select' && (
         <OptionsList list={optionsList} handlers={handlers} />
       )}
-      <div style={styles.switchWrapper}>
+      <div className={styles['new-field-editor__switch']}>
         <LabledSwitch
           label='Обязательное поле'
           name='isRequired'

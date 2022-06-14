@@ -1,0 +1,9 @@
+.field {
+  display: flex;
+  flex-direction: row;
+  row-gap: 10px;
+
+  & h3 {
+    font-size: 16px;
+  }
+}

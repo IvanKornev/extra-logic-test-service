@@ -6,10 +6,10 @@ import { observer } from 'mobx-react-lite';
 import { form } from '@global-states';
 import { fieldTypes, formFields } from '@constants';
 import { useSelectOptionsHandler } from '@hooks';
-import { selectHasOptions } from '@domains';
 
 import { LabledSwitch, OptionsList } from '@components/reusable';
 import { UilCheckCircle } from '@iconscout/react-unicons';
+import styles from './editing-field.module.scss';
 import {
   Button,
   TextField,
@@ -17,8 +17,6 @@ import {
   MenuItem,
   FormControl,
 } from '@mui/material';
-
-import { styles } from './editing-field.styles';
 
 const NewFormEditingField = observer(() => {
   const { selectOptions } = form.selectedField;
@@ -38,7 +36,7 @@ const NewFormEditingField = observer(() => {
       <Formik
         initialValues={formik.initialValues}
         onSubmit={formik.handleSubmit}>
-        <Form style={styles.wrapper}>
+        <Form className={styles['editing-field__wrapper']}>
           {formFields.map((name) => {
             const id = useId();
             return (
@@ -51,7 +49,6 @@ const NewFormEditingField = observer(() => {
                 name={name}
                 value={formik.values[name]}
                 onChange={formik.handleChange}
-                sx={styles.field}
               />
             );
           })}
@@ -60,8 +57,7 @@ const NewFormEditingField = observer(() => {
               name='type'
               onChange={formik.handleChange}
               value={formik.values.type}
-              color='secondary'
-              sx={styles.select}>
+              color='secondary'>
               {fieldTypes.map((type) => (
                 <MenuItem value={type.value} key={generateId()}>
                   {type.title}
@@ -72,7 +68,7 @@ const NewFormEditingField = observer(() => {
               <OptionsList list={optionsList} handlers={handlers} />
             )}
           </FormControl>
-          <div style={styles.footer}>
+          <div className={styles['editing-field__footer']}>
             {formik.dirty && (
               <Button
                 id='editing-field__button_save'

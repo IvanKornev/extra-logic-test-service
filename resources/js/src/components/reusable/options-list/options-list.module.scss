@@ -1,9 +1,4 @@
-@mixin field-input($width, $font-size) {
-  width: $width;
-  &:input[type='text'] {
-    font-size: $font-size;
-  }
-}
+@use '@styles/mixins';
 
 .list {
   display: flex;
@@ -51,12 +46,12 @@
     flex-direction: row;
     column-gap: 6px;
   }
-  
+
   &__title_editing {
-    @include field-input(90%, 17px);
+    @include mixins.field-input(17px, 90%);
   }
 
   &__value_editing {
-    @include field-input(80%, 14px);
+    @include mixins.field-input(14px, 80%);
   }
 }

@@ -4,19 +4,21 @@ import { observer } from 'mobx-react-lite';
 
 import { Box, Tooltip } from '@mui/material';
 import { newForm } from '@domains';
-import { styles } from './menu.styles';
+import styles from './menu.module.scss';
 
 const NewFormMenu = observer((props) => {
   const { showEditorAction, onlyAddOption } = props;
   const menu = newForm.createMenu(showEditorAction);
   return (
     <section>
-      <Box sx={styles.wrapper}>
+      <Box className={styles['menu__wrapper']}>
         {menu.map((item) => {
           const { iconName, action, tooltip } = item;
           const id = useId();
           const IconComponent = iconName;
+          
           const isDisable = onlyAddOption && action.name !== 'add';
+          const classSuffix = isDisable ? '_disabled' : '_enabled';
           return (
             <Tooltip key={id} title={tooltip} placement='right'>
               <div>
@@ -24,7 +26,7 @@ const NewFormMenu = observer((props) => {
                   id={`menu__icon_${action.name}`}
                   color='#545454'
                   onClick={action.callback}
-                  style={isDisable ? styles.disabledOption : styles.option}
+                  className={styles[`menu__item${classSuffix}`]}
                 />
               </div>
             </Tooltip>

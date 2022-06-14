@@ -1,0 +1,11 @@
+.page {
+  display: flex;
+  justify-content: center;
+  
+  &__wrapper {
+    display: inline-flex;
+    flex-direction: column;
+    row-gap: 12px;
+    margin-top: 12px;
+  }
+}

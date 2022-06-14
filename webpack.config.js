@@ -21,6 +21,7 @@ const config = {
       '@constants': path.resolve(__dirname, './resources/js/src/constants'),
       '@global-states': path.resolve(__dirname, './resources/js/src/global-states'),
       '@reducers': path.resolve(__dirname, './resources/js/src/reducers'),
+      '@styles': path.resolve(__dirname, './resources/js/src/styles'),
     }
   },
 };

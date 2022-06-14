@@ -3,12 +3,13 @@ import { createRoot } from 'react-dom/client';
 
 import { Navbar } from '@components/page-structure';
 import { NewFormPage } from './pages';
-import { app } from './styles';
+
+import styles from './styles/app.module.scss';
 
 const App = () => (
   <>
     <Navbar />
-    <main style={app.page}>
+    <main className={styles['page']}>
       <NewFormPage />
     </main>
   </>

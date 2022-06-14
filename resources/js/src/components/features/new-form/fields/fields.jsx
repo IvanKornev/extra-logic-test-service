@@ -3,20 +3,20 @@ import { observer } from 'mobx-react-lite';
 import PropTypes from 'prop-types';
 import generateId from 'uniqid';
 
-import { FieldBox, OptionsList, RequiredFieldMark } from '@components/reusable';
-import { Typography, Stack } from '@mui/material';
-
 import { wasSelected } from '@domains';
 import { formFields } from '@constants';
 import { form } from '@global-states';
 import { LinkedListConverter } from '@lib/converters';
 
-import { styles } from './fields.styles';
+import { Typography, Stack } from '@mui/material';
+import { FieldBox, OptionsList, RequiredFieldMark } from '@components/reusable';
+import styles from './fields.module.scss';
 
 const NewFormFields = observer((props) => {
   const { selectedFieldComponent, menuComponent } = props;
   const currentId = form.selectedField?.uniqueId;
   const fields = LinkedListConverter.toArray(form.fieldsList);
+  const divClasses = `new-form__field ${styles['field']}`;
   return (
     <>
       {fields.length !== 0 &&
@@ -24,8 +24,7 @@ const NewFormFields = observer((props) => {
           <div
             onClick={() => form.selectField(field)}
             key={field.uniqueId}
-            className='new-form__field'
-            style={styles.wrapper}>
+            className={divClasses}>
             <FieldBox>
               <div>
                 {!wasSelected(field.uniqueId, currentId) && (
@@ -35,8 +34,7 @@ const NewFormFields = observer((props) => {
                         <Typography
                           key={generateId()}
                           component='h3'
-                          variant='h6'
-                          sx={styles.heading}>
+                          variant='h6'>
                           {field[name]}
                         </Typography>
                         {field.isRequired && name === 'name' && (

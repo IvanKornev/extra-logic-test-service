@@ -1,0 +1,16 @@
+$footer-border-color: #a0a0a0;
+
+.editing-field {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+  }
+
+  &__footer {
+    border-top: 1px $footer-border-color solid;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
