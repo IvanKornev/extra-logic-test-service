@@ -6,44 +6,44 @@ import { buttons } from '@constants';
 import { Modal, Box, Typography, Button, Stack } from '@mui/material';
 import { Formik, Form } from 'formik';
 
-import { styles } from './editor-modal.styles';
+import styles from './editor-modal.module.css';
 
 export const EditorModal = (props) => {
   const { title, form, abortCallback, disableCondition, isVisible, children } =
     props;
   return (
-    <Modal open={isVisible} onClose={abortCallback} sx={styles.modal}>
-      <Box component='section' sx={styles.box}>
-        <div
-          style={{ display: 'flex', flexDirection: 'column', rowGap: '10px' }}>
-          <Typography variant='h5' component='h5'>
-            {title}
-          </Typography>
-          <Formik
-            initialValues={form.initialValues}
-            onSubmit={form.formikInstance.handleSubmit}>
-            <Form style={styles.form}>
-              <Stack direction='column' spacing={2}>
-                {children}
-              </Stack>
-              <Stack direction='row' spacing={2}>
-                {buttons.editorModal.map((button) => (
-                  <Button
-                    key={generateId()}
-                    id={`editor-modal__button_${button.action}`}
-                    size='medium'
-                    variant='contained'
-                    color={button.color}
-                    type={button.type}
-                    disabled={button.canBeDisabled && disableCondition}
-                    onClick={button.action === 'abort' && abortCallback}>
-                    {button.text}
-                  </Button>
-                ))}
-              </Stack>
-            </Form>
-          </Formik>
-        </div>
+    <Modal
+      open={isVisible}
+      onClose={abortCallback}
+      className={styles['editor-modal']}>
+      <Box component='section' className={styles['editor-modal__box']}>
+        <Typography variant='h5' component='h5'>
+          {title}
+        </Typography>
+        <Formik
+          initialValues={form.initialValues}
+          onSubmit={form.formikInstance.handleSubmit}>
+          <Form className={styles['editor-modal__form']}>
+            <Stack direction='column' spacing={2}>
+              {children}
+            </Stack>
+            <Stack direction='row' spacing={2}>
+              {buttons.editorModal.map((button) => (
+                <Button
+                  key={generateId()}
+                  id={`editor-modal__button_${button.action}`}
+                  size='medium'
+                  variant='contained'
+                  color={button.color}
+                  type={button.type}
+                  disabled={button.canBeDisabled && disableCondition}
+                  onClick={button.action === 'abort' && abortCallback}>
+                  {button.text}
+                </Button>
+              ))}
+            </Stack>
+          </Form>
+        </Formik>
       </Box>
     </Modal>
   );

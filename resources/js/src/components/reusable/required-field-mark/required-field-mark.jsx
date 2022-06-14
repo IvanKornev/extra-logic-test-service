@@ -1,9 +1,9 @@
 import React from 'react';
 import { Tooltip } from '@mui/material';
-import { styles } from './required-field-mark.styles';
+import styles from './required-field-mark.module.css';
 
 export const RequiredFieldMark = () => (
   <Tooltip title='Поле является обязательным' placement='right' arrow>
-    <span style={styles.mark}>*</span>
+    <span className={styles['mark']}>*</span>
   </Tooltip>
 );

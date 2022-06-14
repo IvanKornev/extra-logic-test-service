@@ -2,13 +2,13 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { Box } from '@mui/material';
-import { styles } from './field-box.styles';
+import styles from './field-box.module.css';
 
 const FieldBox = forwardRef((props, ref) => {
   const { children, withBorder, onClick } = props;
-  const { box, borderedBox } = styles;
+  const boxClass = withBorder ? styles['box_bordered'] : styles['box'];
   return (
-    <Box ref={ref} onClick={onClick} sx={withBorder ? borderedBox : box}>
+    <Box ref={ref} onClick={onClick} className={boxClass}>
       {children}
     </Box>
   );

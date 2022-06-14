@@ -34,7 +34,8 @@ describe('Страница новой формы', () => {
     browser.click('button[id=navbar__button_save]');
     const xpathValue = '//*[@id="event-snackbar"]/div/div[2]';
     browser.getText('xpath', xpathValue, (text) => {
-      const expectedText = 'Форма успешно сохранена для использования пользователями';
+      const expectedText =
+        'Форма успешно сохранена для использования пользователями';
       browser.assert.equal(text.value, expectedText);
     });
   });

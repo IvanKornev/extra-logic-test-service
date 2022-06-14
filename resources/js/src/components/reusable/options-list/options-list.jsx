@@ -23,7 +23,7 @@ import {
   UilTimesCircle,
   UilCheckCircle,
 } from '@iconscout/react-unicons';
-import { styles } from './options-list.styles';
+import styles from './options-list.module.css';
 
 export const OptionsList = ({ handlers, list }) => {
   const [editingField, selectEditingField] = useState(null);
@@ -31,7 +31,7 @@ export const OptionsList = ({ handlers, list }) => {
   return (
     <Stack direction='column' justifyContent='center'>
       {list.length !== 0 && (
-        <List sx={styles.list}>
+        <List className={styles['list']}>
           <Typography>Опции селектора: </Typography>
           {list.map((option, index) => {
             const { id } = option;
@@ -73,7 +73,7 @@ export const OptionsList = ({ handlers, list }) => {
 const DefaultOption = ({ option, number, handlers, selectCallback }) => {
   const texts = getSelectOptionTexts(option, number);
   return (
-    <ListItem sx={styles.option}>
+    <ListItem className={styles['option_default']}>
       <ListItemText primary={texts.primary} secondary={texts.secondary} />
       {handlers && (
         <Stack direction='row' spacing={1}>
@@ -95,8 +95,8 @@ const EditingOption = ({ option, abortCallback, handlers }) => {
     }
   };
   return (
-    <div style={styles.editingOption.wrapper}>
-      <div style={styles.editingOption.fields}>
+    <div className={styles['option__wrapper_editing']}>
+      <div className={styles['option__fields_editing']}>
         {optionFields.map((fieldName) => (
           <TextField
             placeholder={optionLabels[fieldName]}
@@ -104,11 +104,11 @@ const EditingOption = ({ option, abortCallback, handlers }) => {
             variant='standard'
             value={fields[fieldName]}
             onChange={(e) => handle(e, fieldName)}
-            sx={styles.editingOption[fieldName]}
+            className={styles[`option__${fieldName}_editing`]}
           />
         ))}
       </div>
-      <div style={styles.editingOption.buttons}>
+      <div className={styles['option__buttons_editing']}>
         <UilCheckCircle color={circleColor} size={28} onClick={editField} />
         <UilTimesCircle color='#F12323' size={28} onClick={abortCallback} />
       </div>
