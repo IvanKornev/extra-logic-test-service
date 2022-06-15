@@ -1,10 +1,10 @@
-import React, { useState, useId } from 'react';
+import React, { useState, useId, useRef } from 'react';
 import PropTypes from 'prop-types';
 import generateId from 'uniqid';
 
 import { selectOptionReducer } from '@reducers';
 import { useFieldsHandler } from '@hooks';
-import { NewOptionEditor } from '@components/features/editor';
+import { NewOptionCreator } from '@components/features/creators';
 import { optionFields, optionLabels } from '@constants';
 import { getSelectOptionTexts, selectOptionIsEmpty } from '@domains';
 
@@ -27,8 +27,8 @@ import {
 import styles from './options-list.module.scss';
 
 export const OptionsList = ({ handlers, list }) => {
+  const creatorRef = useRef();
   const [editingField, selectEditingField] = useState(null);
-  const [editorWasOpened, openEditor] = useState(false);
   return (
     <Stack direction='column' justifyContent='center'>
       {list.length !== 0 && (
@@ -56,17 +56,11 @@ export const OptionsList = ({ handlers, list }) => {
           size='small'
           variant='text'
           color='primary'
-          onClick={() => openEditor(true)}>
+          onClick={() => creatorRef.current.show()}>
           Добавить опцию селектора
         </Button>
       )}
-      {editorWasOpened && (
-        <NewOptionEditor
-          abortCallback={() => openEditor(false)}
-          isVisible={editorWasOpened}
-          optionsHandlers={handlers}
-        />
-      )}
+      <NewOptionCreator ref={creatorRef} optionsHandlers={handlers} />
     </Stack>
   );
 };

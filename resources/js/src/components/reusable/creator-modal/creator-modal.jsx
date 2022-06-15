@@ -1,20 +1,27 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import generateId from 'uniqid';
 
 import { buttons } from '@constants';
+import { useVisibilityManager } from '@hooks';
+
 import { Modal, Box, Typography, Button, Stack } from '@mui/material';
 import { Formik, Form } from 'formik';
+import styles from './creator-modal.module.scss';
 
-import styles from './editor-modal.module.scss';
-
-export const EditorModal = (props) => {
-  const { title, form, abortCallback, disableCondition, isVisible, children } =
-    props;
+export const CreatorModal = forwardRef((props, ref) => {
+  const { title, submitIsDisable, form, children } = props;
+  const manager = useVisibilityManager(ref);
+  const handleClick = (actionName) => {
+    if (actionName === 'abort') {
+      ref.current.close();
+    }
+    return undefined;
+  }
   return (
     <Modal
-      open={isVisible}
-      onClose={abortCallback}
+      open={manager.isVisible}
+      onClose={() => ref.current.close()}
       className={styles['editor-modal']}>
       <Box component='section' className={styles['editor-modal__box']}>
         <Typography variant='h5' component='h5'>
@@ -31,13 +38,13 @@ export const EditorModal = (props) => {
               {buttons.editorModal.map((button) => (
                 <Button
                   key={generateId()}
+                  onClick={() => handleClick(button.action)}
                   id={`editor-modal__button_${button.action}`}
                   size='medium'
                   variant='contained'
                   color={button.color}
                   type={button.type}
-                  disabled={button.canBeDisabled && disableCondition}
-                  onClick={button.action === 'abort' ? abortCallback : undefined}>
+                  disabled={button.canBeDisabled && submitIsDisable}>
                   {button.text}
                 </Button>
               ))}
@@ -47,13 +54,11 @@ export const EditorModal = (props) => {
       </Box>
     </Modal>
   );
-};
+});
 
-EditorModal.propTypes = {
+CreatorModal.propTypes = {
   title: PropTypes.string.isRequired,
-  abortCallback: PropTypes.func.isRequired,
-  isVisible: PropTypes.bool.isRequired,
-  disableCondition: PropTypes.bool.isRequired,
+  submitIsDisable: PropTypes.bool.isRequired,
   children: PropTypes.node.isRequired,
   form: PropTypes.shape({
     initialValues: PropTypes.object.isRequired,

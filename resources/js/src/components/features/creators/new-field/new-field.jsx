@@ -1,4 +1,4 @@
-import React, { useId } from 'react';
+import React, { useId, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import generateId from 'uniqid';
 
@@ -11,29 +11,28 @@ import { useSelectOptionsHandler } from '@hooks';
 import { fieldValues, fieldFormStructure } from '@constants';
 
 import { MenuItem } from '@mui/material';
-import { EditorModal, OptionsList, LabledSwitch } from '@components/reusable';
+import { CreatorModal, OptionsList, LabledSwitch } from '@components/reusable';
 import styles from './new-field.module.scss';
 
-const NewFieldEditor = observer(({ abortCallback, wasOpened }) => {
+const NewFieldCreator = observer(forwardRef((props, creatorRef) => {
   const { optionsList, handlers } = useSelectOptionsHandler();
   const formik = useFormik({
     initialValues: fieldValues,
     onSubmit: (eventValues) => {
       form.createField({ ...eventValues, selectOptions: optionsList });
-      abortCallback();
+      creatorRef.current.close();
     },
   });
+  const formData = {
+    initialValues: fieldValues,
+    formikInstance: formik,
+  };
+  const disableCondition = formik.values.type === 'select' && optionsList.length === 0;
   return (
-    <EditorModal
-      abortCallback={abortCallback}
-      form={{
-        initialValues: fieldValues,
-        formikInstance: formik,
-      }}
-      isVisible={wasOpened}
-      disableCondition={
-        formik.values.type === 'select' && optionsList.length === 0
-      }
+    <CreatorModal
+      ref={creatorRef}
+      form={formData}
+      submitIsDisable={disableCondition}
       title='Новое поле'>
       <EditorFields formikInstance={formik} />
       {formik.values.type === 'select' && (
@@ -46,9 +45,9 @@ const NewFieldEditor = observer(({ abortCallback, wasOpened }) => {
           changeHandler={formik.handleChange}
         />
       </div>
-    </EditorModal>
+    </CreatorModal>
   );
-});
+}));
 
 const EditorFields = ({ formikInstance }) => (
   <>
@@ -78,9 +77,4 @@ const EditorFields = ({ formikInstance }) => (
   </>
 );
 
-NewFieldEditor.propTypes = {
-  wasOpened: PropTypes.bool.isRequired,
-  abortCallback: PropTypes.func.isRequired,
-};
-
-export { NewFieldEditor };
+export { NewFieldCreator };

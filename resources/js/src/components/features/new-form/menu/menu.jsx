@@ -1,14 +1,15 @@
-import React, { useId } from 'react';
+import React, { useId, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react-lite';
 
-import { Box, Tooltip } from '@mui/material';
 import { newForm } from '@domains';
-import styles from './menu.module.scss';
 
-const NewFormMenu = observer((props) => {
-  const { showEditorAction, onlyAddOption } = props;
-  const menu = newForm.createMenu(showEditorAction);
+import styles from './menu.module.scss';
+import { Box, Tooltip } from '@mui/material';
+
+const NewFormMenu = observer(forwardRef((props, creatorRef) => {
+  const { onlyAddOption } = props;
+  const menu = newForm.createMenu(creatorRef);
   return (
     <section>
       <Box className={styles['menu__wrapper']}>
@@ -35,7 +36,7 @@ const NewFormMenu = observer((props) => {
       </Box>
     </section>
   );
-});
+}));
 
 NewFormMenu.defaultTypes = {
   onlyAddOptions: false,
@@ -43,7 +44,6 @@ NewFormMenu.defaultTypes = {
 
 NewFormMenu.propTypes = {
   onlyAddOptions: PropTypes.bool,
-  showEditorAction: PropTypes.func.isRequired,
 };
 
 export { NewFormMenu };

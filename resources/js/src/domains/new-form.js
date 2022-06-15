@@ -1,13 +1,13 @@
 import { UilPlusCircle, UilTrashAlt, UilCopy } from '@iconscout/react-unicons';
 import { form } from '@global-states';
 
-const createMenu = (showEditorAction) => [
+const createMenu = (creatorRef) => [
   {
     iconName: UilPlusCircle,
     tooltip: 'Добавить поле',
     action: {
       name: 'add',
-      callback: () => showEditorAction(true),
+      callback: () => creatorRef.current.show(),
     },
   },
   {

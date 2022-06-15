@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
+
 import { observer } from 'mobx-react-lite';
+import { form } from '@global-states';
 
 import styles from './new-form.module.scss';
-import { NewFieldEditor } from '@components/features/editor';
+import { NewFieldCreator } from '@components/features/creators';
 import {
   NewFormFields,
   NewFormMenu,
@@ -11,27 +13,22 @@ import {
 } from '@components/features/new-form';
 
 const NewFormPage = observer(() => {
-  const [editorIsVisible, setEditorVisibility] = useState(false);
+  form.fieldsCounter;
+  const creatorRef = useRef();
   return (
     <section className={styles['page']}>
       <div className={styles['page__wrapper']}>
         <NewFormTitleField
           menuComponent={
-            <NewFormMenu
-              showEditorAction={setEditorVisibility}
-              onlyAddOption={true}
-            />
+            <NewFormMenu ref={creatorRef} onlyAddOption={true} />
           }
         />
         <NewFormFields
           selectedFieldComponent={<NewFormEditingField />}
-          menuComponent={<NewFormMenu showEditorAction={setEditorVisibility} />}
+          menuComponent={<NewFormMenu ref={creatorRef} />}
         />
       </div>
-      <NewFieldEditor
-        abortCallback={() => setEditorVisibility(false)}
-        wasOpened={editorIsVisible}
-      />
+      <NewFieldCreator ref={creatorRef} />
     </section>
   );
 });
