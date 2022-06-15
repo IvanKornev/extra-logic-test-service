@@ -19,9 +19,7 @@ const NewFormPage = observer(() => {
     <section className={styles['page']}>
       <div className={styles['page__wrapper']}>
         <NewFormTitleField
-          menuComponent={
-            <NewFormMenu ref={creatorRef} onlyAddOption={true} />
-          }
+          menuComponent={<NewFormMenu ref={creatorRef} onlyAddOption={true} />}
         />
         <NewFormFields
           selectedFieldComponent={<NewFormEditingField />}

@@ -1,10 +1,15 @@
 import { useState, useImperativeHandle } from 'react';
 
-export const useVisibilityManager = (elemRef, initialValue = false) => {
-  const [isVisible, setVisibility] = useState(initialValue);
+export const useVisibilityManager = (elemRef, callback) => {
+  const [isVisible, setVisibility] = useState(false);
   useImperativeHandle(elemRef, () => ({
     show: () => setVisibility(true),
-    close: () => setVisibility(false),
+    close: () => {
+      setVisibility(false);
+      if (typeof callback === 'function') {
+        callback();
+      }
+    },
   }));
   return { isVisible, setVisibility };
 };

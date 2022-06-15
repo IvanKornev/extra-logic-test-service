@@ -14,40 +14,44 @@ import { MenuItem } from '@mui/material';
 import { CreatorModal, OptionsList, LabledSwitch } from '@components/reusable';
 import styles from './new-field.module.scss';
 
-const NewFieldCreator = observer(forwardRef((props, creatorRef) => {
-  const { optionsList, handlers } = useSelectOptionsHandler();
-  const formik = useFormik({
-    initialValues: fieldValues,
-    onSubmit: (eventValues) => {
-      form.createField({ ...eventValues, selectOptions: optionsList });
-      creatorRef.current.close();
-    },
-  });
-  const formData = {
-    initialValues: fieldValues,
-    formikInstance: formik,
-  };
-  const disableCondition = formik.values.type === 'select' && optionsList.length === 0;
-  return (
-    <CreatorModal
-      ref={creatorRef}
-      form={formData}
-      submitIsDisable={disableCondition}
-      title='Новое поле'>
-      <EditorFields formikInstance={formik} />
-      {formik.values.type === 'select' && (
-        <OptionsList list={optionsList} handlers={handlers} />
-      )}
-      <div className={styles['new-field-editor__switch']}>
-        <LabledSwitch
-          label='Обязательное поле'
-          name='isRequired'
-          changeHandler={formik.handleChange}
-        />
-      </div>
-    </CreatorModal>
-  );
-}));
+const NewFieldCreator = observer(
+  forwardRef((props, creatorRef) => {
+    const { optionsList, handlers } = useSelectOptionsHandler();
+    const formik = useFormik({
+      initialValues: fieldValues,
+      onSubmit: (eventValues, helpers) => {
+        form.createField({ ...eventValues, selectOptions: optionsList });
+        creatorRef.current.close();
+        helpers.resetForm();
+      },
+    });
+    const formData = {
+      initialValues: fieldValues,
+      formikInstance: formik,
+    };
+    const disableCondition =
+      formik.values.type === 'select' && optionsList.length === 0;
+    return (
+      <CreatorModal
+        ref={creatorRef}
+        form={formData}
+        submitIsDisable={disableCondition}
+        title='Новое поле'>
+        <EditorFields formikInstance={formik} />
+        {formik.values.type === 'select' && (
+          <OptionsList list={optionsList} handlers={handlers} />
+        )}
+        <div className={styles['new-field-editor__switch']}>
+          <LabledSwitch
+            label='Обязательное поле'
+            name='isRequired'
+            changeHandler={formik.handleChange}
+          />
+        </div>
+      </CreatorModal>
+    );
+  }),
+);
 
 const EditorFields = ({ formikInstance }) => (
   <>

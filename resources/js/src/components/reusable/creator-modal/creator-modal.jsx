@@ -11,13 +11,13 @@ import styles from './creator-modal.module.scss';
 
 export const CreatorModal = forwardRef((props, ref) => {
   const { title, submitIsDisable, form, children } = props;
-  const manager = useVisibilityManager(ref);
+  const manager = useVisibilityManager(ref, form.formikInstance.resetForm);
   const handleClick = (actionName) => {
     if (actionName === 'abort') {
       ref.current.close();
     }
     return undefined;
-  }
+  };
   return (
     <Modal
       open={manager.isVisible}

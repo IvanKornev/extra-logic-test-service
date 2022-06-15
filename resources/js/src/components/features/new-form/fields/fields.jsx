@@ -31,9 +31,7 @@ const NewFormFields = observer((props) => {
                   <>
                     {formFields.map((name) => (
                       <Stack key={generateId()} direction='row'>
-                        <Typography
-                          component='h3'
-                          variant='h6'>
+                        <Typography component='h3' variant='h6'>
                           {field[name]}
                         </Typography>
                         {field.isRequired && name === 'name' && (
