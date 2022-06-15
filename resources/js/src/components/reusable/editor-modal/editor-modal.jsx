@@ -37,7 +37,7 @@ export const EditorModal = (props) => {
                   color={button.color}
                   type={button.type}
                   disabled={button.canBeDisabled && disableCondition}
-                  onClick={button.action === 'abort' && abortCallback}>
+                  onClick={button.action === 'abort' ? abortCallback : undefined}>
                   {button.text}
                 </Button>
               ))}

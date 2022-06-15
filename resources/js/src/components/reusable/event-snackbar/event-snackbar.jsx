@@ -11,9 +11,11 @@ export const EventSnackbar = forwardRef((props, ref) => {
       id='event-snackbar'
       anchorOrigin={anchorOrigin}
       open={manager.isVisible}
-      onClose={() => manager.setVisibility(false)}
+      onClose={() => ref.current.close()}
       autoHideDuration={1500}>
-      <Alert onClose={() => manager.setVisibility(false)} severity={alertSeverity}>
+      <Alert
+        onClose={() => ref.current.close()}
+        severity={alertSeverity}>
         {message}
       </Alert>
     </Snackbar>

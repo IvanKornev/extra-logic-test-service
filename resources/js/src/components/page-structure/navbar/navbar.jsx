@@ -63,7 +63,7 @@ const NavbarButtons = observer(() => {
           </Button>
         );
       })}
-      <EventSnackbar message={message} ref={snackbarRef} />
+      {message && <EventSnackbar message={message} ref={snackbarRef} />}
     </>
   );
 });

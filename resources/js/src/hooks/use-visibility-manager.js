@@ -7,4 +7,4 @@ export const useVisibilityManager = (elemRef, initialValue = false) => {
     close: () => setVisibility(false),
   }));
   return { isVisible, setVisibility };
-}
+};

@@ -30,9 +30,8 @@ const NewFormFields = observer((props) => {
                 {!wasSelected(field.uniqueId, currentId) && (
                   <>
                     {formFields.map((name) => (
-                      <Stack direction='row'>
+                      <Stack key={generateId()} direction='row'>
                         <Typography
-                          key={generateId()}
                           component='h3'
                           variant='h6'>
                           {field[name]}

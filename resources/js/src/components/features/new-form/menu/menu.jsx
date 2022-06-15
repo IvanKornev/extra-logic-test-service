@@ -16,7 +16,7 @@ const NewFormMenu = observer((props) => {
           const { iconName, action, tooltip } = item;
           const id = useId();
           const IconComponent = iconName;
-          
+
           const isDisable = onlyAddOption && action.name !== 'add';
           const classSuffix = isDisable ? '_disabled' : '_enabled';
           return (
