@@ -48,14 +48,14 @@
         "eslint-plugin-promise": "^6.0.0",
         "eslint-plugin-react": "^7.30.0",
         "faker": "^6.6.6",
-        "husky": "^8.0.0",
         "jest": "^28.1.0",
         "laravel-mix": "^6.0.6",
         "nightwatch": "^2.1.8",
         "postcss": "^8.1.14",
         "prettier": "^2.6.2",
         "react-test-renderer": "^18.1.0",
-        "sass-loader": "^13.0.0"
+        "sass-loader": "^13.0.0",
+        "husky": "^8.0.0"
     },
     "dependencies": {
         "@emotion/react": "^11.9.0",
@@ -67,6 +67,7 @@
         "cross-env": "^7.0.3",
         "eslint-import-resolver-webpack": "^0.13.2",
         "formik": "^2.2.9",
+        "husky": "^8.0.1",
         "install": "^0.13.0",
         "lodash": "^4.17.21",
         "mobx": "^6.6.0",
