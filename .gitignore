@@ -7,6 +7,9 @@
 composer.lock
 package-lock.json
 
+id_rsa
+prepare-enviroment.sh
+
 public/js
 tests_output
 .env
