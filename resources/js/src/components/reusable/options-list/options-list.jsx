@@ -1,6 +1,5 @@
 import React, { useState, useId, useRef } from 'react';
 import PropTypes from 'prop-types';
-import generateId from 'uniqid';
 
 import { selectOptionReducer } from '@reducers';
 import { useFieldsHandler } from '@hooks';
@@ -45,7 +44,7 @@ export const OptionsList = ({ handlers, list }) => {
                 abortCallback={() => selectEditingField(null)}
                 selectCallback={() => selectEditingField(option)}
                 number={index + 1}
-                key={generateId()}
+                key={id}
               />
             );
           })}

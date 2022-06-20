@@ -12,7 +12,8 @@
         "test:unit": "cross-env NODE_ENV=test jest",
         "test:e2e": "npx nightwatch resources/js/src/pages/new-form/new-form.e2e-test.js --env chrome",
         "debug:fix": "eslint --fix ./resources/js/",
-        "format": "prettier --write ./resources/js/ --config ./.prettierrc.json"
+        "format": "prettier --write ./resources/js/ --config ./.prettierrc.json",
+        "prepare": "husky install"
     },
     "jest": {
         "roots": [
@@ -47,7 +48,7 @@
         "eslint-plugin-promise": "^6.0.0",
         "eslint-plugin-react": "^7.30.0",
         "faker": "^6.6.6",
-        "husky": "^8.0.1",
+        "husky": "^8.0.0",
         "jest": "^28.1.0",
         "laravel-mix": "^6.0.6",
         "nightwatch": "^2.1.8",
