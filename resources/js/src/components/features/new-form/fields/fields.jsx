@@ -40,7 +40,10 @@ const NewFormFields = observer((props) => {
                       </Stack>
                     ))}
                     {field.type === 'select' && (
-                      <OptionsList list={field.selectOptions} />
+                      <OptionsList
+                        scrollbarColor='purple'
+                        list={field.selectOptions}
+                      />
                     )}
                   </>
                 )}

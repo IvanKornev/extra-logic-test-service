@@ -39,7 +39,11 @@ const NewFieldCreator = observer(
         title='Новое поле'>
         <EditorFields formikInstance={formik} />
         {formik.values.type === 'select' && (
-          <OptionsList list={optionsList} handlers={handlers} />
+          <OptionsList
+            scrollbarColor='blue'
+            list={optionsList}
+            handlers={handlers}
+          />
         )}
         <div className={styles['new-field-editor__switch']}>
           <LabledSwitch

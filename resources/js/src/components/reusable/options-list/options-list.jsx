@@ -25,13 +25,16 @@ import {
 
 import styles from './options-list.module.scss';
 
-export const OptionsList = ({ handlers, list }) => {
+export const OptionsList = (props) => {
   const creatorRef = useRef();
   const [editingField, selectEditingField] = useState(null);
+
+  const { handlers, list, scrollbarColor } = props;
+  const scrollbarStyles = styles[`scrollbar_${scrollbarColor}`];
   return (
     <Stack direction='column' justifyContent='center'>
       {list.length !== 0 && (
-        <List className={styles['list']}>
+        <List className={`${styles['list']} ${scrollbarStyles}`}>
           <Typography>Опции селектора: </Typography>
           {list.map((option, index) => {
             const { id } = option;
@@ -111,6 +114,7 @@ const EditingOption = ({ option, abortCallback, handlers }) => {
 };
 
 OptionsList.propTypes = {
+  scrollbarColor: PropTypes.oneOf(['blue', 'purple']).isRequired,
   list: PropTypes.array.isRequired,
   handlers: PropTypes.object,
 };

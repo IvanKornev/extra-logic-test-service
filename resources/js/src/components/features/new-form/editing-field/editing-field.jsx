@@ -65,7 +65,11 @@ const NewFormEditingField = observer(() => {
               ))}
             </Select>
             {formik.values.type === 'select' && (
-              <OptionsList list={optionsList} handlers={handlers} />
+              <OptionsList
+                scrollbarColor='purple'
+                list={optionsList}
+                handlers={handlers}
+              />
             )}
           </FormControl>
           <div className={styles['editing-field__footer']}>
