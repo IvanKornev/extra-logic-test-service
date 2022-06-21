@@ -1,17 +1,16 @@
 import { faker } from '@faker-js/faker';
 import { addSelectOption } from '@domains';
 
-export const generateSelectOptions = (count = 1) => (
+export const generateSelectOptions = (count = 1) =>
   generateCollection(count, (collection) => {
     const newOption = {
       title: faker.word.noun(5),
       value: faker.word.noun(5),
     };
     collection.push(addSelectOption(newOption));
-  })
-);
-    
-export const generateFields = (count = 1) => (
+  });
+
+export const generateFields = (count = 1) =>
   generateCollection(count, (collection) => {
     const newField = {
       name: faker.word.adverb(5),
@@ -20,8 +19,7 @@ export const generateFields = (count = 1) => (
       isRequired: faker.datatype.boolean(),
     };
     collection.push(newField);
-  })
-);
+  });
 
 const generateCollection = (count, collectionCallback) => {
   const collection = [];
@@ -32,4 +30,4 @@ const generateCollection = (count, collectionCallback) => {
     return collection[0];
   }
   return collection;
-}
+};
