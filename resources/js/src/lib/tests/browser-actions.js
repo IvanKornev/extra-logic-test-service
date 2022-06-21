@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-const createField = (browserInstance, additionalCallback) => {
+export const createField = (browserInstance, additionalCallback) => {
   browserInstance.waitForElementVisible('body').click('#menu__icon_add');
   const fieldsNames = ['name', 'description'];
   fillInputs('#new-field-editor', fieldsNames);
@@ -12,7 +12,7 @@ const createField = (browserInstance, additionalCallback) => {
   browserInstance.click('xpath', xpathValue);
 };
 
-const fillInputs = (domainPrefix, fieldsNames) => {
+export const fillInputs = (domainPrefix, fieldsNames) => {
   fieldsNames.forEach((fieldName) => {
     const selector = `${domainPrefix}__field_${fieldName}`;
     browser.getValue(selector, (results) => {
@@ -23,5 +23,3 @@ const fillInputs = (domainPrefix, fieldsNames) => {
     });
   });
 };
-
-export { createField, fillInputs };
