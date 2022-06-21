@@ -12,30 +12,29 @@ const NewFormMenu = observer(
     const { onlyAddOption } = props;
     const menu = newForm.createMenu(creatorRef);
     return (
-      <section>
-        <Box className={styles['menu__wrapper']}>
-          {menu.map((item) => {
-            const { iconName, action, tooltip } = item;
-            const id = useId();
-            const IconComponent = iconName;
+      <Box className={styles['menu']}>
+        {menu.map((item) => {
+          const { iconName, action, tooltip } = item;
+          const id = useId();
+          const IconComponent = iconName;
 
-            const isDisable = onlyAddOption && action.name !== 'add';
-            const classSuffix = isDisable ? '_disabled' : '_enabled';
-            return (
-              <Tooltip key={id} title={tooltip} placement='right'>
-                <div>
-                  <IconComponent
-                    id={`menu__icon_${action.name}`}
-                    color='#545454'
-                    onClick={action.callback}
-                    className={styles[`menu__item${classSuffix}`]}
-                  />
-                </div>
-              </Tooltip>
-            );
-          })}
-        </Box>
-      </section>
+          const isDisable = onlyAddOption && action.name !== 'add';
+          const classSuffix = isDisable ? '_disabled' : '_enabled';
+          return (
+            <Tooltip key={id} title={tooltip} placement='right'>
+              <>
+                <IconComponent
+                  size={30}
+                  id={`menu__icon_${action.name}`}
+                  color='#545454'
+                  onClick={action.callback}
+                  className={styles[`menu__item${classSuffix}`]}
+                />
+              </>
+            </Tooltip>
+          );
+        })}
+      </Box>
     );
   }),
 );

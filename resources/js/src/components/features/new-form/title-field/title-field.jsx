@@ -9,12 +9,12 @@ import { titleFieldReducer } from '@reducers';
 
 import { FieldBox } from '@components/reusable';
 import { TextField } from '@mui/material';
-import { styles } from './title-field.styles';
+import styles from './title-field.module.scss';
 
 export const NewFormTitleField = observer(({ menuComponent }) => {
   const { fields, handle } = useFieldsHandler(titleFieldReducer, formValues);
   return (
-    <div style={styles.wrapper}>
+    <article className={styles['title-field__wrapper']}>
       <FieldBox onClick={() => form.selectField(null)} withBorder>
         {formFields.map((fieldName) => (
           <TextField
@@ -24,12 +24,12 @@ export const NewFormTitleField = observer(({ menuComponent }) => {
             value={fields[fieldName]}
             onChange={(e) => handle(e, fieldName)}
             onBlur={() => form.changeTitleField(fields)}
-            sx={styles.fields[fieldName]}
+            className={styles[`title-field__field_${fieldName}`]}
           />
         ))}
       </FieldBox>
       {!form.selectedField && menuComponent}
-    </div>
+    </article>
   );
 });
 

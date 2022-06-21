@@ -1,0 +1,21 @@
+.title-field {
+  &__wrapper {
+    display: inline-flex;
+    flex-direction: row;
+    row-gap: 4px;
+    margin: 8px 0;
+  }
+
+  &__field {
+    &_name {
+      & input[type="text"] {
+        font-size: 30px;
+      }
+    }
+    &_description {
+      & input[type="text"] {
+        font-size: 16px;
+      }
+    }
+  }
+}
