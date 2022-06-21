@@ -54,15 +54,17 @@ export const OptionsList = (props) => {
         </List>
       )}
       {handlers && (
-        <Button
-          size='small'
-          variant='text'
-          color='primary'
-          onClick={() => creatorRef.current.show()}>
-          Добавить опцию селектора
-        </Button>
+        <>
+          <Button
+            size='small'
+            variant='text'
+            color='primary'
+            onClick={() => creatorRef.current.show()}>
+            Добавить опцию селектора
+          </Button>
+          <NewOptionCreator ref={creatorRef} optionsHandlers={handlers} />
+        </>
       )}
-      <NewOptionCreator ref={creatorRef} optionsHandlers={handlers} />
     </Stack>
   );
 };

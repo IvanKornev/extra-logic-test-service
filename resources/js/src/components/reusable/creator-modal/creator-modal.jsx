@@ -1,6 +1,5 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useId } from 'react';
 import PropTypes from 'prop-types';
-import generateId from 'uniqid';
 
 import { buttons } from '@constants';
 import { useVisibilityManager } from '@hooks';
@@ -37,7 +36,7 @@ export const CreatorModal = forwardRef((props, ref) => {
             <Stack direction='row' spacing={2}>
               {buttons.editorModal.map((button) => (
                 <Button
-                  key={generateId()}
+                  key={useId()}
                   onClick={() => handleClick(button.action)}
                   id={`editor-modal__button_${button.action}`}
                   size='medium'
