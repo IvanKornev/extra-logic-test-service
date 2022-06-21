@@ -25,7 +25,8 @@
             "^@domains.*$": "<rootDir>/resources/js/src/domains",
             "^@hooks.*$": "<rootDir>/resources/js/src/hooks",
             "^@data-structures.*$": "<rootDir>/resources/js/src/data-structures",
-            "^@lib.*$": "<rootDir>/resources/js/src/lib/converters",
+            "^@lib/converters.*$": "<rootDir>/resources/js/src/lib/converters",
+            "^@lib/tests.*$": "<rootDir>/resources/js/src/lib/tests",
             "^@constants.*$": "<rootDir>/resources/js/src/constants",
             "^@global-states.*$": "<rootDir>/resources/js/src/global-states",
             "^@reducers.*$": "<rootDir>/resources/js/src/reducers"
@@ -48,14 +49,13 @@
         "eslint-plugin-promise": "^6.0.0",
         "eslint-plugin-react": "^7.30.0",
         "faker": "^6.6.6",
+        "husky": "^8.0.0",
         "jest": "^28.1.0",
         "laravel-mix": "^6.0.6",
         "nightwatch": "^2.1.8",
         "postcss": "^8.1.14",
         "prettier": "^2.6.2",
-        "react-test-renderer": "^18.1.0",
-        "sass-loader": "^13.0.0",
-        "husky": "^8.0.0"
+        "sass-loader": "^13.0.0"
     },
     "dependencies": {
         "@emotion/react": "^11.9.0",
@@ -77,8 +77,10 @@
         "prop-types": "^15.8.1",
         "react": "^18.1.0",
         "react-dom": "^18.1.0",
+        "react-test-renderer": "^18.2.0",
         "sass": "^1.52.3",
         "uniqid": "^5.4.0",
-        "uuid": "^8.3.2"
+        "uuid": "^8.3.2",
+        "yup": "^0.32.11"
     }
 }

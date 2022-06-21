@@ -1,11 +1,9 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-
+import { componentsRenderer } from '@lib/tests';
 import { selectHasOptions, isSelect } from '@domains';
 
 describe('Методы тега селектора', () => {
   it('Проверяет, является ли компонент селектором', () => {
-    const paragraph = renderParagraph();
+    const paragraph = componentsRenderer.renderParagraph();
     expect(isSelect(paragraph)).toBeFalsy();
   });
 
@@ -15,8 +13,3 @@ describe('Методы тега селектора', () => {
     expect(selectHasOptions(elemType, ['option #1'])).toBeTruthy();
   });
 });
-
-const renderParagraph = () => {
-  const Paragraph = () => <p>Параграф</p>;
-  return renderer.create(<Paragraph />);
-};

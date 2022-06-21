@@ -1,5 +1,4 @@
-import { faker } from '@faker-js/faker';
-
+import { generateFields } from '@lib/tests';
 import { LinkedList } from '@data-structures';
 import { createField, removeField, changeField, copyField } from '@domains';
 
@@ -10,13 +9,13 @@ describe('Методы нового поля', () => {
   });
 
   it('Создает новое поле', () => {
-    const newField = prepareFields();
+    const newField = generateFields();
     createField(newField, fieldsList);
     expect(fieldsList.head.value.name).toBe(newField.name);
   });
 
   it('Удаляет поле', () => {
-    const fields = prepareFields(3);
+    const fields = generateFields(3);
     fields.forEach((field) => createField(field, fieldsList));
 
     const secondFieldId = fieldsList.head.next.value.uniqueId;
@@ -25,7 +24,7 @@ describe('Методы нового поля', () => {
   });
 
   it('Изменяет значения поля', () => {
-    const [originalField, updatedField] = prepareFields(2);
+    const [originalField, updatedField] = generateFields(2);
 
     createField(originalField, fieldsList);
     expect(fieldsList.head.value.name).toBe(originalField.name);
@@ -35,7 +34,7 @@ describe('Методы нового поля', () => {
   });
 
   it('Дублирует поле', () => {
-    const newField = prepareFields(1);
+    const newField = generateFields(1);
     createField(newField, fieldsList);
 
     const originalField = fieldsList.head.value;
@@ -46,19 +45,3 @@ describe('Методы нового поля', () => {
     expect(originalField.uniqueId).not.toBe(copiedField.uniqueId);
   });
 });
-
-const prepareFields = (numberOfFields = 1) => {
-  const fields = [];
-  for (let i = 0; i < numberOfFields; i += 1) {
-    fields.push({
-      name: faker.word.adverb(5),
-      description: faker.word.adverb(5),
-      type: 'text',
-      isRequired: faker.datatype.boolean(),
-    });
-  }
-  if (fields.length === 1) {
-    return fields[0];
-  }
-  return fields;
-};
