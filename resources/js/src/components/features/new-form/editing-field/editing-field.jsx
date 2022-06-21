@@ -1,6 +1,5 @@
 import React, { useId } from 'react';
 import { useFormik, Formik, Form } from 'formik';
-import generateId from 'uniqid';
 
 import { observer } from 'mobx-react-lite';
 import { form } from '@global-states';
@@ -59,7 +58,7 @@ const NewFormEditingField = observer(() => {
               value={formik.values.type}
               color='secondary'>
               {fieldTypes.map((type) => (
-                <MenuItem value={type.value} key={generateId()}>
+                <MenuItem value={type.value} key={useId()}>
                   {type.title}
                 </MenuItem>
               ))}

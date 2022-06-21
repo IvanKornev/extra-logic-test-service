@@ -1,7 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import PropTypes from 'prop-types';
-import generateId from 'uniqid';
 
 import { wasSelected } from '@domains';
 import { formFields } from '@constants';
@@ -30,7 +29,7 @@ const NewFormFields = observer((props) => {
                 {!wasSelected(field.uniqueId, currentId) && (
                   <>
                     {formFields.map((name) => (
-                      <Stack key={generateId()} direction='row'>
+                      <Stack key={name} direction='row'>
                         <Typography component='h3' variant='h6'>
                           {field[name]}
                         </Typography>

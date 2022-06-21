@@ -1,11 +1,8 @@
 import React, { useId, forwardRef } from 'react';
-import PropTypes from 'prop-types';
-import generateId from 'uniqid';
-
 import { observer } from 'mobx-react-lite';
-import { form } from '@global-states';
 import { useFormik } from 'formik';
 
+import { form } from '@global-states';
 import { isSelect } from '@domains';
 import { useSelectOptionsHandler } from '@hooks';
 import { fieldValues, fieldFormStructure } from '@constants';
@@ -75,7 +72,7 @@ const EditorFields = ({ formikInstance }) => (
           onChange={formikInstance.handleChange}>
           {isSelect(component) &&
             component.options.map((option) => (
-              <MenuItem key={generateId()} value={option.value}>
+              <MenuItem key={useId()} value={option.value}>
                 {option.title}
               </MenuItem>
             ))}

@@ -1,7 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React, { useState, useId } from 'react';
 import { observer } from 'mobx-react-lite';
 import { throttle } from 'lodash';
-import generateId from 'uniqid';
 
 import { form } from '@global-states';
 import { snackbarMessages, throttlingButtons, buttons } from '@constants';
@@ -52,7 +51,7 @@ const NavbarButtons = observer(() => {
         const clickHandler = handleButton(button.action);
         return (
           <Button
-            key={generateId()}
+            key={useId()}
             id={`navbar__button_${button.action}`}
             color={button.color}
             variant='outlined'
