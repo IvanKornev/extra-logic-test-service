@@ -21,12 +21,14 @@ const NewOptionCreator = forwardRef((props, creatorRef) => {
   };
   return (
     <CreatorModal
+      creatingThing='option'
       form={form}
       ref={creatorRef}
       submitIsDisable={!formik.values.title || !formik.values.value}
       title='Новая опция селектора'>
       {Object.keys(formik.values).map((fieldName) => (
         <TextField
+          id={`new-option-creator__field_${fieldName}`}
           key={useId()}
           name={fieldName}
           label={optionLabels[fieldName]}

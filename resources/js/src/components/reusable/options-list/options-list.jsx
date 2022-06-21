@@ -56,6 +56,7 @@ export const OptionsList = (props) => {
       {handlers && (
         <>
           <Button
+            id='options-list__button_add'
             size='small'
             variant='text'
             color='primary'

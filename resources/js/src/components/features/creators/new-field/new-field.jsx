@@ -30,6 +30,7 @@ const NewFieldCreator = observer(
       formik.values.type === 'select' && optionsList.length === 0;
     return (
       <CreatorModal
+        creatingThing='field'
         ref={creatorRef}
         form={formData}
         submitIsDisable={disableCondition}
@@ -71,8 +72,11 @@ const EditorFields = ({ formikInstance }) => (
           color='primary'
           onChange={formikInstance.handleChange}>
           {isSelect(component) &&
-            component.options.map((option) => (
-              <MenuItem key={useId()} value={option.value}>
+            component.options.map((option, index) => (
+              <MenuItem
+                key={useId()}
+                id={`new-field-editor__option_${index + 1}`}
+                value={option.value}>
                 {option.title}
               </MenuItem>
             ))}

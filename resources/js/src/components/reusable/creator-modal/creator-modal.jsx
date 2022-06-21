@@ -9,7 +9,7 @@ import { Formik, Form } from 'formik';
 import styles from './creator-modal.module.scss';
 
 export const CreatorModal = forwardRef((props, ref) => {
-  const { title, submitIsDisable, form, children } = props;
+  const { title, submitIsDisable, form, children, creatingThing } = props;
   const manager = useVisibilityManager(ref, form.formikInstance.resetForm);
   const handleClick = (actionName) => {
     if (actionName === 'abort') {
@@ -21,24 +21,28 @@ export const CreatorModal = forwardRef((props, ref) => {
     <Modal
       open={manager.isVisible}
       onClose={() => ref.current.close()}
-      className={styles['editor-modal']}>
-      <Box component='section' className={styles['editor-modal__box']}>
+      id={`creator-modal ${creatingThing}`}
+      className={styles['creator-modal']}>
+      <Box component='section' className={styles['creator-modal__box']}>
         <Typography variant='h5' component='h5'>
           {title}
         </Typography>
         <Formik
           initialValues={form.initialValues}
           onSubmit={form.formikInstance.handleSubmit}>
-          <Form className={styles['editor-modal__form']}>
+          <Form className={styles['creator-modal__form']}>
             <Stack direction='column' spacing={2}>
               {children}
             </Stack>
-            <Stack direction='row' spacing={2}>
+            <Stack
+              className='creator-modal__buttons'
+              direction='row'
+              spacing={2}>
               {buttons.editorModal.map((button) => (
                 <Button
                   key={useId()}
                   onClick={() => handleClick(button.action)}
-                  id={`editor-modal__button_${button.action}`}
+                  id={`creator-modal__button_${button.action} ${creatingThing}`}
                   size='medium'
                   variant='contained'
                   color={button.color}
@@ -56,6 +60,7 @@ export const CreatorModal = forwardRef((props, ref) => {
 });
 
 CreatorModal.propTypes = {
+  creatingThing: PropTypes.oneOf(['field', 'option']).isRequired,
   title: PropTypes.string.isRequired,
   submitIsDisable: PropTypes.bool.isRequired,
   children: PropTypes.node.isRequired,
