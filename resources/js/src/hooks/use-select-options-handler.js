@@ -11,26 +11,26 @@ export const useSelectOptionsHandler = (initialList = []) => {
     switch (action.type) {
       case 'add': {
         const { values } = action.payload;
-        const list = [...state.list, addSelectOption(values)];
-        const wasUpdated = compareOptionLists(initialList, list);
-        return { list, wasUpdated };
+        return changeList(() => [...state.list, addSelectOption(values)]);
       }
       case 'edit': {
         const { values } = action.payload;
-        const list = editSelectOption(values, state.list);
-        const wasUpdated = compareOptionLists(initialList, list);
-        return { list, wasUpdated };
+        return changeList(() => editSelectOption(values, state.list));
       }
       case 'remove': {
         const { optionId } = action.payload;
-        const list = removeSelectOption(optionId, state.list);
-        const wasUpdated = compareOptionLists(initialList, list);
-        return { list, wasUpdated };
+        return changeList(() => removeSelectOption(optionId, state.list));
       }
       default: {
         throw new Error('Некорректный метод опции селектора');
       }
     }
+  };
+
+  const changeList = (listCallback) => {
+    const list = listCallback();
+    const wasUpdated = compareOptionLists(initialList, list);
+    return { list, wasUpdated };
   };
 
   const initialState = { list: initialList, wasUpdated: false };
