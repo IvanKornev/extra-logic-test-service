@@ -32,7 +32,7 @@ export const OptionsList = (props) => {
   const { handlers, list, scrollbarColor } = props;
   const scrollbarStyles = styles[`scrollbar_${scrollbarColor}`];
   return (
-    <Stack direction='column' justifyContent='center'>
+    <Stack id='options-list' direction='column' justifyContent='center'>
       {list.length !== 0 && (
         <List className={`${styles['list']} ${scrollbarStyles}`}>
           <Typography>Опции селектора: </Typography>
@@ -72,13 +72,23 @@ export const OptionsList = (props) => {
 
 const DefaultOption = ({ option, number, handlers, selectCallback }) => {
   const texts = getSelectOptionTexts(option, number);
+  const listClasses =
+    'options-list__option_default ' + styles['option_default'];
   return (
-    <ListItem className={styles['option_default']}>
+    <ListItem className={listClasses}>
       <ListItemText primary={texts.primary} secondary={texts.secondary} />
       {handlers && (
-        <Stack direction='row' spacing={1}>
-          <UilPen size={18} onClick={selectCallback} />
-          <UilTrashAlt size={18} onClick={() => handlers.remove(option.id)} />
+        <Stack className='option__actions' direction='row' spacing={1}>
+          <UilPen
+            className='option__actions_edit'
+            size={18}
+            onClick={selectCallback}
+          />
+          <UilTrashAlt
+            className='option__actions_remove'
+            size={18}
+            onClick={() => handlers.remove(option.id)}
+          />
         </Stack>
       )}
     </ListItem>
@@ -99,6 +109,7 @@ const EditingOption = ({ option, abortCallback, handlers }) => {
       <div className={styles['option__fields_editing']}>
         {optionFields.map((fieldName) => (
           <TextField
+            id={`option__field_${fieldName}`}
             placeholder={optionLabels[fieldName]}
             key={useId()}
             variant='standard'
@@ -109,8 +120,18 @@ const EditingOption = ({ option, abortCallback, handlers }) => {
         ))}
       </div>
       <div className={styles['option__buttons_editing']}>
-        <UilCheckCircle color={circleColor} size={28} onClick={editField} />
-        <UilTimesCircle color='#F12323' size={28} onClick={abortCallback} />
+        <UilCheckCircle
+          className='option__actions_confirm-changes'
+          color={circleColor}
+          size={28}
+          onClick={editField}
+        />
+        <UilTimesCircle
+          className='option__actions_discard-changes'
+          color='#F12323'
+          size={28}
+          onClick={abortCallback}
+        />
       </div>
     </div>
   );

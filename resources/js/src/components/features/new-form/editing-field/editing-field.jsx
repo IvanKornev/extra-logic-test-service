@@ -19,15 +19,12 @@ import {
 
 const NewFormEditingField = observer(() => {
   const { selectOptions } = form.selectedField;
-  const { optionsList, handlers } = useSelectOptionsHandler(selectOptions);
+  const { optionsState, handlers } = useSelectOptionsHandler(selectOptions);
   const formik = useFormik({
     initialValues: form.selectedField,
     onSubmit: (values) => {
-      const { uniqueId } = form.selectedField;
-      if (optionsList) {
-        values.selectOptions = optionsList;
-      }
-      form.changeField(uniqueId, values);
+      const data = { ...values, selectOptions: optionsState.list };
+      form.changeField(form.selectedField.uniqueId, data);
     },
   });
   return (
@@ -66,13 +63,13 @@ const NewFormEditingField = observer(() => {
             {formik.values.type === 'select' && (
               <OptionsList
                 scrollbarColor='purple'
-                list={optionsList}
+                list={optionsState.list}
                 handlers={handlers}
               />
             )}
           </FormControl>
           <div className={styles['editing-field__footer']}>
-            {formik.dirty && (
+            {(formik.dirty || optionsState.wasUpdated) && (
               <Button
                 id='editing-field__button_save'
                 startIcon={<UilCheckCircle />}

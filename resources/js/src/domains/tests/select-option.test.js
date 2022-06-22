@@ -52,10 +52,10 @@ describe('Методы опций селектора', () => {
   });
 
   it('Сравнивает два разных списка опций', () => {
-    let originalList = generateSelectOptions(4);
+    const originalList = generateSelectOptions(4);
 
     const newOption = generateSelectOptions();
-    let updatedList = [...originalList, newOption];
+    const updatedList = [...originalList, newOption];
 
     const wasUpdated = compareOptionLists(originalList, updatedList);
     expect(wasUpdated).toBeTruthy();

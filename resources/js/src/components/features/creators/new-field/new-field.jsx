@@ -13,11 +13,11 @@ import styles from './new-field.module.scss';
 
 const NewFieldCreator = observer(
   forwardRef((props, creatorRef) => {
-    const { optionsList, handlers } = useSelectOptionsHandler();
+    const { optionsState, handlers } = useSelectOptionsHandler();
     const formik = useFormik({
       initialValues: fieldValues,
       onSubmit: (eventValues, helpers) => {
-        form.createField({ ...eventValues, selectOptions: optionsList });
+        form.createField({ ...eventValues, selectOptions: optionsState.list });
         creatorRef.current.close();
         helpers.resetForm();
       },
@@ -27,7 +27,7 @@ const NewFieldCreator = observer(
       formikInstance: formik,
     };
     const disableCondition =
-      formik.values.type === 'select' && optionsList.length === 0;
+      formik.values.type === 'select' && optionsState.list.length === 0;
     return (
       <CreatorModal
         creatingThing='field'
@@ -39,7 +39,7 @@ const NewFieldCreator = observer(
         {formik.values.type === 'select' && (
           <OptionsList
             scrollbarColor='blue'
-            list={optionsList}
+            list={optionsState.list}
             handlers={handlers}
           />
         )}
