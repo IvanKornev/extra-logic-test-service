@@ -22,27 +22,32 @@ describe('Страница новой формы', () => {
     browser.assert.elementsCount('.new-form__field', 2);
   });
 
-  it('Изменяет одно из полей', (browser) => {
+  it('Изменяет поле, также делая его обязательным', (browser) => {
     browser.click('.new-form__field div:nth-of-type(2)');
-
     const fieldsNames = ['name', 'description'];
     fillInputs('#editing-field', fieldsNames);
 
-    const switchXpath =
-      '//*[@id="root"]/main/section/div/' +
+    const switchXpath = '//*[@id="root"]/main/section/div/' +
       ' div/div[1]/div/form/div[4]/div/label';
     browser.click('xpath', switchXpath);
     browser.click('#editing-field__button_save');
+
+    browser.getText('.new-form__field_name span:last-child', (text) => {
+      browser.assert.equal(text.value, '*');
+    });
   });
 
-  it('Добавляет селекторное поле с 2 опциями', (browser) => {
+  it('Добавляет селекторное поле с 3 опциями', (browser) => {
+    const optionsCount = 3;
     createField(browser, () => {
       browser.click('#new-field-editor__field_type');
       browser.click('#new-field-editor__option_3');
-      for (let i = 1; i <= 3; i += 1) {
+      for (let i = 1; i <= optionsCount; i += 1) {
         createSelectOption(browser);
       }
     });
+    const optionClass = '.options-list__option_default';
+    browser.assert.elementsCount(optionClass, optionsCount);
   });
 
   it('Удалив прежние опции селектора, добавляет одну новую', (browser) => {
@@ -53,8 +58,12 @@ describe('Страница новой формы', () => {
         browser.click('.option__actions_remove:last-child');
       }
     });
+
     createSelectOption(browser);
     browser.click('#editing-field__button_save');
+
+    const optionClass = '.options-list__option_default';
+    browser.assert.elementsCount(optionClass, 1);
   });
 
   it('Редактирует единственную опцию поля-селектора', (browser) => {
@@ -69,8 +78,8 @@ describe('Страница новой формы', () => {
     browser.click('#navbar__button_save');
     const xpathValue = '//*[@id="event-snackbar"]/div/div[2]';
     browser.getText('xpath', xpathValue, (text) => {
-      const expectedText =
-        'Форма успешно сохранена для использования пользователями';
+      const expectedText = 'Форма успешно сохранена'
+        + ' для использования пользователями';
       browser.assert.equal(text.value, expectedText);
     });
   });

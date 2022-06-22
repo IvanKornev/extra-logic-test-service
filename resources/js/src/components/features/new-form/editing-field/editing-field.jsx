@@ -34,7 +34,7 @@ const NewFormEditingField = observer(() => {
       return true;
     }
     const inputsAreEmpty = name.length < 1 || description.length < 1;
-    return (inputsAreEmpty) ? true : false;
+    return inputsAreEmpty ? true : false;
   };
   return (
     <>
