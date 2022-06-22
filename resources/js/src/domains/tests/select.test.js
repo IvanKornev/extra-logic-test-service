@@ -8,8 +8,7 @@ describe('Методы тега селектора', () => {
   });
 
   it('Проверяет, имеет ли опции селектор', () => {
-    const elemType = 'select';
-    expect(selectHasOptions(elemType, [])).toBeFalsy();
-    expect(selectHasOptions(elemType, ['option #1'])).toBeTruthy();
+    expect(selectHasOptions([])).toBeFalsy();
+    expect(selectHasOptions(['option #1'])).toBeTruthy();
   });
 });

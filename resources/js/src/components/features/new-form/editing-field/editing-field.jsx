@@ -30,9 +30,11 @@ const NewFormEditingField = observer(() => {
   });
   const disableSubmitButton = () => {
     const { type, name, description } = formik.values;
+    if (type === 'select' && !selectHasOptions(optionsState.list)) {
+      return true;
+    }
     const inputsAreEmpty = name.length < 1 || description.length < 1;
-    const hasOptions = selectHasOptions(type, optionsState.list);
-    return (!hasOptions || inputsAreEmpty) ? true : false;
+    return (inputsAreEmpty) ? true : false;
   };
   return (
     <>
