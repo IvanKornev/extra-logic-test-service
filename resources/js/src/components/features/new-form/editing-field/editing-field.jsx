@@ -2,6 +2,7 @@ import React, { useId } from 'react';
 import { useFormik, Formik, Form } from 'formik';
 
 import { observer } from 'mobx-react-lite';
+import { selectHasOptions } from '@domains';
 import { form } from '@global-states';
 import { fieldTypes, formFields } from '@constants';
 import { useSelectOptionsHandler } from '@hooks';
@@ -27,6 +28,12 @@ const NewFormEditingField = observer(() => {
       form.changeField(form.selectedField.uniqueId, data);
     },
   });
+  const disableSubmitButton = () => {
+    const { type, name, description } = formik.values;
+    const inputsAreEmpty = (name.length < 1 || description.length < 1);
+    const hasOptions = selectHasOptions(type, optionsState.list);
+    return (!hasOptions|| inputsAreEmpty);
+  }
   return (
     <>
       <Formik
@@ -75,6 +82,7 @@ const NewFormEditingField = observer(() => {
                 startIcon={<UilCheckCircle />}
                 type='submit'
                 color='success'
+                disabled={disableSubmitButton()}
                 onClick={formik.changeHandler}>
                 Сохранить
               </Button>
