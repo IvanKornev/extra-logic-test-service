@@ -12,6 +12,15 @@ export const createField = (browserInstance, additionalCallback) => {
   browserInstance.click('xpath', xpathValue);
 };
 
+export const createSelectOption = (browserInstance) => {
+  browserInstance.click('#options-list__button_add');
+  const fieldsNames = ['title', 'value'];
+  fillInputs('#new-option-creator', fieldsNames);
+
+  const buttonXpath = '//*[@id="creator-modal__button_save option"]';
+  browserInstance.click('xpath', buttonXpath);
+};
+
 export const fillInputs = (domainPrefix, fieldsNames) => {
   fieldsNames.forEach((fieldName) => {
     const selector = `${domainPrefix}__field_${fieldName}`;
