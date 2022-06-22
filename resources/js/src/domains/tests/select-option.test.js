@@ -6,9 +6,10 @@ import {
   removeSelectOption,
   getSelectOptionTexts,
   selectOptionIsEmpty,
+  compareOptionLists,
 } from '@domains';
 
-describe('Методы опции селектора', () => {
+describe('Методы опций селектора', () => {
   it('Добавляет новую опцию', () => {
     const newOption = generateSelectOptions();
     const result = addSelectOption(newOption);
@@ -42,6 +43,22 @@ describe('Методы опции селектора', () => {
     const texts = getSelectOptionTexts(newOption, 1);
     expect(texts.primary).toBe(`1) Имя: ${newOption.title}`);
     expect(texts.secondary).toBe(`Значение: ${newOption.value}`);
+  });
+
+  it('Сравнивает два одинаковых списка опций', () => {
+    const optionsList = generateSelectOptions(8);
+    const wasUpdated = compareOptionLists(optionsList, optionsList);
+    expect(wasUpdated).toBeFalsy();
+  });
+
+  it('Сравнивает два разных списка опций', () => {
+    let originalList = generateSelectOptions(4);
+
+    const newOption = generateSelectOptions();
+    let updatedList = [...originalList, newOption];
+
+    const wasUpdated = compareOptionLists(originalList, updatedList);
+    expect(wasUpdated).toBeTruthy();
   });
 
   it('Сокращает текст опции перед рендерингом', () => {
