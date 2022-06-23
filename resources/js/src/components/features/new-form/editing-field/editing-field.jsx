@@ -78,23 +78,24 @@ const NewFormEditingField = observer(() => {
             )}
           </FormControl>
           <div className={styles['editing-field__footer']}>
+            <LabledSwitch
+              id='editing-field__switch_make-require'
+              defaultState={form.selectedField.isRequired && true}
+              label='Обязательное'
+              name='isRequired'
+              changeHandler={formik.handleChange}
+            />
             {(formik.dirty || optionsState.wasUpdated) && (
               <Button
+                className={styles['editing-field__button_save']}
                 id='editing-field__button_save'
                 startIcon={<UilCheckCircle />}
                 type='submit'
                 color='success'
                 disabled={disableSubmitButton()}
-                onClick={formik.changeHandler}>
-                Сохранить
-              </Button>
+                onClick={formik.changeHandler}
+              />
             )}
-            <LabledSwitch
-              defaultState={form.selectedField.isRequired && true}
-              label='Обязательное поле'
-              name='isRequired'
-              changeHandler={formik.handleChange}
-            />
           </div>
         </Form>
       </Formik>

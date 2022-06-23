@@ -5,10 +5,6 @@
   flex-direction: row;
   row-gap: 10px;
 
-  & div:first-child {
-    @extend %default-field;
-  }
-
   & h3 {
     font-size: 16px;
   }

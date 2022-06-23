@@ -1,0 +1,9 @@
+.FormControlLabel {
+  & span:last-child {
+    @media screen and (max-width: 768px) {
+      margin-left: 0;
+      text-align: center;
+      font-size: 14px;
+    }
+  }
+}

@@ -4,3 +4,12 @@
     width: 240px;
   }
 }
+
+%default-box {
+  display: inline-flex;
+  background: white;
+  flex-direction: column;
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px rgba(0, 0, 0, 0.2) solid;
+}
