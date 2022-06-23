@@ -24,8 +24,8 @@ export const fieldAttributes = PropTypes.shape({
 export const createField = (values, list) => {
   const createdField = {
     uniqueId: generateId(),
-    name: values.name || 'Имя по умолчанию',
-    description: values.description || 'Описание по умолчанию',
+    name: values.name,
+    description: values.description,
     type: values.type,
     isRequired: values.isRequired,
   };
@@ -56,4 +56,5 @@ export const changeField = (id, values, list) => {
 
 export const copyField = (id, list) => list.copy(id);
 
-export const wasSelected = (fieldId, currentFieldId) => fieldId && currentFieldId && fieldId === currentFieldId && true;
+export const wasSelected = (fieldId, currentFieldId) =>
+  fieldId && currentFieldId && fieldId === currentFieldId && true;

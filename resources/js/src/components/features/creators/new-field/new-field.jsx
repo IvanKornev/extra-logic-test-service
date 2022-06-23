@@ -59,19 +59,20 @@ const NewFieldCreator = observer(
 const EditorFields = ({ formikInstance }) => (
   <>
     {fieldFormStructure.map((field) => {
-      const { values, handleBlur, handleChange, errors, touched } = formikInstance;
+      const { values, handleBlur, handleChange, errors, touched } =
+        formikInstance;
       const { name, label, component } = field;
       const CurrentComponent = component.name;
       const id = useId();
       return (
         <div className={styles['field__wrapper']} key={id}>
           <CurrentComponent
-            error={touched[name] && errors[name]}
+            error={(touched[name] && errors[name]) ? true : false}
             id={`new-field-editor__field_${name}`}
             name={name}
             label={label}
             value={values[name]}
-            color='primary'
+            color='secondary'
             onBlur={handleBlur}
             onChange={handleChange}>
             {isSelect(component) &&
@@ -82,7 +83,7 @@ const EditorFields = ({ formikInstance }) => (
                   value={option.value}>
                   {option.title}
                 </MenuItem>
-            ))}
+              ))}
           </CurrentComponent>
           {touched[name] && errors[name] && (
             <Alert className={styles['Alert']} severity='error'>

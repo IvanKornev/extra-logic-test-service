@@ -59,7 +59,7 @@ export const OptionsList = (props) => {
             id='options-list__button_add'
             size='small'
             variant='text'
-            color='primary'
+            color='secondary'
             onClick={() => creatorRef.current.show()}>
             Добавить опцию селектора
           </Button>

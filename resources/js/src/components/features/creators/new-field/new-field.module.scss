@@ -19,6 +19,10 @@
       font-size: 15px;
       justify-content: flex-start;
 
+      & div:last-child {
+        max-width: 160px;
+      }
+
       & div:first-child {
         margin-right: 6px;
       }
