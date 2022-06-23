@@ -67,7 +67,7 @@ const EditorFields = ({ formikInstance }) => (
       return (
         <div className={styles['field__wrapper']} key={id}>
           <CurrentComponent
-            error={(touched[name] && errors[name]) ? true : false}
+            error={touched[name] && errors[name] ? true : false}
             id={`new-field-editor__field_${name}`}
             name={name}
             label={label}

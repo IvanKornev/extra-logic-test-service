@@ -1,10 +1,10 @@
+@use '@styles/inherited.module.scss';
+
 .title-field {
-  &__wrapper {
-    display: inline-flex;
-    flex-direction: row;
-    row-gap: 4px;
-    margin: 8px 0;
-  }
+  display: inline-flex;
+  flex-direction: row;
+  row-gap: 4px;
+  margin: 8px 0;
 
   &__field {
     &_name {
@@ -17,5 +17,9 @@
         font-size: 16px;
       }
     }
+  }
+
+  & div:first-child {
+    @extend %default-field;
   }
 }

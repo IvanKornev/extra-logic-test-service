@@ -14,7 +14,7 @@ import styles from './title-field.module.scss';
 export const NewFormTitleField = observer(({ menuComponent }) => {
   const { fields, handle } = useFieldsHandler(titleFieldReducer, formValues);
   return (
-    <article className={styles['title-field__wrapper']}>
+    <div className={styles['title-field']}>
       <FieldBox onClick={() => form.selectField(null)} withBorder>
         {formFields.map((fieldName) => (
           <TextField
@@ -29,7 +29,7 @@ export const NewFormTitleField = observer(({ menuComponent }) => {
         ))}
       </FieldBox>
       {!form.selectedField && menuComponent}
-    </article>
+    </div>
   );
 });
 

@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { throttle } from 'lodash';
 
 import { form } from '@global-states';
-import { snackbarMessages, throttlingButtons, buttons } from '@constants';
+import { snackbarMessages, buttons } from '@constants';
 import { useSnackbar } from '@hooks';
 
 import { EventSnackbar } from '@components/reusable';

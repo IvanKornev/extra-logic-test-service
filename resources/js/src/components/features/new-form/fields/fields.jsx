@@ -25,33 +25,30 @@ const NewFormFields = observer((props) => {
             key={field.uniqueId}
             className={divClasses}>
             <FieldBox>
-              <div>
-                {!wasSelected(field.uniqueId, currentId) && (
-                  <>
-                    {formFields.map((name) => (
-                      <Stack
-                        className={`new-form__field_${name}`}
-                        key={name}
-                        direction='row'>
-                        <Typography component='h3' variant='h6'>
-                          {field[name]}
-                        </Typography>
-                        {field.isRequired && name === 'name' && (
-                          <RequiredFieldMark />
-                        )}
-                      </Stack>
-                    ))}
-                    {field.type === 'select' && (
-                      <OptionsList
-                        scrollbarColor='purple'
-                        list={field.selectOptions}
-                      />
-                    )}
-                  </>
-                )}
-                {wasSelected(field.uniqueId, currentId) &&
-                  selectedFieldComponent}
-              </div>
+              {!wasSelected(field.uniqueId, currentId) && (
+                <>
+                  {formFields.map((name) => (
+                    <Stack
+                      className={`new-form__field_${name}`}
+                      key={name}
+                      direction='row'>
+                      <Typography component='h3' variant='h6'>
+                        {field[name]}
+                      </Typography>
+                      {field.isRequired && name === 'name' && (
+                        <RequiredFieldMark />
+                      )}
+                    </Stack>
+                  ))}
+                  {field.type === 'select' && (
+                    <OptionsList
+                      scrollbarColor='purple'
+                      list={field.selectOptions}
+                    />
+                  )}
+                </>
+              )}
+              {wasSelected(field.uniqueId, currentId) && selectedFieldComponent}
             </FieldBox>
             {wasSelected(field.uniqueId, currentId) && menuComponent}
           </div>
