@@ -3,11 +3,11 @@ import { observer } from 'mobx-react-lite';
 import { useFormik } from 'formik';
 
 import { form } from '@global-states';
-import { isSelect } from '@domains';
+import { isSelect, fieldValidationSchema } from '@domains';
 import { useSelectOptionsHandler } from '@hooks';
 import { fieldValues, fieldFormStructure } from '@constants';
 
-import { MenuItem } from '@mui/material';
+import { MenuItem, Alert } from '@mui/material';
 import { CreatorModal, OptionsList, LabledSwitch } from '@components/reusable';
 import styles from './new-field.module.scss';
 
@@ -16,6 +16,7 @@ const NewFieldCreator = observer(
     const { optionsState, handlers } = useSelectOptionsHandler();
     const formik = useFormik({
       initialValues: fieldValues,
+      validationSchema: fieldValidationSchema,
       onSubmit: (eventValues, helpers) => {
         form.createField({ ...eventValues, selectOptions: optionsState.list });
         creatorRef.current.close();
@@ -58,29 +59,37 @@ const NewFieldCreator = observer(
 const EditorFields = ({ formikInstance }) => (
   <>
     {fieldFormStructure.map((field) => {
+      const { values, handleBlur, handleChange, errors, touched } = formikInstance;
       const { name, label, component } = field;
       const CurrentComponent = component.name;
       const id = useId();
       return (
-        <CurrentComponent
-          key={id}
-          id={`new-field-editor__field_${name}`}
-          name={name}
-          label={label}
-          value={formikInstance.values[name]}
-          variant='standard'
-          color='primary'
-          onChange={formikInstance.handleChange}>
-          {isSelect(component) &&
-            component.options.map((option, index) => (
-              <MenuItem
-                key={useId()}
-                id={`new-field-editor__option_${index + 1}`}
-                value={option.value}>
-                {option.title}
-              </MenuItem>
+        <div className={styles['field__wrapper']} key={id}>
+          <CurrentComponent
+            error={touched[name] && errors[name]}
+            id={`new-field-editor__field_${name}`}
+            name={name}
+            label={label}
+            value={values[name]}
+            color='primary'
+            onBlur={handleBlur}
+            onChange={handleChange}>
+            {isSelect(component) &&
+              component.options.map((option, index) => (
+                <MenuItem
+                  key={useId()}
+                  id={`new-field-editor__option_${index + 1}`}
+                  value={option.value}>
+                  {option.title}
+                </MenuItem>
             ))}
-        </CurrentComponent>
+          </CurrentComponent>
+          {touched[name] && errors[name] && (
+            <Alert className={styles['Alert']} severity='error'>
+              {errors[name]}
+            </Alert>
+          )}
+        </div>
       );
     })}
   </>

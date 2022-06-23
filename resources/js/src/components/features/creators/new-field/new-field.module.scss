@@ -3,3 +3,25 @@
     display: flex;
   }
 }
+
+.field {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 12px;
+
+    &:not(:last-child) {
+      margin-bottom: 12px;
+    }
+
+    & .Alert {
+      padding: 0 16px 0 6px;
+      font-size: 15px;
+      justify-content: flex-start;
+
+      & div:first-child {
+        margin-right: 6px;
+      }
+    }
+  }
+}

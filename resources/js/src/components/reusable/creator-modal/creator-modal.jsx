@@ -31,7 +31,7 @@ export const CreatorModal = forwardRef((props, ref) => {
           initialValues={form.initialValues}
           onSubmit={form.formikInstance.handleSubmit}>
           <Form className={styles['creator-modal__form']}>
-            <Stack direction='column' spacing={2}>
+            <Stack direction='column'>
               {children}
             </Stack>
             <Stack

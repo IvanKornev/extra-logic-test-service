@@ -12,6 +12,7 @@ export {
 } from './select-option';
 
 export {
+  fieldValidationSchema,
   fieldAttributes,
   wasSelected,
   createField,
