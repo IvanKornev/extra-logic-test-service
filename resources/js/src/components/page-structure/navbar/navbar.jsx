@@ -51,7 +51,7 @@ const NavbarInteractivePart = observer(({ isMobileDevice }) => {
     form[actionName]();
     setThrottlingStatus(true);
     showMessage(messages.form[actionName].success);
-    setTimeout(() => setThrottlingStatus(false), 1500);
+    setTimeout(() => setThrottlingStatus(false), 2000);
   };
   return (
     <>
@@ -85,7 +85,7 @@ const NavbarInteractivePart = observer(({ isMobileDevice }) => {
               variant={isMobileDevice ? 'contained' : 'outlined'}
               disabled={isDisable}
               type='button'
-              onClick={throttle(clickHandler, 1500)}>
+              onClick={throttle(clickHandler, 2000)}>
               {button.text}
             </Button>
           );

@@ -1,6 +1,10 @@
+@use '@styles/mixins';
+
 .event-message {
   &__alert {
+    @include mixins.fade-in-left;
     cursor: default;
+    
     @media screen and (max-width: 768px) {
       & div:nth-child(2) {
         max-width: 8em;

@@ -32,3 +32,10 @@
     background-color: transparent;
   }
 }
+
+@mixin fade-in-left($duration: 0.8s) {
+  animation: fade-animation $duration forwards;
+  @keyframes fade-animation {
+    0% {transform: translateX(-150%);}
+  }
+}
