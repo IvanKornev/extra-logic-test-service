@@ -5,6 +5,12 @@
   }
 }
 
+@mixin cursor-effect($opacity: 0.8, $transition: 0.3s) {
+  cursor: pointer;
+  transition: $transition;
+  opacity: $opacity;
+}
+
 @mixin pseudo-elem-line($height: 1px, $color: #4c2b87) {
   height: $height;
   width: 100%;

@@ -104,4 +104,4 @@ export const buttons = {
 export const autohideDefaultOptions = {
   isEnable: false,
   duration: 0,
-}
+};

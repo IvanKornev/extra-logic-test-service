@@ -17,9 +17,11 @@ const NewFormMenu = observer(
           const { iconName, action, tooltip } = item;
           const id = useId();
           const IconComponent = iconName;
-
           const isDisable = onlyAddOption && action.name !== 'add';
-          const classSuffix = isDisable ? '_disabled' : '_enabled';
+
+          const classSuffix = isDisable ? 'disabled' : 'enabled';
+          const itemClass = styles[`menu__item_${classSuffix}`];
+          const iconClass = styles['menu__icon'];
           return (
             <Tooltip key={id} title={tooltip} placement='right'>
               <>
@@ -28,7 +30,7 @@ const NewFormMenu = observer(
                   id={`menu__icon_${action.name}`}
                   color='#545454'
                   onClick={action.callback}
-                  className={styles[`menu__item${classSuffix}`]}
+                  className={`${itemClass} ${iconClass}`}
                 />
               </>
             </Tooltip>

@@ -25,6 +25,7 @@ export const Navbar = observer(() => {
         {!isMobileDevice && <NavbarInteractivePart />}
         {isMobileDevice && (
           <UilBars
+            className={styles['navbar__icon_bars']}
             color='rgb(76, 43, 135)'
             onClick={() => openDrawer(true)}
             size={36}
