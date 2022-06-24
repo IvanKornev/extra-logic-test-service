@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect } from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { useVisibilityManager } from '@hooks';
 
@@ -7,44 +7,37 @@ import styles from './event-message.module.scss';
 
 export const EventMessage = forwardRef((props, ref) => {
   const { anchorOrigin, message, alertSeverity, withSnackbar } = props;
-  const manager = useVisibilityManager(ref);
-  // useEffect(() => {
-  //   if (!withSnackbar) {
-  //     setTimeout(() => ref.current.close(), 2000);
-  //   }
-  // }, [message]);
   return (
-    <>
-      {withSnackbar && (
-        <Snackbar
-          id='event-message'
-          anchorOrigin={anchorOrigin}
-          open={manager.isVisible}
-          onClose={() => ref.current.close()}
-          autoHideDuration={1500}>
-          <Alert
-            className={styles['event-message__alert']}
-            variant='filled'
-            onClose={() => ref.current.close()}
-            severity={alertSeverity}>
-            {message}
-          </Alert>
-        </Snackbar>
-      )}
-      {!withSnackbar && (
-        <>
-          {manager.isVisible && (
-            <Alert
-              className={styles['event-message__alert']}
-              variant='filled'
-              onClose={() => ref.current.close()}
-              severity={alertSeverity}>
-              {message}
-            </Alert>
-          )}
-        </>
-      )}
-    </>
+    <EventMessageSnackbar
+      ref={ref}
+      anchorOrigin={anchorOrigin}
+      withSnackbar={withSnackbar}>
+      <Alert
+        className={styles['event-message__alert']}
+        variant='filled'
+        onClose={() => ref.current.close()}
+        severity={alertSeverity}>
+        {message}
+      </Alert>
+    </EventMessageSnackbar>
+  );
+});
+
+const EventMessageSnackbar = forwardRef((props, ref) => {
+  const { children, withSnackbar, anchorOrigin } = props;
+  const manager = useVisibilityManager(ref);
+  if (!withSnackbar && manager.isVisible) {
+    return children;
+  }
+  return (
+    <Snackbar
+      id='event-message'
+      anchorOrigin={anchorOrigin}
+      open={manager.isVisible}
+      onClose={() => ref.current.close()}
+      autoHideDuration={1500}>
+      {children}
+    </Snackbar>
   );
 });
 
