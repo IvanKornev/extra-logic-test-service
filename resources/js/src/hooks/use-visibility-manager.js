@@ -1,7 +1,21 @@
-import { useState, useImperativeHandle } from 'react';
+import { useEffect, useState, useImperativeHandle } from 'react';
 
-export const useVisibilityManager = (elemRef, callback) => {
+const defaultOptions = {
+  isEnable: false,
+  duration: 0,
+};
+
+const useVisibilityManager = (elemRef, autohide = defaultOptions, callback = null) => {
   const [isVisible, setVisibility] = useState(false);
+
+  useEffect(() => {
+    if (isVisible && autohide.isEnable) {
+      setTimeout(() => {
+        setVisibility(false);
+      }, autohide.duration);
+    }
+  }, [isVisible]);
+
   useImperativeHandle(elemRef, () => ({
     show: () => setVisibility(true),
     close: () => {
@@ -13,3 +27,5 @@ export const useVisibilityManager = (elemRef, callback) => {
   }));
   return { isVisible, setVisibility };
 };
+
+export { useVisibilityManager };

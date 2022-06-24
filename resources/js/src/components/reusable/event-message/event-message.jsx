@@ -25,7 +25,9 @@ export const EventMessage = forwardRef((props, ref) => {
 
 const EventMessageSnackbar = forwardRef((props, ref) => {
   const { children, withSnackbar, anchorOrigin } = props;
-  const manager = useVisibilityManager(ref);
+  const manager = useVisibilityManager(ref, {
+    isEnable: true, duration: 1500,
+  });
   if (!withSnackbar && manager.isVisible) {
     return children;
   }
@@ -34,8 +36,7 @@ const EventMessageSnackbar = forwardRef((props, ref) => {
       id='event-message'
       anchorOrigin={anchorOrigin}
       open={manager.isVisible}
-      onClose={() => ref.current.close()}
-      autoHideDuration={1500}>
+      onClose={() => ref.current.close()}>
       {children}
     </Snackbar>
   );
