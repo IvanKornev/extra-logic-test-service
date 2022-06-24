@@ -5,6 +5,12 @@
   }
 }
 
+@mixin pseudo-elem-line($height: 1px, $color: #4c2b87) {
+  height: $height;
+  width: 100%;
+  background: $color;
+}
+
 @mixin standard-scrollbar($thumb-color, $track-color: transparent) {
   &::-webkit-scrollbar-thumb {
     border-radius: 10px;

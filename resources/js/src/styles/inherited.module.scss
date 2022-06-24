@@ -5,6 +5,19 @@
   }
 }
 
+%item-with-icon {
+  column-gap: 6px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  &:hover {
+    cursor: pointer;
+    transition: 0.3s;
+    opacity: 0.8;
+  }
+}
+
 %default-box {
   display: inline-flex;
   background: white;

@@ -1,3 +1,68 @@
+@use '@styles/inherited.module.scss';
+@use '@styles/mixins';
+
 .navbar {
   padding: 8px 16px 6px 12px;
+
+  &__wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+
+    @media screen and (max-width: 768px) {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    column-gap: 6px;
+  }
+
+  &__item {
+    @extend %item-with-icon;
+
+    & h1, h2, h3, h4, h5, h6 {
+      color: #4c2b87;
+    }
+  }
+
+  &__items {
+    display: flex;
+    justify-content: center;
+    position: relative;
+
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+      &:after {
+        @include mixins.pseudo-elem-line(2px);
+        bottom: 0;
+        margin: 12px 0;
+        content: "";
+        opacity: 0.6;
+      }
+    }
+  }
+
+  &__buttons {
+    justify-content: flex-end;
+    display: flex;
+    column-gap: 12px;
+    position: relative;
+
+    @media screen and (max-width: 768px) {
+      display: flex;
+      row-gap: 8px;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+}
+
+.drawer {
+  &__wrapper {
+    padding: 8px 18px;
+  }
 }
