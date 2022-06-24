@@ -1,11 +1,11 @@
 import { useEffect, useState, useImperativeHandle } from 'react';
+import { autohideDefaultOptions } from '@constants';
 
-const defaultOptions = {
-  isEnable: false,
-  duration: 0,
-};
-
-const useVisibilityManager = (elemRef, autohide = defaultOptions, callback = null) => {
+const useVisibilityManager = (
+  elemRef,
+  onCloseCallback = null,
+  autohide = autohideDefaultOptions,
+) => {
   const [isVisible, setVisibility] = useState(false);
 
   useEffect(() => {
@@ -20,8 +20,8 @@ const useVisibilityManager = (elemRef, autohide = defaultOptions, callback = nul
     show: () => setVisibility(true),
     close: () => {
       setVisibility(false);
-      if (typeof callback === 'function') {
-        callback();
+      if (typeof onCloseCallback === 'function') {
+        onCloseCallback();
       }
     },
   }));

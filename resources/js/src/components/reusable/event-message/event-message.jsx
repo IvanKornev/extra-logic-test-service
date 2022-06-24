@@ -25,9 +25,10 @@ export const EventMessage = forwardRef((props, ref) => {
 
 const EventMessageSnackbar = forwardRef((props, ref) => {
   const { children, withSnackbar, anchorOrigin } = props;
-  const manager = useVisibilityManager(ref, {
-    isEnable: true, duration: 1500,
-  });
+
+  const autohideOptions = { isEnable: true, duration: 1500 };
+  const manager = useVisibilityManager(ref, null, autohideOptions);
+
   if (!withSnackbar && manager.isVisible) {
     return children;
   }
