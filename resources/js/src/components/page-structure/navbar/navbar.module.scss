@@ -24,7 +24,12 @@
   &__item {
     @extend %item-with-icon;
 
-    & h1, h2, h3, h4, h5, h6 {
+    & h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
       color: #4c2b87;
     }
   }
@@ -40,7 +45,7 @@
         @include mixins.pseudo-elem-line(2px);
         bottom: 0;
         margin: 12px 0;
-        content: "";
+        content: '';
         opacity: 0.6;
       }
     }
@@ -63,6 +68,7 @@
 
 .drawer {
   &__wrapper {
-    padding: 8px 18px;
+    min-width: 25vh; 
+    padding: 0.5em 1em;
   }
 }

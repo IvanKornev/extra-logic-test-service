@@ -1,0 +1,11 @@
+.event-message {
+  &__alert {
+    @media screen and (max-width: 768px) {
+      & div:nth-child(2) {
+        max-width: 8em;
+        text-align: center;
+        justify-content: center;
+      }
+    }
+  }
+}

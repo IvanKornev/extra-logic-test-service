@@ -77,7 +77,7 @@ describe('Страница новой формы', () => {
 
   it('Отправляет новую форму на сервер', (browser) => {
     browser.click('#navbar__button_save');
-    const xpathValue = '//*[@id="event-snackbar"]/div/div[2]';
+    const xpathValue = '//*[@id="event-message"]/div/div[2]';
     browser.getText('xpath', xpathValue, (text) => {
       const expectedText =
         'Форма успешно сохранена для использования пользователями';

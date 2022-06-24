@@ -3,11 +3,11 @@ import { observer } from 'mobx-react-lite';
 import { throttle } from 'lodash';
 
 import { form } from '@global-states';
-import { snackbarMessages, buttons } from '@constants';
-import { useSnackbar, useDrawer } from '@hooks';
+import { messages, buttons } from '@constants';
+import { useMessenger, useDrawer } from '@hooks';
 
-import { EventSnackbar } from '@components/reusable';
-import { Button, Typography, Tabs, Tab, Drawer } from '@mui/material';
+import { EventMessage } from '@components/reusable';
+import { Button, Typography, Tabs, Tab, Drawer, Alert } from '@mui/material';
 import { UilFileAlt, UilBars, UilPlusSquare } from '@iconscout/react-unicons';
 import styles from './navbar.module.scss';
 
@@ -22,9 +22,7 @@ export const Navbar = observer(() => {
             Новая форма
           </Typography>
         </div>
-        {!isMobileDevice && (
-          <NavbarInteractivePart />
-        )}
+        {!isMobileDevice && <NavbarInteractivePart />}
         {isMobileDevice && (
           <UilBars
             color='rgb(76, 43, 135)'
@@ -47,11 +45,11 @@ export const Navbar = observer(() => {
 
 const NavbarInteractivePart = observer(({ isMobileDevice }) => {
   const [wasThrottled, setThrottlingStatus] = useState(false);
-  const { message, showSnackbar, snackbarRef } = useSnackbar();
+  const { message, showMessage, messengerRef } = useMessenger();
   const handleButton = (actionName) => () => {
     form[actionName]();
     setThrottlingStatus(true);
-    showSnackbar(snackbarMessages.form[actionName].success);
+    showMessage(messages.form[actionName].success);
     setTimeout(() => setThrottlingStatus(false), 1500);
   };
   return (
@@ -63,7 +61,7 @@ const NavbarInteractivePart = observer(({ isMobileDevice }) => {
             <Typography variant='h6' component='h2'>
               Создать форму
             </Typography>
-          </div>  
+          </div>
         )}
         {!isMobileDevice && (
           <Tabs
@@ -91,7 +89,11 @@ const NavbarInteractivePart = observer(({ isMobileDevice }) => {
             </Button>
           );
         })}
-        <EventSnackbar message={message} ref={snackbarRef} />
+        <EventMessage
+          withSnackbar={isMobileDevice ? false : true}
+          message={message}
+          ref={messengerRef}
+        />
       </div>
     </>
   );
