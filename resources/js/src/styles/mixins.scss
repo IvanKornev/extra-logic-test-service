@@ -33,9 +33,19 @@
   }
 }
 
-@mixin fade-in-left($duration: 0.8s) {
-  animation: fade-animation $duration forwards;
+@mixin fade-in-left($duration: 3s) {
+  animation: fade-animation $duration;
   @keyframes fade-animation {
-    0% {transform: translateX(-150%);}
+    0% {
+      transform: translateX(-150%);
+    }
+    25% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 0;
+    }
   }
 }
