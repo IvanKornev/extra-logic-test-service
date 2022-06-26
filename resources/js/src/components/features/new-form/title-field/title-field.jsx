@@ -11,28 +11,24 @@ import { FieldBox } from '@components/reusable';
 import { TextField } from '@mui/material';
 import styles from './title-field.module.scss';
 
-export const NewFormTitleField = observer(({ menuComponent }) => {
+export const NewFormTitleField = observer(() => {
   const { fields, handle } = useFieldsHandler(titleFieldReducer, formValues);
   return (
-    <div className={styles['title-field']}>
-      <FieldBox onClick={() => form.selectField(null)} withBorder>
-        {formFields.map((fieldName) => (
-          <TextField
-            key={useId()}
-            color='secondary'
-            variant='standard'
-            value={fields[fieldName]}
-            onChange={(e) => handle(e, fieldName)}
-            onBlur={() => form.changeTitleField(fields)}
-            className={styles[`title-field__field_${fieldName}`]}
-          />
-        ))}
-      </FieldBox>
-      {!form.selectedField && menuComponent}
-    </div>
+    <FieldBox
+      additionalClasses={[styles['title-field']]}
+      onClick={() => form.selectField(null)}
+      withBorder>
+      {formFields.map((fieldName) => (
+        <TextField
+          key={useId()}
+          color='secondary'
+          variant='standard'
+          value={fields[fieldName]}
+          onChange={(e) => handle(e, fieldName)}
+          onBlur={() => form.changeTitleField(fields)}
+          className={styles[`title-field__field_${fieldName}`]}
+        />
+      ))}
+    </FieldBox>
   );
 });
-
-NewFormTitleField.propTypes = {
-  menuComponent: PropTypes.element.isRequired,
-};

@@ -1,11 +1,8 @@
 @use '@styles/inherited.module.scss';
 
 .field {
-  display: flex;
-  flex-direction: row;
-  row-gap: 10px;
-
+  @extend %default-field;
   & h3 {
-    font-size: 16px;
+    font-size: 1.8rem;
   }
 }

@@ -18,13 +18,16 @@ const NewFormPage = observer(() => {
   return (
     <section className={styles['page']}>
       <div className={styles['page__wrapper']}>
-        <NewFormTitleField
-          menuComponent={<NewFormMenu ref={creatorRef} onlyAddOption={true} />}
-        />
-        <NewFormFields
-          selectedFieldComponent={<NewFormEditingField />}
-          menuComponent={<NewFormMenu ref={creatorRef} />}
-        />
+        <div className={styles['page__fields']}>
+          <NewFormTitleField />
+          <NewFormFields selectedFieldComponent={<NewFormEditingField />} />
+        </div>
+        <div className={styles['page__menu']}>
+          <NewFormMenu
+            ref={creatorRef}
+            onlyAddOption={!form.selectedField ? true : false}
+          />
+        </div>
       </div>
       <NewFieldCreator ref={creatorRef} />
     </section>

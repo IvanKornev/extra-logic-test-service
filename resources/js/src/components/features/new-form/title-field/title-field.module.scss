@@ -1,11 +1,7 @@
 @use '@styles/inherited.module.scss';
 
 .title-field {
-  display: inline-flex;
-  flex-direction: row;
-  row-gap: 4px;
-  margin: 8px 0;
-
+  @extend %default-field;
   &__field {
     &_name {
       & input[type='text'] {
@@ -17,9 +13,5 @@
         font-size: 16px;
       }
     }
-  }
-
-  & div:first-child {
-    @extend %default-field;
   }
 }
