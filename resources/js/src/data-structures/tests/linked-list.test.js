@@ -17,8 +17,8 @@ describe('Односвязный список', () => {
   it('Находит ноду по id среди десятка других', () => {
     const uniqueId = faker.datatype.uuid();
     fillList(uniqueId, list);
-    const foundNode = list.find(uniqueId);
-    expect(foundNode.value.uniqueId).toBe(uniqueId);
+    const { node } = list.find(uniqueId);
+    expect(node.value.uniqueId).toBe(uniqueId);
   });
 
   it('Возвращает false при ненахождении ноды', () => {
@@ -43,7 +43,7 @@ describe('Односвязный список', () => {
     const uniqueId = faker.datatype.uuid();
     fillList(uniqueId, list);
 
-    expect(list.find(uniqueId)).toBeTruthy();
+    expect(list.find(uniqueId).node).toBeTruthy();
     list.remove(uniqueId);
     expect(list.find(uniqueId)).toBeFalsy();
   });

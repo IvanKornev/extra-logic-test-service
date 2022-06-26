@@ -32,18 +32,23 @@ export class LinkedList {
   find(id) {
     let currentNode = this.head;
     let foundNode = null;
+    let position = 1;
     while (currentNode) {
       if (currentNode.value.uniqueId === id) {
         foundNode = currentNode;
         break;
       }
       currentNode = currentNode.next;
+      position += 1;
     }
 
     if (!foundNode) {
       return false;
     }
-    return foundNode;
+    return {
+      node: foundNode,
+      position,
+    };
   }
 
   change(id, value) {
