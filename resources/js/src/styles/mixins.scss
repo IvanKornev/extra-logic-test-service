@@ -49,3 +49,39 @@
     }
   }
 }
+
+@mixin vertical-movement($starting-point: 100%, $duration: 0.5s) {
+  animation: vertical-movement $duration forwards;
+  @keyframes vertical-movement {
+    0% {
+      transform: translateY($starting-point);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+}
+
+@mixin move-up() {
+  animation: move-up 0.5s forwards;
+  @keyframes move-up {
+    0% {
+      transform: translateY(100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+}
+
+@mixin move-down() {
+  animation: move-down 0.5s forwards;
+  @keyframes move-down {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+}
