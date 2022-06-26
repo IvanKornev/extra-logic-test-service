@@ -56,5 +56,4 @@ export const changeField = (id, values, list) => {
 
 export const copyField = (id, list) => list.copy(id);
 
-export const wasSelected = (fieldId, currentFieldId) =>
-  fieldId && currentFieldId && fieldId === currentFieldId && true;
+export const wasSelected = (fieldId, currentFieldId) => fieldId && currentFieldId && fieldId === currentFieldId && true;
