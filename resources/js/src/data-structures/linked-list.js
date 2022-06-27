@@ -2,11 +2,10 @@ import generateId from 'uniqid';
 import { ListItem } from './list-item';
 
 export class LinkedList {
-  length = 0;
-
   constructor() {
     this.head = null;
     this.tail = null;
+    this.length = 0;
   }
 
   insert(value) {
@@ -23,7 +22,9 @@ export class LinkedList {
       currentNode = currentNode.next;
     }
     const lastNode = currentNode;
+    newNode.previous = lastNode;
     lastNode.next = newNode;
+
     this.tail = newNode;
     this.length += 1;
     return this;
@@ -65,23 +66,23 @@ export class LinkedList {
 
   copy(id) {
     let currentNode = this.head;
-    let copied = null;
-    while (!copied) {
+    let copiedValue;
+    while (!copiedValue) {
       if (currentNode.value.uniqueId !== id) {
         currentNode = currentNode.next;
       }
       if (currentNode.value.uniqueId === id) {
-        copied = JSON.parse(JSON.stringify(currentNode));
+        copiedValue = JSON.parse(JSON.stringify(currentNode.value));
       }
     }
 
-    const originalId = copied.value.uniqueId;
-    copied.value.uniqueId = generateId();
-    if (this.tail.value.uniqueId === originalId) {
-      this.tail = new ListItem(copied);
-    }
+    const originalId = copiedValue.uniqueId;
+    copiedValue.uniqueId = generateId();
+    currentNode.next = new ListItem(copiedValue, currentNode.next, currentNode);
 
-    currentNode.next = copied;
+    if (this.tail.value.uniqueId === originalId) {
+      this.tail = new ListItem(copiedValue, null, currentNode);
+    }
     this.length += 1;
     return {
       list: this,
@@ -98,7 +99,9 @@ export class LinkedList {
     while (this.head && this.head.value.uniqueId === id) {
       removedNode = this.head;
       this.head = this.head.next;
-      this.length -= 1;
+      if (this.head?.previous) {
+        this.head.previous = null;
+      }        
     }
 
     let currentNode = this.head;
@@ -106,7 +109,9 @@ export class LinkedList {
       if (currentNode.next.value.uniqueId === id) {
         removedNode = currentNode.next;
         currentNode.next = currentNode.next.next;
-        this.length -= 1;
+        if (currentNode.next?.previous) {
+          currentNode.next.previous = currentNode;
+        }
       } else {
         currentNode = currentNode.next;
       }
@@ -114,9 +119,10 @@ export class LinkedList {
 
     if (this.tail.value.uniqueId === id) {
       removedNode = this.tail;
-      this.tail = currentNode;
-      this.length -= 1;
+      this.tail = this.tail.previous;
     }
+
+    this.length -= 1;
     return {
       list: this,
       removedNode,

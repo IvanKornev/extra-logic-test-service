@@ -1,8 +1,6 @@
 import { generateFields } from '@lib/tests';
 import { LinkedList } from '@data-structures';
-import {
-  createField, removeField, changeField, copyField,
-} from '@domains';
+import { createField, removeField, changeField, copyField } from '@domains';
 
 describe('Методы нового поля', () => {
   let fieldsList;
@@ -20,9 +18,10 @@ describe('Методы нового поля', () => {
     const fields = generateFields(3);
     fields.forEach((field) => createField(field, fieldsList));
 
-    const secondFieldId = fieldsList.head.next.value.uniqueId;
-    const { removedNode } = removeField(secondFieldId, fieldsList);
-    expect(removedNode.value.uniqueId).toBe(secondFieldId);
+    const firstFieldId = fieldsList.head.value.uniqueId;
+    expect(fieldsList.head.value.uniqueId).toBe(firstFieldId);
+    removeField(firstFieldId, fieldsList);
+    expect(fieldsList.head.value.uniqueId).not.toBe(firstFieldId);
   });
 
   it('Изменяет значения поля', () => {

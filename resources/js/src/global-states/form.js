@@ -3,9 +3,7 @@ import { makeAutoObservable } from 'mobx';
 import { LinkedList } from '@data-structures';
 import { LinkedListConverter } from '@lib/converters';
 import { saveForm } from '@api';
-import {
-  createField, removeField, changeField, copyField,
-} from '@domains';
+import { createField, removeField, changeField, copyField } from '@domains';
 
 class FormGlobalState {
   fieldsList = new LinkedList();
@@ -35,8 +33,8 @@ class FormGlobalState {
 
   removeField() {
     const id = this.selectedField.uniqueId;
-    const results = removeField(id, this.fieldsList);
-    this.selectField(results.remainedNode);
+    const neighboringField = removeField(id, this.fieldsList);
+    this.selectField(neighboringField);
     this.setFieldsCounter((this.fieldsCounter -= 1));
   }
 

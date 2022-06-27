@@ -7,9 +7,10 @@ export const useMenu = (stylesObject) => {
   const [pixelShift, setPixelShift] = useState('0');
   const isFirstRender = useRef(true);
 
-  useEffect(() => (
-    !form.selectedField ? resetCoordinates() : setCoordinates()
-  ), [form.selectedField?.uniqueId]);
+  useEffect(
+    () => (!form.selectedField ? resetCoordinates() : setCoordinates()),
+    [form.selectedField?.uniqueId],
+  );
 
   const resetCoordinates = () => {
     setPixelShift('0');

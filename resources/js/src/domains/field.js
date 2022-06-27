@@ -38,16 +38,15 @@ export const createField = (values, list) => {
 
 export const removeField = (id, list) => {
   const { removedNode } = list.remove(id);
-
-  let remainedNode = null;
+  if (removedNode?.previous) {
+    const previousNode = removedNode.previous.value;
+    return previousNode;
+  }
   if (removedNode?.next) {
-    remainedNode = removedNode.next.value;
+    const nextNode = removedNode.next.value;
+    return nextNode;
   }
-  if (list.head && !removedNode?.next) {
-    remainedNode = list.head.value;
-  }
-
-  return { removedNode, remainedNode };
+  return null;
 };
 
 export const changeField = (id, values, list) => {
@@ -56,4 +55,5 @@ export const changeField = (id, values, list) => {
 
 export const copyField = (id, list) => list.copy(id);
 
-export const wasSelected = (fieldId, currentFieldId) => fieldId && currentFieldId && fieldId === currentFieldId && true;
+export const wasSelected = (fieldId, currentFieldId) =>
+  fieldId && currentFieldId && fieldId === currentFieldId && true;
