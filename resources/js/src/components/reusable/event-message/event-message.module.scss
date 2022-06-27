@@ -1,6 +1,24 @@
 @use '@styles/mixins';
 
 .event-message {
+  &__action {
+    all: unset;
+    padding-left: 10px;
+    font-weight: 400;
+    text-transform: uppercase;
+
+    &[disabled=disabled],
+    &:disabled {
+      transition: 0.3s;
+      color: rgba(0, 0, 0, 0.5);
+    }
+
+    &:hover,
+    &:focus {
+      @include mixins.cursor-effect(0.6, 0.1);
+    }
+  }
+
   &__alert {
     @include mixins.fade-in-left;
     cursor: default;
@@ -12,13 +30,5 @@
         justify-content: center;
       }
     }
-  }
-}
-
-.alert {
-  &__wrapper {
-    display: flex;
-    flex-direction: row;
-    row-gap: 1em;
   }
 }

@@ -18,9 +18,16 @@ export const EventMessage = forwardRef((props, ref) => {
         variant='filled'
         onClose={() => ref.current.close()}
         severity={alertSeverity}>
-        <div className={styles['alert__wrapper']}>
-          {message} {action}
-        </div>
+        <>
+          {message}
+          {action && (
+            <button
+              onClick={action.callback}
+              className={styles['event-message__action']}>
+              {action.title}
+            </button>
+          )}
+        </>
       </Alert>
     </EventMessageSnackbar>
   );
@@ -55,7 +62,10 @@ EventMessage.defaultTypes = {
 };
 
 EventMessage.propTypes = {
-  action: PropTypes.element,
+  action: PropTypes.shape({
+    title: PropTypes.string,
+    callback: PropTypes.func,
+  }),
   withSnackbar: PropTypes.bool,
   alertSeverity: PropTypes.oneOf(['success', 'warning', 'error', 'info']),
   message: PropTypes.string.isRequired,

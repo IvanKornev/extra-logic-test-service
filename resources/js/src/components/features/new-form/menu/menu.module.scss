@@ -40,16 +40,3 @@
     }
   }
 }
-
-.event-message {
-  &__action {
-    all: unset;
-    font-weight: 400;
-    text-transform: uppercase;
-
-    &:hover,
-    &:focus {
-      @include mixins.cursor-effect(0.6, 0.1);
-    }
-  }
-}

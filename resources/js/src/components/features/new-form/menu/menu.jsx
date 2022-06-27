@@ -1,10 +1,11 @@
 import React, { useId, useRef, forwardRef } from 'react';
 import PropTypes from 'prop-types';
+import { throttle } from 'lodash';
 
 import { observer } from 'mobx-react-lite';
 import { form } from '@global-states';
 
-import { newForm, cacheField } from '@domains';
+import { newForm, getField } from '@domains';
 import { useMenu, useMessenger } from '@hooks';
 
 import styles from './menu.module.scss';
@@ -63,17 +64,19 @@ const NewFormMenu = observer(
 const FieldRestoreMessage = (props) => {
   const { messenger, cachedField } = props;
   const clickHandler = () => {
-    form.createField(cachedField.current.values);
+    if (cachedField.current) {
+      const { values, position } = cachedField.current;
+      form.createField(values);
+      cachedField.current = null;
+    }
+  };
+  const messageAction = {
+    title: 'Вернуть',
+    callback: clickHandler,
   };
   return (
     <EventMessage
-      action={
-        <button
-          onClick={clickHandler}
-          className={styles['event-message__action']}>
-          Вернуть
-        </button>
-      }
+      action={messageAction}
       ref={messenger.messengerRef}
       message={messenger.message}
       withSnackbar
