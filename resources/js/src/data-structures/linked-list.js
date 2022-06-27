@@ -101,7 +101,7 @@ export class LinkedList {
       this.head = this.head.next;
       if (this.head?.previous) {
         this.head.previous = null;
-      }        
+      }
     }
 
     let currentNode = this.head;

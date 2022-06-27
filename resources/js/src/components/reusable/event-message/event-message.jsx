@@ -6,9 +6,10 @@ import { Snackbar, Alert } from '@mui/material';
 import styles from './event-message.module.scss';
 
 export const EventMessage = forwardRef((props, ref) => {
-  const { anchorOrigin, message, alertSeverity, withSnackbar } = props;
+  const { anchorOrigin, message, alertSeverity, withSnackbar, action } = props;
   return (
     <EventMessageSnackbar
+      action={action}
       ref={ref}
       anchorOrigin={anchorOrigin}
       withSnackbar={withSnackbar}>
@@ -17,7 +18,7 @@ export const EventMessage = forwardRef((props, ref) => {
         variant='filled'
         onClose={() => ref.current.close()}
         severity={alertSeverity}>
-        {message}
+        <>{message} {action}</>
       </Alert>
     </EventMessageSnackbar>
   );
@@ -25,10 +26,8 @@ export const EventMessage = forwardRef((props, ref) => {
 
 const EventMessageSnackbar = forwardRef((props, ref) => {
   const { children, withSnackbar, anchorOrigin } = props;
-
   const autohideOptions = { isEnable: true, duration: 1500 };
   const manager = useVisibilityManager(ref, null, autohideOptions);
-
   if (!withSnackbar && manager.isVisible) {
     return children;
   }
@@ -50,9 +49,11 @@ EventMessage.defaultTypes = {
     vertical: 'bottom',
     horizontal: 'right',
   }),
+  action: null,
 };
 
 EventMessage.propTypes = {
+  action: PropTypes.element,
   withSnackbar: PropTypes.bool,
   alertSeverity: PropTypes.oneOf(['success', 'warning', 'error', 'info']),
   message: PropTypes.string.isRequired,
