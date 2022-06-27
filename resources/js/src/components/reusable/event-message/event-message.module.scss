@@ -14,3 +14,11 @@
     }
   }
 }
+
+.alert {
+  &__wrapper {
+    display: flex;
+    flex-direction: row;
+    row-gap: 1em;
+  }
+}

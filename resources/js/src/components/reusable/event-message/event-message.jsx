@@ -18,7 +18,9 @@ export const EventMessage = forwardRef((props, ref) => {
         variant='filled'
         onClose={() => ref.current.close()}
         severity={alertSeverity}>
-        <>{message} {action}</>
+        <div className={styles['alert__wrapper']}>
+          {message} {action}
+        </div>
       </Alert>
     </EventMessageSnackbar>
   );

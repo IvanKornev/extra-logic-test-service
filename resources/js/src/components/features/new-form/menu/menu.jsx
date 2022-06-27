@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { observer } from 'mobx-react-lite';
 import { form } from '@global-states';
 
-import { newForm } from '@domains';
+import { newForm, cacheField } from '@domains';
 import { useMenu, useMessenger } from '@hooks';
 
 import styles from './menu.module.scss';
@@ -26,13 +26,16 @@ const NewFormMenu = observer(
             const id = useId();
             const IconComponent = iconName;
             const isDisable = onlyAddOption && action.name !== 'add';
+
             const clickHandler = () => {
-              action.callback();
               if (action.name === 'remove') {
-                cachedField.current = { ...form.selectedField };
+                const { selectedField, fieldsList } = form;
+                cachedField.current = getField(selectedField, fieldsList);
                 messenger.showMessage('Поле формы удалено');
               }
+              action.callback();
             };
+
             const classSuffix = isDisable ? 'disabled' : 'enabled';
             const itemClass = styles[`menu__item_${classSuffix}`];
             const iconClass = styles['menu__icon'];
@@ -51,10 +54,7 @@ const NewFormMenu = observer(
             );
           })}
         </Box>
-        <FieldRestoreMessage
-          cachedField={cachedField}
-          messenger={messenger}
-        />
+        <FieldRestoreMessage cachedField={cachedField} messenger={messenger} />
       </>
     );
   }),
@@ -63,16 +63,16 @@ const NewFormMenu = observer(
 const FieldRestoreMessage = (props) => {
   const { messenger, cachedField } = props;
   const clickHandler = () => {
-    form.createField(cachedField.current);
+    form.createField(cachedField.current.values);
   };
   return (
     <EventMessage
       action={
-        <span
+        <button
           onClick={clickHandler}
-          className={styles['alert__action']}>
+          className={styles['event-message__action']}>
           Вернуть
-        </span>
+        </button>
       }
       ref={messenger.messengerRef}
       message={messenger.message}

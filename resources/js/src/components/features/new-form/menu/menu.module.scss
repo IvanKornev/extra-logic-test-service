@@ -41,19 +41,15 @@
   }
 }
 
-.alert {
+.event-message {
   &__action {
+    all: unset;
     font-weight: 400;
     text-transform: uppercase;
-    
+
     &:hover,
     &:focus {
       @include mixins.cursor-effect(0.6, 0.1);
-    }
-
-    &_disabled {
-      opacity: 0.5;
-      pointer-events: none;
     }
   }
 }
