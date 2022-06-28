@@ -6,13 +6,14 @@ import { form } from '@global-states';
 import { messages, buttons } from '@constants';
 import { useMessenger, useDrawer } from '@hooks';
 
-import { EventMessage } from '@components/reusable';
-import { Button, Typography, Tabs, Tab, Drawer, Alert } from '@mui/material';
-import { UilFileAlt, UilBars, UilPlusSquare } from '@iconscout/react-unicons';
 import styles from './navbar.module.scss';
+import { EventMessage } from '@components/reusable';
+import { Button, Typography, Tabs, Tab, Drawer } from '@mui/material';
+import { UilFileAlt, UilBars, UilPlusSquare, UilTimes } from '@iconscout/react-unicons';
 
 export const Navbar = observer(() => {
   const { isMobileDevice, drawerWasOpened, openDrawer } = useDrawer();
+  const MobileIcon = drawerWasOpened ? UilTimes : UilBars;
   return (
     <nav className={styles['navbar']}>
       <div className={styles['navbar__wrapper']}>
@@ -24,7 +25,7 @@ export const Navbar = observer(() => {
         </div>
         {!isMobileDevice && <NavbarInteractivePart />}
         {isMobileDevice && (
-          <UilBars
+          <MobileIcon
             className={styles['navbar__icon_bars']}
             color='rgb(76, 43, 135)'
             onClick={() => openDrawer(true)}
