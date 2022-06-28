@@ -28,9 +28,18 @@ const createMenu = (creatorRef) => [
   },
 ];
 
+const hasError = (fieldName, formikInstance) => {
+  const { touched, errors } = formikInstance;
+  if (touched[fieldName] && errors[fieldName]) {
+    return true;
+  }
+  return false;
+};
+
 const isEmpty = (fields = []) => fields.length === 0;
 
 export const newForm = {
   createMenu,
+  hasError,
   isEmpty,
 };

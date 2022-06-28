@@ -1,5 +1,17 @@
 import generateId from 'uniqid';
 import lodash from 'lodash';
+import * as Yup from 'yup';
+
+export const optionValidationSchema = Yup.object().shape({
+  title: Yup.string()
+    .max(16, 'Название опции - не дольше 16 символов')
+    .min(2, 'Название опции - не меньше 2 символов')
+    .required('Название опции - обязательно'),
+  value: Yup.string()
+    .max(19, 'Значение опции - не дольше 19 символов')
+    .min(2, 'Значение опции - не меньше 2 символов')
+    .required('Значение опции - обязательно'),
+});
 
 export const addSelectOption = (option) => {
   const id = generateId();
@@ -32,19 +44,12 @@ export const compareOptionLists = (initialList, updatedList) => {
   return wasUpdated;
 };
 
-export const getSelectOptionTexts = (option, number = 1) => {
+export const getSelectOptionTexts = (option, number) => {
   const { title, value } = option;
   const texts = {
-    primary: `${number}) Имя: ${title}`,
-    secondary: `Значение: ${value}`,
+    primary: `${number}) ${title}`,
+    secondary: value,
   };
-
-  Object.keys(texts).map((text) => {
-    if (texts[text].length > 20) {
-      texts[text] = `${texts[text].substring(0, 19)}...`;
-    }
-    return texts[text];
-  });
   return texts;
 };
 

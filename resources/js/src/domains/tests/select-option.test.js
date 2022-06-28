@@ -41,8 +41,9 @@ describe('Методы опций селектора', () => {
   it('Получает текст опции для дальнейшего рендеринга', () => {
     const newOption = generateSelectOptions();
     const texts = getSelectOptionTexts(newOption, 1);
-    expect(texts.primary).toBe(`1) Имя: ${newOption.title}`);
-    expect(texts.secondary).toBe(`Значение: ${newOption.value}`);
+
+    const matchingPattern = /\d\) \w*/gi;
+    expect(texts.primary).toMatch(matchingPattern);
   });
 
   it('Сравнивает два одинаковых списка опций', () => {
@@ -59,15 +60,6 @@ describe('Методы опций селектора', () => {
 
     const wasUpdated = compareOptionLists(originalList, updatedList);
     expect(wasUpdated).toBeTruthy();
-  });
-
-  it('Сокращает текст опции перед рендерингом', () => {
-    const newOption = generateSelectOptions();
-    newOption.title = newOption.title.padEnd(30, 's');
-
-    const texts = getSelectOptionTexts(newOption, 1);
-    const pattern = /\d\) Имя: \w*\.{3}/gi;
-    expect(texts.primary).toMatch(pattern);
   });
 
   it('Проверяет свойства опции на отсутствие', () => {
