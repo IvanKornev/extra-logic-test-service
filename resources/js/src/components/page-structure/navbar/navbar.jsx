@@ -9,7 +9,12 @@ import { useMessenger, useDrawer } from '@hooks';
 import styles from './navbar.module.scss';
 import { EventMessage } from '@components/reusable';
 import { Button, Typography, Tabs, Tab, Drawer } from '@mui/material';
-import { UilFileAlt, UilBars, UilPlusSquare, UilTimes } from '@iconscout/react-unicons';
+import {
+  UilFileAlt,
+  UilBars,
+  UilPlusSquare,
+  UilTimes,
+} from '@iconscout/react-unicons';
 
 export const Navbar = observer(() => {
   const { isMobileDevice, drawerWasOpened, openDrawer } = useDrawer();

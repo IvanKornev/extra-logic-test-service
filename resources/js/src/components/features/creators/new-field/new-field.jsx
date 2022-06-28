@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { useFormik } from 'formik';
 
 import { form } from '@global-states';
-import { isSelect, fieldValidationSchema } from '@domains';
+import { isSelect, fieldValidationSchema, newForm } from '@domains';
 import { useSelectOptionsHandler } from '@hooks';
 import { fieldValues, fieldFormStructure } from '@constants';
 
@@ -59,15 +59,14 @@ const NewFieldCreator = observer(
 const EditorFields = ({ formikInstance }) => (
   <>
     {fieldFormStructure.map((field) => {
-      const { values, handleBlur, handleChange, errors, touched } =
-        formikInstance;
+      const { values, handleBlur, handleChange } = formikInstance;
       const { name, label, component } = field;
       const CurrentComponent = component.name;
       const id = useId();
       return (
         <div className={styles['field__wrapper']} key={id}>
           <CurrentComponent
-            error={touched[name] && errors[name] ? true : false}
+            error={newForm.hasError(name, formikInstance)}
             id={`new-field-editor__field_${name}`}
             name={name}
             label={label}
@@ -85,9 +84,9 @@ const EditorFields = ({ formikInstance }) => (
                 </MenuItem>
               ))}
           </CurrentComponent>
-          {touched[name] && errors[name] && (
+          {newForm.hasError(name, formikInstance) && (
             <Alert className={styles['Alert']} severity='error'>
-              {errors[name]}
+              {formikInstance.errors[name]}
             </Alert>
           )}
         </div>

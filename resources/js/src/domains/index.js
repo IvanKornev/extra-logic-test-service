@@ -9,6 +9,7 @@ export {
   getSelectOptionTexts,
   selectOptionIsEmpty,
   compareOptionLists,
+  optionValidationSchema,
 } from './select-option';
 
 export {

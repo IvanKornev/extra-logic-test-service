@@ -57,10 +57,14 @@ export const CreatorModal = forwardRef((props, ref) => {
   );
 });
 
+CreatorModal.defaultTypes = {
+  submitIsDisable: false,
+};
+
 CreatorModal.propTypes = {
   creatingThing: PropTypes.oneOf(['field', 'option']).isRequired,
   title: PropTypes.string.isRequired,
-  submitIsDisable: PropTypes.bool.isRequired,
+  submitIsDisable: PropTypes.bool,
   children: PropTypes.node.isRequired,
   form: PropTypes.shape({
     initialValues: PropTypes.object.isRequired,
