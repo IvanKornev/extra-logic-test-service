@@ -1,20 +1,15 @@
 import React, { useId } from 'react';
-import { useFormik } from 'formik';
 import { observer } from 'mobx-react-lite';
 
 import { form } from '@global-states';
-import { fieldValidationSchema } from '@domains';
-import { titleFieldFormStructure, formValues } from '@constants';
+import { useFormBuilder } from '@hooks';
+import { titleFieldFormStructure } from '@constants';
 
 import { FieldBox, ValidatedField } from '@components/reusable';
 import styles from './title-field.module.scss';
 
 export const NewFormTitleField = observer(() => {
-  const formik = useFormik({
-    initialValues: formValues,
-    validationSchema: fieldValidationSchema,
-    onBlur: (values) => form.changeTitleField(values),
-  });
+  const formik = useFormBuilder('title-field')();
   return (
     <FieldBox
       additionalClasses={[styles['title-field']]}

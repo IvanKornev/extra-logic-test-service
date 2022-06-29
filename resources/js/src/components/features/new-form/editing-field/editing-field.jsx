@@ -1,11 +1,11 @@
 import React, { useId } from 'react';
-import { useFormik, Formik, Form } from 'formik';
+import { Formik, Form } from 'formik';
 
 import { observer } from 'mobx-react-lite';
 import { selectHasOptions } from '@domains';
 import { form } from '@global-states';
 import { fieldTypes, formFields } from '@constants';
-import { useSelectOptionsHandler } from '@hooks';
+import { useSelectOptionsHandler, useFormBuilder } from '@hooks';
 
 import { LabledSwitch, OptionsList } from '@components/reusable';
 import { UilCheckCircle } from '@iconscout/react-unicons';
@@ -21,13 +21,8 @@ import {
 const NewFormEditingField = observer(() => {
   const { selectOptions } = form.selectedField;
   const { optionsState, handlers } = useSelectOptionsHandler(selectOptions);
-  const formik = useFormik({
-    initialValues: form.selectedField,
-    onSubmit: (values) => {
-      const data = { ...values, selectOptions: optionsState.list };
-      form.changeField(form.selectedField.uniqueId, data);
-    },
-  });
+  const formik = useFormBuilder('editing-field')(optionsState.list);
+
   const disableSubmitButton = () => {
     const { type, name, description } = formik.values;
     if (type === 'select' && !selectHasOptions(optionsState.list)) {

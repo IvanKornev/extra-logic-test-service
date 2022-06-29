@@ -1,14 +1,10 @@
 import React, { useId, forwardRef } from 'react';
 import { observer } from 'mobx-react-lite';
-import { useFormik } from 'formik';
 
-import { form } from '@global-states';
-import { fieldValidationSchema, newForm, isSelect } from '@domains';
-import { useSelectOptionsHandler } from '@hooks';
+import { useSelectOptionsHandler, useFormBuilder } from '@hooks';
 import { fieldValues, fieldFormStructure } from '@constants';
 
 import styles from './new-field.module.scss';
-import { MenuItem, FormControl, InputLabel } from '@mui/material';
 import {
   CreatorModal,
   OptionsList,
@@ -19,15 +15,10 @@ import {
 const NewFieldCreator = observer(
   forwardRef((props, creatorRef) => {
     const { optionsState, handlers } = useSelectOptionsHandler();
-    const formik = useFormik({
-      initialValues: fieldValues,
-      validationSchema: fieldValidationSchema,
-      onSubmit: (eventValues, helpers) => {
-        form.createField({ ...eventValues, selectOptions: optionsState.list });
-        creatorRef.current.close();
-        helpers.resetForm();
-      },
-    });
+    
+    const optionsList = optionsState.list;
+    const formik = useFormBuilder('new-field')(creatorRef, optionsList);
+    
     const formData = {
       initialValues: fieldValues,
       formikInstance: formik,

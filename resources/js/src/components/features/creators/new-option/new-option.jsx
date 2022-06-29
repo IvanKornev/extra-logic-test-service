@@ -1,22 +1,14 @@
-import React, { useId, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
-import { useFormik } from 'formik';
 import { TextField } from '@mui/material';
 
 import { CreatorModal, ValidatedField } from '@components/reusable';
 import { optionValues } from '@constants';
-import { optionValidationSchema, newForm } from '@domains';
+import { useFormBuilder } from '@hooks';
 
 const NewOptionCreator = forwardRef((props, creatorRef) => {
   const { optionsHandlers } = props;
-  const formik = useFormik({
-    initialValues: optionValues,
-    validationSchema: optionValidationSchema,
-    onSubmit: (values) => {
-      optionsHandlers.add(values);
-      creatorRef.current.close();
-    },
-  });
+  const formik = useFormBuilder('new-option')(optionsHandlers, creatorRef);
   const form = {
     initialValues: optionValues,
     formikInstance: formik,
