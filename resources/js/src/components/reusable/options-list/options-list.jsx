@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 
 import { selectOptionReducer } from '@reducers';
 import { useFieldsHandler } from '@hooks';
-import { NewOptionCreator } from '@components/features/creators';
 import { optionFields, optionLabels } from '@constants';
 import { selectOptionIsEmpty } from '@domains';
 
+import { NewOptionCreator } from '@components/features/creators';
 import {
   List,
   Typography,

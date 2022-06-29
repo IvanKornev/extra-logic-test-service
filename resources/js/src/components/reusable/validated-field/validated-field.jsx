@@ -6,7 +6,7 @@ import { Alert, FormControl, InputLabel, MenuItem } from '@mui/material';
 import styles from './validated-field.module.scss';
 
 export const ValidatedField = (props) => {
-  const { id, formikInstance, field } = props;
+  const { id, formikInstance, field, type } = props;
   const { label, component, name } = field;
   const { values, handleBlur, handleChange } = formikInstance;
 
@@ -19,6 +19,7 @@ export const ValidatedField = (props) => {
           <InputLabel color='secondary'>{label}</InputLabel>
         )}
         <CurrentComponent
+          type={type}
           error={withError}
           id={id}
           name={name}
@@ -47,8 +48,13 @@ export const ValidatedField = (props) => {
   );
 };
 
+ValidatedField.defaultProps = {
+  type: 'outlined',
+};
+
 ValidatedField.propTypes = {
   field: PropTypes.shape({
+    placeholder: PropTypes.string,
     label: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     component: PropTypes.shape({
@@ -56,6 +62,7 @@ ValidatedField.propTypes = {
       options: PropTypes.array,
     }),
   }),
+  type: PropTypes.oneOf(['standard', 'outlined']),
   id: PropTypes.string.isRequired,
   formikInstance: PropTypes.object.isRequired,
 };
