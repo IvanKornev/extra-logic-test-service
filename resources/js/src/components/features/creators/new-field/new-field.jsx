@@ -46,7 +46,7 @@ const NewFieldCreator = observer(
           const { name } = field;
           return (
             <ValidatedField key={id} name={name} formikInstance={formik}>
-              <EditorField field={field} formikInstance={formik} />
+              <CreatorField field={field} formikInstance={formik} />
             </ValidatedField>
           );
         })}
@@ -69,7 +69,7 @@ const NewFieldCreator = observer(
   }),
 );
 
-const EditorField = ({ formikInstance, field }) => {
+const CreatorField = ({ formikInstance, field }) => {
   const { values, handleBlur, handleChange } = formikInstance;
   const { name, label, component } = field;
   const withError = newForm.hasError(name, formikInstance);

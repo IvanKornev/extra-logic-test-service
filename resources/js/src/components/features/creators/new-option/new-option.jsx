@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useFormik } from 'formik';
 import { TextField, Alert } from '@mui/material';
 
-import { CreatorModal } from '@components/reusable';
+import { CreatorModal, ValidatedField } from '@components/reusable';
 import { optionValues, optionLabels } from '@constants';
 import { optionValidationSchema, newForm } from '@domains';
 
@@ -28,25 +28,34 @@ const NewOptionCreator = forwardRef((props, creatorRef) => {
       ref={creatorRef}
       title='Новая опция селектора'>
       {Object.keys(formik.values).map((fieldName) => (
-        <>
-          <TextField
-            error={newForm.hasError(fieldName, formik)}
-            id={`new-option-creator__field_${fieldName}`}
-            key={useId()}
-            name={fieldName}
-            label={optionLabels[fieldName]}
-            value={formik.values[fieldName]}
-            onChange={formik.handleChange}
-            variant='standard'
-          />
-          {newForm.hasError(fieldName, formik) && (
-            <Alert severity='error'>{formik.errors[fieldName]}</Alert>
-          )}
-        </>
+        <CreatorField
+          name={fieldName}
+          formikInstance={formik}
+          key={useId()}
+        />
       ))}
     </CreatorModal>
   );
 });
+
+const CreatorField = ({ name, formikInstance }) => {
+  const { values, handleChange, handleBlur } = formikInstance;
+  const withError = newForm.hasError(name, formikInstance);
+  return (
+    <ValidatedField name={name} formikInstance={formikInstance}>
+      <TextField
+        error={withError}
+        id={`new-option-creator__field_${name}`}
+        name={name}
+        label={optionLabels[name]}
+        value={values[name]}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        variant='standard'
+      />
+    </ValidatedField>
+  );
+};
 
 NewOptionCreator.propTypes = {
   optionsHandlers: PropTypes.object.isRequired,
