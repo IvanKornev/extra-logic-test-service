@@ -56,7 +56,7 @@ EventMessage.defaultProps = {
   alertSeverity: 'success',
   anchorOrigin: {
     vertical: 'bottom',
-    horizontal: 'right',
+    horizontal: 'left',
   },
   action: null,
 };

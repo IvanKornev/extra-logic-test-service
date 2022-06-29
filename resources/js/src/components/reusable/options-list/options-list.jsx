@@ -71,11 +71,10 @@ export const OptionsList = (props) => {
 };
 
 const DefaultOption = ({ option, number, handlers, selectCallback }) => {
-  const listClasses =
-    'options-list__option_default ' + styles['option_default'];
+  const listClasses = ['options-list__option_default', styles['option_default']];
   const itemText = `${number}) ${option.title}`;
   return (
-    <ListItem className={listClasses}>
+    <ListItem className={listClasses.join(' ')}>
       <ListItemText primary={itemText} />
       {handlers && (
         <Stack className='option__actions' direction='row' spacing={1}>

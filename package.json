@@ -30,7 +30,8 @@
             "^@lib/tests.*$": "<rootDir>/resources/js/src/lib/tests",
             "^@constants.*$": "<rootDir>/resources/js/src/constants",
             "^@global-states.*$": "<rootDir>/resources/js/src/global-states",
-            "^@reducers.*$": "<rootDir>/resources/js/src/reducers"
+            "^@reducers.*$": "<rootDir>/resources/js/src/reducers",
+            "^@validation-schemas.*$": "<rootDir>/resources/js/src/validation-schemas"
         }
     },
     "devDependencies": {

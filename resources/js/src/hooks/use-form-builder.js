@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 
-import { form } from '@global-states';
-import { optionValidationSchema, fieldValidationSchema } from '@domains';
+import { form as formState } from '@global-states';
+import { validationSchemas } from '@validation-schemas';
 import { optionValues, formValues, fieldValues } from '@constants';
 
 export const useFormBuilder =
@@ -22,21 +22,22 @@ export const useFormBuilder =
 
     function getTitleFieldForm() {
       const callbacks = {
-        onBlur: (values) => form.changeTitleField(values),
+        onBlur: (values) => formState.changeTitleField(values),
       };
-      const builtForm = buildFieldForm(formValues, callbacks);
+      const builtForm = buildForm(formValues, callbacks);
       return builtForm;
     }
 
     function getEditingFieldForm(params) {
       const [selectOptions] = params;
+      const { selectedField } = formState;
       const callbacks = {
         onSubmit: (values) => {
           const data = { ...values, selectOptions };
-          form.changeField(form.selectedField.uniqueId, data);
+          formState.changeField(selectedField.uniqueId, data);
         },
       };
-      const builtForm = buildFieldForm(form.selectedField, callbacks);
+      const builtForm = buildForm(selectedField, callbacks);
       return builtForm;
     }
 
@@ -44,39 +45,33 @@ export const useFormBuilder =
       const [creatorRef, selectOptions] = params;
       const callbacks = {
         onSubmit: (values, helpers) => {
-          form.createField({ ...values, selectOptions });
+          formState.createField({ ...values, selectOptions });
           creatorRef.current.close();
           helpers.resetForm();
         },
       };
-      const builtForm = buildFieldForm(fieldValues, callbacks);
-      return builtForm;
+      const form = buildForm(fieldValues, callbacks);
+      return form;
     }
 
     function getNewOptionForm(params) {
       const [handlers, creatorRef] = params;
-      const builtForm = buildNewOptionForm(handlers, creatorRef);
-      return builtForm;
-    }
-
-    function buildFieldForm(initialValues, callbacks = []) {
-      const builtForm = useFormik({
-        initialValues,
-        validationSchema: fieldValidationSchema,
-        ...callbacks,
-      });
-      return builtForm;
-    }
-
-    function buildNewOptionForm(handlers, modalRef) {
-      const submitCallback = (values) => {
-        handlers.add(values);
-        modalRef.current.close();
+      const callbacks = {
+        onSubmit: (values) => {
+          handlers.add(values);
+          creatorRef.current.close();
+        },
       };
+      const form = buildForm(optionValues, callbacks, 'option');
+      return form;
+    }
+
+    function buildForm(values, callbacks = [], type = 'field') {
+      const validationSchema = validationSchemas[type];
       const builtForm = useFormik({
-        initialValues: optionValues,
-        validationSchema: optionValidationSchema,
-        onSubmit: (values) => submitCallback(values),
+        initialValues: values,
+        validationSchema,
+        ...callbacks,
       });
       return builtForm;
     }

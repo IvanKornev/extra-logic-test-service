@@ -1,15 +1,6 @@
 import generateId from 'uniqid';
 import { generateString } from '@lib/generators';
-
 import lodash from 'lodash';
-import * as Yup from 'yup';
-
-export const optionValidationSchema = Yup.object().shape({
-  title: Yup.string()
-    .max(16, 'Название опции - не дольше 16 символов')
-    .min(2, 'Название опции - не меньше 2 символов')
-    .required('Название опции - обязательно'),
-});
 
 export const addSelectOption = (option) => {
   const id = generateId();

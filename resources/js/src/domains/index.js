@@ -8,11 +8,9 @@ export {
   removeSelectOption,
   selectOptionIsEmpty,
   compareOptionLists,
-  optionValidationSchema,
 } from './select-option';
 
 export {
-  fieldValidationSchema,
   fieldAttributes,
   wasSelected,
   createField,
