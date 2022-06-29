@@ -5,7 +5,7 @@ import { selectOptionReducer } from '@reducers';
 import { useFieldsHandler } from '@hooks';
 import { NewOptionCreator } from '@components/features/creators';
 import { optionFields, optionLabels } from '@constants';
-import { getSelectOptionTexts, selectOptionIsEmpty } from '@domains';
+import { selectOptionIsEmpty } from '@domains';
 
 import {
   List,
@@ -71,12 +71,12 @@ export const OptionsList = (props) => {
 };
 
 const DefaultOption = ({ option, number, handlers, selectCallback }) => {
-  const texts = getSelectOptionTexts(option, number);
   const listClasses =
     'options-list__option_default ' + styles['option_default'];
+  const itemText = `${number}) ${option.title}`;
   return (
     <ListItem className={listClasses}>
-      <ListItemText primary={texts.primary} secondary={texts.secondary} />
+      <ListItemText primary={itemText} />
       {handlers && (
         <Stack className='option__actions' direction='row' spacing={1}>
           <UilPen

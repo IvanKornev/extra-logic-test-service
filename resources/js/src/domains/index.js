@@ -6,7 +6,6 @@ export {
   addSelectOption,
   editSelectOption,
   removeSelectOption,
-  getSelectOptionTexts,
   selectOptionIsEmpty,
   compareOptionLists,
   optionValidationSchema,

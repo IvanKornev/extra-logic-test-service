@@ -4,7 +4,6 @@ import {
   addSelectOption,
   editSelectOption,
   removeSelectOption,
-  getSelectOptionTexts,
   selectOptionIsEmpty,
   compareOptionLists,
 } from '@domains';
@@ -13,7 +12,7 @@ describe('Методы опций селектора', () => {
   it('Добавляет новую опцию', () => {
     const newOption = generateSelectOptions();
     const result = addSelectOption(newOption);
-    expect(result.value).toBe(newOption.value);
+    expect(result.title).toBe(newOption.title);
     expect(result.id).not.toBeNull();
   });
 
@@ -38,14 +37,6 @@ describe('Методы опций селектора', () => {
     expect(updatedList[0].id).toBe(list[1].id);
   });
 
-  it('Получает текст опции для дальнейшего рендеринга', () => {
-    const newOption = generateSelectOptions();
-    const texts = getSelectOptionTexts(newOption, 1);
-
-    const matchingPattern = /\d\) \w*/gi;
-    expect(texts.primary).toMatch(matchingPattern);
-  });
-
   it('Сравнивает два одинаковых списка опций', () => {
     const optionsList = generateSelectOptions(8);
     const wasUpdated = compareOptionLists(optionsList, optionsList);
@@ -64,10 +55,10 @@ describe('Методы опций селектора', () => {
 
   it('Проверяет свойства опции на отсутствие', () => {
     const newOption = {
-      title: faker.word.adverb(1),
+      value: faker.word.adverb(1),
     };
     expect(selectOptionIsEmpty(newOption)).toBeTruthy();
-    newOption.value = faker.word.adverb(1);
+    newOption.title = faker.word.adverb(1);
     expect(selectOptionIsEmpty(newOption)).toBeFalsy();
   });
 });

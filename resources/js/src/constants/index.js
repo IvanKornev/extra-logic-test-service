@@ -40,12 +40,10 @@ export const fieldFormStructure = [
 
 export const optionValues = {
   title: '',
-  value: '',
 };
 
 export const optionLabels = {
   title: 'Наименование',
-  value: 'Значение',
 };
 
 export const optionFields = Object.keys(optionLabels);

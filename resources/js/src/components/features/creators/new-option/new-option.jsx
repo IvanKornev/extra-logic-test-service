@@ -1,7 +1,7 @@
 import React, { useId, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { useFormik } from 'formik';
-import { TextField, Alert } from '@mui/material';
+import { TextField } from '@mui/material';
 
 import { CreatorModal, ValidatedField } from '@components/reusable';
 import { optionValues, optionLabels } from '@constants';
@@ -28,11 +28,7 @@ const NewOptionCreator = forwardRef((props, creatorRef) => {
       ref={creatorRef}
       title='Новая опция селектора'>
       {Object.keys(formik.values).map((fieldName) => (
-        <CreatorField
-          name={fieldName}
-          formikInstance={formik}
-          key={useId()}
-        />
+        <CreatorField name={fieldName} formikInstance={formik} key={useId()} />
       ))}
     </CreatorModal>
   );
