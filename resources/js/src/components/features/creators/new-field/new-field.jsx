@@ -41,15 +41,7 @@ const NewFieldCreator = observer(
         form={formData}
         submitIsDisable={disableCondition}
         title='Новое поле'>
-        {fieldFormStructure.map((field) => {
-          const id = useId();
-          const { name } = field;
-          return (
-            <ValidatedField key={id} name={name} formikInstance={formik}>
-              <CreatorField field={field} formikInstance={formik} />
-            </ValidatedField>
-          );
-        })}
+        <CreatorFields formikInstance={formik} />
         {formik.values.type === 'select' && (
           <OptionsList
             scrollbarColor='blue'
@@ -69,37 +61,20 @@ const NewFieldCreator = observer(
   }),
 );
 
-const CreatorField = ({ formikInstance, field }) => {
-  const { values, handleBlur, handleChange } = formikInstance;
-  const { name, label, component } = field;
-  const withError = newForm.hasError(name, formikInstance);
-  const CurrentComponent = component.name;
-  return (
-    <FormControl fullWidth>
-      {field.name === 'type' && (
-        <InputLabel color='secondary'>{label}</InputLabel>
-      )}
-      <CurrentComponent
-        error={withError}
-        id={`new-field-editor__field_${name}`}
-        name={name}
-        label={label}
-        value={values[name]}
-        color='secondary'
-        onBlur={handleBlur}
-        onChange={handleChange}>
-        {isSelect(component) &&
-          component.options.map((option, index) => (
-            <MenuItem
-              key={useId()}
-              id={`new-field-editor__option_${index + 1}`}
-              value={option.value}>
-              {option.title}
-            </MenuItem>
-          ))}
-      </CurrentComponent>
-    </FormControl>
-  );
-};
+const CreatorFields = ({ formikInstance }) => (
+  <>
+    {fieldFormStructure.map((field) => {
+      const id = useId();
+      return (
+        <ValidatedField
+          key={id}
+          id={`new-field-creator__field_${field.name}`}
+          formikInstance={formikInstance}
+          field={field}
+        />
+      );
+    })}
+  </>
+);
 
 export { NewFieldCreator };

@@ -27,31 +27,25 @@ const NewOptionCreator = forwardRef((props, creatorRef) => {
       form={form}
       ref={creatorRef}
       title='Новая опция селектора'>
-      {Object.keys(formik.values).map((fieldName) => (
-        <CreatorField name={fieldName} formikInstance={formik} key={useId()} />
-      ))}
+      <CreatorField formikInstance={formik} />
     </CreatorModal>
   );
 });
 
-const CreatorField = ({ name, formikInstance }) => {
-  const { values, handleChange, handleBlur } = formikInstance;
-  const withError = newForm.hasError(name, formikInstance);
-  return (
-    <ValidatedField name={name} formikInstance={formikInstance}>
-      <TextField
-        error={withError}
-        id={`new-option-creator__field_${name}`}
-        name={name}
-        label={optionLabels[name]}
-        value={values[name]}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        variant='standard'
-      />
-    </ValidatedField>
-  );
-};
+const CreatorField = ({ formikInstance }) => (
+  <ValidatedField
+    field={{
+      name: 'title',
+      label: 'Наименование',
+      component: {
+        name: TextField,
+      },
+    }}
+    name='title'
+    id='new-option-creator__field_title'
+    formikInstance={formikInstance}
+  />
+);
 
 NewOptionCreator.propTypes = {
   optionsHandlers: PropTypes.object.isRequired,
