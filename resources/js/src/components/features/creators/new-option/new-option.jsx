@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import { TextField } from '@mui/material';
 
 import { CreatorModal, ValidatedField } from '@components/reusable';
-import { optionValues, optionLabels } from '@constants';
+import { optionValues } from '@constants';
 import { optionValidationSchema, newForm } from '@domains';
 
 const NewOptionCreator = forwardRef((props, creatorRef) => {

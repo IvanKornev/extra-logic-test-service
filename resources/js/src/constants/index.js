@@ -38,6 +38,21 @@ export const fieldFormStructure = [
   },
 ];
 
+export const titleFieldFormStructure = [
+  {
+    name: 'name',
+    component: {
+      name: TextField,
+    },
+  },
+  {
+    name: 'description',
+    component: {
+      name: TextField,
+    },
+  },
+];
+
 export const optionValues = {
   title: '',
 };

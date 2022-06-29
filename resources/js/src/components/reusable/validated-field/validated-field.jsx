@@ -6,11 +6,12 @@ import { Alert, FormControl, InputLabel, MenuItem } from '@mui/material';
 import styles from './validated-field.module.scss';
 
 export const ValidatedField = (props) => {
-  const { id, formikInstance, field, type } = props;
-  const { label, component, name } = field;
+  const { id, formikInstance, field, variant, className } = props;
+  const { component, name } = field;
   const { values, handleBlur, handleChange } = formikInstance;
 
   const withError = newForm.hasError(name, formikInstance);
+  const label = field?.label;
   const CurrentComponent = component.name;
   return (
     <div className={styles['field__wrapper']}>
@@ -19,9 +20,10 @@ export const ValidatedField = (props) => {
           <InputLabel color='secondary'>{label}</InputLabel>
         )}
         <CurrentComponent
-          type={type}
+          variant={variant}
           error={withError}
           id={id}
+          className={className}
           name={name}
           label={label}
           value={values[name]}
@@ -49,20 +51,21 @@ export const ValidatedField = (props) => {
 };
 
 ValidatedField.defaultProps = {
-  type: 'outlined',
+  variant: 'outlined',
 };
 
 ValidatedField.propTypes = {
   field: PropTypes.shape({
     placeholder: PropTypes.string,
-    label: PropTypes.string.isRequired,
+    label: PropTypes.string,
     name: PropTypes.string.isRequired,
     component: PropTypes.shape({
-      name: PropTypes.element.isRequired,
+      name: PropTypes.object.isRequired,
       options: PropTypes.array,
     }),
   }),
-  type: PropTypes.oneOf(['standard', 'outlined']),
-  id: PropTypes.string.isRequired,
+  variant: PropTypes.oneOf(['standard', 'outlined']),
+  id: PropTypes.string,
+  className: PropTypes.string,
   formikInstance: PropTypes.object.isRequired,
 };
