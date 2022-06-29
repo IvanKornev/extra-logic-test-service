@@ -9,7 +9,9 @@ export const fieldValidationSchema = Yup.object().shape({
   description: Yup.string()
     .max(50, 'Описание не может быть дольше 50 символов')
     .required('Описание - обязательно'),
-  type: Yup.string().oneOf(['text', 'textarea', 'select']),
+  type: Yup.string()
+    .oneOf(['text', 'textarea', 'select'])
+    .required('Тип поля выбирается обязательно'),
   isRequired: Yup.boolean(),
 });
 

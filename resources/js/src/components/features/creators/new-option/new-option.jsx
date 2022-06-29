@@ -40,9 +40,7 @@ const NewOptionCreator = forwardRef((props, creatorRef) => {
             variant='standard'
           />
           {newForm.hasError(fieldName, formik) && (
-            <Alert severity='error'>
-              {formik.errors[fieldName]}
-            </Alert>
+            <Alert severity='error'>{formik.errors[fieldName]}</Alert>
           )}
         </>
       ))}

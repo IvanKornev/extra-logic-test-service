@@ -1,9 +1,7 @@
-import { TextField, Select } from '@mui/material';
-
 export const fieldValues = {
   name: '',
   description: '',
-  type: 'text',
+  type: '',
   isRequired: false,
 };
 
@@ -17,24 +15,14 @@ export const fieldFormStructure = [
   {
     name: 'name',
     label: 'Название поля',
-    component: {
-      name: TextField,
-    },
   },
   {
     name: 'description',
     label: 'Описание поля',
-    component: {
-      name: TextField,
-    },
   },
   {
     name: 'type',
     label: 'Тип поля',
-    component: {
-      name: Select,
-      options: fieldTypes,
-    },
   },
 ];
 
