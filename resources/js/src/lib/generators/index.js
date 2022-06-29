@@ -1,0 +1,1 @@
+export { generateString } from './string';

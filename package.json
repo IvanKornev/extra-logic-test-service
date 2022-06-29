@@ -26,6 +26,7 @@
             "^@hooks.*$": "<rootDir>/resources/js/src/hooks",
             "^@data-structures.*$": "<rootDir>/resources/js/src/data-structures",
             "^@lib/converters.*$": "<rootDir>/resources/js/src/lib/converters",
+            "^@lib/generators.*$": "<rootDir>/resources/js/src/lib/generators",
             "^@lib/tests.*$": "<rootDir>/resources/js/src/lib/tests",
             "^@constants.*$": "<rootDir>/resources/js/src/constants",
             "^@global-states.*$": "<rootDir>/resources/js/src/global-states",
