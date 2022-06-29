@@ -28,14 +28,14 @@ export const ValidatedField = (props) => {
           onChange={handleChange}
           color='secondary'>
           {isSelect(component) &&
-          component.options.map((option, index) => (
-            <MenuItem
-              key={useId()}
-              id={`new-field-editor__option_${index + 1}`}
-              value={option.value}>
-              {option.title}
-            </MenuItem>
-          ))}
+            component.options.map((option, index) => (
+              <MenuItem
+                key={useId()}
+                id={`new-field-editor__option_${index + 1}`}
+                value={option.value}>
+                {option.title}
+              </MenuItem>
+            ))}
         </CurrentComponent>
         {withError && (
           <Alert className={styles['Alert']} severity='error'>
@@ -50,8 +50,11 @@ export const ValidatedField = (props) => {
 ValidatedField.propTypes = {
   field: PropTypes.shape({
     label: PropTypes.string.isRequired,
-    component: PropTypes.element.isRequired,
     name: PropTypes.string.isRequired,
+    component: PropTypes.shape({
+      name: PropTypes.element.isRequired,
+      options: PropTypes.array,
+    }),
   }),
   id: PropTypes.string.isRequired,
   formikInstance: PropTypes.object.isRequired,
