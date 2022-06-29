@@ -43,9 +43,10 @@ const NewFieldCreator = observer(
         title='Новое поле'>
         {fieldFormStructure.map((field) => {
           const id = useId();
+          const { name } = field;
           return (
-            <ValidatedField key={id} name={field.name} formikInstance={formik}>
-              <EditorField field={field} formik={formik} />
+            <ValidatedField key={id} name={name} formikInstance={formik}>
+              <EditorField field={field} formikInstance={formik} />
             </ValidatedField>
           );
         })}
@@ -68,9 +69,10 @@ const NewFieldCreator = observer(
   }),
 );
 
-const EditorField = ({ formik, field }) => {
-  const { values, handleBlur, handleChange } = formik;
+const EditorField = ({ formikInstance, field }) => {
+  const { values, handleBlur, handleChange } = formikInstance;
   const { name, label, component } = field;
+  const withError = newForm.hasError(name, formikInstance);
   const CurrentComponent = component.name;
   return (
     <FormControl fullWidth>
@@ -78,7 +80,7 @@ const EditorField = ({ formik, field }) => {
         <InputLabel color='secondary'>{label}</InputLabel>
       )}
       <CurrentComponent
-        error={newForm.hasError(name, formik)}
+        error={withError}
         id={`new-field-editor__field_${name}`}
         name={name}
         label={label}
@@ -94,7 +96,7 @@ const EditorField = ({ formik, field }) => {
               value={option.value}>
               {option.title}
             </MenuItem>
-        ))}
+          ))}
       </CurrentComponent>
     </FormControl>
   );
