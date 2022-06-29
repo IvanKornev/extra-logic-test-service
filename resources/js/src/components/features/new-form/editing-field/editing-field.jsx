@@ -3,7 +3,7 @@ import { Formik, Form } from 'formik';
 
 import { observer } from 'mobx-react-lite';
 import { selectHasOptions } from '@domains';
-import { form } from '@global-states';
+import { form as formState } from '@global-states';
 import { fieldTypes, formFields } from '@constants';
 import { useSelectOptionsHandler, useFormBuilder } from '@hooks';
 
@@ -19,12 +19,12 @@ import {
 } from '@mui/material';
 
 const NewFormEditingField = observer(() => {
-  const { selectOptions } = form.selectedField;
+  const { selectOptions } = formState.selectedField;
   const { optionsState, handlers } = useSelectOptionsHandler(selectOptions);
-  const formik = useFormBuilder('editing-field')(optionsState.list);
+  const form = useFormBuilder('editing-field')(optionsState.list);
 
   const disableSubmitButton = () => {
-    const { type, name, description } = formik.values;
+    const { type, name, description } = form.values;
     if (type === 'select' && !selectHasOptions(optionsState.list)) {
       return true;
     }
@@ -34,8 +34,8 @@ const NewFormEditingField = observer(() => {
   return (
     <>
       <Formik
-        initialValues={formik.initialValues}
-        onSubmit={formik.handleSubmit}>
+        initialValues={form.initialValues}
+        onSubmit={form.handleSubmit}>
         <Form className={styles['editing-field__wrapper']}>
           {formFields.map((name) => {
             const id = useId();
@@ -45,18 +45,18 @@ const NewFormEditingField = observer(() => {
                 id={`editing-field__field_${name}`}
                 color='secondary'
                 variant='standard'
-                placeholder={form.selectedField[name]}
+                placeholder={formState.selectedField[name]}
                 name={name}
-                value={formik.values[name]}
-                onChange={formik.handleChange}
+                value={form.values[name]}
+                onChange={form.handleChange}
               />
             );
           })}
           <FormControl size='small'>
             <Select
               name='type'
-              onChange={formik.handleChange}
-              value={formik.values.type}
+              onChange={form.handleChange}
+              value={form.values.type}
               color='secondary'>
               {fieldTypes.map((type) => (
                 <MenuItem value={type.value} key={useId()}>
@@ -64,7 +64,7 @@ const NewFormEditingField = observer(() => {
                 </MenuItem>
               ))}
             </Select>
-            {formik.values.type === 'select' && (
+            {form.values.type === 'select' && (
               <OptionsList
                 scrollbarColor='purple'
                 list={optionsState.list}
@@ -75,12 +75,12 @@ const NewFormEditingField = observer(() => {
           <div className={styles['editing-field__footer']}>
             <LabledSwitch
               id='editing-field__switch_make-require'
-              defaultState={form.selectedField.isRequired && true}
+              defaultState={formState.selectedField.isRequired && true}
               label='Обязательное'
               name='isRequired'
-              changeHandler={formik.handleChange}
+              changeHandler={form.handleChange}
             />
-            {(formik.dirty || optionsState.wasUpdated) && (
+            {(form.dirty || optionsState.wasUpdated) && (
               <Button
                 className={styles['editing-field__button_save']}
                 id='editing-field__button_save'
@@ -88,7 +88,7 @@ const NewFormEditingField = observer(() => {
                 type='submit'
                 color='success'
                 disabled={disableSubmitButton()}
-                onClick={formik.changeHandler}
+                onClick={form.changeHandler}
               />
             )}
           </div>

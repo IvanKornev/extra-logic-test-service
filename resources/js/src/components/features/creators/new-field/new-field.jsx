@@ -2,7 +2,7 @@ import React, { useId, forwardRef } from 'react';
 import { observer } from 'mobx-react-lite';
 
 import { useSelectOptionsHandler, useFormBuilder } from '@hooks';
-import { fieldValues, fieldFormStructure } from '@constants';
+import { fieldFormStructure } from '@constants';
 
 import styles from './new-field.module.scss';
 import {
@@ -15,25 +15,19 @@ import {
 const NewFieldCreator = observer(
   forwardRef((props, creatorRef) => {
     const { optionsState, handlers } = useSelectOptionsHandler();
-    
     const optionsList = optionsState.list;
-    const formik = useFormBuilder('new-field')(creatorRef, optionsList);
-    
-    const formData = {
-      initialValues: fieldValues,
-      formikInstance: formik,
-    };
+    const form = useFormBuilder('new-field')(creatorRef, optionsList);
     const disableCondition =
-      formik.values.type === 'select' && optionsState.list.length === 0;
+      form.values.type === 'select' && optionsState.list.length === 0;
     return (
       <CreatorModal
         creatingThing='field'
         ref={creatorRef}
-        form={formData}
+        formInstance={form}
         submitIsDisable={disableCondition}
         title='Новое поле'>
-        <CreatorFields formikInstance={formik} />
-        {formik.values.type === 'select' && (
+        <CreatorFields formInstance={form} />
+        {form.values.type === 'select' && (
           <OptionsList
             scrollbarColor='blue'
             list={optionsState.list}
@@ -44,7 +38,7 @@ const NewFieldCreator = observer(
           <LabledSwitch
             label='Обязательное поле'
             name='isRequired'
-            changeHandler={formik.handleChange}
+            changeHandler={form.handleChange}
           />
         </div>
       </CreatorModal>
@@ -52,7 +46,7 @@ const NewFieldCreator = observer(
   }),
 );
 
-const CreatorFields = ({ formikInstance }) => (
+const CreatorFields = ({ formInstance }) => (
   <>
     {fieldFormStructure.map((field) => {
       const id = useId();
@@ -60,7 +54,7 @@ const CreatorFields = ({ formikInstance }) => (
         <ValidatedField
           key={id}
           id={`new-field-creator__field_${field.name}`}
-          formikInstance={formikInstance}
+          formInstance={formInstance}
           field={field}
         />
       );

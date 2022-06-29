@@ -3,28 +3,23 @@ import PropTypes from 'prop-types';
 import { TextField } from '@mui/material';
 
 import { CreatorModal, ValidatedField } from '@components/reusable';
-import { optionValues } from '@constants';
 import { useFormBuilder } from '@hooks';
 
 const NewOptionCreator = forwardRef((props, creatorRef) => {
   const { optionsHandlers } = props;
-  const formik = useFormBuilder('new-option')(optionsHandlers, creatorRef);
-  const form = {
-    initialValues: optionValues,
-    formikInstance: formik,
-  };
+  const form = useFormBuilder('new-option')(optionsHandlers, creatorRef);
   return (
     <CreatorModal
       creatingThing='option'
-      form={form}
+      formInstance={form}
       ref={creatorRef}
       title='Новая опция селектора'>
-      <CreatorField formikInstance={formik} />
+      <CreatorField formInstance={form} />
     </CreatorModal>
   );
 });
 
-const CreatorField = ({ formikInstance }) => (
+const CreatorField = ({ formInstance }) => (
   <ValidatedField
     field={{
       name: 'title',
@@ -35,7 +30,7 @@ const CreatorField = ({ formikInstance }) => (
     }}
     name='title'
     id='new-option-creator__field_title'
-    formikInstance={formikInstance}
+    formInstance={formInstance}
   />
 );
 

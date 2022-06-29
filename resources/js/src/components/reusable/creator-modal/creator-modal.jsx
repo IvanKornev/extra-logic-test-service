@@ -9,8 +9,8 @@ import { Formik, Form } from 'formik';
 import styles from './creator-modal.module.scss';
 
 export const CreatorModal = forwardRef((props, ref) => {
-  const { title, submitIsDisable, form, children, creatingThing } = props;
-  const manager = useVisibilityManager(ref, form.formikInstance.resetForm);
+  const { title, submitIsDisable, formInstance, children, creatingThing } = props;
+  const manager = useVisibilityManager(ref, formInstance.resetForm);
   const handleClick = (actionName) => {
     if (actionName === 'abort') {
       ref.current.close();
@@ -28,8 +28,8 @@ export const CreatorModal = forwardRef((props, ref) => {
           {title}
         </Typography>
         <Formik
-          initialValues={form.initialValues}
-          onSubmit={form.formikInstance.handleSubmit}>
+          initialValues={formInstance.initialValues}
+          onSubmit={formInstance.handleSubmit}>
           <Form className={styles['creator-modal__form']}>
             <Stack direction='column'>{children}</Stack>
             <Stack
@@ -66,8 +66,5 @@ CreatorModal.propTypes = {
   title: PropTypes.string.isRequired,
   submitIsDisable: PropTypes.bool,
   children: PropTypes.node.isRequired,
-  form: PropTypes.shape({
-    initialValues: PropTypes.object.isRequired,
-    formikInstance: PropTypes.object.isRequired,
-  }),
+  formInstance: PropTypes.object.isRequired,
 };
