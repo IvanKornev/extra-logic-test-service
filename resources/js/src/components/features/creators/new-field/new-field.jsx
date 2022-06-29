@@ -3,24 +3,18 @@ import { observer } from 'mobx-react-lite';
 import { useFormik } from 'formik';
 
 import { form } from '@global-states';
-import { fieldValidationSchema, newForm } from '@domains';
+import { fieldValidationSchema, newForm, isSelect } from '@domains';
 import { useSelectOptionsHandler } from '@hooks';
-import { fieldValues, fieldFormStructure, fieldTypes } from '@constants';
+import { fieldValues, fieldFormStructure } from '@constants';
 
 import styles from './new-field.module.scss';
+import { MenuItem, FormControl, InputLabel } from '@mui/material';
 import {
   CreatorModal,
   OptionsList,
   LabledSwitch,
   ValidatedField,
 } from '@components/reusable';
-import {
-  MenuItem,
-  TextField,
-  Select,
-  FormControl,
-  InputLabel,
-} from '@mui/material';
 
 const NewFieldCreator = observer(
   forwardRef((props, creatorRef) => {
@@ -48,16 +42,10 @@ const NewFieldCreator = observer(
         submitIsDisable={disableCondition}
         title='Новое поле'>
         {fieldFormStructure.map((field) => {
-          const components = {
-            name: EditorTextField,
-            description: EditorTextField,
-            type: EditorSelect,
-          };
           const id = useId();
-          const CurrentComponent = components[field.name];
           return (
-            <ValidatedField name={field.name} formikInstance={formik}>
-              <CurrentComponent key={id} field={field} formik={formik} />
+            <ValidatedField key={id} name={field.name} formikInstance={formik}>
+              <EditorField field={field} formik={formik} />
             </ValidatedField>
           );
         })}
@@ -80,47 +68,35 @@ const NewFieldCreator = observer(
   }),
 );
 
-const EditorSelect = ({ formik, field }) => {
-  const { name, label } = field;
+const EditorField = ({ formik, field }) => {
+  const { values, handleBlur, handleChange } = formik;
+  const { name, label, component } = field;
+  const CurrentComponent = component.name;
   return (
     <FormControl fullWidth>
-      <InputLabel color='secondary'>{label}</InputLabel>
-      <Select
-        id={`new-field-editor__field_${name}`}
+      {field.name === 'type' && (
+        <InputLabel color='secondary'>{label}</InputLabel>
+      )}
+      <CurrentComponent
         error={newForm.hasError(name, formik)}
-        color='secondary'
-        label={label}
+        id={`new-field-editor__field_${name}`}
         name={name}
-        onBlur={formik.handleBlur}
-        onChange={formik.handleChange}
-        value={formik.values[name]}>
-        {fieldTypes.map((type) => {
-          const { title, value } = type;
-          return (
-            <MenuItem value={value} key={value}>
-              {title}
+        label={label}
+        value={values[name]}
+        color='secondary'
+        onBlur={handleBlur}
+        onChange={handleChange}>
+        {isSelect(component) &&
+          component.options.map((option, index) => (
+            <MenuItem
+              key={useId()}
+              id={`new-field-editor__option_${index + 1}`}
+              value={option.value}>
+              {option.title}
             </MenuItem>
-          );
-        })}
-      </Select>
+        ))}
+      </CurrentComponent>
     </FormControl>
-  );
-};
-
-const EditorTextField = ({ formik, field }) => {
-  const { values, handleBlur, handleChange } = formik;
-  const { name, label } = field;
-  return (
-    <TextField
-      error={newForm.hasError(name, formik)}
-      id={`new-field-editor__field_${name}`}
-      name={name}
-      label={label}
-      value={values[name]}
-      color='secondary'
-      onBlur={handleBlur}
-      onChange={handleChange}
-    />
   );
 };
 
