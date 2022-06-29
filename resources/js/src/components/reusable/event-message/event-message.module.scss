@@ -1,4 +1,5 @@
 @use '@styles/mixins';
+@use '@styles/animations';
 
 .event-message {
   &__action {
@@ -20,7 +21,7 @@
   }
 
   &__alert {
-    @include mixins.fade-in-left;
+    @include animations.fade-in-left;
     cursor: default;
 
     @media screen and (max-width: 768px) {

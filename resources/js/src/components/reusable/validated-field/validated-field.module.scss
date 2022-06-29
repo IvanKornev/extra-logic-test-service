@@ -1,4 +1,4 @@
-@use '@styles/mixins';
+@use '@styles/animations';
 
 .field {
   &__wrapper {
@@ -12,7 +12,7 @@
     & .Alert {
       font-size: 0.9rem;
       justify-content: flex-start;
-      @include mixins.landing-from-above;
+      @include animations.landing-from-above;
 
       & div:last-child {
         max-width: 160px;

@@ -1,0 +1,52 @@
+@mixin fade-in-left($duration: 3s) {
+  animation: fade-animation $duration;
+  @keyframes fade-animation {
+    0% {
+      transform: translateX(-150%);
+    }
+    25% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 0;
+    }
+  }
+}
+  
+@mixin landing-from-above($margin-top: 1em, $duration: 0.1s) {
+  animation: landing-from-above $duration forwards;
+  @keyframes landing-from-above {
+    0% {
+      margin-top: 0;
+    }
+    100% {
+      margin-top: $margin-top;
+    }
+  }
+}
+  
+@mixin move-up() {
+  animation: move-up 0.5s forwards;
+  @keyframes move-up {
+    0% {
+      transform: translateY(100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+}
+  
+@mixin move-down() {
+  animation: move-down 0.5s forwards;
+  @keyframes move-down {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+}

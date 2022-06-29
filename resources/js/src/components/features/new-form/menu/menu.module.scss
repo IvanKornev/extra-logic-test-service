@@ -1,4 +1,5 @@
 @use '@styles/mixins';
+@use '@styles/animations';
 
 .menu {
   border-radius: 8px;
@@ -15,11 +16,11 @@
   margin-top: 0;
 
   &_moving-down {
-    @include mixins.move-down;
+    @include animations.move-down;
   }
 
   &_moving-up {
-    @include mixins.move-up;
+    @include animations.move-up;
   }
 
   &__icon {
