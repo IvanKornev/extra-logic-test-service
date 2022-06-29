@@ -1,17 +1,18 @@
+@use '@styles/mixins';
+
 .field {
   &__wrapper {
     display: flex;
     flex-direction: column;
-    row-gap: 12px;
 
     &:not(:last-child) {
-      margin-bottom: 12px;
+      margin-bottom: 1em;
     }
 
     & .Alert {
-      padding: 0 16px 0 6px;
-      font-size: 15px;
+      font-size: 0.9rem;
       justify-content: flex-start;
+      @include mixins.landing-from-above;
 
       & div:last-child {
         max-width: 160px;

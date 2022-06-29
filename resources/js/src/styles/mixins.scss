@@ -50,14 +50,14 @@
   }
 }
 
-@mixin vertical-movement($starting-point: 100%, $duration: 0.5s) {
-  animation: vertical-movement $duration forwards;
-  @keyframes vertical-movement {
-    0% {
-      transform: translateY($starting-point);
+@mixin landing-from-above($margin-top: 1em, $duration: 0.1s) {
+  animation: landing-from-above $duration forwards;
+  @keyframes landing-from-above {
+    0%{ 
+      margin-top: 0;
     }
     100% {
-      transform: translateY(0);
+      margin-top: $margin-top;
     }
   }
 }
