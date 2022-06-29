@@ -51,13 +51,13 @@ const EventMessageSnackbar = forwardRef((props, ref) => {
   );
 });
 
-EventMessage.defaultTypes = {
+EventMessage.defaultProps = {
   withSnackbar: true,
   alertSeverity: 'success',
-  anchorOrigin: PropTypes.shape({
+  anchorOrigin: {
     vertical: 'bottom',
     horizontal: 'right',
-  }),
+  },
   action: null,
 };
 

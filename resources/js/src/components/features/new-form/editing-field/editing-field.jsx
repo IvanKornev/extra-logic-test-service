@@ -33,9 +33,7 @@ const NewFormEditingField = observer(() => {
   };
   return (
     <>
-      <Formik
-        initialValues={form.initialValues}
-        onSubmit={form.handleSubmit}>
+      <Formik initialValues={form.initialValues} onSubmit={form.handleSubmit}>
         <Form className={styles['editing-field__wrapper']}>
           {formFields.map((name) => {
             const id = useId();

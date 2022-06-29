@@ -26,7 +26,7 @@ export const LabledSwitch = (props) => {
   );
 };
 
-LabledSwitch.defaultTypes = {
+LabledSwitch.defaultProps = {
   defaultState: false,
 };
 

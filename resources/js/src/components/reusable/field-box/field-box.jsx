@@ -15,7 +15,7 @@ const FieldBox = forwardRef((props, ref) => {
   );
 });
 
-FieldBox.defaultTypes = {
+FieldBox.defaultProps = {
   withBorder: false,
   additionalClasses: [],
 };
