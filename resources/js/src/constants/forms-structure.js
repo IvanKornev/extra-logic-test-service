@@ -13,8 +13,8 @@ export const formsStructure = {
       label: 'Наименование',
       component: {
         name: TextField,
-      }
-    }
+      },
+    },
   ],
   field: [
     {
