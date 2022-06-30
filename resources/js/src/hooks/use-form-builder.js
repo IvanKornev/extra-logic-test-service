@@ -1,8 +1,7 @@
 import { useFormik } from 'formik';
 
 import { form as formState } from '@global-states';
-import { validationSchemas } from '@validation-schemas';
-import { optionValues, initialValues } from '@constants';
+import { optionValues, initialValues, validationSchemas } from '@constants';
 
 export const useFormBuilder =
   (formName) =>
@@ -77,4 +76,4 @@ export const useFormBuilder =
       });
       return builtForm;
     }
-  };
+};

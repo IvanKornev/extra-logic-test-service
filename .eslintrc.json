@@ -52,8 +52,7 @@
                 ["@lib", "./resources/js/src/lib"],
                 ["@constants", "./resources/js/src/constants"],
                 ["@global-states", "./resources/js/src/global-states"],
-                ["@reducers", "./resources/js/src/reducers"],
-                ["@validation-schemas", "./resources/js/src/validation-schemas"]
+                ["@reducers", "./resources/js/src/reducers"]
             ]
         }
     }

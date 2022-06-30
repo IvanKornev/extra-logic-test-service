@@ -39,7 +39,7 @@ const NewFormFields = observer((props) => {
                         <RequiredFieldMark />
                       )}
                     </Stack>
-                  )
+                  );
                 })}
                 {field.type === 'select' && (
                   <OptionsList

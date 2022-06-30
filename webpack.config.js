@@ -22,7 +22,6 @@ const config = {
       '@global-states': path.resolve(__dirname, './resources/js/src/global-states'),
       '@reducers': path.resolve(__dirname, './resources/js/src/reducers'),
       '@styles': path.resolve(__dirname, './resources/js/src/styles'),
-      '@validation-schemas': path.resolve(__dirname, './resources/js/src/validation-schemas'),
     }
   },
 };
