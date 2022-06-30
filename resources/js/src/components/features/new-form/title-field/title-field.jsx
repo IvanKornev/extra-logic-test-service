@@ -12,7 +12,12 @@ export const NewFormTitleField = observer(() => {
   const form = useFormBuilder('title-field')();
   return (
     <FieldBox
-      additionalClasses={[styles['title-field']]}
+      additionalClasses={[
+        styles['title-field'],
+        !formState.selectedField
+          ? 'new-form__field_selected'
+          : 'new-form__field',
+      ]}
       onClick={() => formState.selectField(null)}
       withBorder>
       {formsStructure.titleField.map((field) => (

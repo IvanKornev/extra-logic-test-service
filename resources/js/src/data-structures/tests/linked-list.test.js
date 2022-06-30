@@ -21,8 +21,8 @@ describe('Односвязный список', () => {
     expect(node.value.uniqueId).toBe(uniqueId);
   });
 
-  it('Возвращает false при ненахождении ноды', () => {
-    expect(list.find(105)).toBeFalsy();
+  it('Возвращает нулевую позицию при ненахождении ноды', () => {
+    expect(list.find(105).position).toBeNull();
   });
 
   it('Заменяет значение ноды, найденной по id', () => {
@@ -43,9 +43,9 @@ describe('Односвязный список', () => {
     const uniqueId = faker.datatype.uuid();
     fillList(uniqueId, list);
 
-    expect(list.find(uniqueId).node).toBeTruthy();
+    expect(list.find(uniqueId).position).not.toBeNull();
     list.remove(uniqueId);
-    expect(list.find(uniqueId)).toBeFalsy();
+    expect(list.find(uniqueId).position).toBeNull();
   });
 
   it('Копирует первую ноду, делая её следующей в списке', () => {

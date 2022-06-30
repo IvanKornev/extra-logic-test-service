@@ -44,7 +44,7 @@ export class LinkedList {
     }
 
     if (!foundNode) {
-      return false;
+      position = null;
     }
     return {
       node: foundNode,
