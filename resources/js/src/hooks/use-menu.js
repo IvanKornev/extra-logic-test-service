@@ -2,10 +2,9 @@ import { useEffect, useState, useRef } from 'react';
 import { form } from '@global-states';
 
 export const useMenu = (stylesObject) => {
-  const [classes, setClasses] = useState([stylesObject.menu]);
   const [fieldPosition, updateFieldPosition] = useState(1);
-  const [pixelShift, setPixelShift] = useState('0');
   const isFirstRender = useRef(true);
+  const menuRef = useRef(null);
 
   useEffect(
     () => (!form.selectedField ? resetCoordinates() : setCoordinates()),
@@ -13,7 +12,7 @@ export const useMenu = (stylesObject) => {
   );
 
   const resetCoordinates = () => {
-    setPixelShift('0');
+    menuRef.current.style.marginTop = '0';
     if (!isFirstRender.current) {
       performMoveAnimation('up');
     } else {
@@ -27,7 +26,7 @@ export const useMenu = (stylesObject) => {
 
     const selector = '.new-form__field_selected';
     const fieldBlock = document.querySelector(selector);
-    setPixelShift(`${fieldBlock.offsetTop}px`);
+    menuRef.current.style.marginTop = `${fieldBlock.offsetTop}px`;
 
     if (fieldPosition > position) {
       performMoveAnimation('up');
@@ -38,18 +37,12 @@ export const useMenu = (stylesObject) => {
   };
 
   const performMoveAnimation = (direction = 'up') => {
-    const directionClass = `menu_moving-${direction}`;
-    setClasses((updatingClasses) => [
-      ...updatingClasses,
-      stylesObject[directionClass],
-    ]);
+    const directionClass = stylesObject[`menu_moving-${direction}`];
+    menuRef.current.classList.add(directionClass);
     setTimeout(() => {
-      setClasses((updatingClasses) => {
-        updatingClasses.pop();
-        return updatingClasses;
-      });
+      menuRef.current.classList.remove(directionClass);
     }, 500);
   };
 
-  return { pixelShift, classes };
+  return { menuRef };
 };

@@ -1,6 +1,5 @@
 import React, { useId, useRef, forwardRef } from 'react';
 import PropTypes from 'prop-types';
-import { throttle } from 'lodash';
 
 import { observer } from 'mobx-react-lite';
 import { form } from '@global-states';
@@ -15,13 +14,13 @@ import { EventMessage } from '@components/reusable';
 const NewFormMenu = observer(
   forwardRef((props, creatorRef) => {
     const { onlyAddOption } = props;
-    const { pixelShift, classes } = useMenu(styles);
+    const { menuRef } = useMenu(styles);
     const cachedField = useRef(null);
     const messenger = useMessenger();
     const menu = newForm.createMenu(creatorRef);
     return (
       <>
-        <Box sx={{ marginTop: pixelShift }} className={classes.join(' ')}>
+        <Box ref={menuRef} className={styles['menu']}>
           {menu.map((item) => {
             const { iconName, action, tooltip } = item;
             const id = useId();

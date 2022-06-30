@@ -22,7 +22,12 @@ const NewFormFields = observer((props) => {
           <FieldBox
             key={field.uniqueId}
             onClick={() => form.selectField(field)}
-            additionalClasses={[wasSelected(field.uniqueId, currentId) ? 'new-form__field_selected' : 'new-form__field', styles['field']]}>
+            additionalClasses={[
+              wasSelected(field.uniqueId, currentId)
+                ? 'new-form__field_selected'
+                : 'new-form__field',
+              styles['field'],
+            ]}>
             {!wasSelected(field.uniqueId, currentId) && (
               <>
                 {formsStructure.titleField.map((structure) => {
