@@ -2,7 +2,7 @@ import React, { useId, forwardRef } from 'react';
 import { observer } from 'mobx-react-lite';
 
 import { useSelectOptionsHandler, useFormBuilder } from '@hooks';
-import { fieldFormStructure } from '@constants';
+import { formsStructure } from '@constants';
 
 import styles from './new-field.module.scss';
 import {
@@ -48,7 +48,7 @@ const NewFieldCreator = observer(
 
 const CreatorFields = ({ formInstance }) => (
   <>
-    {fieldFormStructure.map((field) => {
+    {formsStructure.field.map((field) => {
       const id = useId();
       return (
         <ValidatedField

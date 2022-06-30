@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 
 import { form as formState } from '@global-states';
 import { useFormBuilder } from '@hooks';
-import { titleFieldFormStructure } from '@constants';
+import { formsStructure } from '@constants';
 
 import { FieldBox, ValidatedField } from '@components/reusable';
 import styles from './title-field.module.scss';
@@ -15,7 +15,7 @@ export const NewFormTitleField = observer(() => {
       additionalClasses={[styles['title-field']]}
       onClick={() => formState.selectField(null)}
       withBorder>
-      {titleFieldFormStructure.map((field) => (
+      {formsStructure.titleField.map((field) => (
         <ValidatedField
           key={useId()}
           field={field}

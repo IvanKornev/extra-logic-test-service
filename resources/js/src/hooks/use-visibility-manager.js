@@ -1,10 +1,11 @@
 import { useEffect, useState, useImperativeHandle } from 'react';
-import { autohideDefaultOptions } from '@constants';
+import { hooksOptions } from '@constants';
 
+const { defaultAutohide } = hooksOptions.visibilityManager;
 const useVisibilityManager = (
   elemRef,
   onCloseCallback = null,
-  autohide = autohideDefaultOptions,
+  autohide = defaultAutohide,
 ) => {
   const [isVisible, setVisibility] = useState(false);
 

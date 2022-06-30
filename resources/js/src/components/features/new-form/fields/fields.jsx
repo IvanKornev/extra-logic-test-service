@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import PropTypes from 'prop-types';
 
 import { wasSelected } from '@domains';
-import { formFields } from '@constants';
+import { formsStructure } from '@constants';
 import { form } from '@global-states';
 import { LinkedListConverter } from '@lib/converters';
 
@@ -25,19 +25,22 @@ const NewFormFields = observer((props) => {
             additionalClasses={['new-form__field', styles['field']]}>
             {!wasSelected(field.uniqueId, currentId) && (
               <>
-                {formFields.map((name) => (
-                  <Stack
-                    className={`new-form__field_${name}`}
-                    key={name}
-                    direction='row'>
-                    <Typography component='h3' variant='h6'>
-                      {field[name]}
-                    </Typography>
-                    {field.isRequired && name === 'name' && (
-                      <RequiredFieldMark />
-                    )}
-                  </Stack>
-                ))}
+                {formsStructure.titleField.map((structure) => {
+                  const { name } = structure;
+                  return (
+                    <Stack
+                      className={`new-form__field_${name}`}
+                      key={name}
+                      direction='row'>
+                      <Typography component='h3' variant='h6'>
+                        {field[name]}
+                      </Typography>
+                      {field.isRequired && name === 'name' && (
+                        <RequiredFieldMark />
+                      )}
+                    </Stack>
+                  )
+                })}
                 {field.type === 'select' && (
                   <OptionsList
                     scrollbarColor='purple'

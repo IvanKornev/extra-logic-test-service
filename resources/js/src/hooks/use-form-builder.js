@@ -2,7 +2,7 @@ import { useFormik } from 'formik';
 
 import { form as formState } from '@global-states';
 import { validationSchemas } from '@validation-schemas';
-import { optionValues, formValues, fieldValues } from '@constants';
+import { optionValues, initialValues } from '@constants';
 
 export const useFormBuilder =
   (formName) =>
@@ -24,7 +24,8 @@ export const useFormBuilder =
       const callbacks = {
         onBlur: (values) => formState.changeTitleField(values),
       };
-      const builtForm = buildForm(formValues, callbacks);
+      const fieldValues = initialValues.titleField;
+      const builtForm = buildForm(fieldValues, callbacks);
       return builtForm;
     }
 
@@ -50,6 +51,7 @@ export const useFormBuilder =
           helpers.resetForm();
         },
       };
+      const fieldValues = initialValues.newField;
       const form = buildForm(fieldValues, callbacks);
       return form;
     }

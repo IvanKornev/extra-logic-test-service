@@ -4,12 +4,16 @@ import { Formik, Form } from 'formik';
 import { observer } from 'mobx-react-lite';
 import { selectHasOptions } from '@domains';
 import { form as formState } from '@global-states';
-import { fieldFormStructure } from '@constants';
+import { formsStructure } from '@constants';
 import { useSelectOptionsHandler, useFormBuilder } from '@hooks';
 
 import { UilCheckCircle } from '@iconscout/react-unicons';
 import styles from './editing-field.module.scss';
-import { LabledSwitch, OptionsList, ValidatedField } from '@components/reusable';
+import {
+  LabledSwitch,
+  OptionsList,
+  ValidatedField,
+} from '@components/reusable';
 import { Button } from '@mui/material';
 
 const NewFormEditingField = observer(() => {
@@ -26,7 +30,7 @@ const NewFormEditingField = observer(() => {
     <>
       <Formik initialValues={form.initialValues} onSubmit={form.handleSubmit}>
         <Form className={styles['editing-field__wrapper']}>
-          {fieldFormStructure.map((field) => {
+          {formsStructure.field.map((field) => {
             const id = useId();
             const placeholder = formState.selectedField[field.name];
             return (
@@ -34,7 +38,7 @@ const NewFormEditingField = observer(() => {
                 key={id}
                 id={`editing-field__field_${field.name}`}
                 variant='standard'
-                field={{...field, placeholder }}
+                field={{ ...field, placeholder }}
                 formInstance={form}
               />
             );
