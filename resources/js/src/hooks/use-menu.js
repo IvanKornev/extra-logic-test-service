@@ -24,8 +24,10 @@ export const useMenu = (stylesObject) => {
   const setCoordinates = () => {
     const { uniqueId } = form.selectedField;
     const { position } = form.fieldsList.find(uniqueId);
-    const fieldBlockSize = 135;
-    setPixelShift(`${fieldBlockSize * position}px`);
+
+    const selector = '.new-form__field_selected';
+    const fieldBlock = document.querySelector(selector);
+    setPixelShift(`${fieldBlock.offsetTop}px`);
 
     if (fieldPosition > position) {
       performMoveAnimation('up');

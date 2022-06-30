@@ -85,7 +85,7 @@ const FieldRestoreMessage = (props) => {
 };
 
 NewFormMenu.defaultProps = {
-  onlyAddOptions: false,
+  onlyAddOptions: true,
 };
 
 NewFormMenu.propTypes = {
