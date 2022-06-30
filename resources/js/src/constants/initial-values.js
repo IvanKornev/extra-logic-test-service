@@ -1,4 +1,7 @@
 export const initialValues = {
+  newOption: {
+    title: '',
+  },
   newField: {
     name: '',
     description: '',

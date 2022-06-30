@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { selectOptionReducer } from '@reducers';
 import { useFieldsHandler } from '@hooks';
-import { optionFields, optionLabels } from '@constants';
+import { formsStructure } from '@constants';
 import { selectOptionIsEmpty } from '@domains';
 
 import { NewOptionCreator } from '@components/features/creators';
@@ -109,15 +109,15 @@ const EditingOption = ({ option, abortCallback, handlers }) => {
   return (
     <div className={styles['option__wrapper_editing']}>
       <div className={styles['option__fields_editing']}>
-        {optionFields.map((fieldName) => (
+        {formsStructure.option.map((field) => (
           <TextField
-            id={`option__field_${fieldName}`}
-            placeholder={optionLabels[fieldName]}
+            id={`option__field_${field.name}`}
+            placeholder={field.label}
             key={useId()}
             variant='standard'
-            value={fields[fieldName]}
-            onChange={(e) => handle(e, fieldName)}
-            className={styles[`option__${fieldName}_editing`]}
+            value={fields[field.name]}
+            onChange={(e) => handle(e, field.name)}
+            className={styles[`option__${field.name}_editing`]}
           />
         ))}
       </div>

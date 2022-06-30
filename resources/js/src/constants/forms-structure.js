@@ -7,6 +7,15 @@ const fieldTypes = [
 ];
 
 export const formsStructure = {
+  option: [
+    {
+      name: 'title',
+      label: 'Наименование',
+      component: {
+        name: TextField,
+      }
+    }
+  ],
   field: [
     {
       name: 'name',

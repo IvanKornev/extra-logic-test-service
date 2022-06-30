@@ -1,9 +1,9 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
-import { TextField } from '@mui/material';
 
 import { CreatorModal, ValidatedField } from '@components/reusable';
 import { useFormBuilder } from '@hooks';
+import { formsStructure } from '@constants';
 
 const NewOptionCreator = forwardRef((props, creatorRef) => {
   const { optionsHandlers } = props;
@@ -20,18 +20,16 @@ const NewOptionCreator = forwardRef((props, creatorRef) => {
 });
 
 const CreatorField = ({ formInstance }) => (
-  <ValidatedField
-    field={{
-      name: 'title',
-      label: 'Наименование',
-      component: {
-        name: TextField,
-      },
-    }}
-    name='title'
-    id='new-option-creator__field_title'
-    formInstance={formInstance}
-  />
+  <>
+    {formsStructure.option.map((field) => (
+      <ValidatedField
+        field={field}
+        name={field.name}
+        id={`new-option-creator__field_${field.name}`}
+        formInstance={formInstance}
+      />
+    ))}
+  </>
 );
 
 NewOptionCreator.propTypes = {
