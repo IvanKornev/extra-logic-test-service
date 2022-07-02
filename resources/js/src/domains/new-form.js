@@ -1,7 +1,7 @@
 import { UilPlusCircle, UilTrashAlt, UilCopy } from '@iconscout/react-unicons';
 import { form } from '@global-states';
 
-const createMenu = (creatorRef) => [
+const prepareMenuList = (creatorRef) => [
   {
     iconName: UilPlusCircle,
     tooltip: 'Добавить поле',
@@ -39,7 +39,7 @@ const hasError = (fieldName, formInstance) => {
 const isEmpty = (fields = []) => fields.length === 0;
 
 export const newForm = {
-  createMenu,
+  prepareMenuList,
   hasError,
   isEmpty,
 };

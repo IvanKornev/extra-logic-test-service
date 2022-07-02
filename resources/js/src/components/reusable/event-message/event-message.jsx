@@ -6,10 +6,9 @@ import { Snackbar, Alert } from '@mui/material';
 import styles from './event-message.module.scss';
 
 export const EventMessage = forwardRef((props, ref) => {
-  const { anchorOrigin, message, alertSeverity, withSnackbar, action } = props;
+  const { anchorOrigin, message, alertSeverity, withSnackbar } = props;
   return (
     <EventMessageSnackbar
-      action={action}
       ref={ref}
       anchorOrigin={anchorOrigin}
       withSnackbar={withSnackbar}>
@@ -18,16 +17,7 @@ export const EventMessage = forwardRef((props, ref) => {
         variant='filled'
         onClose={() => ref.current.close()}
         severity={alertSeverity}>
-        <>
-          {message}
-          {action && (
-            <button
-              onClick={action.callback}
-              className={styles['event-message__action']}>
-              {action.title}
-            </button>
-          )}
-        </>
+        {message}
       </Alert>
     </EventMessageSnackbar>
   );
@@ -58,14 +48,9 @@ EventMessage.defaultProps = {
     vertical: 'bottom',
     horizontal: 'left',
   },
-  action: null,
 };
 
 EventMessage.propTypes = {
-  action: PropTypes.shape({
-    title: PropTypes.string,
-    callback: PropTypes.func,
-  }),
   withSnackbar: PropTypes.bool,
   alertSeverity: PropTypes.oneOf(['success', 'warning', 'error', 'info']),
   message: PropTypes.string.isRequired,

@@ -37,15 +37,6 @@ export const removeField = (id, list) => {
   return null;
 };
 
-export const getField = (field, list) => {
-  const { position } = list.find(field.uniqueId);
-  const cachedField = {
-    values: { ...field },
-    position,
-  };
-  return cachedField;
-};
-
 export const changeField = (id, values, list) => {
   list.change(id, values);
 };
