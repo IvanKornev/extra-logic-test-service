@@ -14,7 +14,7 @@ export const OptionIconsContainer = (props) => {
             key={id}
             onClick={actions[action]}
             className={`options__actions_${action}`}
-            { ...params }
+            {...params}
           />
         );
       })}

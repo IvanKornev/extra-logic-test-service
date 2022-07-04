@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { selectOptionReducer } from '@reducers';
 import { useFieldsHandler } from '@hooks';
 import { formsStructure, icons } from '@constants';
-import { selectOptionIsEmpty } from '@domains';
+import { selectOptionIsEmpty, getSelectOptionClasses } from '@domains';
 import { OptionIconsContainer } from '@components/simple-containers';
 
 import { NewOptionCreator } from '@components/features/creators';
@@ -22,7 +22,6 @@ import styles from './options-list.module.scss';
 export const OptionsList = (props) => {
   const creatorRef = useRef();
   const [editingField, selectEditingField] = useState(null);
-
   const { handlers, list, scrollbarColor } = props;
   const scrollbarStyles = styles[`scrollbar_${scrollbarColor}`];
   return (
@@ -65,14 +64,7 @@ export const OptionsList = (props) => {
 };
 
 const DefaultOption = ({ option, number, handlers, selectCallback }) => {
-  const listClasses = [
-    'options-list__option_default',
-    styles['option_default'],
-  ];
-  const actions = {
-    edit: () => selectCallback(),
-    remove: () => handlers.remove(option.id),
-  };
+  const listClasses = getSelectOptionClasses(styles);
   const itemText = `${number}) ${option.title}`;
   return (
     <ListItem className={listClasses.join(' ')}>
@@ -81,7 +73,10 @@ const DefaultOption = ({ option, number, handlers, selectCallback }) => {
         <Stack className='option__actions' direction='row' spacing={1}>
           <OptionIconsContainer
             icons={icons.optionsList.defaultOption}
-            actions={actions}
+            actions={{
+              edit: selectCallback,
+              remove: () => handlers.remove(option.id),
+            }}
           />
         </Stack>
       )}
@@ -96,10 +91,6 @@ const EditingOption = ({ option, abortCallback, handlers }) => {
       handlers.edit(fields);
       abortCallback();
     }
-  };
-  const actions = {
-    'confirm-changes': () => editField(),
-    'discard-changes': () => abortCallback(),
   };
   return (
     <div className={styles['option__wrapper_editing']}>
@@ -119,7 +110,10 @@ const EditingOption = ({ option, abortCallback, handlers }) => {
       <div className={styles['option__buttons_editing']}>
         <OptionIconsContainer
           icons={icons.optionsList.editingOption}
-          actions={actions}
+          actions={{
+            'confirm-changes': editField,
+            'discard-changes': abortCallback,
+          }}
         />
       </div>
     </div>

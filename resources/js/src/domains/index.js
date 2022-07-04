@@ -8,6 +8,7 @@ export {
   removeSelectOption,
   selectOptionIsEmpty,
   compareOptionLists,
+  getSelectOptionClasses,
 } from './select-option';
 
 export {
