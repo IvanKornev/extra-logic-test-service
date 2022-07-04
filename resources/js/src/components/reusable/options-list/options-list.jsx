@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { selectOptionReducer } from '@reducers';
 import { useFieldsHandler } from '@hooks';
-import { formsStructure } from '@constants';
+import { formsStructure, icons } from '@constants';
 import { selectOptionIsEmpty } from '@domains';
 
 import { NewOptionCreator } from '@components/features/creators';
@@ -16,12 +16,6 @@ import {
   Button,
   TextField,
 } from '@mui/material';
-import {
-  UilPen,
-  UilTrashAlt,
-  UilTimesCircle,
-  UilCheckCircle,
-} from '@iconscout/react-unicons';
 
 import styles from './options-list.module.scss';
 
@@ -75,22 +69,28 @@ const DefaultOption = ({ option, number, handlers, selectCallback }) => {
     'options-list__option_default',
     styles['option_default'],
   ];
+  const actions = {
+    'edit': () => selectCallback(),
+    'remove': () => handlers.remove(option.id),
+  };
   const itemText = `${number}) ${option.title}`;
   return (
     <ListItem className={listClasses.join(' ')}>
       <ListItemText primary={itemText} />
       {handlers && (
         <Stack className='option__actions' direction='row' spacing={1}>
-          <UilPen
-            className='option__actions_edit'
-            size={18}
-            onClick={selectCallback}
-          />
-          <UilTrashAlt
-            className='option__actions_remove'
-            size={18}
-            onClick={() => handlers.remove(option.id)}
-          />
+          {icons.optionsList.defaultOption.map((icon) => {
+            const { action, component, size } = icon;
+            const Icon = component;
+            return (
+              <Icon
+                key={useId()}
+                onClick={actions[action]}
+                size={size}
+                className={`options__actions_${action}`}
+              />
+            );
+          })}
         </Stack>
       )}
     </ListItem>
@@ -99,12 +99,15 @@ const DefaultOption = ({ option, number, handlers, selectCallback }) => {
 
 const EditingOption = ({ option, abortCallback, handlers }) => {
   const { fields, handle } = useFieldsHandler(selectOptionReducer, option);
-  const circleColor = selectOptionIsEmpty(fields) ? '#C5C5C5' : '#1EE676';
   const editField = () => {
     if (!selectOptionIsEmpty(fields)) {
       handlers.edit(fields);
       abortCallback();
     }
+  };
+  const actions = {
+    'confirm-changes': () => editField(),
+    'discard-changes': () => abortCallback(),
   };
   return (
     <div className={styles['option__wrapper_editing']}>
@@ -122,18 +125,19 @@ const EditingOption = ({ option, abortCallback, handlers }) => {
         ))}
       </div>
       <div className={styles['option__buttons_editing']}>
-        <UilCheckCircle
-          className='option__actions_confirm-changes'
-          color={circleColor}
-          size={28}
-          onClick={editField}
-        />
-        <UilTimesCircle
-          className='option__actions_discard-changes'
-          color='#F12323'
-          size={28}
-          onClick={abortCallback}
-        />
+        {icons.optionsList.editingOption.map((icon) => {
+          const { action, component, size, color } = icon;
+          const Icon = component;
+          return (
+            <Icon
+              key={useId()}
+              onClick={actions[action]}
+              color={color}
+              size={size}
+              className={`options__actions_${action}`}
+            />
+          );
+        })}
       </div>
     </div>
   );
