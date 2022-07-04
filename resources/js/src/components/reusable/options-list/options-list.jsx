@@ -5,6 +5,7 @@ import { selectOptionReducer } from '@reducers';
 import { useFieldsHandler } from '@hooks';
 import { formsStructure, icons } from '@constants';
 import { selectOptionIsEmpty } from '@domains';
+import { OptionIconsContainer } from '@components/simple-containers';
 
 import { NewOptionCreator } from '@components/features/creators';
 import {
@@ -16,7 +17,6 @@ import {
   Button,
   TextField,
 } from '@mui/material';
-
 import styles from './options-list.module.scss';
 
 export const OptionsList = (props) => {
@@ -70,8 +70,8 @@ const DefaultOption = ({ option, number, handlers, selectCallback }) => {
     styles['option_default'],
   ];
   const actions = {
-    'edit': () => selectCallback(),
-    'remove': () => handlers.remove(option.id),
+    edit: () => selectCallback(),
+    remove: () => handlers.remove(option.id),
   };
   const itemText = `${number}) ${option.title}`;
   return (
@@ -79,18 +79,10 @@ const DefaultOption = ({ option, number, handlers, selectCallback }) => {
       <ListItemText primary={itemText} />
       {handlers && (
         <Stack className='option__actions' direction='row' spacing={1}>
-          {icons.optionsList.defaultOption.map((icon) => {
-            const { action, component, size } = icon;
-            const Icon = component;
-            return (
-              <Icon
-                key={useId()}
-                onClick={actions[action]}
-                size={size}
-                className={`options__actions_${action}`}
-              />
-            );
-          })}
+          <OptionIconsContainer
+            icons={icons.optionsList.defaultOption}
+            actions={actions}
+          />
         </Stack>
       )}
     </ListItem>
@@ -125,19 +117,10 @@ const EditingOption = ({ option, abortCallback, handlers }) => {
         ))}
       </div>
       <div className={styles['option__buttons_editing']}>
-        {icons.optionsList.editingOption.map((icon) => {
-          const { action, component, size, color } = icon;
-          const Icon = component;
-          return (
-            <Icon
-              key={useId()}
-              onClick={actions[action]}
-              color={color}
-              size={size}
-              className={`options__actions_${action}`}
-            />
-          );
-        })}
+        <OptionIconsContainer
+          icons={icons.optionsList.editingOption}
+          actions={actions}
+        />
       </div>
     </div>
   );
