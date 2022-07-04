@@ -11,7 +11,6 @@ export {
 } from './select-option';
 
 export {
-  fieldAttributes,
   wasSelected,
   createField,
   removeField,

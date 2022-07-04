@@ -1,13 +1,4 @@
 import generateId from 'uniqid';
-import PropTypes from 'prop-types';
-
-export const fieldAttributes = PropTypes.shape({
-  uniqueId: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(['text', 'textarea', 'select']),
-  isRequired: PropTypes.bool,
-});
 
 export const createField = (values, list) => {
   const createdField = {
