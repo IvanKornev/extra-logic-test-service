@@ -25,7 +25,7 @@ export const Navbar = observer(() => {
         <div className={styles['navbar__logo']}>
           <UilFileAlt color='rgb(76, 43, 135)' size={52} />
           <Typography variant='h6' component='h1'>
-            Новая форма
+            {form.titleField.name}
           </Typography>
         </div>
         {!isMobileDevice && <NavbarInteractivePart />}
@@ -75,7 +75,10 @@ const NavbarInteractivePart = observer(({ isMobileDevice }) => {
             textColor='secondary'
             indicatorColor='secondary'
             value='to-create-form'>
-            <Tab value='to-create-form' label='Создать форму' />
+            <Tab
+              value='to-create-form'
+              label='Создать форму'
+            />
           </Tabs>
         )}
       </div>
