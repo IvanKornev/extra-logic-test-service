@@ -2,7 +2,7 @@ import React from 'react';
 import { observer } from 'mobx-react-lite';
 import PropTypes from 'prop-types';
 
-import { wasSelected } from '@domains';
+import { wasSelected, getFieldClasses } from '@domains';
 import { formsStructure } from '@constants';
 import { form } from '@global-states';
 import { LinkedListConverter } from '@lib/converters';
@@ -18,45 +18,44 @@ const NewFormFields = observer((props) => {
   return (
     <>
       {fields.length !== 0 &&
-        fields.map((field) => (
-          <FieldBox
-            key={field.uniqueId}
-            onClick={() => form.selectField(field)}
-            additionalClasses={[
-              wasSelected(field.uniqueId, currentId)
-                ? 'new-form__field_selected'
-                : 'new-form__field',
-              styles['field'],
-            ]}>
-            {!wasSelected(field.uniqueId, currentId) && (
-              <>
-                {formsStructure.titleField.map((structure) => {
-                  const { name } = structure;
-                  return (
-                    <Stack
-                      className={`new-form__field_${name}`}
-                      key={name}
-                      direction='row'>
-                      <Typography component='h3' variant='h6'>
-                        {field[name]}
-                      </Typography>
-                      {field.isRequired && name === 'name' && (
-                        <RequiredFieldMark />
-                      )}
-                    </Stack>
-                  );
-                })}
-                {field.type === 'select' && (
-                  <OptionsList
-                    scrollbarColor='purple'
-                    list={field.selectOptions}
-                  />
-                )}
-              </>
-            )}
-            {wasSelected(field.uniqueId, currentId) && selectedFieldComponent}
-          </FieldBox>
-        ))}
+        fields.map((field) => {
+          const isSelectedField = wasSelected(field.uniqueId, currentId);
+          const classes = getFieldClasses(isSelectedField, styles, 'default');
+          return (
+            <FieldBox
+              key={field.uniqueId}
+              onClick={() => form.selectField(field)}
+              additionalClasses={classes}>
+              {!isSelectedField && (
+                <>
+                  {formsStructure.titleField.map((structure) => {
+                    const { name } = structure;
+                    return (
+                      <Stack
+                        className={`new-form__field_${name}`}
+                        key={name}
+                        direction='row'>
+                        <Typography component='h3' variant='h6'>
+                          {field[name]}
+                        </Typography>
+                        {field.isRequired && name === 'name' && (
+                          <RequiredFieldMark />
+                        )}
+                      </Stack>
+                    );
+                  })}
+                  {field.type === 'select' && (
+                    <OptionsList
+                      scrollbarColor='purple'
+                      list={field.selectOptions}
+                    />
+                  )}
+                </>
+              )}
+              {isSelectedField && selectedFieldComponent}
+            </FieldBox>
+          );
+        })}
     </>
   );
 });
