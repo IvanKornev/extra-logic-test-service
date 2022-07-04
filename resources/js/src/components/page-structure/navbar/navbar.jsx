@@ -83,6 +83,7 @@ const NavbarInteractivePart = observer(({ isMobileDevice }) => {
         {buttons.navbar.map((button) => {
           const isDisable = wasThrottled || !form.fieldsCounter;
           const clickHandler = handleButton(button.action);
+          const ButtonIcon = button.icon;
           return (
             <Button
               key={useId()}
@@ -90,6 +91,7 @@ const NavbarInteractivePart = observer(({ isMobileDevice }) => {
               color={button.color}
               variant={isMobileDevice ? 'contained' : 'outlined'}
               disabled={isDisable}
+              startIcon={<ButtonIcon />}
               type='button'
               onClick={throttle(clickHandler, 2000)}>
               {button.text}

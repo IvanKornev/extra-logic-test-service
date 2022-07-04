@@ -34,7 +34,7 @@ const NewFormMenu = observer(
   }),
 );
 
-const NewFormMenuIcon = ((props) => {
+const NewFormMenuIcon = (props) => {
   const { params } = props;
   const iconClass = styles['menu__icon'];
   const IconComponent = params.iconName;
@@ -47,7 +47,7 @@ const NewFormMenuIcon = ((props) => {
       className={iconClass}
     />
   );
-});
+};
 
 NewFormMenu.defaultProps = {
   onlyAddOptions: true,

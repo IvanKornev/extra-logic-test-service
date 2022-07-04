@@ -4,10 +4,10 @@
   align-items: center;
 
   &__box {
-    row-gap: 10px;
+    row-gap: 0.8em;
     border: none;
     outline: none;
-    padding: 20px;
+    padding: 1.5em;
     background: rgba(255, 255, 255, 0.8);
     border-radius: 6px;
     display: inline-flex;
@@ -18,7 +18,7 @@
   &__form {
     display: flex;
     flex-direction: column;
-    row-gap: 14px;
+    row-gap: 0.8em;
     margin-top: 0;
   }
 }

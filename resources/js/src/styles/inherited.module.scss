@@ -8,7 +8,7 @@
 }
 
 %item-with-icon {
-  column-gap: 6px;
+  column-gap: 0.3em;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -21,7 +21,7 @@
   display: inline-flex;
   background: white;
   flex-direction: column;
-  padding: 14px;
+  padding: 0.9em;
   border-radius: 8px;
   border: 1px rgba(0, 0, 0, 0.2) solid;
 }

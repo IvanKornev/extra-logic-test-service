@@ -5,14 +5,18 @@
   &__fields {
     display: inline-flex;
     flex-direction: column;
-    row-gap: 12px;
-    margin-right: 12px;
+    row-gap: 0.8em;
+    margin-right: 0.8em;
   }
 
   &__wrapper {
-    margin-top: 12px;
+    margin-top: 0.8em;
     position: relative;
     display: flex;
     flex-direction: row;
+
+    @media screen and (max-width: 768px) {
+      padding: 1em;
+    }
   }
 }
