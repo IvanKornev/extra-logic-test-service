@@ -22,7 +22,7 @@
         "moduleNameMapper": {
             "^@components.*$": "<rootDir>/resources/js/src/components",
             "^@api.*$": "<rootDir>/resources/js/src/api",
-            "^@domains.*$": "<rootDir>/resources/js/src/domains",
+            "^@entities.*$": "<rootDir>/resources/js/src/entities",
             "^@hooks.*$": "<rootDir>/resources/js/src/hooks",
             "^@data-structures.*$": "<rootDir>/resources/js/src/data-structures",
             "^@lib/converters.*$": "<rootDir>/resources/js/src/lib/converters",

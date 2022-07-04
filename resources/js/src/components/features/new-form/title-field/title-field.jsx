@@ -5,7 +5,7 @@ import { Formik, Form } from 'formik';
 import { form as formState } from '@global-states';
 import { useFormBuilder } from '@hooks';
 import { formsStructure } from '@constants';
-import { getFieldClasses } from '@domains';
+import { getFieldClasses } from '@entities';
 
 import { Button } from '@mui/material';
 import { FieldBox, ValidatedField } from '@components/reusable';

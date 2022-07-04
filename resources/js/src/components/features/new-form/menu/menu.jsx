@@ -2,7 +2,7 @@ import React, { useId, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react-lite';
 
-import { newForm } from '@domains';
+import { newForm } from '@entities';
 import { useMenu } from '@hooks';
 
 import styles from './menu.module.scss';

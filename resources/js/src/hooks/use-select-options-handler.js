@@ -4,7 +4,7 @@ import {
   editSelectOption,
   removeSelectOption,
   compareOptionLists,
-} from '@domains';
+} from '@entities';
 
 export const useSelectOptionsHandler = (initialList = []) => {
   const reducer = (state, action) => {

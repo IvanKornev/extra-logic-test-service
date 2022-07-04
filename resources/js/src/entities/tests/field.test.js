@@ -6,7 +6,7 @@ import {
   changeField,
   copyField,
   getFieldClasses,
-} from '@domains';
+} from '@entities';
 
 describe('Методы нового поля', () => {
   let fieldsList;

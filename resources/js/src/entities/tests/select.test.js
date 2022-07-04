@@ -1,5 +1,5 @@
 import { componentsRenderer } from '@lib/tests';
-import { selectHasOptions, isSelect } from '@domains';
+import { selectHasOptions, isSelect } from '@entities';
 
 describe('Методы тега селектора', () => {
   it('Проверяет, является ли компонент селектором', () => {

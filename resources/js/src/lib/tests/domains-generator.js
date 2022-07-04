@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { addSelectOption } from '@domains';
+import { addSelectOption } from '@entities';
 
 export const generateSelectOptions = (count = 1) =>
   generateCollection(count, (collection) => {

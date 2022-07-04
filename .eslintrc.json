@@ -46,7 +46,7 @@
     "settings": {
         "import/resolver": {
             "alias": [
-                ["@domains", "./resources/js/src/domains"],
+                ["@entities", "./resources/js/src/entities"],
                 ["@data-structures", "./resources/js/src/data-structures"],
                 ["@api", "./resources/js/src/api"],
                 ["@lib", "./resources/js/src/lib"],

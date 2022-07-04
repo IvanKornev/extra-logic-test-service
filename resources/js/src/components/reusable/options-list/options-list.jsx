@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { selectOptionReducer } from '@reducers';
 import { useFieldsHandler } from '@hooks';
 import { formsStructure, icons } from '@constants';
-import { selectOptionIsEmpty, getSelectOptionClasses } from '@domains';
+import { selectOptionIsEmpty, getSelectOptionClasses } from '@entities';
 import { OptionIconsContainer } from '@components/simple-containers';
 
 import { NewOptionCreator } from '@components/features/creators';

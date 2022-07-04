@@ -1,6 +1,6 @@
 import React, { useId } from 'react';
 import PropTypes from 'prop-types';
-import { newForm, isSelect } from '@domains';
+import { newForm, isSelect } from '@entities';
 
 import { Alert, FormControl, InputLabel, MenuItem } from '@mui/material';
 import styles from './validated-field.module.scss';

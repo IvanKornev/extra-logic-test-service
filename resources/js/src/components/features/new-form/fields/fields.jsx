@@ -2,7 +2,7 @@ import React from 'react';
 import { observer } from 'mobx-react-lite';
 import PropTypes from 'prop-types';
 
-import { wasSelected, getFieldClasses } from '@domains';
+import { wasSelected, getFieldClasses } from '@entities';
 import { formsStructure } from '@constants';
 import { form } from '@global-states';
 import { LinkedListConverter } from '@lib/converters';

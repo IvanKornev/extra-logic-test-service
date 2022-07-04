@@ -14,7 +14,7 @@ const config = {
     alias: {
       '@components': path.resolve(__dirname, './resources/js/src/components'),
       '@api': path.resolve(__dirname, './resources/js/src/api'),
-      '@domains': path.resolve(__dirname, './resources/js/src/domains'),
+      '@entities': path.resolve(__dirname, './resources/js/src/entities'),
       '@hooks': path.resolve(__dirname, './resources/js/src/hooks'),
       '@data-structures': path.resolve(__dirname, './resources/js/src/data-structures'),
       '@lib': path.resolve(__dirname, './resources/js/src/lib'),

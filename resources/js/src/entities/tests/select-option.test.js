@@ -6,7 +6,7 @@ import {
   removeSelectOption,
   selectOptionIsEmpty,
   compareOptionLists,
-} from '@domains';
+} from '@entities';
 
 describe('Методы опций селектора', () => {
   it('Добавляет новую опцию', () => {
