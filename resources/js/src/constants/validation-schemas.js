@@ -9,9 +9,7 @@ const fieldDefaultValues = {
     .required('Описание - обязательно'),
 };
 
-const titleField = {
-  ...fieldDefaultValues,
-};
+const titleField = Yup.object().shape(fieldDefaultValues);
 
 const defaultField = Yup.object().shape({
   ...fieldDefaultValues,

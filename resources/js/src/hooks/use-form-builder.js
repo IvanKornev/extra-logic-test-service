@@ -21,7 +21,11 @@ export const useFormBuilder =
 
     function getTitleFieldForm() {
       const callbacks = {
-        onSubmit: (values) => formState.changeTitleField(values),
+        onSubmit: (values, helpers) => {
+          formState.changeTitleField(values);
+          const formNextState = { values };
+          helpers.resetForm(formNextState);
+        },
       };
       const fieldValues = initialValues.titleField;
       const builtForm = buildForm(fieldValues, callbacks, 'titleField');

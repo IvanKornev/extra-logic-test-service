@@ -1,4 +1,5 @@
 @use '@styles/inherited.module.scss';
+@use '@styles/animations';
 
 .title-field {
   @extend %default-field;
@@ -12,6 +13,12 @@
       & input[type='text'] {
         font-size: 16px;
       }
+    }
+  }
+
+  &__button {
+    &_submit {
+      @include animations.landing-from-right-side;
     }
   }
 }
