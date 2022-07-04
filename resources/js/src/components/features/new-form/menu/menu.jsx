@@ -16,24 +16,16 @@ const NewFormMenu = observer(
     return (
       <Box ref={menuRef} className={styles['menu']}>
         {menuList.map((item) => {
-          const { iconName, action, tooltip } = item;
+          const { action, tooltip } = item;
           const id = useId();
-          const IconComponent = iconName;
           const isDisable = onlyAddOption && action.name !== 'add';
           const classSuffix = isDisable ? 'disabled' : 'enabled';
           const itemClass = styles[`menu__item_${classSuffix}`];
-          const iconClass = styles['menu__icon'];
           return (
-            <Tooltip key={id} title={tooltip} placement='right'>
-              <>
-                <IconComponent
-                  size={30}
-                  id={`menu__icon_${action.name}`}
-                  color='#545454'
-                  onClick={action.callback}
-                  className={`${itemClass} ${iconClass}`}
-                />
-              </>
+            <Tooltip key={id} title={tooltip} placement='right' arrow>
+              <div className={itemClass}>
+                <NewFormMenuIcon params={item} />
+              </div>
             </Tooltip>
           );
         })}
@@ -41,6 +33,21 @@ const NewFormMenu = observer(
     );
   }),
 );
+
+const NewFormMenuIcon = ((props) => {
+  const { params } = props;
+  const iconClass = styles['menu__icon'];
+  const IconComponent = params.iconName;
+  return (
+    <IconComponent
+      size={30}
+      id={`menu__icon_${params.action.name}`}
+      color='#545454'
+      onClick={params.action.callback}
+      className={iconClass}
+    />
+  );
+});
 
 NewFormMenu.defaultProps = {
   onlyAddOptions: true,
