@@ -1,12 +1,20 @@
 import * as Yup from 'yup';
 
-const field = Yup.object().shape({
+const fieldDefaultValues = {
   name: Yup.string()
     .max(50, 'Имя не может быть дольше 50 символов')
     .required('Имя - обязательно'),
   description: Yup.string()
     .max(50, 'Описание не может быть дольше 50 символов')
     .required('Описание - обязательно'),
+};
+
+const titleField = {
+  ...fieldDefaultValues,
+};
+
+const defaultField = Yup.object().shape({
+  ...fieldDefaultValues,
   type: Yup.string()
     .oneOf(['text', 'textarea', 'select'])
     .required('Тип поля выбирается обязательно'),
@@ -20,5 +28,8 @@ const option = Yup.object().shape({
     .required('Название опции - обязательно'),
 });
 
-const validationSchemas = { field, option };
-export { validationSchemas };
+export const validationSchemas = {
+  titleField,
+  defaultField,
+  option,
+};
