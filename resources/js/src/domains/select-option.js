@@ -9,16 +9,14 @@ export const addSelectOption = (option) => {
   return { id, title, value };
 };
 
-export const editSelectOption = (values, options) =>
-  options.map((option) => {
-    if (option.id === values.id) {
-      return values;
-    }
-    return option;
-  });
+export const editSelectOption = (values, options) => options.map((option) => {
+  if (option.id === values.id) {
+    return values;
+  }
+  return option;
+});
 
-export const removeSelectOption = (id, options) =>
-  options.filter((option) => option.id !== id);
+export const removeSelectOption = (id, options) => options.filter((option) => option.id !== id);
 
 export const compareOptionLists = (initialList, updatedList) => {
   let wasUpdated = false;
@@ -34,5 +32,4 @@ export const compareOptionLists = (initialList, updatedList) => {
   return wasUpdated;
 };
 
-export const selectOptionIsEmpty = (option) =>
-  !!(!option.title || !option.value);
+export const selectOptionIsEmpty = (option) => !!(!option.title || !option.value);

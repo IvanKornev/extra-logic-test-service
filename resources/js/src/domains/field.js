@@ -34,5 +34,17 @@ export const changeField = (id, values, list) => {
 
 export const copyField = (id, list) => list.copy(id);
 
-export const wasSelected = (fieldId, currentFieldId) =>
-  fieldId && currentFieldId && fieldId === currentFieldId && true;
+export const getFieldClasses = (wasSelected, cssModule, fieldType = 'title') => {
+  const fieldTypes = ['title', 'default'];
+  if (!fieldTypes.includes(fieldType)) {
+    throw new Error(`Допустимые типы поля: ${fieldTypes.join(', ')}`);
+  }
+  const classSuffix = wasSelected ? '_selected' : '';
+  const classes = [
+    cssModule[`field-${fieldType}`],
+    `new-form__field${classSuffix}`,
+  ];
+  return classes;
+};
+
+export const wasSelected = (fieldId, currentFieldId) => fieldId && currentFieldId && fieldId === currentFieldId && true;

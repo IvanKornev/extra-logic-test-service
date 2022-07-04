@@ -16,4 +16,5 @@ export {
   removeField,
   changeField,
   copyField,
+  getFieldClasses,
 } from './field';

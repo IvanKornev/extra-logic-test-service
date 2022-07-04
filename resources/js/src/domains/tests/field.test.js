@@ -1,6 +1,12 @@
 import { generateFields } from '@lib/tests';
 import { LinkedList } from '@data-structures';
-import { createField, removeField, changeField, copyField } from '@domains';
+import {
+  createField,
+  removeField,
+  changeField,
+  copyField,
+  getFieldClasses,
+} from '@domains';
 
 describe('Методы нового поля', () => {
   let fieldsList;
@@ -32,6 +38,20 @@ describe('Методы нового поля', () => {
 
     changeField(fieldsList.head.value.uniqueId, updatedField, fieldsList);
     expect(fieldsList.head.value.name).toBe(updatedField.name);
+  });
+
+  it('Получает CSS-классы для заглавного поля', () => {
+    const classes = getFieldClasses(false, {}, 'title');
+    const lastClass = classes.pop();
+    expect(lastClass).toBe('new-form__field');
+  });
+
+  it('Вызывает ошибку при получении классов для некорректного типа поля', () => {
+    const call = () => {
+      getFieldClasses(true, {}, 'custom');
+    };
+    const expectedError = 'Допустимые типы поля: title, default';
+    expect(call).toThrow(expectedError);
   });
 
   it('Дублирует поле', () => {
