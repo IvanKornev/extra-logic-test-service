@@ -6,7 +6,6 @@ export {
   addSelectOption,
   editSelectOption,
   removeSelectOption,
-  selectOptionIsEmpty,
   compareOptionLists,
   getSelectOptionClasses,
 } from './select-option';

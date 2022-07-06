@@ -4,7 +4,6 @@ import {
   addSelectOption,
   editSelectOption,
   removeSelectOption,
-  selectOptionIsEmpty,
   compareOptionLists,
 } from '@domains';
 
@@ -51,14 +50,5 @@ describe('Методы опций селектора', () => {
 
     const wasUpdated = compareOptionLists(originalList, updatedList);
     expect(wasUpdated).toBeTruthy();
-  });
-
-  it('Проверяет свойства опции на отсутствие', () => {
-    const newOption = {
-      value: faker.word.adverb(1),
-    };
-    expect(selectOptionIsEmpty(newOption)).toBeTruthy();
-    newOption.title = faker.word.adverb(1);
-    expect(selectOptionIsEmpty(newOption)).toBeFalsy();
   });
 });
