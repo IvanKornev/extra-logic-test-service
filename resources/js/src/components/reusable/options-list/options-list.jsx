@@ -20,11 +20,13 @@ export const OptionsList = (props) => {
   const creatorRef = useRef();
   const { handlers, list, scrollbarColor } = props;
   const newOptionForm = useFormBuilder('new-option')(handlers, creatorRef);
+
   const scrollbarStyles = styles[`scrollbar_${scrollbarColor}`];
+  const listClasses = `${styles['list']} ${scrollbarStyles}`;
   return (
     <Stack id='options-list' direction='column' justifyContent='center'>
       {list.length !== 0 && (
-        <List className={`${styles['list']} ${scrollbarStyles}`}>
+        <List className={listClasses}>
           <Typography>Опции селектора: </Typography>
           {list.map((option, index) => (
             <Option

@@ -1,4 +1,5 @@
 @use '@styles/mixins';
+@use '@styles/animations';
 
 $blue-scrollbar: #1976d2;
 $purple-scrollbar: #673ab7;
@@ -9,6 +10,13 @@ $purple-scrollbar: #673ab7;
   height: 100px;
   overflow-x: hidden;
   overflow-y: auto;
+
+  &__option {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-between;
+    @include animations.landing-from-right-side(4em, 0.4s);
+  }
 }
 
 .scrollbar {
@@ -17,40 +25,5 @@ $purple-scrollbar: #673ab7;
   }
   &_purple {
     @include mixins.standard-scrollbar($purple-scrollbar);
-  }
-}
-
-.option {
-  &_default {
-    display: inline-flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  &__wrapper_editing {
-    display: flex;
-    flex-direction: row;
-    column-gap: 8px;
-  }
-
-  &__fields_editing {
-    display: flex;
-    flex-direction: column;
-    row-gap: 4px;
-  }
-
-  &__buttons_editing {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    column-gap: 6px;
-  }
-
-  &__title_editing {
-    @include mixins.field-input(17px, 90%);
-  }
-
-  &__value_editing {
-    @include mixins.field-input(14px, 80%);
   }
 }
