@@ -19,11 +19,18 @@ const NewFieldCreator = observer(
     const form = useFormBuilder('new-field')(creatorRef, optionsList);
     const disableCondition =
       form.values.type === 'select' && optionsState.list.length === 0;
+
+    const onClose = () => {
+      form.resetForm();
+      handlers.removeAll();
+    };
+
     return (
       <CreatorModal
         creatingThing='field'
         ref={creatorRef}
         formInstance={form}
+        onCloseCallback={onClose}
         submitIsDisable={disableCondition}
         title='Новое поле'>
         <CreatorFields formInstance={form} />

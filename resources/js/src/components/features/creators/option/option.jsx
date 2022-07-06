@@ -10,6 +10,7 @@ const OptionCreator = forwardRef((props, creatorRef) => {
     <CreatorModal
       creatingThing='option'
       formInstance={formInstance}
+      onCloseCallback={formInstance.resetForm}
       ref={creatorRef}
       title={title}>
       {formsStructure.option.map((field) => (

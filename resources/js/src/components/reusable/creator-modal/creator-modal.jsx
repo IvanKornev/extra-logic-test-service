@@ -9,9 +9,15 @@ import { Formik, Form } from 'formik';
 import styles from './creator-modal.module.scss';
 
 export const CreatorModal = forwardRef((props, ref) => {
-  const { title, submitIsDisable, formInstance, children, creatingThing } =
-    props;
-  const manager = useVisibilityManager(ref, formInstance.resetForm);
+  const {
+    title,
+    submitIsDisable,
+    formInstance,
+    children,
+    creatingThing,
+    onCloseCallback,
+  } = props;
+  const manager = useVisibilityManager(ref, onCloseCallback);
   const handleClick = (actionName) => {
     if (actionName === 'abort') {
       ref.current.close();
@@ -65,6 +71,7 @@ CreatorModal.defaultProps = {
 CreatorModal.propTypes = {
   creatingThing: PropTypes.oneOf(['field', 'option']).isRequired,
   title: PropTypes.string.isRequired,
+  onCloseCallback: PropTypes.func,
   submitIsDisable: PropTypes.bool,
   children: PropTypes.node.isRequired,
   formInstance: PropTypes.object.isRequired,
