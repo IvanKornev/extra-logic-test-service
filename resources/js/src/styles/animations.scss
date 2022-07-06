@@ -18,15 +18,11 @@
 @mixin fade-in-right($duration: 1s) {
   animation: fade-animation $duration backwards;
   @keyframes fade-animation {
-    25% {
-      transform: translateX(0);
-      opacity: 1;
-    }
     50% {
       opacity: 0.75;
     }
     100% {
-      transform: translateX(150%);
+      transform: translateX(100%);
       opacity: 0;
     }
   }

@@ -18,7 +18,7 @@ $purple-scrollbar: #673ab7;
     @include animations.landing-from-right-side(4em, 0.4s);
 
     &_removing {
-      @include animations.fade-in-right(0.5s);
+      @include animations.fade-in-right;
     }
   }
 }
