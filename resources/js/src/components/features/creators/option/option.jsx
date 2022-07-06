@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 import { CreatorModal, ValidatedField } from '@components/reusable';
 import { formsStructure } from '@constants';
 
-const NewOptionCreator = forwardRef((props, creatorRef) => {
-  const { formInstance } = props;
+const OptionCreator = forwardRef((props, creatorRef) => {
+  const { formInstance, title } = props;
   return (
     <CreatorModal
       creatingThing='option'
       formInstance={formInstance}
       ref={creatorRef}
-      title='Новая опция селектора'>
+      title={title}>
       {formsStructure.option.map((field) => (
         <ValidatedField
           field={field}
@@ -24,8 +24,9 @@ const NewOptionCreator = forwardRef((props, creatorRef) => {
   );
 });
 
-NewOptionCreator.propTypes = {
+OptionCreator.propTypes = {
+  title: PropTypes.string.isRequired,
   formInstance: PropTypes.object.isRequired,
 };
 
-export { NewOptionCreator };
+export { OptionCreator };

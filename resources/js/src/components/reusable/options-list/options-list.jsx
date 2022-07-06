@@ -1,13 +1,10 @@
-import React, { useState, useId, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-import { selectOptionReducer } from '@reducers';
-import { useFieldsHandler, useFormBuilder } from '@hooks';
-import { formsStructure, icons } from '@constants';
-import { selectOptionIsEmpty, getSelectOptionClasses } from '@domains';
-import { OptionIconsContainer } from '@components/simple-containers';
+import { useFormBuilder } from '@hooks';
+import { getSelectOptionClasses } from '@domains';
 
-import { NewOptionCreator } from '@components/features/creators';
+import { OptionCreator } from '@components/features/creators';
 import {
   List,
   Typography,
@@ -15,7 +12,6 @@ import {
   ListItemText,
   Stack,
   Button,
-  TextField,
 } from '@mui/material';
 import styles from './options-list.module.scss';
 
@@ -30,21 +26,14 @@ export const OptionsList = (props) => {
       {list.length !== 0 && (
         <List className={`${styles['list']} ${scrollbarStyles}`}>
           <Typography>Опции селектора: </Typography>
-          {list.map((option, index) => {
-            const { id } = option;
-            const Option =
-              editingField?.id === id ? EditingOption : DefaultOption;
-            return (
-              <Option
-                option={option}
-                handlers={handlers}
-                abortCallback={() => selectEditingField(null)}
-                selectCallback={() => selectEditingField(option)}
-                number={index + 1}
-                key={id}
-              />
-            );
-          })}
+          {list.map((option, index) => (
+            <Option
+              option={option}
+              handlers={handlers}
+              number={index + 1}
+              key={option.id}
+            />
+          ))}
         </List>
       )}
       {handlers && (
@@ -57,14 +46,25 @@ export const OptionsList = (props) => {
             onClick={() => creatorRef.current.show()}>
             Добавить опцию селектора
           </Button>
-          <NewOptionCreator ref={creatorRef} formInstance={newOptionForm} />
+          <OptionCreator
+            title='Новая опция селектора'
+            ref={creatorRef}
+            formInstance={newOptionForm}
+          />
         </>
       )}
     </Stack>
   );
 };
 
-const DefaultOption = ({ option, number, handlers, selectCallback }) => {
+const Option = ({ option, number, handlers }) => {
+  const creatorRef = useRef();
+  const editingOptionForm = useFormBuilder('editing-option')(
+    handlers,
+    creatorRef,
+    option,
+  );
+
   const listClasses = getSelectOptionClasses(styles);
   const itemText = `${number}) ${option.title}`;
   return (
@@ -72,52 +72,15 @@ const DefaultOption = ({ option, number, handlers, selectCallback }) => {
       <ListItemText primary={itemText} />
       {handlers && (
         <Stack className='option__actions' direction='row' spacing={1}>
-          <OptionIconsContainer
-            icons={icons.optionsList.defaultOption}
-            actions={{
-              edit: selectCallback,
-              remove: () => handlers.remove(option.id),
-            }}
-          />
+          <p onClick={() => creatorRef.current.show()}>Править</p>
         </Stack>
       )}
+      <OptionCreator
+        title='Редактировании опции'
+        ref={creatorRef}
+        formInstance={editingOptionForm}
+      />
     </ListItem>
-  );
-};
-
-const EditingOption = ({ option, abortCallback, handlers }) => {
-  const { fields, handle } = useFieldsHandler(selectOptionReducer, option);
-  const editField = () => {
-    if (!selectOptionIsEmpty(fields)) {
-      handlers.edit(fields);
-      abortCallback();
-    }
-  };
-  return (
-    <div className={styles['option__wrapper_editing']}>
-      <div className={styles['option__fields_editing']}>
-        {formsStructure.option.map((field) => (
-          <TextField
-            id={`option__field_${field.name}`}
-            placeholder={field.label}
-            key={useId()}
-            variant='standard'
-            value={fields[field.name]}
-            onChange={(e) => handle(e, field.name)}
-            className={styles[`option__${field.name}_editing`]}
-          />
-        ))}
-      </div>
-      <div className={styles['option__buttons_editing']}>
-        <OptionIconsContainer
-          icons={icons.optionsList.editingOption}
-          actions={{
-            'confirm-changes': editField,
-            'discard-changes': abortCallback,
-          }}
-        />
-      </div>
-    </div>
   );
 };
 
