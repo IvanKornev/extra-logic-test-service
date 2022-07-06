@@ -2,30 +2,27 @@ import React, { useId } from 'react';
 import { Formik, Form } from 'formik';
 
 import { observer } from 'mobx-react-lite';
-import { selectHasOptions } from '@entities';
+import { selectIsEmpty } from '@domains';
 import { form as formState } from '@global-states';
 import { formsStructure } from '@constants';
 import { useSelectOptionsHandler, useFormBuilder } from '@hooks';
 
 import { UilCheckCircle } from '@iconscout/react-unicons';
 import styles from './editing-field.module.scss';
+import { Button } from '@mui/material';
 import {
   LabledSwitch,
   OptionsList,
   ValidatedField,
 } from '@components/reusable';
-import { Button } from '@mui/material';
 
 const NewFormEditingField = observer(() => {
   const { selectOptions } = formState.selectedField;
   const { optionsState, handlers } = useSelectOptionsHandler(selectOptions);
-  const form = useFormBuilder('editing-field')(optionsState.list);
-  const disableSubmitButton = () => {
-    const { type } = form.values;
-    if (type === 'select' && !selectHasOptions(optionsState.list)) {
-      return true;
-    }
-  };
+
+  const { list } = optionsState;
+  const form = useFormBuilder('editing-field')(list);
+  const disableCondition = selectIsEmpty(form.values.type, list);
   return (
     <>
       <Formik initialValues={form.initialValues} onSubmit={form.handleSubmit}>
@@ -65,7 +62,7 @@ const NewFormEditingField = observer(() => {
                 startIcon={<UilCheckCircle />}
                 type='submit'
                 color='success'
-                disabled={disableSubmitButton()}
+                disabled={disableCondition}
                 onClick={form.changeHandler}
               />
             )}

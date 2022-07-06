@@ -34,10 +34,7 @@ export const compareOptionLists = (initialList, updatedList) => {
   return wasUpdated;
 };
 
-export const selectOptionIsEmpty = (option) =>
-  !!(!option.title || !option.value);
-
 export const getSelectOptionClasses = (cssModule) => {
-  const classes = ['options-list__option_default', cssModule.option_default];
+  const classes = ['list__option', cssModule.list__option];
   return classes;
 };

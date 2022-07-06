@@ -3,22 +3,23 @@ import { observer } from 'mobx-react-lite';
 import { throttle } from 'lodash';
 
 import { form } from '@global-states';
-import { messages, buttons, icons } from '@constants';
+import { messages, buttons } from '@constants';
 import { useMessenger, useDrawer } from '@hooks';
 
 import styles from './navbar.module.scss';
+import * as icons from '@iconscout/react-unicons';
 import { EventMessage } from '@components/reusable';
 import { Button, Typography, Tabs, Tab, Drawer } from '@mui/material';
 
 export const Navbar = observer(() => {
   const { isMobileDevice, drawerWasOpened, openDrawer } = useDrawer();
-  const { Logo, OpenedMenu, ClosedMenu } = icons.navbar;
-  const MobileIcon = drawerWasOpened ? OpenedMenu : ClosedMenu;
+  const { UilFileAlt, UilBars, UilTimes } = icons;
+  const MobileIcon = drawerWasOpened ? UilTimes : UilBars;
   return (
     <nav className={styles['navbar']}>
       <div className={styles['navbar__wrapper']}>
         <div className={styles['navbar__logo']}>
-          <Logo color='rgb(76, 43, 135)' size={52} />
+          <UilFileAlt color='rgb(76, 43, 135)' size={52} />
           <Typography variant='h6' component='h1'>
             {form.titleField.name}
           </Typography>
@@ -54,13 +55,13 @@ const NavbarInteractivePart = observer(({ isMobileDevice }) => {
     showMessage(messages.form[actionName].success);
     setTimeout(() => setThrottlingStatus(false), 2000);
   };
-  const { CreateFormAction } = icons.navbar;
+  const { UilPlusSquare } = icons;
   return (
     <>
       <div className={styles['navbar__items']}>
         {isMobileDevice && (
           <div className={styles['navbar__item']}>
-            <CreateFormAction color='rgb(76, 43, 135)' size={30} />
+            <UilPlusSquare color='rgb(76, 43, 135)' size={30} />
             <Typography variant='h6' component='h2'>
               Создать форму
             </Typography>

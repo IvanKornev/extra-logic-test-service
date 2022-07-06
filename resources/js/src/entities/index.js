@@ -1,12 +1,11 @@
 export { newForm } from './new-form';
 
-export { isSelect, selectHasOptions } from './select';
+export { isSelect, selectIsEmpty } from './select';
 
 export {
   addSelectOption,
   editSelectOption,
   removeSelectOption,
-  selectOptionIsEmpty,
   compareOptionLists,
   getSelectOptionClasses,
 } from './select-option';

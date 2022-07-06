@@ -51,8 +51,7 @@
                 ["@api", "./resources/js/src/api"],
                 ["@lib", "./resources/js/src/lib"],
                 ["@constants", "./resources/js/src/constants"],
-                ["@global-states", "./resources/js/src/global-states"],
-                ["@reducers", "./resources/js/src/reducers"]
+                ["@global-states", "./resources/js/src/global-states"]
             ]
         }
     }

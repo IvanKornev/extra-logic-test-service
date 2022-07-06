@@ -9,6 +9,8 @@ export const useFormBuilder =
     switch (formName) {
       case 'new-option':
         return getNewOptionForm(formParams);
+      case 'editing-option':
+        return getEditingOptionForm(formParams);
       case 'new-field':
         return getNewFieldForm(formParams);
       case 'editing-field':
@@ -56,6 +58,20 @@ export const useFormBuilder =
       };
       const fieldValues = initialValues.newField;
       const form = buildForm(fieldValues, callbacks, 'defaultField');
+      return form;
+    }
+
+    function getEditingOptionForm(params) {
+      const [handlers, creatorRef, previousValue] = params;
+      const callbacks = {
+        onSubmit: (values, helpers) => {
+          handlers.edit(values);
+          creatorRef.current.close();
+          helpers.resetForm({ values });
+        },
+      };
+      const optionValues = previousValue;
+      const form = buildForm(optionValues, callbacks, 'option');
       return form;
     }
 

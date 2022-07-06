@@ -1,6 +1,7 @@
 import React, { useId, forwardRef } from 'react';
 import { observer } from 'mobx-react-lite';
 
+import { selectIsEmpty } from '@domains';
 import { useSelectOptionsHandler, useFormBuilder } from '@hooks';
 import { formsStructure } from '@constants';
 
@@ -15,15 +16,19 @@ import {
 const NewFieldCreator = observer(
   forwardRef((props, creatorRef) => {
     const { optionsState, handlers } = useSelectOptionsHandler();
-    const optionsList = optionsState.list;
-    const form = useFormBuilder('new-field')(creatorRef, optionsList);
-    const disableCondition =
-      form.values.type === 'select' && optionsState.list.length === 0;
+    const { list } = optionsState;
+    const form = useFormBuilder('new-field')(creatorRef, list);
+    const disableCondition = selectIsEmpty(form.values.type, list);
+    const onClose = () => {
+      form.resetForm();
+      handlers.removeAll();
+    };
     return (
       <CreatorModal
         creatingThing='field'
         ref={creatorRef}
         formInstance={form}
+        onCloseCallback={onClose}
         submitIsDisable={disableCondition}
         title='Новое поле'>
         <CreatorFields formInstance={form} />
