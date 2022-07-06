@@ -2,7 +2,7 @@ import React, { useId } from 'react';
 import { Formik, Form } from 'formik';
 
 import { observer } from 'mobx-react-lite';
-import { selectIsEmpty } from '@domains';
+import { selectIsEmpty } from '@entities';
 import { form as formState } from '@global-states';
 import { formsStructure } from '@constants';
 import { useSelectOptionsHandler, useFormBuilder } from '@hooks';

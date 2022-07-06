@@ -1,5 +1,5 @@
 import { componentsRenderer } from '@lib/tests';
-import { selectIsEmpty, isSelect } from '@domains';
+import { selectIsEmpty, isSelect } from '@entities';
 
 describe('Методы тега селектора', () => {
   it('Проверяет, является ли компонент селектором', () => {

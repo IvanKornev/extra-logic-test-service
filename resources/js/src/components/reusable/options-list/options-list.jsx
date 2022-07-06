@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { useFormBuilder } from '@hooks';
-import { getSelectOptionClasses } from '@domains';
+import { getSelectOptionClasses } from '@entities';
 
 import { OptionCreator } from '@components/features/creators';
 import { UilPen, UilTrashAlt } from '@iconscout/react-unicons';

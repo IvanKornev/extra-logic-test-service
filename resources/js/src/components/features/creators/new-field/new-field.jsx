@@ -1,7 +1,7 @@
 import React, { useId, forwardRef } from 'react';
 import { observer } from 'mobx-react-lite';
 
-import { selectIsEmpty } from '@domains';
+import { selectIsEmpty } from '@entities';
 import { useSelectOptionsHandler, useFormBuilder } from '@hooks';
 import { formsStructure } from '@constants';
 

@@ -4,7 +4,9 @@ import { LinkedList } from '@data-structures';
 import { LinkedListConverter } from '@lib/converters';
 import { initialValues } from '@constants';
 import { saveForm } from '@api';
-import { createField, removeField, changeField, copyField } from '@entities';
+import {
+  createField, removeField, changeField, copyField,
+} from '@entities';
 
 class FormGlobalState {
   fieldsList = new LinkedList();
