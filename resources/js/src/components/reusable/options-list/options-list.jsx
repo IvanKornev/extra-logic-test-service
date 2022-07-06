@@ -5,6 +5,7 @@ import { useFormBuilder } from '@hooks';
 import { getSelectOptionClasses } from '@domains';
 
 import { OptionCreator } from '@components/features/creators';
+import { UilPen, UilTrashAlt } from '@iconscout/react-unicons';
 import {
   List,
   Typography,
@@ -72,7 +73,16 @@ const Option = ({ option, number, handlers }) => {
       <ListItemText primary={itemText} />
       {handlers && (
         <Stack className='option__actions' direction='row' spacing={1}>
-          <p onClick={() => creatorRef.current.show()}>Править</p>
+          <UilPen
+            onClick={() => creatorRef.current.show()}
+            size={18}
+            className='option__actions_edit'
+          />
+          <UilTrashAlt
+            onClick={() => handlers.remove(option.id)}
+            size={18}
+            className='option__actions_remove'
+          />
         </Stack>
       )}
       <OptionCreator
