@@ -15,6 +15,23 @@
   }
 }
 
+@mixin fade-in-right($duration: 1s) {
+  animation: fade-animation $duration backwards;
+  @keyframes fade-animation {
+    25% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.75;
+    }
+    100% {
+      transform: translateX(150%);
+      opacity: 0;
+    }
+  }
+}
+
 @mixin landing-from-above($margin-top: 1em, $duration: 0.1s) {
   animation: landing-from-above $duration forwards;
   @keyframes landing-from-above {
@@ -28,7 +45,7 @@
 }
 
 @mixin landing-from-right-side($startingMargin: 4em, $duration: 0.1s) {
-  animation: landing-from-right-side $duration forwards;
+  animation: landing-from-right-side $duration backwards;
   @keyframes landing-from-right-side {
     0% {
       margin-left: $startingMargin;

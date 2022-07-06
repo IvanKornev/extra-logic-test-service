@@ -66,11 +66,16 @@ const Option = ({ option, number, handlers }) => {
     creatorRef,
     option,
   );
-
+  const itemRef = useRef();
+  const removeItem = () => {
+    const newClass = styles['list__option_removing'];
+    itemRef.current.classList.add(newClass);
+    setTimeout(() => handlers.remove(option.id), 200);
+  };
   const listClasses = getSelectOptionClasses(styles);
   const itemText = `${number}) ${option.title}`;
   return (
-    <ListItem className={listClasses.join(' ')}>
+    <ListItem ref={itemRef} className={listClasses.join(' ')}>
       <ListItemText primary={itemText} />
       {handlers && (
         <Stack className='option__actions' direction='row' spacing={1}>
@@ -80,7 +85,7 @@ const Option = ({ option, number, handlers }) => {
             className='option__actions_edit'
           />
           <UilTrashAlt
-            onClick={() => handlers.remove(option.id)}
+            onClick={removeItem}
             size={18}
             className='option__actions_remove'
           />

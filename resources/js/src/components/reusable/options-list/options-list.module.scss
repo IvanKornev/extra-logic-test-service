@@ -16,6 +16,10 @@ $purple-scrollbar: #673ab7;
     flex-direction: row;
     justify-content: space-between;
     @include animations.landing-from-right-side(4em, 0.4s);
+
+    &_removing {
+      @include animations.fade-in-right(0.5s);
+    }
   }
 }
 
