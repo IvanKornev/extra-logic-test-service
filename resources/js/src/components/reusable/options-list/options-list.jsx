@@ -2,7 +2,7 @@ import React, { useState, useId, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { selectOptionReducer } from '@reducers';
-import { useFieldsHandler } from '@hooks';
+import { useFieldsHandler, useFormBuilder } from '@hooks';
 import { formsStructure, icons } from '@constants';
 import { selectOptionIsEmpty, getSelectOptionClasses } from '@domains';
 import { OptionIconsContainer } from '@components/simple-containers';
@@ -23,6 +23,7 @@ export const OptionsList = (props) => {
   const creatorRef = useRef();
   const [editingField, selectEditingField] = useState(null);
   const { handlers, list, scrollbarColor } = props;
+  const newOptionForm = useFormBuilder('new-option')(handlers, creatorRef);
   const scrollbarStyles = styles[`scrollbar_${scrollbarColor}`];
   return (
     <Stack id='options-list' direction='column' justifyContent='center'>
@@ -56,7 +57,7 @@ export const OptionsList = (props) => {
             onClick={() => creatorRef.current.show()}>
             Добавить опцию селектора
           </Button>
-          <NewOptionCreator ref={creatorRef} optionsHandlers={handlers} />
+          <NewOptionCreator ref={creatorRef} formInstance={newOptionForm} />
         </>
       )}
     </Stack>
