@@ -1,5 +1,5 @@
 import { componentsRenderer } from '@lib/tests';
-import { selectHasOptions, isSelect } from '@domains';
+import { selectIsEmpty, isSelect } from '@domains';
 
 describe('Методы тега селектора', () => {
   it('Проверяет, является ли компонент селектором', () => {
@@ -8,7 +8,8 @@ describe('Методы тега селектора', () => {
   });
 
   it('Проверяет, имеет ли опции селектор', () => {
-    expect(selectHasOptions([])).toBeFalsy();
-    expect(selectHasOptions(['option #1'])).toBeTruthy();
+    const fieldType = 'select';
+    expect(selectIsEmpty(fieldType, [])).toBeTruthy();
+    expect(selectIsEmpty(fieldType, ['option #1'])).toBeFalsy();
   });
 });
