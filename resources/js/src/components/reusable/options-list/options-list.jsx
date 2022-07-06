@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { useFormBuilder } from '@hooks';
@@ -18,7 +18,6 @@ import styles from './options-list.module.scss';
 
 export const OptionsList = (props) => {
   const creatorRef = useRef();
-  const [editingField, selectEditingField] = useState(null);
   const { handlers, list, scrollbarColor } = props;
   const newOptionForm = useFormBuilder('new-option')(handlers, creatorRef);
   const scrollbarStyles = styles[`scrollbar_${scrollbarColor}`];
