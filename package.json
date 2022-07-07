@@ -15,23 +15,6 @@
         "format": "prettier --write ./resources/js/ --config ./.prettierrc.json",
         "prepare": "husky install"
     },
-    "jest": {
-        "roots": [
-            "<rootDir>/resources/js/src"
-        ],
-        "moduleNameMapper": {
-            "^@components.*$": "<rootDir>/resources/js/src/components",
-            "^@api.*$": "<rootDir>/resources/js/src/api",
-            "^@entities.*$": "<rootDir>/resources/js/src/entities",
-            "^@hooks.*$": "<rootDir>/resources/js/src/hooks",
-            "^@data-structures.*$": "<rootDir>/resources/js/src/data-structures",
-            "^@lib/converters.*$": "<rootDir>/resources/js/src/lib/converters",
-            "^@lib/generators.*$": "<rootDir>/resources/js/src/lib/generators",
-            "^@lib/tests.*$": "<rootDir>/resources/js/src/lib/tests",
-            "^@constants.*$": "<rootDir>/resources/js/src/constants",
-            "^@global-states.*$": "<rootDir>/resources/js/src/global-states"
-        }
-    },
     "devDependencies": {
         "@babel/core": "^7.18.5",
         "@babel/preset-env": "^7.18.2",
@@ -42,8 +25,8 @@
         "babel-plugin-module-resolver": "^4.1.0",
         "browser-sync": "^2.27.10",
         "browser-sync-webpack-plugin": "^2.3.0",
-        "chromedriver": "^102.0.0",
         "eslint": "^8.16.0",
+        "chromedriver": "^102.0.0",
         "eslint-config-airbnb": "^19.0.4",
         "eslint-config-prettier": "^8.5.0",
         "eslint-import-resolver-alias": "^1.1.2",
