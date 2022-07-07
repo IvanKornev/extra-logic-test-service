@@ -1,6 +1,8 @@
+@use '@styles/device-sizes';
+
 .FormControlLabel {
   & span:last-child {
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: device-sizes.$tablet) {
       margin-left: 0;
       text-align: center;
       font-size: 14px;

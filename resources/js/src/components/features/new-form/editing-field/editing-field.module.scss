@@ -1,3 +1,5 @@
+@use '@styles/device-sizes';
+
 $footer-border-color: #a0a0a0;
 
 .editing-field {
@@ -8,13 +10,13 @@ $footer-border-color: #a0a0a0;
   }
 
   &__button_save {
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: device-sizes.$tablet) {
       & span {
         margin: 0;
       }
     }
 
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: device-sizes.$tablet) {
       &::after {
         content: 'Сохранить';
         display: inline-block;
