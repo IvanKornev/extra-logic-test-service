@@ -1,5 +1,7 @@
-const path = require('path');
 const htmlWebpackPlugin = require('html-webpack-plugin');
+const miniCssExtractPlugin = require('mini-css-extract-plugin');
+
+const path = require('path');
 
 const resolveRoot = (...segments) => (
   path.resolve(__dirname, ...segments)
@@ -13,6 +15,7 @@ module.exports = {
  output: {
    path: resolveRoot('dist'),
    filename: 'bundle.js',
+   clean: true,
  },
  devServer: {
    static: resolveRoot('src'),
@@ -32,14 +35,16 @@ module.exports = {
     {
       test: /\.s[ac]ss$/i,
       use: [
-        "style-loader",
-        "css-loader",
-        "sass-loader",
+        miniCssExtractPlugin.loader,
+        'css-loader',
+        'postcss-loader',
+        'sass-loader',
       ],
     },
    ],
  },
  plugins: [
    new htmlWebpackPlugin(htmlPluginConfig),
+   new miniCssExtractPlugin(),
  ],
 };
