@@ -28,12 +28,12 @@ export const OptionsList = (props) => {
       {list.length !== 0 && (
         <List className={listClasses}>
           <Typography>Опции селектора: </Typography>
-          {list.map((option, index) => (
-            <Option
-              option={option}
+          {list.map((value, index) => (
+            <OptionsListItem
+              value={value}
               handlers={handlers}
               number={index + 1}
-              key={option.id}
+              key={value.id}
             />
           ))}
         </List>
@@ -59,21 +59,20 @@ export const OptionsList = (props) => {
   );
 };
 
-const Option = ({ option, number, handlers }) => {
+const OptionsListItem = ({ value, number, handlers }) => {
   const creatorRef = useRef();
-  const editingOptionForm = useFormBuilder('editing-option')(
-    handlers,
-    creatorRef,
-    option,
-  );
+  const formParams = { handlers, creatorRef, value };
+  const editingOptionForm = useFormBuilder('editing-option')(formParams);
+
   const itemRef = useRef();
   const removeItem = () => {
     const newClass = styles['list__option_removing'];
     itemRef.current.classList.add(newClass);
-    setTimeout(() => handlers.remove(option.id), 200);
+    setTimeout(() => handlers.remove(value.id), 200);
   };
+
   const listClasses = getSelectOptionClasses(styles);
-  const itemText = `${number}) ${option.title}`;
+  const itemText = `${number}) ${value.title}`;
   return (
     <ListItem ref={itemRef} className={listClasses.join(' ')}>
       <ListItemText primary={itemText} />

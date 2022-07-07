@@ -62,7 +62,8 @@ export const useFormBuilder =
     }
 
     function getEditingOptionForm(params) {
-      const [handlers, creatorRef, previousValue] = params;
+      const [editingOption] = params;
+      const { handlers, creatorRef, value } = editingOption;
       const callbacks = {
         onSubmit: (values, helpers) => {
           handlers.edit(values);
@@ -70,8 +71,7 @@ export const useFormBuilder =
           helpers.resetForm({ values });
         },
       };
-      const optionValues = previousValue;
-      const form = buildForm(optionValues, callbacks, 'option');
+      const form = buildForm(value, callbacks, 'option');
       return form;
     }
 
