@@ -51,4 +51,5 @@ export const getFieldClasses = (
   return classes;
 };
 
-export const wasSelected = (fieldId, currentFieldId) => fieldId && currentFieldId && fieldId === currentFieldId && true;
+export const wasSelected = (fieldId, currentFieldId) =>
+  fieldId && currentFieldId && fieldId === currentFieldId && true;

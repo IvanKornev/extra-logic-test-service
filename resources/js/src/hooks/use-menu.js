@@ -1,15 +1,15 @@
 import { useEffect, useState, useRef } from 'react';
-import { form } from '@global-states';
+import { formState } from '@global-states';
 
 export const useMenu = (stylesObject) => {
   const [prevPosition, updatePrevPosition] = useState(1);
   const menuRef = useRef(null);
 
   useEffect(() => {
-    const id = form.selectedField?.uniqueId;
-    const { position } = form.fieldsList.find(id);
+    const id = formState.selectedField?.uniqueId;
+    const { position } = formState.fieldsList.find(id);
     return changePosition(position);
-  }, [form.selectedField?.uniqueId]);
+  }, [formState.selectedField?.uniqueId]);
 
   const changePosition = (position) => {
     setMarginTop();

@@ -1,5 +1,5 @@
 import { UilPlusCircle, UilTrashAlt, UilCopy } from '@iconscout/react-unicons';
-import { form } from '@global-states';
+import { formState } from '@global-states';
 
 const prepareMenuList = (creatorRef) => [
   {
@@ -15,7 +15,7 @@ const prepareMenuList = (creatorRef) => [
     tooltip: 'Копировать это поле',
     action: {
       name: 'copy',
-      callback: () => form.copyField(),
+      callback: () => formState.copyField(),
     },
   },
   {
@@ -23,7 +23,7 @@ const prepareMenuList = (creatorRef) => [
     tooltip: 'Удалить это поле',
     action: {
       name: 'remove',
-      callback: () => form.removeField(),
+      callback: () => formState.removeField(),
     },
   },
 ];

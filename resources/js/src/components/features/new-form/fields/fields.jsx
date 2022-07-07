@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { wasSelected, getFieldClasses } from '@entities';
 import { formsStructure } from '@constants';
-import { form } from '@global-states';
+import { formState } from '@global-states';
 import { LinkedListConverter } from '@lib/converters';
 
 import { Typography, Stack } from '@mui/material';
@@ -13,8 +13,8 @@ import styles from './fields.module.scss';
 
 const NewFormFields = observer((props) => {
   const { selectedFieldComponent } = props;
-  const currentId = form.selectedField?.uniqueId;
-  const fields = LinkedListConverter.toArray(form.fieldsList);
+  const currentId = formState.selectedField?.uniqueId;
+  const fields = LinkedListConverter.toArray(formState.fieldsList);
   return (
     <>
       {fields.length !== 0 &&
@@ -24,7 +24,7 @@ const NewFormFields = observer((props) => {
           return (
             <FieldBox
               key={field.uniqueId}
-              onClick={() => form.selectField(field)}
+              onClick={() => formState.selectField(field)}
               additionalClasses={classes}>
               {!isSelectedField && (
                 <>

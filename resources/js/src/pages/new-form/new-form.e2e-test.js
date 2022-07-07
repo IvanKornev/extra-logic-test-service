@@ -27,8 +27,9 @@ describe('Страница новой формы', () => {
     const fieldsNames = ['name', 'description'];
     fillInputs('#editing-field', fieldsNames);
 
-    const switchXpath = '//*[@id="root"]/main/section/div/'
-      + ' div/div[1]/div/form/div[4]/div/label';
+    const switchXpath =
+      '//*[@id="root"]/main/section/div/' +
+      ' div/div[1]/div/form/div[4]/div/label';
     browser.click('xpath', switchXpath);
     browser.click('#editing-field__button_save');
 
@@ -78,7 +79,8 @@ describe('Страница новой формы', () => {
     browser.click('#navbar__button_save');
     const xpathValue = '//*[@id="event-message"]/div/div[2]';
     browser.getText('xpath', xpathValue, (text) => {
-      const expectedText = 'Форма успешно сохранена для использования пользователями';
+      const expectedText =
+        'Форма успешно сохранена для использования пользователями';
       browser.assert.equal(text.value, expectedText);
     });
   });

@@ -2,7 +2,7 @@ import React, { useState, useId } from 'react';
 import { observer } from 'mobx-react-lite';
 import { throttle } from 'lodash';
 
-import { form } from '@global-states';
+import { formState } from '@global-states';
 import { messages, buttons } from '@constants';
 import { useMessenger, useDrawer } from '@hooks';
 
@@ -21,7 +21,7 @@ export const Navbar = observer(() => {
         <div className={styles['navbar__logo']}>
           <UilFileAlt color='rgb(76, 43, 135)' size={52} />
           <Typography variant='h6' component='h1'>
-            {form.titleField.name}
+            {formState.titleField.name}
           </Typography>
         </div>
         {!isMobileDevice && <NavbarInteractivePart />}
@@ -50,7 +50,7 @@ const NavbarInteractivePart = observer(({ isMobileDevice }) => {
   const [wasThrottled, setThrottlingStatus] = useState(false);
   const { message, showMessage, messengerRef } = useMessenger();
   const handleButton = (actionName) => () => {
-    form[actionName]();
+    formState[actionName]();
     setThrottlingStatus(true);
     showMessage(messages.form[actionName].success);
     setTimeout(() => setThrottlingStatus(false), 2000);
@@ -78,7 +78,7 @@ const NavbarInteractivePart = observer(({ isMobileDevice }) => {
       </div>
       <div className={styles['navbar__buttons']}>
         {buttons.navbar.map((button) => {
-          const isDisable = wasThrottled || !form.fieldsCounter;
+          const isDisable = wasThrottled || !formState.fieldsCounter;
           const clickHandler = handleButton(button.action);
           const ButtonIcon = button.icon;
           return (

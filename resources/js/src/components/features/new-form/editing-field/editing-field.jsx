@@ -3,7 +3,7 @@ import { Formik, Form } from 'formik';
 
 import { observer } from 'mobx-react-lite';
 import { selectIsEmpty } from '@entities';
-import { form as formState } from '@global-states';
+import { formState } from '@global-states';
 import { formsStructure } from '@constants';
 import { useSelectOptionsHandler, useFormBuilder } from '@hooks';
 

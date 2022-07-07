@@ -2,7 +2,7 @@ import React, { useId } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Formik, Form } from 'formik';
 
-import { form as formState } from '@global-states';
+import { formState } from '@global-states';
 import { useFormBuilder } from '@hooks';
 import { formsStructure } from '@constants';
 import { getFieldClasses } from '@entities';
