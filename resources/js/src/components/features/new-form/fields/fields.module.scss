@@ -1,8 +1,0 @@
-@use '@styles/inherited.module.scss';
-
-.default-field {
-  @extend %default-field;
-  & h3 {
-    font-size: 1.8rem;
-  }
-}
