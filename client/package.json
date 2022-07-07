@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "webpack serve --config webpack.dev.js",
-    "prod": "webpack --config webpack.prod.js"
+    "dev": "webpack serve --config ./config/webpack/webpack.dev.js",
+    "prod": "webpack --config ./config/webpack/webpack.prod.js"
   },
   "keywords": [],
   "author": "",

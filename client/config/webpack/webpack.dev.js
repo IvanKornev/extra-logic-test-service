@@ -1,12 +1,12 @@
 const { merge } = require('webpack-merge');
-const path = require('path');
 const commonConfig = require('./webpack.common.js');
+const resolveRoot = require('./utils/resolve-root');
 
 module.exports = merge(commonConfig, {
   mode: 'development',
   devtool: 'inline-source-map',
   devServer: {
-    static: path.resolve(__dirname, 'src'),
+    static: resolveRoot('src'),
     port: 3030,
     open: true,
     hot: true,
