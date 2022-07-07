@@ -1,0 +1,15 @@
+@use '@styles/animations';
+@use '@styles/device-sizes';
+
+.event-message {
+  &__alert {
+    cursor: default;
+
+    @include animations.fade-in-left;
+    @media screen and (max-width: device-sizes.$phone) {
+      & div:last-child {
+        display: none;
+      }
+    }
+  }
+}

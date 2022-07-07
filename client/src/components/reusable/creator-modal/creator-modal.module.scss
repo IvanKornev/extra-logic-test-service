@@ -1,0 +1,24 @@
+.creator-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__box {
+    row-gap: 0.8em;
+    border: none;
+    outline: none;
+    padding: 1.5em;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 6px;
+    display: inline-flex;
+    flex-direction: column;
+    color: black;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.8em;
+    margin-top: 0;
+  }
+}

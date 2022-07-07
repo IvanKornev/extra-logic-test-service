@@ -1,0 +1,24 @@
+@use '@styles/device-sizes';
+
+.page {
+  display: flex;
+  justify-content: center;
+
+  &__fields {
+    display: inline-flex;
+    flex-direction: column;
+    row-gap: 0.8em;
+    margin-right: 0.8em;
+  }
+
+  &__wrapper {
+    margin-top: 0.8em;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+
+    @media screen and (max-width: device-sizes.$tablet) {
+      padding: 1em;
+    }
+  }
+}

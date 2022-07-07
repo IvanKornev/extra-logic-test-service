@@ -1,0 +1,100 @@
+@use '@styles/inherited.module.scss';
+@use '@styles/mixins';
+@use '@styles/device-sizes';
+
+$headings-color: #4c2b87;
+
+.navbar {
+  padding: 0 1.8em;
+
+  &__wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+
+    @media screen and (max-width: device-sizes.$tablet) {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  &__icon {
+    &_bars {
+      &:hover,
+      &:focus {
+        @include mixins.cursor-effect(0.6);
+      }
+    }
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    column-gap: 0.4em;
+    & h1 {
+      color: $headings-color;
+      cursor: default;
+    }
+  }
+
+  &__item {
+    &_desktop {
+      border-bottom: 2px $headings-color solid;
+      align-items: center;
+      display: flex;
+
+      & button {
+        color: $headings-color;
+      }
+    }
+
+    &_mobile {
+      @extend %item-with-icon;
+      & h2 {
+        color: $headings-color;
+      }
+    }
+  }
+
+  &__items {
+    display: flex;
+    justify-content: center;
+    position: relative;
+
+    @media screen and (min-width: device-sizes.$tablet) {
+      height: 100%;
+    }
+
+    @media screen and (max-width: device-sizes.$tablet) {
+      flex-direction: column;
+      &:after {
+        @include mixins.pseudo-elem-line(2px);
+        bottom: 0;
+        margin: 0.8em 0;
+        content: '';
+        opacity: 0.6;
+      }
+    }
+  }
+
+  &__buttons {
+    justify-content: flex-end;
+    display: flex;
+    column-gap: 0.8em;
+    position: relative;
+
+    @media screen and (max-width: device-sizes.$tablet) {
+      display: flex;
+      row-gap: 0.5em;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+}
+
+.drawer {
+  &__wrapper {
+    padding: 0.5em 1em;
+    width: 45vw;
+  }
+}
