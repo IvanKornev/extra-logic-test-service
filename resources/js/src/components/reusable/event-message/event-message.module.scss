@@ -1,27 +1,14 @@
-@use '@styles/mixins';
 @use '@styles/animations';
 
 .event-message {
-  &__action {
-    all: unset;
-    padding-left: 10px;
-    font-weight: 400;
-    text-transform: uppercase;
-
-    &[disabled='disabled'],
-    &:disabled {
-      transition: 0.3s;
-      color: rgba(0, 0, 0, 0.5);
-    }
-
-    &:hover,
-    &:focus {
-      @include mixins.cursor-effect(0.6, 0.1);
-    }
-  }
-
   &__alert {
-    @include animations.fade-in-left;
     cursor: default;
+
+    @include animations.fade-in-left;
+    @media screen and (max-width: 480px) {
+      & div:last-child {
+        display: none;
+      }
+    }
   }
 }

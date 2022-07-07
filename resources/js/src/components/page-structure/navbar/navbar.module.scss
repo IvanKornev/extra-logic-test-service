@@ -4,7 +4,7 @@
 $headings-color: #4c2b87;
 
 .navbar {
-  padding: 0 30px;
+  padding: 0 1.8em;
 
   &__wrapper {
     display: grid;
@@ -29,7 +29,7 @@ $headings-color: #4c2b87;
   &__logo {
     display: flex;
     align-items: center;
-    column-gap: 6px;
+    column-gap: 0.4em;
     & h1 {
       color: $headings-color;
       cursor: default;
@@ -53,7 +53,7 @@ $headings-color: #4c2b87;
       &:after {
         @include mixins.pseudo-elem-line(2px);
         bottom: 0;
-        margin: 12px 0;
+        margin: 0.8em 0;
         content: '';
         opacity: 0.6;
       }
@@ -63,12 +63,12 @@ $headings-color: #4c2b87;
   &__buttons {
     justify-content: flex-end;
     display: flex;
-    column-gap: 12px;
+    column-gap: 0.8em;
     position: relative;
 
     @media screen and (max-width: 768px) {
       display: flex;
-      row-gap: 8px;
+      row-gap: 0.5em;
       flex-direction: column;
       justify-content: center;
     }
@@ -77,7 +77,7 @@ $headings-color: #4c2b87;
 
 .drawer {
   &__wrapper {
-    min-width: 25vh;
     padding: 0.5em 1em;
+    width: 45vw;
   }
 }
