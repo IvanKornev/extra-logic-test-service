@@ -10,6 +10,6 @@ const getEnviromentVariablesPlugin = () => {
     }, {});
     return new webpack.DefinePlugin(envKeys);
   }
-}
+};
 
 module.exports = getEnviromentVariablesPlugin;
