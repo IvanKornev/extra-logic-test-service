@@ -69,9 +69,7 @@ const NavbarInteractivePart = observer(({ isMobileDevice }) => {
         )}
         {!isMobileDevice && (
           <div className={styles['navbar__item_desktop']}>
-            <Button startIcon={<UilPlusSquare />}>
-              Создать форму
-            </Button>
+            <Button startIcon={<UilPlusSquare />}>Создать форму</Button>
           </div>
         )}
       </div>

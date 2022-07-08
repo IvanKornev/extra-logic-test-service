@@ -1,12 +1,15 @@
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const miniCssExtractPlugin = require('mini-css-extract-plugin');
 const getEnviromentVariablesPlugin = require('./plugins/enviroment-variables');
-const resolveRoot = require('./utils/resolve-root');
+const ESLintPlugin = require('eslint-webpack-plugin');
+
+const resolveRoot = require('../utils/resolve-root');
+const { getEsLintConfig } = require('../utils/get-paths');
 
 const commonConfig = {
  entry: resolveRoot('src', 'index.js'),
  output: {
-   path: resolveRoot(__dirname, 'dist'),
+   path: resolveRoot('dist'),
    filename: 'bundle.js',
    clean: true,
  },
@@ -50,7 +53,10 @@ const commonConfig = {
     template: resolveRoot('public', 'index.html'),
     title: 'Сервис форм',
    }),
-   new miniCssExtractPlugin(),
+   new ESLintPlugin({
+     overrideConfigFile: getEsLintConfig(),
+   }),
+   new miniCssExtractPlugin(),  
    getEnviromentVariablesPlugin(),
  ],
 };

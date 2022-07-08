@@ -1,6 +1,6 @@
 const { merge } = require('webpack-merge');
 const commonConfig = require('./webpack.common.js');
-const resolveRoot = require('./utils/resolve-root');
+const resolveRoot = require('../utils/resolve-root');
 
 module.exports = merge(commonConfig, {
   mode: 'development',

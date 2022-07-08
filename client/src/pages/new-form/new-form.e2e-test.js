@@ -80,7 +80,7 @@ describe('Страница новой формы', () => {
     const xpathValue = '//*[@id="event-message"]/div/div[2]';
     browser.getText('xpath', xpathValue, (text) => {
       const expectedText =
-        'Форма успешно сохранена для использования пользователями';
+        'Форма успешно сохранена' + ' для использования пользователями';
       browser.assert.equal(text.value, expectedText);
     });
   });
