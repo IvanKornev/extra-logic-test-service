@@ -15,6 +15,7 @@
     - Mobx
     - Material UI
     - SCSS-модули
+    - Webpack
 - Бэкенд
     - Postgres
     - Laravel
