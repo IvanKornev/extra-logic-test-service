@@ -1,5 +1,5 @@
-const htmlWebpackPlugin = require('html-webpack-plugin');
-const miniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin   = require('html-webpack-plugin');
+const MiniCssExtractPlugin   = require('mini-css-extract-plugin');
 const getEnviromentVariablesPlugin = require('./plugins/enviroment-variables');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
@@ -21,14 +21,22 @@ const commonConfig = {
         use: {
           loader: 'babel-loader',
           options: {
-            'plugins': ['lodash'],
+            plugins: [
+              'lodash',
+              [ 'babel-plugin-import', {
+                libraryName: '@mui/material',
+                libraryDirectory: '',
+                camel2DashComponentName: false,
+              }, 'core',
+              ],
+            ],
           },
         },
       },
       {
         test: /\.s[ac]ss$/i,
         use: [
-          miniCssExtractPlugin.loader,
+          MiniCssExtractPlugin  .loader,
           'css-loader',
           'postcss-loader',
           'sass-loader',
@@ -52,14 +60,14 @@ const commonConfig = {
     },
   },
   plugins: [
-    new htmlWebpackPlugin({
+    new HtmlWebpackPlugin  ({
       template: resolveRoot('public', 'index.html'),
       title: 'Сервис форм',
     }),
     new ESLintPlugin({
       overrideConfigFile: getEsLintConfig(),
     }),
-    new miniCssExtractPlugin(),
+    new MiniCssExtractPlugin  (),
     getEnviromentVariablesPlugin(),
   ],
 };

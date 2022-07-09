@@ -7,8 +7,8 @@ import { formState } from '@global-states';
 import { formsStructure } from '@constants';
 import { useSelectOptionsHandler, useFormBuilder } from '@hooks';
 
-import { UilCheckCircle } from '@iconscout/react-unicons';
 import styles from './editing-field.module.scss';
+import { UilCheckCircle } from '@iconscout/react-unicons';
 import { Button } from '@mui/material';
 import {
   LabledSwitch,

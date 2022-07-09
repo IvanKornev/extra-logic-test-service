@@ -7,7 +7,8 @@ import { formsStructure } from '@constants';
 import { formState } from '@global-states';
 import { LinkedListConverter } from '@lib/converters';
 
-import { Typography, Stack } from '@mui/material';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 import { FieldBox, OptionsList, RequiredFieldMark } from '@components/reusable';
 import styles from './fields.module.scss';
 
