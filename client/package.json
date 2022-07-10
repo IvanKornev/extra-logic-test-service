@@ -5,9 +5,9 @@
   "scripts": {
     "dev": "webpack serve --config ./config/webpack/webpack.dev.js",
     "prod": "webpack --config ./config/webpack/webpack.prod.js",
-    "debug": "eslint ./src -c=./config/eslint/eslint.config.js",
-    "debug:fix": "eslint --fix -c=./config/eslint/eslint.config.js",
-    "format": "prettier --write ./src/ --config ./config/prettier/prettier.config.js",
+    "lint": "eslint ./src -c=./config/eslint.config.js",
+    "lint:fix": "eslint --fix -c=./config/eslint.config.js",
+    "format": "prettier --write ./src/ --config ./config/prettier.config.js",
     "bundle:analyze": "webpack-bundle-analyzer --port 4200 dist/stats.json"
   },
   "keywords": [],

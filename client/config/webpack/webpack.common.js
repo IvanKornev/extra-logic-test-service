@@ -3,13 +3,12 @@ const MiniCssExtractPlugin   = require('mini-css-extract-plugin');
 const getEnviromentVariablesPlugin = require('./plugins/enviroment-variables');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
-const resolveRoot = require('../_utils/resolve-root');
-const { getEsLintConfig, getPostCssConfig } = require('../_utils/get-paths');
+const { getClientFolder, getConfigFolder } = require('../_get-paths');
 
 const commonConfig = {
-  entry: resolveRoot('src', 'index.js'),
+  entry: getClientFolder('src', 'index.js'),
   output: {
-    path: resolveRoot('dist'),
+    path: getClientFolder('dist'),
     filename: 'bundle.js',
     clean: true,
   },
@@ -36,13 +35,13 @@ const commonConfig = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          MiniCssExtractPlugin  .loader,
+          MiniCssExtractPlugin.loader,
           'css-loader',
           {
             loader: "postcss-loader",
             options: {
               postcssOptions: {
-                config: getPostCssConfig(),
+                config: getConfigFolder('postcss'),
               },
             },
           },
@@ -54,25 +53,25 @@ const commonConfig = {
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
-      '@components': resolveRoot('src', 'components'),
-      '@api': resolveRoot('src', 'api'),
-      '@entities': resolveRoot('src', 'entities'),
-      '@hooks': resolveRoot('src', 'hooks'),
-      '@pages': resolveRoot('src', 'pages'),
-      '@data-structures': resolveRoot('src', 'data-structures'),
-      '@lib': resolveRoot('src', 'lib'),
-      '@constants': resolveRoot('src', 'constants'),
-      '@global-states': resolveRoot('src', 'global-states'),
-      '@styles': resolveRoot('src', 'styles'),
+      '@components': getClientFolder('src', 'components'),
+      '@api': getClientFolder('src', 'api'),
+      '@entities': getClientFolder('src', 'entities'),
+      '@hooks': getClientFolder('src', 'hooks'),
+      '@pages': getClientFolder('src', 'pages'),
+      '@data-structures': getClientFolder('src', 'data-structures'),
+      '@lib': getClientFolder('src', 'lib'),
+      '@constants': getClientFolder('src', 'constants'),
+      '@global-states': getClientFolder('src', 'global-states'),
+      '@styles': getClientFolder('src', 'styles'),
     },
   },
   plugins: [
     new HtmlWebpackPlugin  ({
-      template: resolveRoot('public', 'index.html'),
+      template: getClientFolder('public', 'index.html'),
       title: 'Сервис форм',
     }),
     new ESLintPlugin({
-      overrideConfigFile: getEsLintConfig(),
+      overrideConfigFile: getConfigFolder('eslint'),
     }),
     new MiniCssExtractPlugin  (),
     getEnviromentVariablesPlugin(),

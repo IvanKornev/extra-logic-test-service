@@ -1,4 +1,4 @@
-const resolveRoot = require('../_utils/resolve-root');
+const { getClientFolder } = require('./_get-paths');
 
 const eslintConfig = {
   parser: '@babel/eslint-parser',
@@ -53,12 +53,12 @@ const eslintConfig = {
   settings: {
     'import/resolver': {
       alias: {
-        '@entities': resolveRoot('src', 'entities'),
-        '@data-structures': resolveRoot('src', 'data-structures'),
-        '@api': resolveRoot('src', 'api'),
-        '@lib': resolveRoot('src', 'lib'),
-        '@constants': resolveRoot('src', 'constants'),
-        '@global-states': resolveRoot('src', 'global-states'),
+        '@entities': getClientFolder('src', 'entities'),
+        '@data-structures': getClientFolder('src', 'data-structures'),
+        '@api': getClientFolder('src', 'api'),
+        '@lib': getClientFolder('src', 'lib'),
+        '@constants': getClientFolder('src', 'constants'),
+        '@global-states': getClientFolder('src', 'global-states'),
       },
     },
   },
