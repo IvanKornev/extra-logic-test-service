@@ -1,12 +1,13 @@
 @use '@styles/device-sizes';
+@use '@styles/mixins';
 
-$footer-border-color: #a0a0a0;
+$footer-border-color: #4c2b87;
 
 .editing-field {
   &__wrapper {
     display: flex;
     flex-direction: column;
-    row-gap: 10px;
+    row-gap: 0.7em;
   }
 
   &__button_save {
@@ -25,7 +26,7 @@ $footer-border-color: #a0a0a0;
   }
 
   &__footer {
-    padding-top: 14px;
+    padding-top: 0.9em;
     border-top: 1px $footer-border-color solid;
     display: flex;
     align-items: center;

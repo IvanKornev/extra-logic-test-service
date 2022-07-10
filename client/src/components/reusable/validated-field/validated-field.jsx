@@ -11,13 +11,17 @@ export const ValidatedField = (props) => {
   const { values, handleBlur, handleChange } = formInstance;
 
   const withError = newForm.hasError(name, formInstance);
-  const label = field?.label;
+  const isStandardField = variant === 'standard';
   const CurrentComponent = component.name;
   return (
     <div className={styles['field__wrapper']}>
       <FormControl fullWidth>
         {isSelect(component) && (
-          <InputLabel color='secondary'>{label}</InputLabel>
+          <InputLabel
+            className={isStandardField && styles['InputLabel']}
+            color='secondary'>
+            {field?.label}
+          </InputLabel>
         )}
         <CurrentComponent
           variant={variant}
@@ -25,7 +29,7 @@ export const ValidatedField = (props) => {
           id={id}
           className={className}
           name={name}
-          label={label}
+          label={field?.label}
           value={values[name]}
           onBlur={handleBlur}
           onChange={handleChange}
