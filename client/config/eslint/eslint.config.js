@@ -1,4 +1,4 @@
-const resolveRoot = require('../utils/resolve-root');
+const resolveRoot = require('../_utils/resolve-root');
 
 const eslintConfig = {
   parser: '@babel/eslint-parser',

@@ -3,8 +3,8 @@ const MiniCssExtractPlugin   = require('mini-css-extract-plugin');
 const getEnviromentVariablesPlugin = require('./plugins/enviroment-variables');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
-const resolveRoot = require('../utils/resolve-root');
-const { getEsLintConfig } = require('../utils/get-paths');
+const resolveRoot = require('../_utils/resolve-root');
+const { getEsLintConfig, getPostCssConfig } = require('../_utils/get-paths');
 
 const commonConfig = {
   entry: resolveRoot('src', 'index.js'),
@@ -38,7 +38,14 @@ const commonConfig = {
         use: [
           MiniCssExtractPlugin  .loader,
           'css-loader',
-          'postcss-loader',
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                config: getPostCssConfig(),
+              },
+            },
+          },
           'sass-loader',
         ],
       },
