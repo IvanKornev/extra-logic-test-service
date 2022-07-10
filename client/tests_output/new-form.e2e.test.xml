@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="1"
+            failures="0"
+            tests="0">
+
+  <testsuite name="new-form.e2e.test"
+    errors="1" failures="0" hostname="" id="" package="new-form.e2e.test" skipped="8"
+    tests="0" time="0.000" timestamp="">
+  
+
+  
+    <system-err>
+        WebDriverError: An error occurred while creating a new GeckoDriver session: [WebDriverError] Process unexpectedly closed with status 1
+  Verify if GeckoDriver is configured correctly; using:
+  {
+     start_process: true,
+     server_path: &#39;/home/ivan-kornev/Desktop/code/test-service-2.0/client/node_modules/geckodriver/geckodriver&#39;,
+     port: 4444,
+     host: &#39;localhost&#39;,
+     ssl: false,
+     default_path_prefix: &#39;&#39;,
+     proxy: undefined,
+     cli_args: []
+  }
+
+ 
+  More info might be available in the log file: /home/ivan-kornev/Desktop/code/test-service-2.0/client/logs/new-form.e2e.test_geckodriver.log
+    </system-err>
+  
+
+    
+    <error message="An error occurred while creating a new GeckoDriver session: [WebDriverError] Process unexpectedly closed with status 1"><![CDATA[
+      WebDriverError: An error occurred while creating a new GeckoDriver session: [WebDriverError] Process unexpectedly closed with status 1
+    at Object.throwDecodedError (/home/ivan-kornev/Desktop/code/test-service-2.0/client/node_modules/selenium-webdriver/lib/error.js:522:15)
+    at parseHttpResponse (/home/ivan-kornev/Desktop/code/test-service-2.0/client/node_modules/selenium-webdriver/lib/http.js:548:13)
+    at Executor.execute (/home/ivan-kornev/Desktop/code/test-service-2.0/client/node_modules/selenium-webdriver/lib/http.js:474:28)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+      ]]></error>  
+
+  
+    
+    <testcase
+      name="Создаёт поле новой формы" classname="new-form.e2e.test">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="Дважды копирует созданное поле" classname="new-form.e2e.test">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="Удаляет поле новой формы" classname="new-form.e2e.test">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="Изменяет поле, также делая его обязательным" classname="new-form.e2e.test">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="Добавляет селекторное поле с 3 опциями" classname="new-form.e2e.test">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="Удалив прежние опции селектора, добавляет одну новую" classname="new-form.e2e.test">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="Редактирует единственную опцию поля-селектора" classname="new-form.e2e.test">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="Отправляет новую форму на сервер" classname="new-form.e2e.test">
+      <skipped />
+    </testcase>
+    
+  
+  </testsuite>
+</testsuites>
