@@ -1,5 +1,5 @@
 import { generateFields } from '@lib/tests';
-import { LinkedList } from '@data-structures';
+import { DoublyLinkedList } from '@data-structures';
 import {
   createField,
   removeField,
@@ -11,7 +11,7 @@ import {
 describe('Методы нового поля', () => {
   let fieldsList;
   beforeEach(() => {
-    fieldsList = new LinkedList();
+    fieldsList = new DoublyLinkedList();
   });
 
   it('Создает новое поле', () => {

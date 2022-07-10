@@ -1,13 +1,13 @@
 import { makeAutoObservable } from 'mobx';
 
-import { LinkedList } from '@data-structures';
+import { DoublyLinkedList } from '@data-structures';
 import { LinkedListConverter } from '@lib/converters';
 import { initialValues } from '@constants';
 import { saveForm } from '@api';
 import { createField, removeField, changeField, copyField } from '@entities';
 
 class FormGlobalState {
-  fieldsList = new LinkedList();
+  fieldsList = new DoublyLinkedList();
 
   titleField = initialValues.titleField;
 
@@ -65,7 +65,7 @@ class FormGlobalState {
 
   reset() {
     this.selectField(null);
-    this.fieldsList = new LinkedList();
+    this.fieldsList = new DoublyLinkedList();
     this.setFieldsCounter();
   }
 }

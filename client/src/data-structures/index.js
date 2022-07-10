@@ -1,1 +1,1 @@
-export { LinkedList } from './linked-list';
+export { DoublyLinkedList } from './linked-list';

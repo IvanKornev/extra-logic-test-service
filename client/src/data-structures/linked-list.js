@@ -1,7 +1,7 @@
 import generateId from 'uniqid';
 import { ListItem } from './list-item';
 
-export class LinkedList {
+export class DoublyLinkedList {
   constructor() {
     this.head = null;
     this.tail = null;

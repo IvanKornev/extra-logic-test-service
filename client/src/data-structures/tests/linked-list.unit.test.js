@@ -1,10 +1,11 @@
 import { faker } from '@faker-js/faker';
-import { LinkedList } from '@data-structures';
+import { DoublyLinkedList } from '@data-structures';
+import { fillDoublyLinkedList } from '@lib/tests';
 
 describe('Двусвязный список', () => {
   let list;
   beforeEach(() => {
-    list = new LinkedList();
+    list = new DoublyLinkedList();
   });
 
   it('Добавляет несколько нод в список', () => {
@@ -16,7 +17,7 @@ describe('Двусвязный список', () => {
 
   it('Находит ноду по id среди десятка других', () => {
     const uniqueId = faker.datatype.uuid();
-    fillList(uniqueId, list);
+    fillDoublyLinkedList(uniqueId, list);
     const { node } = list.find(uniqueId);
     expect(node.value.uniqueId).toBe(uniqueId);
   });
@@ -41,7 +42,7 @@ describe('Двусвязный список', () => {
 
   it('Удаляет ноду по id', () => {
     const uniqueId = faker.datatype.uuid();
-    fillList(uniqueId, list);
+    fillDoublyLinkedList(uniqueId, list);
 
     expect(list.find(uniqueId).position).not.toBeNull();
     list.remove(uniqueId);
@@ -75,12 +76,3 @@ describe('Двусвязный список', () => {
     expect(list.length).toBe(3);
   });
 });
-
-const fillList = (uniqueId, list) => {
-  for (let i = 0; i <= 10; i += 1) {
-    if (i === 5) {
-      list.insert({ uniqueId });
-    }
-    list.insert(faker.datatype.uuid());
-  }
-};
