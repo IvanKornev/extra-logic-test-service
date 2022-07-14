@@ -14,7 +14,7 @@ const jestConfig = {
     '^@data-structures.*$': '<rootDir>/src/data-structures',
     '^@lib/converters.*$': '<rootDir>/src/lib/converters',
     '^@lib/generators.*$': '<rootDir>/src/lib/generators',
-    '^@lib/tests.*$': '<rootDir>/src/lib/tests',
+    '^@lib/for-tests.*$': '<rootDir>/src/lib/for-tests',
     '^@constants.*$': '<rootDir>/src/constants',
     '^@global-states.*$': '<rootDir>/src/global-states',
   }
