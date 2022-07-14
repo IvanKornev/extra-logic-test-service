@@ -1,15 +1,10 @@
-const controller = require('./custom-form.controller');
+const controller = require('./form-templates.controller');
 
-class CustomFormRouter {
+class FormTemplatesRouter {
   _routes = [
     {
-      method: 'post',
-      path: '/custom-form',
-      controllerMethod: 'add',
-    },
-    {
       method: 'get',
-      path: '/custom-form',
+      path: '/form-templates',
       controllerMethod: 'getAll',
     },
   ];
@@ -22,4 +17,4 @@ class CustomFormRouter {
   }
 }
 
-module.exports = new CustomFormRouter();
+module.exports = new FormTemplatesRouter();

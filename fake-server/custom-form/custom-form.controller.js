@@ -1,6 +1,11 @@
 const validator = require('./custom-form.validator');
+const { customForms } = require('../db.json');
 
 class CustomFormController {
+  getAll(req, res) {
+    return res.status(201).json({ formsList: customForms });
+  }
+
   add(req, res) {
     const invalidMessage = validator.validate(req.body);
     if (invalidMessage) {
