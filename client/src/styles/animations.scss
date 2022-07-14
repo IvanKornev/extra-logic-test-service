@@ -15,6 +15,16 @@
   }
 }
 
+@mixin circle-appearing($color: rgba(0, 0, 0, 0.2)) {
+  padding: 0.4em 0.5em 0.3em 0.5em;
+  border-radius: 1.3rem;
+  &:hover {
+    background-color: $color;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+}
+
 @mixin fade-in-right($duration: 1s) {
   animation: fade-animation $duration backwards;
   @keyframes fade-animation {

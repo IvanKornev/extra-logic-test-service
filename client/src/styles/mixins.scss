@@ -1,3 +1,5 @@
+@use '@styles/device-sizes';
+
 @mixin field-input($font-size, $width: 100%) {
   width: $width;
   &:input[type='text'] {
@@ -30,5 +32,26 @@
   &::-webkit-scrollbar {
     width: 0.3em;
     background-color: transparent;
+  }
+}
+
+@mixin cards-container($cards-in-row: 5, $gridMargin: 1.5em) {
+  display: grid;
+  grid-template-columns: repeat($cards-in-row, 1fr);
+  row-gap: $gridMargin;
+  margin-top: $gridMargin;
+  column-gap: $gridMargin;
+
+  @media screen and (max-width: device-sizes.$medium-screen) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media screen and (max-width: device-sizes.$tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (max-width: device-sizes.$phone) {
+    display: flex;
+    flex-direction: column;
   }
 }
