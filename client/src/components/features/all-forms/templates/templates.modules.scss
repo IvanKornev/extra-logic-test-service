@@ -1,0 +1,11 @@
+@use '@styles/mixins';
+
+.templates {
+  &__wrapper {
+    padding: 1em 30em;
+  }
+
+  &__cards {
+    @include mixins.cards-container;
+  }
+}

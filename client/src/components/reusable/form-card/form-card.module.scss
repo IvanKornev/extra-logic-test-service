@@ -1,0 +1,35 @@
+@use '@styles/animations';
+@use '@styles/inherited.module.scss';
+
+.Card {
+  min-width: 125px;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0px -1px 14px 3px rgba(76, 43, 135, 0.31);
+  }
+}
+
+.form-card {
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__image {
+    max-width: 100%;
+    @extend %default-gradient-image;
+  }
+
+  &__title {
+    @extend %default-heading;
+  }
+}
+
+.footer {
+  &__icon {
+    &_menu {
+      @include animations.circle-appearing;
+    }
+  }
+}

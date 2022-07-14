@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 import { DoublyLinkedList } from '@data-structures';
-import { fillDoublyLinkedList } from '@lib/tests';
+import { fillDoublyLinkedList } from '@lib/for-tests';
 
 describe('Двусвязный список', () => {
   let list;

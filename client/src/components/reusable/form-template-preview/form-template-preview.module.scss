@@ -1,0 +1,17 @@
+@use '@styles/inherited.module.scss';
+
+.template-preview {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5em;
+  }
+
+  &__image {
+    @extend %default-gradient-image;
+  }
+
+  &__title {
+    @extend %default-heading;
+  }
+}

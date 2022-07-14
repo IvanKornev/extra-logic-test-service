@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { generateSelectOptions } from '@lib/tests';
+import { generateSelectOptions } from '@lib/for-tests';
 import {
   addSelectOption,
   editSelectOption,

@@ -1,4 +1,4 @@
-import { generateFields } from '@lib/tests';
+import { generateFields } from '@lib/for-tests';
 import { DoublyLinkedList } from '@data-structures';
 import {
   createField,

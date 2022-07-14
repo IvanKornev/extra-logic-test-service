@@ -12,4 +12,10 @@ export const initialValues = {
     name: 'Новая форма',
     description: 'Описание новой формы',
   },
+  formTemplates: {
+    blank: {
+      title: 'Пустой шаблон',
+      isCustomTemplate: true,
+    },
+  },
 };

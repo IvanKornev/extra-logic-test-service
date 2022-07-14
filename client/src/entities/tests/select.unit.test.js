@@ -1,4 +1,4 @@
-import { componentsRenderer } from '@lib/tests';
+import { componentsRenderer } from '@lib/for-tests';
 import { selectIsEmpty, isSelect } from '@entities';
 
 describe('Методы тега селектора', () => {

@@ -4,7 +4,7 @@ import { baseUrl } from '@api/config';
 const makeRequest = async (urlPrefix, params) => {
   isCorrectRequest(urlPrefix, params);
   const url = `${baseUrl}${urlPrefix}`;
-  axios({ url, ...params });
+  return axios({ url, ...params });
 };
 
 const isCorrectRequest = (urlPrefix, params) => {
