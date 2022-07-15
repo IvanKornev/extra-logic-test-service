@@ -1,13 +1,13 @@
 import React from 'react';
 import '@styles/reset.scss';
 
-import { CurrentFormLayout } from '@layouts';
+import { AllFormsLayout } from '@layouts';
 import { AppRouter } from './router';
 
 const App = () => (
-  <CurrentFormLayout>
+  <AllFormsLayout>
     <AppRouter />
-  </CurrentFormLayout>
+  </AllFormsLayout>
 );
 
 export default App;

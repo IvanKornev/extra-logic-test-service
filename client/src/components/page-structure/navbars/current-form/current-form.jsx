@@ -7,13 +7,17 @@ import { messages, buttons } from '@constants';
 import { useMessenger, useDrawer } from '@hooks';
 
 import styles from './current-form.module.scss';
-import * as icons from '@iconscout/react-unicons';
 import { EventMessage } from '@components/reusable';
 import { Button, Typography, Drawer } from '@mui/material';
+import {
+  UilFileAlt,
+  UilBars,
+  UilTimes,
+  UilPlusSquare,
+} from '@iconscout/react-unicons';
 
 export const CurrentFormNavbar = observer(() => {
   const { isMobileDevice, drawerWasOpened, openDrawer } = useDrawer();
-  const { UilFileAlt, UilBars, UilTimes } = icons;
   const MobileIcon = drawerWasOpened ? UilTimes : UilBars;
   return (
     <nav className={styles['navbar']}>
@@ -55,7 +59,6 @@ const NavbarInteractivePart = observer(({ isMobileDevice }) => {
     showMessage(messages.form[actionName].success);
     setTimeout(() => setThrottlingStatus(false), 2000);
   };
-  const { UilPlusSquare } = icons;
   return (
     <>
       <div className={styles['navbar__items']}>

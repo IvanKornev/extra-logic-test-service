@@ -1,0 +1,8 @@
+@use '@styles/inherited.module.scss';
+
+.navbar {
+  padding: 0 1.8em;
+  &__wrapper {
+    @extend %navbar-grid;
+  }
+}
