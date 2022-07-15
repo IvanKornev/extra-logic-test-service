@@ -6,12 +6,12 @@ import { formState } from '@global-states';
 import { messages, buttons } from '@constants';
 import { useMessenger, useDrawer } from '@hooks';
 
-import styles from './navbar.module.scss';
+import styles from './current-form.module.scss';
 import * as icons from '@iconscout/react-unicons';
 import { EventMessage } from '@components/reusable';
 import { Button, Typography, Drawer } from '@mui/material';
 
-export const Navbar = observer(() => {
+export const CurrentFormNavbar = observer(() => {
   const { isMobileDevice, drawerWasOpened, openDrawer } = useDrawer();
   const { UilFileAlt, UilBars, UilTimes } = icons;
   const MobileIcon = drawerWasOpened ? UilTimes : UilBars;

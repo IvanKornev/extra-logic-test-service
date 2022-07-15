@@ -50,6 +50,17 @@
   }
 }
 
+%navbar-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+
+  @media screen and (max-width: device-sizes.$tablet) {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
 %item-with-icon {
   column-gap: 0.3em;
   display: flex;

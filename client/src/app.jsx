@@ -1,17 +1,13 @@
 import React from 'react';
+import '@styles/reset.scss';
 
-import { Navbar } from '@components/page-structure';
+import { CurrentFormLayout } from '@layouts';
 import { AppRouter } from './router';
 
-import '@styles/app.scss';
-
 const App = () => (
-  <>
-    <Navbar />
-    <main className='page'>
-      <AppRouter />
-    </main>
-  </>
+  <CurrentFormLayout>
+    <AppRouter />
+  </CurrentFormLayout>
 );
 
 export default App;

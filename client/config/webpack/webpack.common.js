@@ -63,6 +63,7 @@ const commonConfig = {
       '@constants': getClientFolder('src', 'constants'),
       '@global-states': getClientFolder('src', 'global-states'),
       '@styles': getClientFolder('src', 'styles'),
+      '@layouts': getClientFolder('src', 'layouts'),
     },
   },
   plugins: [

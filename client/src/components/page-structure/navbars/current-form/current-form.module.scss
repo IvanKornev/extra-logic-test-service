@@ -8,14 +8,7 @@ $headings-color: #4c2b87;
   padding: 0 1.8em;
 
   &__wrapper {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    align-items: center;
-
-    @media screen and (max-width: device-sizes.$tablet) {
-      display: flex;
-      justify-content: space-between;
-    }
+    @extend %navbar-grid;
   }
 
   &__icon {
