@@ -6,11 +6,12 @@ import { Typography } from '@mui/material';
 import { UilPlus } from '@iconscout/react-unicons';
 import styles from './form-template-preview.module.scss';
 
-export const FormTemplatePreview = ({ template }) => {
+export const FormTemplatePreview = (props) => {
+  const { template, onClick } = props;
   const { title, isCustomTemplate } = template;
   const imageAbbrevation = generateAbbreviation(title);
   return (
-    <article>
+    <article onClick={onClick}>
       <div className={styles['template-preview__wrapper']}>
         <div
           className={styles['template-preview__image']}
@@ -34,6 +35,7 @@ FormTemplatePreview.defaultProps = {
 };
 
 FormTemplatePreview.propTypes = {
+  onClick: PropTypes.func,
   template: PropTypes.shape({
     title: PropTypes.string.isRequired,
     isCustomTemplate: PropTypes.bool,

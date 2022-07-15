@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { getAllFormTemplates } from '@api';
 import { initialValues } from '@constants/initial-values';
 
@@ -15,6 +17,12 @@ export const AllFormsTemplates = () => {
     };
     getTemplates();
   }, []);
+
+  const navigate = useNavigate();
+  const clickHandler = () => {
+    navigate('/form/new');
+  };
+
   const { formTemplates } = initialValues;
   const skeletonCardsId = Array.from(Array(5).keys());
   return (
@@ -36,7 +44,10 @@ export const AllFormsTemplates = () => {
             ))}
           {templates.length !== 0 && (
             <>
-              <FormTemplatePreview template={formTemplates.blank} />
+              <FormTemplatePreview
+                onClick={clickHandler}
+                template={formTemplates.blank}
+              />
               {templates.map((template) => (
                 <FormTemplatePreview template={template} key={template.id} />
               ))}

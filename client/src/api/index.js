@@ -1,2 +1,9 @@
-export { saveForm, getAllForms } from './rest/custom-form';
-export { getAllFormTemplates } from './rest/form-templates';
+export {
+  saveForm,
+  getAllForms,
+  removeForm,
+} from './rest/custom-form';
+
+export {
+  getAllFormTemplates,
+} from './rest/form-templates';

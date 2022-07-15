@@ -15,6 +15,17 @@ export const getAllForms = async (userId) => {
   return data.formsList;
 };
 
+export const removeForm = async (formId) => {
+  const params = {
+    method: 'DELETE',
+    data: {
+      formId,
+    },
+  };
+  const response = await makeRequest(urlPrefix, params);
+  return response;
+};
+
 export const saveForm = async (values) => {
   const params = {
     method: 'POST',
