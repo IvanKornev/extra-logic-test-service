@@ -10,6 +10,7 @@ export const AppRouter = () => (
         const ElementComponent = element;
         return (
           <Route
+            key={useId()}
             path={path}
             element={<ElementComponent />}
           />
