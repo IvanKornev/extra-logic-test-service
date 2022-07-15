@@ -13,7 +13,7 @@ export const initialValues = {
     description: 'Описание новой формы',
   },
   formTemplates: {
-    blank: {
+    emptyBlank: {
       title: 'Пустой шаблон',
       isCustomTemplate: true,
     },

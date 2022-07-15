@@ -35,7 +35,7 @@ FormTemplatePreview.defaultProps = {
 };
 
 FormTemplatePreview.propTypes = {
-  onClick: PropTypes.func,
+  onClick: PropTypes.func.isRequired,
   template: PropTypes.shape({
     title: PropTypes.string.isRequired,
     isCustomTemplate: PropTypes.bool,

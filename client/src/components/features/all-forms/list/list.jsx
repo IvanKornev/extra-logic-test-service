@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+
 import { getAllForms } from '@api';
+import { useQuery } from '@hooks';
 
 import { FormCard } from '@components/reusable';
 import { Typography, Skeleton } from '@mui/material';
 import styles from './list.module.scss';
 
 export const AllFormsList = ({ userId }) => {
-  const [formsList, setFormsList] = useState([]);
-  useEffect(() => {
-    const getList = async () => {
-      const result = await getAllForms(userId);
-      setFormsList(result);
-    };
-    getList();
-  }, [userId]);
+  const queryResults = useQuery(getAllForms(userId), [userId]);
+  console.log(queryResults);
+  const { formsList } = queryResults;
+
   const skeletonCardsId = Array.from(Array(10).keys());
   return (
     <div className={styles['all-forms__list']}>

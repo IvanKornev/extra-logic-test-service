@@ -1,27 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { getAllFormTemplates } from '@api';
 import { initialValues } from '@constants/initial-values';
+import { useQuery } from '@hooks';
+import { getAllFormTemplates } from '@api';
 
 import { Typography, Skeleton } from '@mui/material';
 import { FormTemplatePreview } from '@components/reusable';
 import styles from './templates.modules.scss';
 
 export const AllFormsTemplates = () => {
-  const [templates, setTemplates] = useState([]);
-  useEffect(() => {
-    const getTemplates = async () => {
-      const result = await getAllFormTemplates();
-      setTemplates(result);
-    };
-    getTemplates();
-  }, []);
+  const queryResults = useQuery(getAllFormTemplates());
+  const { templatesList } = queryResults;
 
   const navigate = useNavigate();
-  const clickHandler = () => {
-    navigate('/form/new');
-  };
+  const emptyBlankClickHandler = () => navigate('/form/new');
 
   const { formTemplates } = initialValues;
   const skeletonCardsId = Array.from(Array(5).keys());
@@ -32,7 +25,7 @@ export const AllFormsTemplates = () => {
           Создать форму
         </Typography>
         <div className={styles['templates__cards']}>
-          {templates.length === 0 &&
+          {templatesList.length === 0 &&
             skeletonCardsId.map((id) => (
               <Skeleton
                 height={100}
@@ -42,15 +35,24 @@ export const AllFormsTemplates = () => {
                 animation='wave'
               />
             ))}
-          {templates.length !== 0 && (
+          {templatesList.length !== 0 && (
             <>
               <FormTemplatePreview
-                onClick={clickHandler}
-                template={formTemplates.blank}
+                onClick={emptyBlankClickHandler}
+                template={formTemplates.emptyBlank}
               />
-              {templates.map((template) => (
-                <FormTemplatePreview template={template} key={template.id} />
-              ))}
+              {templatesList.map((template) => {
+                const clickHandler = () => {
+                  navigate(`/form/${template.id}`);
+                };
+                return (
+                  <FormTemplatePreview
+                     onClick={clickHandler}
+                     template={template}
+                     key={template.id}
+                  />
+                );
+              })}
             </>
           )}
         </div>

@@ -12,7 +12,7 @@ export const getAllForms = async (userId) => {
   const data = await makeRequest(urlPrefix, params).then(
     (results) => results.status === 201 && results.data,
   );
-  return data.formsList;
+  return data;
 };
 
 export const removeForm = async (formId) => {

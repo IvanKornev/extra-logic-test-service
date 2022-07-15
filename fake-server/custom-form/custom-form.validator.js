@@ -1,3 +1,5 @@
+const messages = require('./custom-form.messages');
+
 class CustomFormValidator {
   #failMessage = null;
   #isValid = true;
@@ -16,16 +18,14 @@ class CustomFormValidator {
     const { name, description } = title;
     if (!name || !description) {
       this.#isValid = false;
-      this.#failMessage = 'У новой формы должно'
-        + ' быть имя и описание';
+      this.#failMessage = messages.add.error.title;
     }
   }
 
   #checkFields(fields) {
     if (fields.length === 0) {
       this.#isValid = false;
-      this.#failMessage = 'У новой формы должно'
-        + ' быть хотя бы одно поле';
+      this.#failMessage = messages.add.error.fields;
     }
   }
 }

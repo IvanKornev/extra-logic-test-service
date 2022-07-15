@@ -9,5 +9,5 @@ export const getAllFormTemplates = async () => {
   const data = await makeRequest(urlPrefix, params).then(
     (results) => results.status === 201 && results.data,
   );
-  return data.templatesList;
+  return data;
 };
