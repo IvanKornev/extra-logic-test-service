@@ -1,6 +1,10 @@
 @use '@styles/mixins';
 
+$background-color: #f1f3f4;
+
 .templates {
+  background: $background-color;
+
   &__wrapper {
     padding: 1em 30em;
   }

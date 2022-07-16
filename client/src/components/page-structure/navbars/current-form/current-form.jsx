@@ -10,7 +10,7 @@ import styles from './current-form.module.scss';
 import { EventMessage } from '@components/reusable';
 import { Button, Typography, Drawer } from '@mui/material';
 import {
-  UilFileAlt,
+  UilLottiefilesAlt,
   UilBars,
   UilTimes,
   UilPlusSquare,
@@ -23,7 +23,7 @@ export const CurrentFormNavbar = observer(() => {
     <nav className={styles['navbar']}>
       <div className={styles['navbar__wrapper']}>
         <div className={styles['navbar__logo']}>
-          <UilFileAlt color='rgb(76, 43, 135)' size={52} />
+          <UilLottiefilesAlt color='rgb(76, 43, 135)' size={52} />
           <Typography variant='h6' component='h1'>
             {formState.titleField.name}
           </Typography>

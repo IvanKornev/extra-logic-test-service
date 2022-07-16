@@ -19,7 +19,7 @@ export const AllFormsTemplates = () => {
   const { formTemplates } = initialValues;
   const skeletonCardsId = Array.from(Array(5).keys());
   return (
-    <div>
+    <div className={styles['templates']}>
       <div className={styles['templates__wrapper']}>
         <Typography variant='h6' component='h1'>
           Создать форму
