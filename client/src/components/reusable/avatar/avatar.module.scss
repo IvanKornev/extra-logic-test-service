@@ -1,0 +1,47 @@
+$abbreviation-color: #fff;
+$primary-color: #4c2b87;
+
+.avatar {
+  display: inline-flex;
+  padding: 0.6em 0.8em;
+  background: $primary-color;
+
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  
+  & h3 {
+    font-weight: 600;
+    color: $abbreviation-color;
+  }
+
+  &[data-with-hover-effect='true'] {
+    &:focus,
+    &:hover {
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: -5px 3px 33px -10px $primary-color;
+    }  
+  }
+  &[data-with-hover-effect='false'] {
+    &:hover,
+    &:focus {
+      cursor: default;
+    }
+  }
+
+  &[data-size='large'] {
+    min-width: 4em;
+    min-height: 4em;
+    & h3 {
+      font-size: 2rem;
+    }
+  }
+  &[data-size='small'] {
+    min-width: 1em;
+    min-height: 1em;
+    & h3 {
+      font-size: 1rem;
+    }
+  }
+}

@@ -2,7 +2,8 @@ import React from 'react';
 import { useUserPanel } from '@hooks';
 
 import styles from './all-forms.module.scss';
-import { UserAvatar, UserPanel } from '@components/features/user';
+import { Avatar } from '@components/reusable';
+import { UserPanel } from '@components/features/user';
 import { UilFileAlt } from '@iconscout/react-unicons';
 
 export const AllFormsNavbar = () => {
@@ -13,7 +14,7 @@ export const AllFormsNavbar = () => {
         <UilFileAlt color='rgb(76, 43, 135)' size={52} />
         <UilFileAlt color='rgb(76, 43, 135)' size={52} />
         <div>
-          <UserAvatar onClick={userPanel.set} />
+          <Avatar onClick={userPanel.set} withHoverEffect />
           <UserPanel panelHookInstance={userPanel} />
         </div>
       </div>

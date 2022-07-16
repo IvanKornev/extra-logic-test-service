@@ -8,12 +8,16 @@ import { generateAbbreviation } from '@lib/generators';
 import { Typography } from '@mui/material';
 import styles from './avatar.module.scss';
 
-export const UserAvatar = observer((props) => {
-  const { onClick } = props;
+export const Avatar = observer((props) => {
+  const { onClick, withHoverEffect, size } = props;
   const { nickname } = userState.profile;
+
   const abbreviation = generateAbbreviation(nickname);
+  const hoverStatus = withHoverEffect.toString();
   return (
     <div
+      data-size={size}
+      data-with-hover-effect={hoverStatus}
       onClick={onClick}
       className={styles['avatar']}>
       <Typography variant='h6' component='h3'>
@@ -23,10 +27,14 @@ export const UserAvatar = observer((props) => {
   );
 });
 
-UserAvatar.defaultProps = {
+Avatar.defaultProps = {
+  withHoverEffect: false,
+  size: 'small',
   onClick: null,
 };
 
-UserAvatar.propTypes = {
+Avatar.propTypes = {
+  withHoverEffect: PropTypes.bool,
+  size: PropTypes.oneOf(['small', 'large']),
   onClick: PropTypes.func,
 };
