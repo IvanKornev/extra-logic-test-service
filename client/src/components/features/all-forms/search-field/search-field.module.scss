@@ -1,0 +1,7 @@
+@use '@styles/animations';
+
+.icon {
+  &__wrapper {
+    @include animations.circle-appearing;
+  }
+}

@@ -68,9 +68,7 @@ const FormCardMenu = ({ formId, anchorEl, setAnchorEl }) => {
   return (
     <Menu anchorEl={anchorEl} open={isOpen} onClose={handleClose}>
       <MenuItem sx={{ fontSize: '0.8rem' }}>Переименовать</MenuItem>
-      <MenuItem
-        onClick={removeHandler}
-        sx={{ fontSize: '0.8rem' }}>
+      <MenuItem onClick={removeHandler} sx={{ fontSize: '0.8rem' }}>
         Удалить
       </MenuItem>
       <MenuItem sx={{ fontSize: '0.8rem' }}>Открыть в новой вкладке</MenuItem>

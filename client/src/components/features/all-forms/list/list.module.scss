@@ -11,11 +11,11 @@
     padding: 1em 30em;
     min-height: 100vh;
   }
-  
+
   &__cards {
     @include mixins.cards-container;
   }
-  
+
   &__panel {
     align-items: center;
     display: flex;

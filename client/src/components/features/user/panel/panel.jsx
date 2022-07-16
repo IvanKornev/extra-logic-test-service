@@ -13,21 +13,14 @@ export const UserPanel = observer((props) => {
   const { elem, drop } = panelHookInstance;
   const isOpen = Boolean(elem);
   return (
-    <Menu
-      onClose={drop}
-      anchorEl={elem}
-      open={isOpen}>
+    <Menu onClose={drop} anchorEl={elem} open={isOpen}>
       <div className={styles['user-panel__wrapper']}>
         <div className={styles['user-panel__avatar']}>
           <Avatar size='large' />
         </div>
         <div className={styles['user-panel__information']}>
-          <Typography>
-            {userState.profile.nickname}
-          </Typography>
-          <Typography>
-            {userState.profile.email}
-          </Typography>
+          <Typography>{userState.profile.nickname}</Typography>
+          <Typography>{userState.profile.email}</Typography>
         </div>
         <Button color='secondary' variant='outlined'>
           Выйти

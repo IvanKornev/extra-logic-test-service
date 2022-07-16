@@ -47,9 +47,9 @@ export const AllFormsTemplates = () => {
                 };
                 return (
                   <FormTemplatePreview
-                     onClick={clickHandler}
-                     template={template}
-                     key={template.id}
+                    onClick={clickHandler}
+                    template={template}
+                    key={template.id}
                   />
                 );
               })}

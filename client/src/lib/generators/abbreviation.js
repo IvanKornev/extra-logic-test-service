@@ -1,8 +1,6 @@
 export const generateAbbreviation = (phrase) => {
   const words = phrase.split(' ');
-  const letters = words.map((word) => (
-    word.charAt(0).toUpperCase()
-  ))
+  const letters = words.map((word) => word.charAt(0).toUpperCase());
 
   const abbreviation = letters.join('');
   if (letters.length > 2) {
@@ -10,4 +8,4 @@ export const generateAbbreviation = (phrase) => {
     return shortedAbbreviation;
   }
   return abbreviation;
-}
+};

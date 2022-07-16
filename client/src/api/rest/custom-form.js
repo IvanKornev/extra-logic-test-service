@@ -2,6 +2,10 @@ import makeRequest from '@api/make-request';
 
 const urlPrefix = '/custom-form';
 
+export const findForm = () => {
+  console.log('Поиск формы');
+};
+
 export const getAllForms = async (userId) => {
   const params = {
     method: 'GET',

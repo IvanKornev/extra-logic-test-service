@@ -9,11 +9,7 @@ export const AppRouter = () => (
         const { path, element } = route;
         const ElementComponent = element;
         return (
-          <Route
-            key={useId()}
-            path={path}
-            element={<ElementComponent />}
-          />
+          <Route key={useId()} path={path} element={<ElementComponent />} />
         );
       })}
     </Routes>

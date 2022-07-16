@@ -7,9 +7,7 @@ import styles from './current-form.module.scss';
 export const CurrentFormLayout = ({ children }) => (
   <>
     <CurrentFormNavbar />
-    <main className={styles['layout_current-form']}>
-      {children}
-    </main>
+    <main className={styles['layout_current-form']}>{children}</main>
   </>
 );
 
