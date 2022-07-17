@@ -1,10 +1,18 @@
 @use '@styles/inherited.module.scss';
+@use '@styles/mixins';
 
 .navbar {
   padding: 0.5em 1.8em;
 
   &__wrapper {
     @extend %navbar-grid;
+  }
+
+  &__logo {
+    &:hover,
+    &:focus {
+      @include mixins.cursor-effect;
+    }
   }
 
   &__avatar {

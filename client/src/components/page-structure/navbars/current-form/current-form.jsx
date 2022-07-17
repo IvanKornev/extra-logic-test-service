@@ -2,6 +2,9 @@ import React, { useState, useId } from 'react';
 import { observer } from 'mobx-react-lite';
 import { throttle } from 'lodash';
 
+import { useNavigate } from 'react-router-dom';
+import { usePageNavigator } from '@hooks';
+
 import { formState } from '@global-states';
 import { messages, buttons } from '@constants';
 import { useMessenger, useDrawer } from '@hooks';
@@ -13,7 +16,7 @@ import {
   UilLottiefilesAlt,
   UilBars,
   UilTimes,
-  UilPlusSquare,
+  UilHistoryAlt,
 } from '@iconscout/react-unicons';
 
 export const CurrentFormNavbar = observer(() => {
@@ -53,7 +56,13 @@ export const CurrentFormNavbar = observer(() => {
 const NavbarInteractivePart = observer(({ isMobileDevice }) => {
   const [wasThrottled, setThrottlingStatus] = useState(false);
   const { message, showMessage, messengerRef } = useMessenger();
-  const handleButton = (actionName) => () => {
+  
+  const navigate = useNavigate();
+  const iconClickHandler = () => {
+    usePageNavigator(navigate, 'all-forms')([]);
+  };
+
+  const handleAction = (actionName) => () => {
     formState[actionName]();
     setThrottlingStatus(true);
     showMessage(messages.form[actionName].success);
@@ -63,23 +72,29 @@ const NavbarInteractivePart = observer(({ isMobileDevice }) => {
     <>
       <div className={styles['navbar__items']}>
         {isMobileDevice && (
-          <div className={styles['navbar__item_mobile']}>
-            <UilPlusSquare color='rgb(76, 43, 135)' size={30} />
+          <div
+            onClick={iconClickHandler}
+            className={styles['navbar__item_mobile']}>
+            <UilHistoryAlt color='rgb(76, 43, 135)' size={30} />
             <Typography variant='h6' component='h2'>
-              Создать форму
+              Вернуться обратно
             </Typography>
           </div>
         )}
         {!isMobileDevice && (
           <div className={styles['navbar__item_desktop']}>
-            <Button startIcon={<UilPlusSquare />}>Создать форму</Button>
+            <Button
+              onClick={iconClickHandler}
+              startIcon={<UilHistoryAlt />}>
+              Вернуться обратно
+            </Button>
           </div>
         )}
       </div>
       <div className={styles['navbar__buttons']}>
         {buttons.navbar.map((button) => {
           const isDisable = wasThrottled || !formState.fieldsCounter;
-          const clickHandler = handleButton(button.action);
+          const buttonClickHandler = handleAction(button.action);
           const ButtonIcon = button.icon;
           return (
             <Button
@@ -90,7 +105,7 @@ const NavbarInteractivePart = observer(({ isMobileDevice }) => {
               disabled={isDisable}
               startIcon={<ButtonIcon />}
               type='button'
-              onClick={throttle(clickHandler, 2000)}>
+              onClick={throttle(buttonClickHandler, 2000)}>
               {button.text}
             </Button>
           );

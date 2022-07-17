@@ -4,8 +4,17 @@ export const usePageNavigator =
     switch (pageName) {
       case 'form-search-results':
         goToFormSearchResults(params);
+        break;
+      case 'all-forms':
+        goToAllForms();
+        break;
       default:
         throw new Error('SPA не имеет страницы с таким названием');
+    }
+
+    function goToAllForms() {
+      const route = '/';
+      navigateInstance(route);
     }
 
     function goToFormSearchResults(params) {
