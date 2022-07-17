@@ -8,6 +8,20 @@ class CustomFormController {
     return res.status(201).json({ formsList: customForms });
   }
 
+  find(req, res) {
+    const searchQuery = req.params.query.toLowerCase();
+    const searchPattern = new RegExp(`${searchQuery}.*`, 'gi');
+
+    const searchedForms = customForms.filter((form) => {
+      const currentTitle = form.title.toLocaleLowerCase();
+      const isSearchingForm = searchPattern.test(currentTitle);
+      if (isSearchingForm) {
+        return form;
+      }
+    });
+    return res.status(201).json({ searchedForms });
+  }
+
   remove(req, res) {
     const { formId } = req.body;
     let wasRemoved = false;

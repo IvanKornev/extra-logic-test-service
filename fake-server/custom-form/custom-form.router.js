@@ -5,21 +5,28 @@ class CustomFormRouter {
     {
       method: 'post',
       controllerMethod: 'add',
+      path: '/custom-form',
     },
     {
       method: 'get',
       controllerMethod: 'getAll',
+      path: '/custom-form',
+    },
+    {
+      method: 'get',
+      controllerMethod: 'find',
+      path: '/custom-form/search/:query',
     },
     {
       method: 'delete',
       controllerMethod: 'remove',
+      path: '/custom-form',
     },
   ];
 
   prepare(appInstance) {
-    const path = '/custom-form';
     this._routes.forEach((route) => {
-      const { method, controllerMethod } = route;
+      const { method, path, controllerMethod } = route;
       appInstance[method](path, controller[controllerMethod]);
     });
   }
