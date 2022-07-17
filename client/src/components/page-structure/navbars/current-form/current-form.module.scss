@@ -11,6 +11,15 @@ $headings-color: #4c2b87;
     @extend %navbar-grid;
   }
 
+  &__actions {
+    display: flex;
+    justify-content: center;
+
+    @media screen and (max-width: device-sizes.$tablet) {
+      padding-bottom: 0.5em;
+    }
+  }
+
   &__icon {
     &_bars {
       &:hover,
@@ -27,46 +36,6 @@ $headings-color: #4c2b87;
     & h1 {
       color: $headings-color;
       cursor: default;
-    }
-  }
-
-  &__item {
-    &_desktop {
-      border-bottom: 2px $headings-color solid;
-      align-items: center;
-      display: flex;
-
-      & button {
-        color: $headings-color;
-      }
-    }
-
-    &_mobile {
-      @extend %item-with-icon;
-      & h2 {
-        color: $headings-color;
-      }
-    }
-  }
-
-  &__items {
-    display: flex;
-    justify-content: center;
-    position: relative;
-
-    @media screen and (min-width: device-sizes.$tablet) {
-      height: 100%;
-    }
-
-    @media screen and (max-width: device-sizes.$tablet) {
-      flex-direction: column;
-      &:after {
-        @include mixins.pseudo-elem-line(2px);
-        bottom: 0;
-        margin: 0.8em 0;
-        content: '';
-        opacity: 0.6;
-      }
     }
   }
 

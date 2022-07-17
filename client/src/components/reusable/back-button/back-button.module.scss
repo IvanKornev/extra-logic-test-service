@@ -1,15 +1,16 @@
-@use '@styles/inherited.module.scss';
-@use '@styles/mixins';
 @use '@styles/device-sizes';
 
-$main-color: #4c2b87;
-
 .button {
-  @extend %item-with-icon;
-  & h2 {
-    color: $main-color;
-    @media screen and (min-width: device-sizes.$tablet) {
-      font-size: 0.9rem;
+  &::after {
+    content: 'Вернуться обратно';
+    display: inline-block;
+  }
+  
+  &[data-with-mobile-text='false'] {
+    @media screen and (max-width: device-sizes.$tablet) {
+      &::after {
+        content: '';
+      }
     }
-  }  
+  }
 }

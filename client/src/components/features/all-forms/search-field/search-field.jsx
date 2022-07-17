@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { findForm } from '@api';
+
+import { useNavigate } from 'react-router-dom';
+import { usePageNavigator } from '@hooks';
 
 import { TextField, InputAdornment } from '@mui/material';
 import { UilSearch, UilTimes } from '@iconscout/react-unicons';
@@ -7,11 +9,16 @@ import styles from './search-field.module.scss';
 
 export const AllFormsSearchField = () => {
   const [query, setQuery] = useState('');
+  const navigate = useNavigate();
+  const keyDownHandler = (event) => {
+    if (event.key === 'Enter') {
+      usePageNavigator(navigate, 'form-search-results')(query);
+    }
+  };
   const inputProps = {
     startAdornment: <ConfirmQueryIcon query={query} />,
     endAdornment: <AbortQueryIcon query={query} queryAction={setQuery} />,
   };
-  const keyDownHandler = (event) => event.key === 'Enter' && findForm(query);
   return (
     <TextField
       onKeyDown={keyDownHandler}
@@ -26,8 +33,11 @@ export const AllFormsSearchField = () => {
 
 const ConfirmQueryIcon = (props) => {
   const { query } = props;
+  const navigate = useNavigate();
   const clickHandler = () => {
-    query.length !== 0 && findForm(query);
+    if (query.length !== 0) {
+      usePageNavigator(navigate, 'form-search-results')(query);
+    }
   };
   return (
     <InputAdornment position='start'>

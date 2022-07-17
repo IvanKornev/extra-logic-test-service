@@ -1,4 +1,4 @@
-import { NewFormPage, AllFormsPage } from '@pages';
+import { NewFormPage, AllFormsPage, FormSearchResultsPage } from '@pages';
 
 export const routes = [
   {
@@ -8,5 +8,9 @@ export const routes = [
   {
     path: '/',
     element: AllFormsPage,
+  },
+  {
+    path: '/form/search/:query',
+    element: FormSearchResultsPage,
   },
 ];

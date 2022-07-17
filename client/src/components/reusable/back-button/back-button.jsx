@@ -1,25 +1,34 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
+import { useNavigate } from 'react-router-dom';
 import { usePageNavigator } from '@hooks';
 
-import { Typography } from '@mui/material';
+import { Button } from '@mui/material';
 import { UilHistoryAlt } from '@iconscout/react-unicons';
 import styles from './back-button.module.scss';
 
-export const BackButton = () => {
+export const BackButton = (props) => {
   const navigate = useNavigate();
   const clickHandler = () => {
     usePageNavigator(navigate, 'all-forms')([]);
   };
+  const { withTextOnMobile } = props;
   return (
-    <div
+    <Button
+      data-with-mobile-text={withTextOnMobile.toString()}
+      startIcon={<UilHistoryAlt size={30} />}
+      color='secondary'
       onClick={clickHandler}
-      className={styles['button']}>
-      <UilHistoryAlt color='rgb(76, 43, 135)' size={30} />
-      <Typography variant='h6' component='h2'>
-        Вернуться обратно
-      </Typography>
-    </div>
+      className={styles['button']}
+    />
   );
 }
+
+BackButton.defaultProps = {
+  withTextOnMobile: false,
+};
+
+BackButton.propTypes = {
+  withTextOnMobile: PropTypes.bool,
+};

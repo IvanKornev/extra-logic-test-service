@@ -2,21 +2,17 @@ import React, { useState, useId } from 'react';
 import { observer } from 'mobx-react-lite';
 import { throttle } from 'lodash';
 
-import { useNavigate } from 'react-router-dom';
-import { usePageNavigator } from '@hooks';
-
 import { formState } from '@global-states';
 import { messages, buttons } from '@constants';
 import { useMessenger, useDrawer } from '@hooks';
 
 import styles from './current-form.module.scss';
-import { EventMessage } from '@components/reusable';
+import { EventMessage, BackButton } from '@components/reusable';
 import { Button, Typography, Drawer } from '@mui/material';
 import {
   UilLottiefilesAlt,
   UilBars,
   UilTimes,
-  UilHistoryAlt,
 } from '@iconscout/react-unicons';
 
 export const CurrentFormNavbar = observer(() => {
@@ -56,12 +52,6 @@ export const CurrentFormNavbar = observer(() => {
 const NavbarInteractivePart = observer(({ isMobileDevice }) => {
   const [wasThrottled, setThrottlingStatus] = useState(false);
   const { message, showMessage, messengerRef } = useMessenger();
-  
-  const navigate = useNavigate();
-  const iconClickHandler = () => {
-    usePageNavigator(navigate, 'all-forms')([]);
-  };
-
   const handleAction = (actionName) => () => {
     formState[actionName]();
     setThrottlingStatus(true);
@@ -70,26 +60,8 @@ const NavbarInteractivePart = observer(({ isMobileDevice }) => {
   };
   return (
     <>
-      <div className={styles['navbar__items']}>
-        {isMobileDevice && (
-          <div
-            onClick={iconClickHandler}
-            className={styles['navbar__item_mobile']}>
-            <UilHistoryAlt color='rgb(76, 43, 135)' size={30} />
-            <Typography variant='h6' component='h2'>
-              Вернуться обратно
-            </Typography>
-          </div>
-        )}
-        {!isMobileDevice && (
-          <div className={styles['navbar__item_desktop']}>
-            <Button
-              onClick={iconClickHandler}
-              startIcon={<UilHistoryAlt />}>
-              Вернуться обратно
-            </Button>
-          </div>
-        )}
+      <div className={styles['navbar__actions']}>
+        <BackButton withTextOnMobile />
       </div>
       <div className={styles['navbar__buttons']}>
         {buttons.navbar.map((button) => {

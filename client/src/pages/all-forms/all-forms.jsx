@@ -1,6 +1,7 @@
 import React from 'react';
-
 import styles from './all-forms.module.scss';
+
+import { AllFormsLayout } from '@layouts';
 import {
   AllFormsTemplates,
   AllFormsList,
@@ -8,11 +9,13 @@ import {
 
 export const AllFormsPage = () => {
   return (
-    <section className={styles['all-forms__section']}>
-      <div>
-        <AllFormsTemplates />
-        <AllFormsList />
-      </div>
-    </section>
+    <AllFormsLayout>
+      <section className={styles['all-forms__section']}>
+        <div>
+          <AllFormsTemplates />
+          <AllFormsList />
+        </div>
+      </section>
+    </AllFormsLayout>
   );
 };

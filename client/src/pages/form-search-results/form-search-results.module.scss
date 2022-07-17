@@ -1,0 +1,33 @@
+@use '@styles/mixins';
+
+$hint-color: #5f6368;
+
+.empty-results {
+  display: flex;
+  justify-content: center;
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+    min-width: 65vw;
+  }
+
+  &__top-panel {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.2em 0;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    & p {
+      font-size: 0.9rem;
+      opacity: 0.8;
+      color: $hint-color;
+    }
+  }
+}

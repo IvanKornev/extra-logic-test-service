@@ -10,9 +10,7 @@ import styles from './list.module.scss';
 
 export const AllFormsList = ({ userId }) => {
   const queryResults = useQuery(getAllForms(userId), [userId]);
-  console.log(queryResults);
   const { formsList } = queryResults;
-
   const skeletonCardsId = Array.from(Array(10).keys());
   return (
     <div className={styles['all-forms__list']}>

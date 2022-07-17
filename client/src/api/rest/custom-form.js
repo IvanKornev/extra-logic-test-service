@@ -2,8 +2,17 @@ import makeRequest from '@api/make-request';
 
 const urlPrefix = '/custom-form';
 
-export const findForm = () => {
-  console.log('Поиск формы');
+export const findForm = async (query) => {
+  const params = {
+    method: 'GET',
+  };
+
+  const fullUrl = `${urlPrefix}/search/${query}`;
+  console.log(fullUrl);
+  const data = await makeRequest(fullUrl, params).then(
+    (results) => results.status === 201 && results.data,
+  );
+  return data;
 };
 
 export const getAllForms = async (userId) => {
