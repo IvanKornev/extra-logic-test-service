@@ -6,3 +6,4 @@ export { useMenu } from './use-menu';
 export { useFormBuilder } from './use-form-builder';
 export { useQuery } from './use-query';
 export { useUserPanel } from './use-user-panel';
+export { usePageNavigator } from './use-page-navigator';
