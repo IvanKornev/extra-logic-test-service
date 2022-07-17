@@ -1,5 +1,8 @@
 export { Avatar } from './avatar/avatar';
+
 export { CreateFormButton } from './create-form-button/create-form-button';
+export { BackButton } from './back-button/back-button';
+
 export { FieldBox } from './field-box/field-box';
 export { LabledSwitch } from './labled-switch/labled-switch';
 export { OptionsList } from './options-list/options-list';

@@ -1,0 +1,15 @@
+@use '@styles/inherited.module.scss';
+@use '@styles/mixins';
+@use '@styles/device-sizes';
+
+$main-color: #4c2b87;
+
+.button {
+  @extend %item-with-icon;
+  & h2 {
+    color: $main-color;
+    @media screen and (min-width: device-sizes.$tablet) {
+      font-size: 0.9rem;
+    }
+  }  
+}
