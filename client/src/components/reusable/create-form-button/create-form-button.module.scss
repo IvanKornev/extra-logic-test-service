@@ -1,0 +1,20 @@
+@use '@styles/mixins';
+
+$background-color: #4c2b87;
+
+.create-form-button {
+  border-radius: 50%;
+  position: absolute;
+  background: $background-color;
+  bottom: 1em;
+  right: 4em;
+
+  &:hover,
+  &:focus {
+    @include mixins.cursor-effect;
+  }
+
+  &__wrapper {
+    padding: 1em;
+  }
+}
