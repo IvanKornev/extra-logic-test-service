@@ -2,36 +2,98 @@
   "templates": [
     {
       "id": 1,
-      "title": "Приглашение на вечеринку"
+      "name": "Приглашение на вечеринку"
     },
     {
       "id": 2,
-      "title": "Контактная информация"
+      "name": "Контактная информация"
     },
     {
       "id": 3,
-      "title": "Регистрация события"
+      "name": "Регистрация события"
     },
     {
       "id": 4,
-      "title": "Контактная информация"
+      "name": "Контактная информация"
     }
   ],
   "customForms": [
     {
       "id": 1,
-      "title": "Форма № 1",
+      "name": "Форма № 1",
+      "description": "Обычная форма",
       "lastOpeningTimestamp": 1657670400
     },
     {
-      "id": 2,
+      "name": 2,
       "title": "Форма № 2",
+      "description": "Обычная форма",
       "lastOpeningTimestamp": 1530489600
     },
     {
-      "id": 3,
+      "name": 3,
       "title": "Форма № 3",
+      "description": "Обычная форма",
       "lastOpeningTimestamp": 1214956800
+    }
+  ],
+  "formFields": [
+    {
+      "id": 1,
+      "fields": [
+        {
+          "uniqueId": "1",
+          "description": "Текстовое поле",
+          "isRequired": true,
+          "name": "Поле № 1",
+          "type": "text"
+        },
+        {
+          "uniqueId": "2",
+          "description": "Текстовая область",
+          "isRequired": false,
+          "name": "Поле № 2",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "fields": [
+        {
+          "uniqueId": "1",
+          "description": "Текстовое поле",
+          "isRequired": true,
+          "name": "Поле № 1",
+          "type": "text"
+        },
+        {
+          "uniqueId": "2",
+          "description": "Текстовая область",
+          "isRequired": false,
+          "name": "Поле № 2",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "fields": [
+        {
+          "uniqueId": "1",
+          "description": "Текстовое поле",
+          "isRequired": true,
+          "name": "Поле № 1",
+          "type": "text"
+        },
+        {
+          "uniqueId": "2",
+          "description": "Текстовая область",
+          "isRequired": false,
+          "name": "Поле № 2",
+          "type": "textarea"
+        }
+      ]
     }
   ]
 }

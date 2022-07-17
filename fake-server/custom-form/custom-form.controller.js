@@ -1,7 +1,7 @@
 const validator = require('./custom-form.validator');
 const messages = require('./custom-form.messages');
 
-const { customForms } = require('../db.json');
+const { customForms, formFields } = require('../db.json');
 
 class CustomFormController {
   getAll(req, res) {
@@ -39,6 +39,24 @@ class CustomFormController {
     return res.status(201).json({
       answer: messages.remove.success,
     });
+  }
+
+  get(req, res) {
+    const formId = parseInt(req.params.formId);
+    let receivedForm = {};
+    
+    customForms.forEach((form) => {
+      if (form.id === formId) {
+        receivedForm = form;
+      }
+    })
+    formFields.forEach((form) => {
+      if (form.id === formId) {
+        receivedForm.fields = form.fields;
+      }
+    });
+
+    return res.status(201).json({ receivedForm });
   }
 
   add(req, res) {

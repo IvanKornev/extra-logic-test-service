@@ -22,6 +22,11 @@ class CustomFormRouter {
       controllerMethod: 'remove',
       path: '/custom-form',
     },
+    {
+      method: 'get',
+      controllerMethod: 'get',
+      path: '/custom-form/:formId',
+    },
   ];
 
   prepare(appInstance) {
