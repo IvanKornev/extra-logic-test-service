@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+
+import { useNavigate } from 'react-router-dom';
+import { usePageNavigator } from '@hooks';
 
 import { getAllForms } from '@api';
 import { useQuery } from '@hooks';
@@ -10,6 +13,8 @@ import styles from './list.module.scss';
 
 export const AllFormsList = ({ userId }) => {
   const queryResults = useQuery(getAllForms(userId), [userId]);
+  const navigate = useNavigate();
+
   const { formsList } = queryResults;
   const skeletonCardsId = Array.from(Array(10).keys());
   return (
@@ -31,9 +36,19 @@ export const AllFormsList = ({ userId }) => {
                 animation='wave'
               />
             ))}
-          {formsList.map((form) => (
-            <FormCard key={form.id} form={form} />
-          ))}
+          {formsList.map((form) => {
+            const clickHandler = () => {
+              const { id } = form;
+              usePageNavigator(navigate, 'saving-form')(id);
+            };
+            return (
+              <FormCard
+                onClick={clickHandler}
+                key={form.id}
+                form={form}
+              />
+            );
+          })}
         </div>
       </div>
     </div>

@@ -1,18 +1,17 @@
 import {
-  NewFormPage,
+  FormPage,
   AllFormsPage,
   FormSearchResultsPage,
-  SavedFormPage,
 } from '@pages';
 
 export const routes = [
   {
     path: '/form/new',
-    element: NewFormPage,
+    element: FormPage,
   },
   {
     path: '/form/:formId',
-    element: SavedFormPage,
+    element: FormPage,
   },
   {
     path: '/',

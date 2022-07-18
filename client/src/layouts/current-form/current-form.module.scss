@@ -1,4 +1,21 @@
+@use '@styles/device-sizes';
+
 .layout_current-form {
   min-height: 100vh;
   background: #ede7f6;
+}
+
+.page {
+  display: flex;
+  justify-content: center;
+  &__wrapper {
+    margin-top: 0.8em;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+
+    @media screen and (max-width: device-sizes.$tablet) {
+      padding: 1em;
+    }
+  }
 }

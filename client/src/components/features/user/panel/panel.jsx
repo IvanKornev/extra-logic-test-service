@@ -31,9 +31,5 @@ export const UserPanel = observer((props) => {
 });
 
 UserPanel.propTypes = {
-  panelHookInstance: PropTypes.shape({
-    elem: PropTypes.object.isRequired,
-    set: PropTypes.func.isRequired,
-    drop: PropTypes.func.isRequired,
-  }),
+  panelHookInstance: PropTypes.object.isRequired,
 };

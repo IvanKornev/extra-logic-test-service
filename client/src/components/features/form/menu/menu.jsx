@@ -8,7 +8,7 @@ import { useMenu } from '@hooks';
 import styles from './menu.module.scss';
 import { Box, Tooltip } from '@mui/material';
 
-const NewFormMenu = observer(
+export const FormMenu = observer(
   forwardRef((props, creatorRef) => {
     const { onlyAddOption } = props;
     const { menuRef } = useMenu(styles);
@@ -49,12 +49,10 @@ const NewFormMenuIcon = (props) => {
   );
 };
 
-NewFormMenu.defaultProps = {
+FormMenu.defaultProps = {
   onlyAddOptions: true,
 };
 
-NewFormMenu.propTypes = {
+FormMenu.propTypes = {
   onlyAddOptions: PropTypes.bool,
 };
-
-export { NewFormMenu };

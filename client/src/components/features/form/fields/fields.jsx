@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography';
 import { FieldBox, OptionsList, RequiredFieldMark } from '@components/reusable';
 import styles from './fields.module.scss';
 
-const NewFormFields = observer((props) => {
+export const FormFields = observer((props) => {
   const { selectedFieldComponent } = props;
   const currentId = formState.selectedField?.uniqueId;
   const fields = LinkedListConverter.toArray(formState.fieldsList);
@@ -61,8 +61,6 @@ const NewFormFields = observer((props) => {
   );
 });
 
-NewFormFields.propTypes = {
+FormFields.propTypes = {
   selectedFieldComponent: PropTypes.element.isRequired,
 };
-
-export { NewFormFields };

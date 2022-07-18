@@ -16,7 +16,7 @@ import {
   ValidatedField,
 } from '@components/reusable';
 
-const NewFormEditingField = observer(() => {
+export const FormEditingField = observer(() => {
   const { selectOptions } = formState.selectedField;
   const { optionsState, handlers } = useSelectOptionsHandler(selectOptions);
 
@@ -72,5 +72,3 @@ const NewFormEditingField = observer(() => {
     </>
   );
 });
-
-export { NewFormEditingField };

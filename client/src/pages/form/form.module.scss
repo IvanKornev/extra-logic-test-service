@@ -1,0 +1,7 @@
+@use '@styles/inherited.module.scss';
+
+.page {
+  &__fields {
+    @extend %form-fields-grid;
+  }
+}

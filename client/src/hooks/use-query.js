@@ -5,9 +5,8 @@ export const useQuery = (apiCallback, dependencies = []) => {
     templatesList: [],
     formsList: [],
     searchedForms: [],
+    receivedForm: {},
   });
-
-  console.log(apiCallback);
 
   useEffect(() => {
     const makeQuery = async () => {

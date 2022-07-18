@@ -1,2 +1,2 @@
 export { OptionCreator } from './option/option';
-export { NewFieldCreator } from './new-field/new-field';
+export { FieldCreator } from './field/field';

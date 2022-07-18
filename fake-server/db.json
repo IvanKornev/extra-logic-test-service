@@ -25,14 +25,14 @@
       "lastOpeningTimestamp": 1657670400
     },
     {
-      "name": 2,
-      "title": "Форма № 2",
+      "id": 2,
+      "name": "Форма № 2",
       "description": "Обычная форма",
       "lastOpeningTimestamp": 1530489600
     },
     {
-      "name": 3,
-      "title": "Форма № 3",
+      "id": 3,
+      "name": "Форма № 3",
       "description": "Обычная форма",
       "lastOpeningTimestamp": 1214956800
     }

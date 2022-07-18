@@ -8,8 +8,8 @@ import styles from './form-template-preview.module.scss';
 
 export const FormTemplatePreview = (props) => {
   const { template, onClick } = props;
-  const { title, isCustomTemplate } = template;
-  const imageAbbrevation = generateAbbreviation(title);
+  const { name, isCustomTemplate } = template;
+  const imageAbbrevation = generateAbbreviation(name);
   return (
     <article onClick={onClick}>
       <div className={styles['template-preview__wrapper']}>
@@ -20,9 +20,9 @@ export const FormTemplatePreview = (props) => {
             {isCustomTemplate ? <UilPlus /> : imageAbbrevation}
           </Typography>
         </div>
-        <div className={styles['template-preview__title']}>
+        <div className={styles['template-preview__name']}>
           <Typography variant='h6' component='h2'>
-            {title}
+            {name}
           </Typography>
         </div>
       </div>
@@ -37,7 +37,7 @@ FormTemplatePreview.defaultProps = {
 FormTemplatePreview.propTypes = {
   onClick: PropTypes.func.isRequired,
   template: PropTypes.shape({
-    title: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
     isCustomTemplate: PropTypes.bool,
   }),
 };

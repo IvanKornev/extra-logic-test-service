@@ -5,7 +5,7 @@ import { selectIsEmpty } from '@entities';
 import { useSelectOptionsHandler, useFormBuilder } from '@hooks';
 import { formsStructure } from '@constants';
 
-import styles from './new-field.module.scss';
+import styles from './field.module.scss';
 import {
   CreatorModal,
   OptionsList,
@@ -13,7 +13,7 @@ import {
   ValidatedField,
 } from '@components/reusable';
 
-const NewFieldCreator = observer(
+export const FieldCreator = observer(
   forwardRef((props, creatorRef) => {
     const { optionsState, handlers } = useSelectOptionsHandler();
     const { list } = optionsState;
@@ -39,7 +39,7 @@ const NewFieldCreator = observer(
             handlers={handlers}
           />
         )}
-        <div className={styles['new-field-editor__switch']}>
+        <div className={styles['field-editor__switch']}>
           <LabledSwitch
             label='Обязательное поле'
             name='isRequired'
@@ -58,7 +58,7 @@ const CreatorFields = ({ formInstance }) => (
       return (
         <ValidatedField
           key={id}
-          id={`new-field-creator__field_${field.name}`}
+          id={`field-creator__field_${field.name}`}
           formInstance={formInstance}
           field={field}
         />
@@ -66,5 +66,3 @@ const CreatorFields = ({ formInstance }) => (
     })}
   </>
 );
-
-export { NewFieldCreator };

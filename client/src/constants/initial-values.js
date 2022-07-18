@@ -14,7 +14,7 @@ export const initialValues = {
   },
   formTemplates: {
     emptyBlank: {
-      title: 'Пустой шаблон',
+      name: 'Пустой шаблон',
       isCustomTemplate: true,
     },
   },

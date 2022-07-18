@@ -11,8 +11,8 @@ import { Button } from '@mui/material';
 import { FieldBox, ValidatedField } from '@components/reusable';
 import styles from './title-field.module.scss';
 
-export const NewFormTitleField = observer(() => {
-  const form = useFormBuilder('title-field')();
+export const FormTitleField = observer(() => {
+  const form = useFormBuilder('title-field')(formState.titleField);
   const wasSelected = !formState.selectedField ? true : false;
   const classes = getFieldClasses(wasSelected, styles, 'title');
   const { initialValues, handleSubmit } = form;

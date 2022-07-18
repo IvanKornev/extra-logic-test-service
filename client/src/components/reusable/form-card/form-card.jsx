@@ -16,8 +16,8 @@ import {
   MenuItem,
 } from '@mui/material';
 
-export const FormCard = ({ form }) => {
-  const { title, lastOpeningTimestamp, id } = form;
+export const FormCard = ({ form, onClick }) => {
+  const { name, lastOpeningTimestamp, id } = form;
   const openingDate = Timestamp.toHumanReadableDate(lastOpeningTimestamp);
   const openingInfo = `Открыто ${openingDate}`;
 
@@ -26,7 +26,7 @@ export const FormCard = ({ form }) => {
     setAnchorEl(event.currentTarget);
   };
   return (
-    <Card className={styles['Card']}>
+    <Card onClick={onClick} className={styles['Card']}>
       <CardMedia
         component='img'
         height='140'
@@ -35,7 +35,7 @@ export const FormCard = ({ form }) => {
       />
       <CardContent>
         <Typography sx={{ fontSize: '0.9rem', fontWeight: '600' }}>
-          {title}
+          {name}
         </Typography>
       </CardContent>
       <CardActions>
@@ -76,10 +76,15 @@ const FormCardMenu = ({ formId, anchorEl, setAnchorEl }) => {
   );
 };
 
+FormCard.defaultProps = {
+  onClick: null,
+};
+
 FormCard.propTypes = {
+  onClick: PropTypes.func,
   form: PropTypes.shape({
     lastOpeningTimestamp: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
   }),
 };

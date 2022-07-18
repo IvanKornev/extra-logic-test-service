@@ -16,12 +16,12 @@ export const useFormBuilder =
       case 'editing-field':
         return getEditingFieldForm(formParams);
       case 'title-field':
-        return getTitleFieldForm();
+        return getTitleFieldForm(formParams);
       default:
         throw new Error('Шаблона для построения не обнаружено');
     }
 
-    function getTitleFieldForm() {
+    function getTitleFieldForm(params) {
       const callbacks = {
         onSubmit: (values, helpers) => {
           formState.changeTitleField(values);
@@ -29,7 +29,7 @@ export const useFormBuilder =
           helpers.resetForm(formNextState);
         },
       };
-      const fieldValues = initialValues.titleField;
+      const [fieldValues] = params;
       const builtForm = buildForm(fieldValues, callbacks, 'titleField');
       return builtForm;
     }

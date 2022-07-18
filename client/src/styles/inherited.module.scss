@@ -50,6 +50,13 @@
   }
 }
 
+%form-fields-grid {
+  display: inline-flex;
+  flex-direction: column;
+  row-gap: 0.8em;
+  margin-right: 0.8em;
+}
+
 %navbar-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

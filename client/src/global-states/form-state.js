@@ -23,6 +23,16 @@ class FormGlobalState {
     this.selectedField = value;
   }
 
+  dropFieldsList() {
+    this.fieldsList = new DoublyLinkedList();
+  }
+
+  setFieldsList(list = []) {
+    list.forEach((item) => {
+      createField(item, this.fieldsList);
+    });
+  }
+
   setFieldsCounter(value = 0) {
     this.fieldsCounter = value;
   }
@@ -55,6 +65,16 @@ class FormGlobalState {
     this.setFieldsCounter((this.fieldsCounter += 1));
   }
 
+  useSavedData(form) {
+    form.fields.forEach((field) => {
+      this.createField(field);
+    });
+    this.selectField(null);
+
+    const { name, description } = form;
+    this.changeTitleField({ name, description });
+  }
+
   async save() {
     const savingData = {
       title: { ...this.titleField },
@@ -65,7 +85,8 @@ class FormGlobalState {
 
   reset() {
     this.selectField(null);
-    this.fieldsList = new DoublyLinkedList();
+    this.dropFieldsList();
+    this.changeTitleField(initialValues.titleField);
     this.setFieldsCounter();
   }
 }
