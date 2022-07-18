@@ -3,16 +3,14 @@ import PropTypes from 'prop-types';
 
 import { observer } from 'mobx-react-lite';
 import { userState } from '@global-states';
+import { getUserAvatarText } from '@entities';
 
-import { generateAbbreviation } from '@lib/generators';
 import { Typography } from '@mui/material';
 import styles from './avatar.module.scss';
 
 export const Avatar = observer((props) => {
   const { onClick, withHoverEffect, size } = props;
-  const { nickname } = userState.profile;
-
-  const abbreviation = generateAbbreviation(nickname);
+  const text = getUserAvatarText(userState);
   const hoverStatus = withHoverEffect.toString();
   return (
     <div
@@ -21,7 +19,7 @@ export const Avatar = observer((props) => {
       onClick={onClick}
       className={styles['avatar']}>
       <Typography variant='h6' component='h3'>
-        {abbreviation}
+        {text}
       </Typography>
     </div>
   );
