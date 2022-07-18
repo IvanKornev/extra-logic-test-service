@@ -7,3 +7,4 @@ export { useFormBuilder } from './use-form-builder';
 export { useQuery } from './use-query';
 export { useUserPanel } from './use-user-panel';
 export { usePageNavigator } from './use-page-navigator';
+export { useSearchFieldHandler } from './use-search-field-handler';

@@ -2,6 +2,9 @@
 
 .icon {
   &__wrapper {
+    &[data-is-hidden='true'] {
+      display: none;
+    }
     @include animations.circle-appearing;
   }
 }

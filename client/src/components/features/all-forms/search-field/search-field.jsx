@@ -1,62 +1,50 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSearchFieldHandler } from '@hooks';
 
-import { useNavigate } from 'react-router-dom';
-import { usePageNavigator } from '@hooks';
+import { observer } from 'mobx-react-lite';
+import { userState } from '@global-states';
 
 import { TextField, InputAdornment } from '@mui/material';
 import { UilSearch, UilTimes } from '@iconscout/react-unicons';
 import styles from './search-field.module.scss';
 
-export const AllFormsSearchField = () => {
-  const [query, setQuery] = useState('');
-  const navigate = useNavigate();
-  const keyDownHandler = (event) => {
-    if (event.key === 'Enter') {
-      usePageNavigator(navigate, 'form-search-results')(query);
-    }
-  };
+export const AllFormsSearchField = observer(() => {
+  const fieldHandler = useSearchFieldHandler();
   const inputProps = {
-    startAdornment: <ConfirmQueryIcon query={query} />,
-    endAdornment: <AbortQueryIcon query={query} queryAction={setQuery} />,
+    startAdornment: <ConfirmQueryIcon fieldHandler={fieldHandler} />,
+    endAdornment: <AbortQueryIcon fieldHandler={fieldHandler} />,
   };
   return (
     <TextField
-      onKeyDown={keyDownHandler}
-      onChange={(e) => setQuery(e.target.value)}
-      value={query}
-      placeholder='Найти форму'
+      disabled={!userState.isAuthorized && true}
+      onKeyDown={fieldHandler.events.keyDown}
+      onChange={fieldHandler.query.set}
+      value={userState.isAuthorized ? fieldHandler.query.value : 'Доступно лишь авторизованным пользователям'}
+      placeholder={'Найти форму'}
       color='secondary'
       InputProps={inputProps}
     />
   );
-};
+});
 
-const ConfirmQueryIcon = (props) => {
-  const { query } = props;
-  const navigate = useNavigate();
-  const clickHandler = () => {
-    if (query.length !== 0) {
-      usePageNavigator(navigate, 'form-search-results')(query);
-    }
-  };
-  return (
-    <InputAdornment position='start'>
-      <div onClick={clickHandler} className={styles['icon__wrapper']}>
-        <UilSearch size={24} />
-      </div>
-    </InputAdornment>
-  );
-};
+const ConfirmQueryIcon = ({ fieldHandler }) => (
+  <InputAdornment position='start'>
+    <div
+      onClick={fieldHandler.events.click}
+      className={styles['icon__wrapper']}>
+      <UilSearch size={24} />
+    </div>
+  </InputAdornment>
+);
 
-const AbortQueryIcon = (props) => {
-  const { queryAction, query } = props;
-  if (query.length === 0) {
-    return;
-  }
-  const clickHandler = () => queryAction('');
+const AbortQueryIcon = ({ fieldHandler }) => {
+  const isHidden = fieldHandler.query.isEmpty().toString();
   return (
     <InputAdornment position='end'>
-      <div onClick={clickHandler} className={styles['icon__wrapper']}>
+      <div
+        data-is-hidden={isHidden}
+        onClick={fieldHandler.query.erase}
+        className={styles['icon__wrapper']}>
         <UilTimes size={24} />
       </div>
     </InputAdornment>
