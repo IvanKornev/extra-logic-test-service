@@ -1,8 +1,10 @@
 import React from 'react';
-import { useSearchFieldHandler } from '@hooks';
-
 import { observer } from 'mobx-react-lite';
+
+import { useSearchFieldHandler } from '@hooks';
 import { userState } from '@global-states';
+import { initialValues } from '@constants';
+import { getUserStatusKey } from '@entities';
 
 import { TextField, InputAdornment } from '@mui/material';
 import { UilSearch, UilTimes } from '@iconscout/react-unicons';
@@ -14,13 +16,15 @@ export const AllFormsSearchField = observer(() => {
     startAdornment: <ConfirmQueryIcon fieldHandler={fieldHandler} />,
     endAdornment: <AbortQueryIcon fieldHandler={fieldHandler} />,
   };
+  const statusKey = getUserStatusKey(userState);
+  const fieldValues = initialValues.searchField[statusKey];
   return (
     <TextField
-      disabled={!userState.isAuthorized && true}
+      disabled={fieldValues.isDisabled}
       onKeyDown={fieldHandler.events.keyDown}
       onChange={fieldHandler.query.set}
-      value={userState.isAuthorized ? fieldHandler.query.value : 'Доступно лишь авторизованным пользователям'}
-      placeholder={'Найти форму'}
+      value={fieldHandler.query.value}
+      placeholder={fieldValues.placeholder}
       color='secondary'
       InputProps={inputProps}
     />
