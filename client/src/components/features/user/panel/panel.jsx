@@ -29,7 +29,7 @@ export const UserPanel = observer((props) => {
 
 const UnauthorizedUserPanel = () => (
   <>
-    <Typography textAlign='center' fontWeight='bold'>
+    <Typography textAlign='center'>
       Вы не авторизованы
     </Typography>
     {buttons.userPanel.unauthorized.map((button) => {

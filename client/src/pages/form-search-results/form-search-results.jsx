@@ -7,7 +7,11 @@ import { AllFormsLayout } from '@layouts';
 
 import styles from './form-search-results.module.scss';
 import { Typography } from '@mui/material';
-import { FormCard, CreateFormButton, BackButton } from '@components/reusable';
+import { FormCard } from '@components/reusable';
+import {
+  ToBackButton,
+  CreateFormButton,
+} from '@components/reusable/buttons';
 
 export const FormSearchResultsPage = () => {
   const { query } = useParams();
@@ -34,7 +38,7 @@ const SearchResultsIsEmpty = ({ query }) => (
         <Typography variant='h6' component='h1'>
           Результаты поиска
         </Typography>
-        <BackButton />
+        <ToBackButton />
       </div>
       <div className={styles['empty-results__info']}>
         <Typography variant='h6' component='h1'>

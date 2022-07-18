@@ -7,7 +7,8 @@ import { messages, buttons } from '@constants';
 import { useMessenger, useDrawer } from '@hooks';
 
 import styles from './current-form.module.scss';
-import { EventMessage, BackButton } from '@components/reusable';
+import { EventMessage } from '@components/reusable';
+import { ToBackButton } from '@components/reusable/buttons';
 import { Button, Typography, Drawer } from '@mui/material';
 import {
   UilLottiefilesAlt,
@@ -61,7 +62,7 @@ const NavbarInteractivePart = observer(({ isMobileDevice }) => {
   return (
     <>
       <div className={styles['navbar__actions']}>
-        <BackButton withTextOnMobile />
+        <ToBackButton withTextOnMobile />
       </div>
       <div className={styles['navbar__buttons']}>
         {buttons.navbar.map((button) => {

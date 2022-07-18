@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { UilPlus } from '@iconscout/react-unicons';
 import { Tooltip, Typography } from '@mui/material';
-import styles from './create-form-button.module.scss';
+import styles from './create-form.module.scss';
 
 export const CreateFormButton = () => {
   const navigate = useNavigate();

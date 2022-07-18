@@ -6,9 +6,9 @@ import { usePageNavigator } from '@hooks';
 
 import { Button } from '@mui/material';
 import { UilHistoryAlt } from '@iconscout/react-unicons';
-import styles from './back-button.module.scss';
+import styles from './to-back.module.scss';
 
-export const BackButton = (props) => {
+export const ToBackButton = (props) => {
   const navigate = useNavigate();
   const clickHandler = () => {
     usePageNavigator(navigate, 'all-forms')([]);
@@ -25,10 +25,10 @@ export const BackButton = (props) => {
   );
 }
 
-BackButton.defaultProps = {
+ToBackButton.defaultProps = {
   withTextOnMobile: false,
 };
 
-BackButton.propTypes = {
+ToBackButton.propTypes = {
   withTextOnMobile: PropTypes.bool,
 };

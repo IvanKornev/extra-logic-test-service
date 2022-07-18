@@ -6,6 +6,23 @@ const fieldTypes = [
   { value: 'select', title: 'Селектор (select)' },
 ];
 
+const userCommonInformation = [
+  {
+    name: 'email',
+    label: 'Электронная почта',
+    component: {
+      name: TextField,
+    },
+  },
+  {
+    name: 'password',
+    label: 'Пароль',
+    component: {
+      name: TextField,
+    },
+  },
+];
+
 export const formsStructure = {
   option: [
     {
@@ -53,5 +70,18 @@ export const formsStructure = {
         name: TextField,
       },
     },
+  ],
+  userAuthorization: [
+    ...userCommonInformation,
+  ],
+  userRegistration: [
+    {
+      name: 'nickname',
+      label: 'Имя пользователя',
+      component: {
+        name: TextField,
+      },
+    },
+    ...userCommonInformation,
   ],
 };
