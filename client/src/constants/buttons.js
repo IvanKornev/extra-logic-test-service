@@ -9,12 +9,10 @@ export const buttons = {
   userPanel: {
     unauthorized: [
       {
-        color: 'secondary',
-        text: 'Войти',
+        text: 'Авторизоваться',
         icon: UilUserCheck,
       },
       {
-        color: 'secondary',
         text: 'Зарегистрироваться',
         icon: UilUserPlus,
       },

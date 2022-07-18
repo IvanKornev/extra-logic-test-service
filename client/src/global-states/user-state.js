@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 
 class UserGlobalState {
-  isAuthorized = false;
+  isAuthorized = true;
   profile = {
     nickname: 'Ivan Kornev',
     email: 'kornevwebmonk@gmail.com',

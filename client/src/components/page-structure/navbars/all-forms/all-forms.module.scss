@@ -1,5 +1,6 @@
 @use '@styles/inherited.module.scss';
 @use '@styles/mixins';
+@use '@styles/device-sizes';
 
 .navbar {
   padding: 0.5em 1.8em;

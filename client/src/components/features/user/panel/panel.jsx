@@ -32,19 +32,20 @@ const UnauthorizedUserPanel = () => (
     <Typography textAlign='center'>
       Вы не авторизованы
     </Typography>
-    {buttons.userPanel.unauthorized.map((button) => {
-      const { text, color, icon } = button;
-      const IconComponent = icon;
-      return (
-        <Button
-          variant='contained'
-          key={useId()}
-          color={color}
-          startIcon={<IconComponent />}>
-          {text}
-        </Button>
-      );
-    })}
+    <div className={styles['user-panel__buttons_unauthorized']}>
+      {buttons.userPanel.unauthorized.map((button) => {
+        const { text, icon } = button;
+        const IconComponent = icon;
+        return (
+          <Button
+            variant='outlined'
+            key={useId()}
+            startIcon={<IconComponent />}>
+            {text}
+          </Button>
+        );
+      })}
+    </div>
   </>
 )
 
