@@ -1,6 +1,25 @@
-import { UilSave, UilCancel } from '@iconscout/react-unicons';
+import {
+  UilSave,
+  UilCancel,
+  UilUserPlus,
+  UilUserCheck,
+} from '@iconscout/react-unicons';
 
 export const buttons = {
+  userPanel: {
+    unauthorized: [
+      {
+        color: 'secondary',
+        text: 'Войти',
+        icon: UilUserCheck,
+      },
+      {
+        color: 'secondary',
+        text: 'Зарегистрироваться',
+        icon: UilUserPlus,
+      },
+    ],
+  },
   navbar: [
     {
       color: 'secondary',

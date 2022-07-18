@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useId } from 'react';
 import PropTypes from 'prop-types';
 
 import { observer } from 'mobx-react-lite';
 import { userState } from '@global-states';
+import { buttons } from '@constants';
 
 import { Avatar } from '@components/reusable';
 import { Menu, Button, Typography } from '@mui/material';
@@ -15,20 +16,52 @@ export const UserPanel = observer((props) => {
   return (
     <Menu onClose={drop} anchorEl={elem} open={isOpen}>
       <div className={styles['user-panel__wrapper']}>
-        <div className={styles['user-panel__avatar']}>
-          <Avatar size='large' />
-        </div>
-        <div className={styles['user-panel__information']}>
-          <Typography>{userState.profile.nickname}</Typography>
-          <Typography>{userState.profile.email}</Typography>
-        </div>
-        <Button color='secondary' variant='outlined'>
-          Выйти
-        </Button>
+        {userState.isAuthorized && (
+          <AuthorizedUserPanel />
+        )}
+        {!userState.isAuthorized && (
+          <UnauthorizedUserPanel />
+        )}
       </div>
     </Menu>
   );
 });
+
+const UnauthorizedUserPanel = () => (
+  <>
+    <Typography textAlign='center' fontWeight='bold'>
+      Вы не авторизованы
+    </Typography>
+    {buttons.userPanel.unauthorized.map((button) => {
+      const { text, color, icon } = button;
+      const IconComponent = icon;
+      return (
+        <Button
+          variant='contained'
+          key={useId()}
+          color={color}
+          startIcon={<IconComponent />}>
+          {text}
+        </Button>
+      );
+    })}
+  </>
+)
+
+const AuthorizedUserPanel = () => (
+  <>
+    <div className={styles['user-panel__avatar']}>
+      <Avatar size='large' />
+    </div>
+    <div className={styles['user-panel__information']}>
+      <Typography>{userState.profile.nickname}</Typography>
+      <Typography>{userState.profile.email}</Typography>
+    </div>
+    <Button color='secondary' variant='outlined'>
+      Выйти
+    </Button>
+  </>
+)
 
 UserPanel.propTypes = {
   panelHookInstance: PropTypes.object.isRequired,
