@@ -1,5 +1,7 @@
 export { newForm } from './new-form';
 
+export { getUserAvatarText } from './user';
+
 export { isSelect, selectIsEmpty } from './select';
 
 export {

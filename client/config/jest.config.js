@@ -1,7 +1,6 @@
 const { getClientFolder } = require('./_get-paths');
 
 const jestConfig = {
-  testRegex: '^.+\.unit\.test\.js',
   rootDir: getClientFolder(),
   roots: [
     '<rootDir>/src',
@@ -11,6 +10,7 @@ const jestConfig = {
     '^@api.*$': '<rootDir>/src/api',
     '^@entities.*$': '<rootDir>/src/entities',
     '^@hooks.*$': '<rootDir>/src/hooks',
+    '^@pages.*$': '<rootDir>/src/pages',
     '^@data-structures.*$': '<rootDir>/src/data-structures',
     '^@lib/converters.*$': '<rootDir>/src/lib/converters',
     '^@lib/generators.*$': '<rootDir>/src/lib/generators',
