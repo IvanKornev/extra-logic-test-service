@@ -1,4 +1,4 @@
-const { templates } = require('../db.json'); 
+const { templates } = require('../../db.json'); 
 
 class FormTemplatesController {
 

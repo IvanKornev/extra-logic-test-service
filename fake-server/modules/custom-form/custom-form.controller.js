@@ -1,7 +1,7 @@
 const validator = require('./custom-form.validator');
 const messages = require('./custom-form.messages');
 
-const { customForms, formFields } = require('../db.json');
+const { customForms, formFields } = require('../../db.json');
 
 class CustomFormController {
   getAll(req, res) {
