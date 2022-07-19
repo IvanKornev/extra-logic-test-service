@@ -1,6 +1,6 @@
-import React, { useRef, useId } from 'react';
+import React, { useId } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useUserPanel } from '@hooks';
+import { useUserPanel, useUserDialogs } from '@hooks';
 
 import styles from './all-forms.module.scss';
 import { Avatar } from '@components/reusable';
@@ -10,13 +10,9 @@ import { UserPanel, UserDialog } from '@components/features/user';
 
 export const AllFormsNavbar = () => {
   const userPanel = useUserPanel();
+  const { dialogsTypes, dialogsRef } = useUserDialogs();
   const navigate = useNavigate();
   const goToAllForms = () => navigate('/');
-  const dialogsRef = {
-    authorization: useRef(),
-    registration: useRef(),
-  };
-  const dialogTypes = ['authorization', 'registration'];
   return (
     <>
       <nav className={styles['navbar']}>
@@ -35,7 +31,7 @@ export const AllFormsNavbar = () => {
           </div>
         </div>
       </nav>
-      {dialogTypes.map((type) => (
+      {dialogsTypes.map((type) => (
         <UserDialog actionType={type} ref={dialogsRef[type]} key={useId()} />
       ))}
     </>

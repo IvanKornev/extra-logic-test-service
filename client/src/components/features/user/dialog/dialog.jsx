@@ -34,10 +34,16 @@ export const UserDialog = forwardRef((props, ref) => {
             ))}
           </DialogContent>
           <DialogActions>
-            <Button variant='outlined' color='success' type='submit'>
+            <Button
+              variant='outlined'
+              color='success'
+              type='submit'>
               {dialog.submitButton[actionType]}
             </Button>
-            <Button variant='outlined' color='error'>
+            <Button
+              variant='outlined'
+              color='error'
+              onClick={() => ref.current.close()}>
               {dialog.closeButton[actionType]}
             </Button>
           </DialogActions>

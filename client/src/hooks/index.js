@@ -8,3 +8,4 @@ export { useQuery } from './use-query';
 export { useUserPanel } from './use-user-panel';
 export { usePageNavigator } from './use-page-navigator';
 export { useSearchFieldHandler } from './use-search-field-handler';
+export { useUserDialogs } from './use-user-dialogs';
