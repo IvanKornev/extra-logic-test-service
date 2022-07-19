@@ -22,7 +22,7 @@ export const FormPage = observer(() => {
       const getData = async () => {
         const { receivedForm } = await getForm(formId);
         formState.useSavedData(receivedForm);
-      }
+      };
       getData();
     }
   }, []);
@@ -33,9 +33,7 @@ export const FormPage = observer(() => {
       <CurrentFormLayout>
         <div className={styles['page__fields']}>
           <FormTitleField />
-          <FormFields
-            selectedFieldComponent={<FormEditingField />}
-          />
+          <FormFields selectedFieldComponent={<FormEditingField />} />
         </div>
         <div className={styles['page__menu']}>
           <FormMenu

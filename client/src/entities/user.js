@@ -11,8 +11,7 @@ export const getUserAvatarText = (user) => {
 
   avatarText = '?';
   return avatarText;
-}
+};
 
-export const getUserStatusKey = (user) => (
-  (user.isAuthorized) ? 'authorized' : 'unauthorized'
-);
+export const getUserStatusKey = (user) =>
+  user.isAuthorized ? 'authorized' : 'unauthorized';

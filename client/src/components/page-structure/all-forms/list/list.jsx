@@ -22,12 +22,8 @@ export const AllFormsList = observer(({ userId }) => {
             Формы
           </Typography>
         </div>
-        {!userState.isAuthorized && (
-          <UnauthorizedUserBanner />
-        )}
-        {userState.isAuthorized && (
-          <AuthorizedUserList userId={userId} />
-        )}
+        {!userState.isAuthorized && <UnauthorizedUserBanner />}
+        {userState.isAuthorized && <AuthorizedUserList userId={userId} />}
       </div>
     </div>
   );
@@ -38,8 +34,7 @@ const UnauthorizedUserBanner = () => (
     <div className={styles['banner__wrapper']}>
       <UilLockAlt size={50} />
       <Typography>
-        Просмотр сохраненных форм доступен лишь
-        авторизованным пользователям
+        Просмотр сохраненных форм доступен лишь авторизованным пользователям
       </Typography>
     </div>
   </div>
@@ -68,17 +63,11 @@ const AuthorizedUserList = ({ userId }) => {
           const { id } = form;
           usePageNavigator(navigate, 'saving-form')(id);
         };
-        return (
-          <FormCard
-            onClick={clickHandler}
-            key={form.id}
-            form={form}
-          />
-        );
+        return <FormCard onClick={clickHandler} key={form.id} form={form} />;
       })}
     </div>
   );
-}
+};
 
 AllFormsList.propTypes = {
   userId: PropTypes.number,

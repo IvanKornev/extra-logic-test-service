@@ -9,7 +9,7 @@ import { createField, removeField, changeField, copyField } from '@entities';
 class FormGlobalState {
   fieldsList = new DoublyLinkedList();
 
-  titleField = initialValues.titleField;
+  titleField = initialValues.field.title;
 
   selectedField = null;
 
@@ -86,7 +86,7 @@ class FormGlobalState {
   reset() {
     this.selectField(null);
     this.dropFieldsList();
-    this.changeTitleField(initialValues.titleField);
+    this.changeTitleField(initialValues.field.title);
     this.setFieldsCounter();
   }
 }

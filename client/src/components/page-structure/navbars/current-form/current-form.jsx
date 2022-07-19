@@ -10,11 +10,7 @@ import styles from './current-form.module.scss';
 import { EventMessage } from '@components/reusable';
 import { ToBackButton } from '@components/reusable/buttons';
 import { Button, Typography, Drawer } from '@mui/material';
-import {
-  UilLottiefilesAlt,
-  UilBars,
-  UilTimes,
-} from '@iconscout/react-unicons';
+import { UilLottiefilesAlt, UilBars, UilTimes } from '@iconscout/react-unicons';
 
 export const CurrentFormNavbar = observer(() => {
   const { isMobileDevice, drawerWasOpened, openDrawer } = useDrawer();

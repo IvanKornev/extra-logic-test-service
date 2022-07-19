@@ -1,25 +1,56 @@
 export const initialValues = {
-  newOption: {
-    title: '',
-  },
-  newField: {
-    name: '',
-    description: '',
-    type: '',
-    isRequired: false,
-  },
-  titleField: {
-    name: 'Новая форма',
-    description: 'Описание новой формы',
-  },
-  searchField: {
-    authorized: {
-      placeholder: 'Найти форму',
-      isDisabled: false,
+  option: {
+    new: {
+      title: '',
     },
-    unauthorized: {
-      placeholder: 'Доступно лишь авторизованным пользователям',
-      isDisabled: true,
+  },
+  user: {
+    form: {
+      authorization: {
+        email: '',
+        password: '',
+      },
+      registration: {
+        nickname: '',
+        email: '',
+        password: '',
+      },
+    },
+    dialog: {
+      title: {
+        authorization: 'Авторизация',
+        registration: 'Регистрация',
+      },
+      submitButton: {
+        authorization: 'Авторизоваться',
+        registration: 'Зарегистрироваться',
+      },
+      closeButton: {
+        authorization: 'Я войду позже',
+        registration: 'Закрыть',
+      },
+    },
+  },
+  field: {
+    new: {
+      name: '',
+      description: '',
+      type: '',
+      isRequired: false,
+    },
+    title: {
+      name: 'Новая форма',
+      description: 'Описание новой формы',
+    },
+    search: {
+      authorized: {
+        placeholder: 'Найти форму',
+        isDisabled: false,
+      },
+      unauthorized: {
+        placeholder: 'Доступно лишь авторизованным пользователям',
+        isDisabled: true,
+      },
     },
   },
   formTemplates: {

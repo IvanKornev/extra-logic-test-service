@@ -10,44 +10,44 @@ import { Menu, Button, Typography } from '@mui/material';
 import styles from './panel.module.scss';
 
 export const UserPanel = observer((props) => {
-  const { panelHookInstance } = props;
+  const { panelHookInstance, dialogsRef } = props;
   const { elem, drop } = panelHookInstance;
   const isOpen = Boolean(elem);
   return (
     <Menu onClose={drop} anchorEl={elem} open={isOpen}>
       <div className={styles['user-panel__wrapper']}>
-        {userState.isAuthorized && (
-          <AuthorizedUserPanel />
-        )}
+        {userState.isAuthorized && <AuthorizedUserPanel />}
         {!userState.isAuthorized && (
-          <UnauthorizedUserPanel />
+          <UnauthorizedUserPanel dialogsRef={dialogsRef} />
         )}
       </div>
     </Menu>
   );
 });
 
-const UnauthorizedUserPanel = () => (
-  <>
-    <Typography textAlign='center'>
-      Вы не авторизованы
-    </Typography>
-    <div className={styles['user-panel__buttons_unauthorized']}>
-      {buttons.userPanel.unauthorized.map((button) => {
-        const { text, icon } = button;
-        const IconComponent = icon;
-        return (
-          <Button
-            variant='outlined'
-            key={useId()}
-            startIcon={<IconComponent />}>
-            {text}
-          </Button>
-        );
-      })}
-    </div>
-  </>
-)
+const UnauthorizedUserPanel = (props) => {
+  const { dialogsRef } = props;
+  return (
+    <>
+      <Typography textAlign='center'>Вы не авторизованы</Typography>
+      <div className={styles['user-panel__buttons_unauthorized']}>
+        {buttons.userPanel.unauthorized.map((button) => {
+          const { text, icon, action } = button;
+          const IconComponent = icon;
+          return (
+            <Button
+              variant='outlined'
+              key={useId()}
+              onClick={() => dialogsRef[action].current.show()}
+              startIcon={<IconComponent />}>
+              {text}
+            </Button>
+          );
+        })}
+      </div>
+    </>
+  );
+};
 
 const AuthorizedUserPanel = () => (
   <>
@@ -62,8 +62,9 @@ const AuthorizedUserPanel = () => (
       Выйти
     </Button>
   </>
-)
+);
 
 UserPanel.propTypes = {
   panelHookInstance: PropTypes.object.isRequired,
+  dialogsRef: PropTypes.object.isRequired,
 };

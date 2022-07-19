@@ -5,7 +5,7 @@
     content: 'Вернуться обратно';
     display: inline-block;
   }
-  
+
   &[data-with-mobile-text='false'] {
     @media screen and (max-width: device-sizes.$tablet) {
       &::after {

@@ -26,22 +26,22 @@ const option = Yup.object().shape({
     .required('Название опции - обязательно'),
 });
 
-const userDefaultValues = Yup.object().shape({
+const userDefaultValues = {
   email: Yup.string()
     .required('Email - обязателен')
     .email('Email пользователя некорректен'),
   password: Yup.string()
-    .required('Пароль - обязателен') 
-    .min(8, 'В пароле - не меньше 8 символов')
-});
+    .required('Пароль - обязателен')
+    .min(8, 'В пароле - не меньше 8 символов'),
+};
 
-const registeringUser = {
+const registeringUser = Yup.object().shape({
   ...userDefaultValues,
   nickname: Yup.string()
     .min(6, 'Никнейм не может быть меньше 6 символов')
     .max(24, 'Никнейм не может быть дольше 24 символов')
     .required('Никнейм - обязателен'),
-};
+});
 
 const authorizingUser = Yup.object().shape(userDefaultValues);
 

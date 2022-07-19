@@ -9,9 +9,7 @@ export const CurrentFormLayout = ({ children }) => (
     <CurrentFormNavbar />
     <main className={styles['layout_current-form']}>
       <section className={styles['page']}>
-        <div className={styles['page__wrapper']}>
-          {children}
-        </div>
+        <div className={styles['page__wrapper']}>{children}</div>
       </section>
     </main>
   </>

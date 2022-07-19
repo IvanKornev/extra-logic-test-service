@@ -2,15 +2,20 @@
 
 $hint-color: #5f6368;
 
-.empty-results {
+.results {
   display: flex;
   justify-content: center;
 
   &__wrapper {
+    padding: 1em 30em;
     display: flex;
     flex-direction: column;
     row-gap: 1em;
     min-width: 65vw;
+  }
+
+  &__cards {
+    @include mixins.cards-container;
   }
 
   &__top-panel {

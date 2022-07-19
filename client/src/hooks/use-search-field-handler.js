@@ -12,7 +12,7 @@ export const useSearchFieldHandler = () => {
   const query = {
     value,
     set: (event) => setValue(event.target.value),
-    isEmpty: () => value.length === 0 ? true : false,
+    isEmpty: () => (value.length === 0 ? true : false),
     erase: () => setValue(''),
   };
 

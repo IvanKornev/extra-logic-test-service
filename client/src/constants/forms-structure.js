@@ -71,17 +71,19 @@ export const formsStructure = {
       },
     },
   ],
-  userAuthorization: [
-    ...userCommonInformation,
-  ],
-  userRegistration: [
-    {
-      name: 'nickname',
-      label: 'Имя пользователя',
-      component: {
-        name: TextField,
+  user: {
+    authorization: [
+      ...userCommonInformation,
+    ],
+    registration: [
+      {
+        name: 'nickname',
+        label: 'Имя пользователя',
+        component: {
+          name: TextField,
+        },
       },
-    },
-    ...userCommonInformation,
-  ],
+      ...userCommonInformation,
+    ],
+  },
 };

@@ -1,10 +1,7 @@
 export { newForm } from './new-form';
 export { isSelect, selectIsEmpty } from './select';
 
-export {
-  getUserStatusKey,
-  getUserAvatarText,
-} from './user';
+export { getUserStatusKey, getUserAvatarText } from './user';
 
 export {
   addSelectOption,

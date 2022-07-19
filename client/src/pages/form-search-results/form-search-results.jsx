@@ -8,47 +8,46 @@ import { AllFormsLayout } from '@layouts';
 import styles from './form-search-results.module.scss';
 import { Typography } from '@mui/material';
 import { FormCard } from '@components/reusable';
-import {
-  ToBackButton,
-  CreateFormButton,
-} from '@components/reusable/buttons';
+import { ToBackButton, CreateFormButton } from '@components/reusable/buttons';
 
 export const FormSearchResultsPage = () => {
   const { query } = useParams();
   const { searchedForms } = useQuery(findForm(query), [query]);
   return (
     <AllFormsLayout>
-      {searchedForms.length !== 0 && searchedForms.map((form) => (
-        <div>
-          <FormCard key={useId} form={form} />
+      <div className={styles['results']}>
+        <div className={styles['results__wrapper']}>
+          <div className={styles['results__top-panel']}>
+            <Typography variant='h6' component='h1'>
+              Результаты поиска
+            </Typography>
+            <ToBackButton />
+          </div>
+          {searchedForms.length !== 0 && (
+            <SearchResults searchedForms={searchedForms} />
+          )}
+          {searchedForms.length === 0 && <SearchResultsIsEmpty query={query} />}
         </div>
-      ))}
-      {searchedForms.length === 0 && (
-        <SearchResultsIsEmpty query={query} />
-      )}
+      </div>
     </AllFormsLayout>
   );
 };
 
+const SearchResults = ({ searchedForms }) => (
+  <div className={styles['results__cards']}>
+    {searchedForms.map((form) => (
+      <FormCard key={useId} form={form} />
+    ))}
+  </div>
+);
+
 const SearchResultsIsEmpty = ({ query }) => (
   <>
-    <div className={styles['empty-results']}>
-      <div className={styles['empty-results__wrapper']}>
-      <div className={styles['empty-results__top-panel']}>
-        <Typography variant='h6' component='h1'>
-          Результаты поиска
-        </Typography>
-        <ToBackButton />
-      </div>
-      <div className={styles['empty-results__info']}>
-        <Typography variant='h6' component='h1'>
-          Форм по запросу {`"${query}"`} не найдено
-        </Typography>
-        <Typography>
-          Нажмите на + снизу, чтобы создать новую форму
-        </Typography>
-      </div>
-      </div>
+    <div className={styles['results__info']}>
+      <Typography variant='h6' component='h1'>
+        Форм по запросу {`"${query}"`} не найдено
+      </Typography>
+      <Typography>Нажмите на + снизу, чтобы создать новую форму</Typography>
     </div>
     <CreateFormButton />
   </>

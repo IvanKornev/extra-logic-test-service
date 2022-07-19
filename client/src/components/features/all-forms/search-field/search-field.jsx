@@ -17,7 +17,7 @@ export const AllFormsSearchField = observer(() => {
     endAdornment: <AbortQueryIcon fieldHandler={fieldHandler} />,
   };
   const statusKey = getUserStatusKey(userState);
-  const fieldValues = initialValues.searchField[statusKey];
+  const fieldValues = initialValues.field.search[statusKey];
   return (
     <TextField
       disabled={fieldValues.isDisabled}

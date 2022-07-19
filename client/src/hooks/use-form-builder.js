@@ -17,6 +17,10 @@ export const useFormBuilder =
         return getEditingFieldForm(formParams);
       case 'title-field':
         return getTitleFieldForm(formParams);
+      case 'authorization':
+        return getAuthorizationForm();
+      case 'registration':
+        return getRegistrationForm();
       default:
         throw new Error('Шаблона для построения не обнаружено');
     }
@@ -56,7 +60,7 @@ export const useFormBuilder =
           helpers.resetForm();
         },
       };
-      const fieldValues = initialValues.newField;
+      const fieldValues = initialValues.field.new;
       const form = buildForm(fieldValues, callbacks, 'defaultField');
       return form;
     }
@@ -83,8 +87,30 @@ export const useFormBuilder =
           creatorRef.current.close();
         },
       };
-      const optionValues = initialValues.newOption;
+      const optionValues = initialValues.option.new;
       const form = buildForm(optionValues, callbacks, 'option');
+      return form;
+    }
+
+    function getAuthorizationForm() {
+      const callbacks = {
+        onSubmit: (values) => {
+          console.log(values);
+        },
+      };
+      const userValues = initialValues.user.form.authorization;
+      const form = buildForm(userValues, callbacks, 'authorizingUser');
+      return form;
+    }
+
+    function getRegistrationForm() {
+      const callbacks = {
+        onSubmit: (values) => {
+          console.log(values);
+        },
+      };
+      const userValues = initialValues.user.form.registration;
+      const form = buildForm(userValues, callbacks, 'registeringUser');
       return form;
     }
 

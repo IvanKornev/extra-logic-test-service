@@ -10,9 +10,11 @@
   }
 
   &__logo {
-    &:hover,
-    &:focus {
-      @include mixins.cursor-effect;
+    & > svg {
+      &:hover,
+      &:focus {
+        @include mixins.cursor-effect;
+      }
     }
   }
 

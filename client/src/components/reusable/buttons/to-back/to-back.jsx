@@ -23,7 +23,7 @@ export const ToBackButton = (props) => {
       className={styles['button']}
     />
   );
-}
+};
 
 ToBackButton.defaultProps = {
   withTextOnMobile: false,

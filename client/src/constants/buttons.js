@@ -11,10 +11,12 @@ export const buttons = {
       {
         text: 'Авторизоваться',
         icon: UilUserCheck,
+        action: 'authorization',
       },
       {
         text: 'Зарегистрироваться',
         icon: UilUserPlus,
+        action: 'registration',
       },
     ],
   },

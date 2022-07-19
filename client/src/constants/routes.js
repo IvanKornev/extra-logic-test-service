@@ -1,8 +1,4 @@
-import {
-  FormPage,
-  AllFormsPage,
-  FormSearchResultsPage,
-} from '@pages';
+import { FormPage, AllFormsPage, FormSearchResultsPage } from '@pages';
 
 export const routes = [
   {

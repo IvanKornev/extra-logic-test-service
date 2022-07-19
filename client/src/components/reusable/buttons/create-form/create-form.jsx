@@ -10,10 +10,7 @@ export const CreateFormButton = () => {
   const clickHandler = () => navigate('/form/new');
   return (
     <>
-      <Tooltip
-        title={<TooltipTitle />}
-        placement='top'
-        arrow>
+      <Tooltip title={<TooltipTitle />} placement='top' arrow>
         <section
           onClick={clickHandler}
           className={styles['create-form-button']}>
@@ -27,7 +24,5 @@ export const CreateFormButton = () => {
 };
 
 const TooltipTitle = () => (
-  <Typography sx={{ fontSize: '0.9rem' }}>
-    Создать новую форму
-  </Typography>
+  <Typography sx={{ fontSize: '0.9rem' }}>Создать новую форму</Typography>
 );
