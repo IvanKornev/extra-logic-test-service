@@ -13,8 +13,8 @@ class CustomFormController {
     const searchPattern = new RegExp(`${searchQuery}.*`, 'gi');
 
     const searchedForms = customForms.filter((form) => {
-      const currentTitle = form.title.toLowerCase();
-      const isSearchingForm = searchPattern.test(currentTitle);
+      const currentName = form.name.toLowerCase();
+      const isSearchingForm = searchPattern.test(currentName);
       if (isSearchingForm) {
         return form;
       }
